@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {    programs.command-not-found.enable = false;
+{ pkgs, config, ... }: {
+  programs.command-not-found.enable = false;
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -42,7 +43,8 @@
       find = "${pkgs.fd}/bin/fd";
       vim = "${pkgs.neovim}/bin/nvim";
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
-      sw = "home-manager switch --flake /home/autumnal/.config/nixpkgs#\"autumnal@neesama\"";
+      sw = ''
+        home-manager switch --flake /home/autumnal/.config/nixpkgs#"autumnal@neesama"'';
       update-background =
         "betterlockscreen -u ~/Pictures/Wallpaper/venti-nord.png --display 1 -u ~/Pictures/Wallpaper/ganyu-nord.png";
     };

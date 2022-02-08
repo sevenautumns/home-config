@@ -18,6 +18,8 @@ let
   nord14_sat = "#a0e565";
   nord15 = "#b48ead";
 in {
+  xdg.configFile."i3/scripts/empris.py".source = ./empris.py;
+
   xsession = {
     enable = true;
     numlock.enable = true;
@@ -40,7 +42,7 @@ in {
         package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
-          bars = [];
+          bars = [ ];
           window.border = 1;
           gaps = {
             inner = 12;
@@ -86,7 +88,15 @@ in {
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
             '';
-            # TODO Play/Pause/Next/Prev
+            # Audio Controll
+            "XF86AudioPlay" =
+              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
+            "XF86AudioPause" =
+              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
+            "XF86AudioNext" =
+              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py next";
+            "XF86AudioPrev" =
+              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py prev";
 
           };
           keycodebindings = {

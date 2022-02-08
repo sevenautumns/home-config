@@ -13,29 +13,31 @@
     deploy-rs.url = "github:serokell/deploy-rs";
   };
 
-  outputs = { self, nixpkgs, homeManager, my-flakes, nur, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, ... }@inputs: {
+  outputs = { self, nixpkgs, homeManager, my-flakes, nur, deploy-rs
+    , nixpkgs-unstable, nixpkgs-stable, ... }@inputs: {
       homeConfigurations = {
         "autumnal@neesama" = homeManager.lib.homeManagerConfiguration {
           configuration = { pkgs, ... }: {
             imports = [ ./home.nix ];
-
             home.packages = [ pkgs.deploy-rs.deploy-rs ];
-            #nix.sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
           };
 
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             overlays = [
               deploy-rs.overlay
-              #(self: super: {
-                #unstable = import "${nixpkgs-unstable}" {
-                #  system = "x86_64-linux";
-                #};
-              #})
+              (self: super: {
+                unstable = import "${inputs.nixpkgs-unstable}" {
+                  system = "x86_64-linux";
+                };
+                stable = import "${inputs.nixpkgs-stable}" {
+                  system = "x86_64-linux";
+                };
+              })
               nur.overlay
             ];
           };
+          extraSpecialArgs = { inherit inputs; };
 
           system = "x86_64-linux";
           homeDirectory = "/home/autumnal";

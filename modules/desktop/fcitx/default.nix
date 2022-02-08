@@ -1,10 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = [ pkgs.fcitx5-mozc ];
   };
 
-  #TODO fcitx5 nord theme 
+  home.file.".local/share/fcitx5/themes/".source =
+    inputs.my-flakes.packages."x86_64-linux".fcitx5-nord;
 
   xdg.configFile = {
     "fcitx5/config" = {

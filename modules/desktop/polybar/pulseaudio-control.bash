@@ -15,8 +15,6 @@ OSD="no"
 SINK_NICKNAMES_PROP=
 VOLUME_STEP=2
 VOLUME_MAX=130
-# Manually add PATH
-PATH=/home/autumnal/.nix-profile/bin
 # shellcheck disable=SC2016
 FORMAT='$ICON_SINK $SINK_NICKNAME ${VOL_LEVEL}%'
 #FORMAT='$VOL_ICON ${VOL_LEVEL}% $ICON_SINK $SINK_NICKNAME'

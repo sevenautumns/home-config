@@ -3,6 +3,7 @@
   home.packages = with pkgs; [ skim fd bat exa neovim ripgrep ];
 
   programs.nix-index.enable = true;
+  programs.bash.enable = true;
 
   xdg.configFile."paru/paru.conf".text = ''
     [options]
@@ -11,5 +12,4 @@
     DevelSuffixes = -git -cvs -svn -bzr -darcs -always -hg
     BottomUp 
   '';
-
 }
