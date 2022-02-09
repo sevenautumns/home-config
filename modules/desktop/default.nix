@@ -17,7 +17,6 @@
     gcc
     calc
     pywal
-    rofi
     betterlockscreen
   ];
 }

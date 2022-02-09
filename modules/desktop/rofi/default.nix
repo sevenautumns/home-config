@@ -24,6 +24,7 @@ in {
   programs.rofi = {
     enable = true;
     font = "FiraCode Nerd Font 11";
+    plugins = [ pkgs.rofi-calc ];
     extraConfig = {
       width = 30;
       line-margin = 10;
@@ -35,7 +36,7 @@ in {
       display-window = "";
       display-combi = "";
       show-icons = true;
-      modi = "drun,window,run,ssh";
+      modi = "drun,window,run,ssh,calc";
     };
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {

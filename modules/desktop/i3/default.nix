@@ -120,6 +120,9 @@ in {
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
             '';
+
+            # Calculator
+            "XF86Calculator" = "exec rofi -show calc -mode calc";
           };
           keycodebindings = {
             # Workspace select numpad
