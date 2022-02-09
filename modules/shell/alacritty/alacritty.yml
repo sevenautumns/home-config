@@ -6,6 +6,9 @@ window:
 
 font:
   size: 11  
+
+shell:
+  program: ~/.nix-profile/bin/fish
       
       
 # Project:    Nord Alacritty
