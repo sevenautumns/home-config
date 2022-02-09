@@ -18,6 +18,7 @@
     gcc
     calc
     pywal
+    betterlockscreen
   ];
 
   #services.betterlockscreen.enable = true;
