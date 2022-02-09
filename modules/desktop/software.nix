@@ -13,5 +13,10 @@
 
     #dev
     rustup
+    nixfmt
+
+    #misc
+    bitwarden
+    neofetch
   ];
 }
