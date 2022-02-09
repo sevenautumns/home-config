@@ -19,6 +19,7 @@
     calc
     pywal
     betterlockscreen
+    feh
   ];
 
   #services.betterlockscreen.enable = true;
