@@ -178,11 +178,11 @@ in {
         format-foreground = nord15;
         format-padding = 2;
         exec =
-          "~/.config/polybar/scripts/pulseaudio-control.bash --icons-volume '%{T5}奔%{T-},%{T5}墳%{T-}' --icon-muted '%{T5}ﱝ%{T-}' --sink-nicknames-from 'node.name' --sink-nickname 'alsa_output.pci-0000_0c_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.pci-0000_0b_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.analog-stereo:%{T5}%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.iec958-stereo:%{T5}%{T-}' listen";
+          "${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --icons-volume '%{T5}奔%{T-},%{T5}墳%{T-}' --icon-muted '%{T5}ﱝ%{T-}' --sink-nicknames-from 'node.name' --sink-nickname 'alsa_output.pci-0000_0c_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.pci-0000_0b_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.analog-stereo:%{T5}%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.iec958-stereo:%{T5}%{T-}' listen";
         click = {
           # this is also copied to i3-config
           left =
-            "~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-blacklist 'alsa_output.pci-0000_0a_00.1.hdmi-stereo,alsa_output.pci-0000_09_00.1.hdmi-stereo,alsa_output.pci-0000_09_00.1.hdmi-stereo-extra2,easyeffects_sink,alsa_output.pci-0000_0a_00.1.hdmi-stereo-extra2' next-sink";
+            "${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-blacklist 'alsa_output.pci-0000_0a_00.1.hdmi-stereo,alsa_output.pci-0000_09_00.1.hdmi-stereo,alsa_output.pci-0000_09_00.1.hdmi-stereo-extra2,easyeffects_sink,alsa_output.pci-0000_0a_00.1.hdmi-stereo-extra2' next-sink";
           # With pactl set-card-profile we can force the audio out to be available
           right =
             "${pkgs.pulseaudio}/bin/pactl set-card-profile alsa_card.pci-0000_0b_00.4 output:analog-stereo && ${pkgs.pulseaudio}/bin/pactl set-card-profile alsa_output.pci-0000_0c_00.4 output:analog-stereo";

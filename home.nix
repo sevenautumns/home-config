@@ -6,6 +6,11 @@
 
   #xdg.configFile."test".text = "{config.}";
 
-  home.packages =
-    [ pkgs.unstable.xterm pkgs.nixfmt pkgs.bitwarden pkgs.neofetch ];
+  home.packages = [
+    pkgs.alacritty
+    pkgs.unstable.xterm
+    pkgs.nixfmt
+    pkgs.bitwarden
+    pkgs.neofetch
+  ];
 }

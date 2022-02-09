@@ -43,7 +43,10 @@
               nur.overlay
             ];
           };
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = {
+            inherit inputs;
+            inherit host;
+          };
 
           system = x86_64;
           homeDirectory = "/home/${user}";
