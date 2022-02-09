@@ -178,15 +178,15 @@ in {
         adapter = "AC";
         poll-interval = 5;
         format-discharging =
-          "{F${nord12}}<ramp-capacity> <label-discharging>{F-}";
-        label-charging = "%{F${nord13}}{T2}ﮣ% {T-}%percentage%% - %time%{F-}";
+          "%{F${nord12}}<ramp-capacity> <label-discharging>%{F-}";
+        label-charging = "%{F${nord13}}%{T2}ﮣ% %{T-}%percentage%% - %time%%{F-}";
         label-discharging = "%percentage%% - %time%";
-        label-full = "{F${nord14}}Full{F-}";
-        ramp-capacity-0 = "{T2}{T-}";
-        ramp-capacity-1 = "{T2}{T-}";
-        ramp-capacity-2 = "{T2}{T-}";
-        ramp-capacity-3 = "{T2}{T-}";
-        ramp-capacity-4 = "{T2}{T-}";
+        label-full = "%{F${nord14}}Full%{F-}";
+        ramp-capacity-0 = "%{T2}%{T-}";
+        ramp-capacity-1 = "%{T2}%{T-}";
+        ramp-capacity-2 = "%{T2}%{T-}";
+        ramp-capacity-3 = "%{T2}%{T-}";
+        ramp-capacity-4 = "%{T2}%{T-}";
         format-foreground = nord11;
       };
       "module/player-mpris-tail" = {
