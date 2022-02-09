@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, host, ... }:
 let
   mpris-python-packages = python-packages:
     with python-packages; [
@@ -12,6 +12,7 @@ let
   home.packages = [
     # Needed for pactl
     pkgs.pulseaudio
+    pkgs.pavucontrol
   ];
 
   nord0 = "#2e3440";
@@ -90,7 +91,13 @@ in {
         modules = {
           left = "i3";
           center = "player-mpris-tail";
-          right = "memory cpu pulseaudio-control date time";
+          right = if host == "neesama" then
+              "memory cpu pulseaudio-control date time"
+            else if host == "ft-ssy-sfnb" then
+              "memory cpu pulseaudio-control battery date time"
+            # This last one is for failing if the system is not defined
+            else
+              0;
         };
         tray = {
           position = "right";
@@ -163,6 +170,13 @@ in {
         format-foreground = nord13;
         label = "%time%";
       };
+      "module/battery" = {
+        type = "internal/battery";
+        full-at = 99;
+        battery = "BAT0";
+        adapter = "AC";
+        poll-interval = 5;
+      };
       "module/player-mpris-tail" = {
         type = "custom/script";
         # TODO link player mpris tail?
@@ -177,8 +191,8 @@ in {
         tail = true;
         format-foreground = nord15;
         format-padding = 2;
-        exec =
-          #"${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-nickname 'alsa_output.pci-0000_0c_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.pci-0000_0b_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.analog-stereo:%{T5}%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.iec958-stereo:%{T5}%{T-}' listen";
+        #"${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-nickname 'alsa_output.pci-0000_0c_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.pci-0000_0b_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.analog-stereo:%{T5}%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.iec958-stereo:%{T5}%{T-}' listen";
+        exec = 
           "${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --format '$SINK_NICKNAME \${VOL_LEVEL}%' --sink-nickname '*pci*analog-stereo:%{T5}蓼%{T-}' --sink-nickname '*Yamaha*:%{T5}%{T-}' listen";
         click = {
           # this is also copied to i3-config
