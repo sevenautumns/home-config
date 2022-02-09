@@ -172,22 +172,13 @@ in {
       };
       "module/battery" = {
         type = "internal/battery";
-        full-at = 99;
+        full-at = 100;
         battery = "BAT0";
         adapter = "AC";
         poll-interval = 5;
-        # Available tokens:
-        #   %percentage% (default)
-        #   %time%
-        #   %consumption% (shows current charge rate in watts)
+        format-discharging = "<ramp-capacity> <label-discharging>";
         label-charging = "ﮣ %percentage%% - %time%";
-        # Available tokens:
-        #   %percentage% (default)
-        #   %time%
-        #   %consumption% (shows current discharge rate in watts)
-        label-discharging = "Discharging %percentage%% - %time%";
-        # Available tokens:
-        #   %percentage% (default)
+        label-discharging = "%percentage%% - %time%";
         label-full = "ﮣ Full";
         ramp-capacity-0 = "";
         ramp-capacity-1 = "";
