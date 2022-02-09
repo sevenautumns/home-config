@@ -16,14 +16,13 @@ SINK_NICKNAMES_PROP=
 VOLUME_STEP=2
 VOLUME_MAX=130
 # shellcheck disable=SC2016
-FORMAT='$ICON_SINK $SINK_NICKNAME ${VOL_LEVEL}%'
-#FORMAT='$VOL_ICON ${VOL_LEVEL}% $ICON_SINK $SINK_NICKNAME'
+FORMAT='$VOL_ICON ${VOL_LEVEL}%  $ICON_SINK $SINK_NICKNAME'
 declare -A SINK_NICKNAMES
 declare -a ICONS_VOLUME
 declare -a SINK_BLACKLIST
 
 # Environment & global constants for the script
-export LANG=en_US  # Some calls depend on English outputs of pactl
+export LC_ALL=C  # Some calls depend on English outputs of pactl
 END_COLOR="%{F-}"  # For Polybar colors
 
 
@@ -64,13 +63,24 @@ function getNickname() {
         SINK_NICKNAME="${SINK_NICKNAMES[$sinkName/$portName]}"
     elif [ -n "$sinkName" ] && [ -n "${SINK_NICKNAMES[$sinkName]}" ]; then
         SINK_NICKNAME="${SINK_NICKNAMES[$sinkName]}"
-    elif [ -n "$sinkName" ] && [ -n "$SINK_NICKNAMES_PROP" ]; then
+    elif [ -n "$sinkName" ]; then
+        # No exact match could be found, try a Glob Match
+        for glob in "${!SINK_NICKNAMES[@]}"; do
+            # shellcheck disable=SC2053 # Disable Shellcheck warning for Glob-Matching
+            if [[ "$sinkName/$portName" == $glob ]] || [[ "$sinkName" == $glob ]]; then
+                SINK_NICKNAME="${SINK_NICKNAMES[$glob]}"
+                # Cache that result for next time
+                SINK_NICKNAMES["$sinkName"]="$SINK_NICKNAME"
+                break
+            fi
+        done
+    fi
+
+    if [ -z "$SINK_NICKNAME" ] && [ -n "$sinkName" ] && [ -n "$SINK_NICKNAMES_PROP" ]; then
         getNicknameFromProp "$SINK_NICKNAMES_PROP" "$sinkName"
         # Cache that result for next time
         SINK_NICKNAMES["$sinkName"]="$SINK_NICKNAME"
-    fi
-
-    if [ -z "$SINK_NICKNAME" ]; then
+    elif [ -z "$SINK_NICKNAME" ]; then
         SINK_NICKNAME="Sink #$1"
     fi
 }
@@ -99,9 +109,9 @@ function getNicknameFromProp() {
 }
 
 # Saves the status of the sink passed by parameter into a variable named
-# `isMuted`.
+# `IS_MUTED`.
 function getIsMuted() {
-    isMuted=$(pactl list sinks | grep -E "^Sink #$1\$" -A 15 | awk '/Mute: / {print $2}')
+    IS_MUTED=$(pactl list sinks | grep -E "^Sink #$1\$" -A 15 | awk '/Mute: / {print $2}')
 }
 
 
@@ -173,7 +183,7 @@ function volMute() {
     fi
     if [ "$1" = "toggle" ]; then
         getIsMuted "$curSink"
-        if [ "$isMuted" = "yes" ]; then
+        if [ "$IS_MUTED" = "yes" ]; then
             pactl set-sink-mute "$curSink" "no"
         else
             pactl set-sink-mute "$curSink" "yes"
@@ -207,7 +217,8 @@ function nextSink() {
         # If it's in the blacklist, continue the main loop. Otherwise, add
         # it to the list.
         for sink in "${SINK_BLACKLIST[@]}"; do
-            if [ "$sink" = "$name" ]; then
+            # shellcheck disable=SC2053 # Disable Shellcheck warning for Glob-Matching
+            if [[ "$name" == $sink ]]; then
                 continue 2
             fi
         done
@@ -237,12 +248,11 @@ function nextSink() {
     pactl set-default-sink "$newSink"
 
     # Move all audio threads to new sink
-    # SKIP BECAUSE OF EASYEFFECTS SINK
-    #local inputs
-    #inputs="$(pactl list short sink-inputs | cut -f 1)"
-    #for i in $inputs; do
-    #    pactl move-sink-input "$i" "$newSink"
-    #done
+    local inputs
+    inputs="$(pactl list short sink-inputs | cut -f 1)"
+    for i in $inputs; do
+        pactl move-sink-input "$i" "$newSink"
+    done
 
     if [ $NOTIFICATIONS = "yes" ]; then
         getNickname "$newSink"
@@ -268,7 +278,7 @@ function showOSD() {
     fi
     getCurVol "$curSink"
     getIsMuted "$curSink"
-    qdbus org.kde.kded /modules/kosd showVolume "$VOL_LEVEL" "$isMuted"
+    qdbus org.kde.kded /modules/kosd showVolume "$VOL_LEVEL" "$IS_MUTED"
 }
 
 
@@ -324,7 +334,7 @@ function output() {
     getNickname "$curSink"
 
     # Showing the formatted message
-    if [ "$isMuted" = "yes" ]; then
+    if [ "$IS_MUTED" = "yes" ]; then
         # shellcheck disable=SC2034
         VOL_ICON=$ICON_MUTED
         echo "${COLOR_MUTED}$(eval echo "$FORMAT")${END_COLOR}"
@@ -337,20 +347,19 @@ function output() {
 function usage() {
     echo "\
 Usage: $0 [OPTION...] ACTION
-
 Options:
   --autosync | --no-autosync
         Whether to maintain same volume for all programs.
-        Default: $AUTOSYNC
+        Default: \"$AUTOSYNC\"
   --color-muted <rrggbb>
         Color in which to format when muted.
-        Default: ${COLOR_MUTED:4:-1}
+        Default: \"${COLOR_MUTED:4:-1}\"
   --notifications | --no-notifications
         Whether to show notifications when changing sinks.
-        Default: $NOTIFICATIONS
+        Default: \"$NOTIFICATIONS\"
   --osd | --no-osd
         Whether to display KDE's OSD message.
-        Default: $OSD
+        Default: \"$OSD\"
   --icon-muted <icon>
         Icon to use when muted.
         Default: none
@@ -359,23 +368,29 @@ Options:
         Default: none
   --format <string>
         Use a format string to control the output.
+        Remember to pass this argument wrapped in single quotes (\`'\`) instead
+        of double quotes (\`\"\`) to avoid your shell from evaluating the
+        variables early.
         Available variables:
         * \$VOL_ICON
         * \$VOL_LEVEL
         * \$ICON_SINK
         * \$SINK_NICKNAME
-        Default: $FORMAT
+        * \$IS_MUTED (yes/no)
+        Default: '$FORMAT'
   --icons-volume <icon>[,<icon>...]
         Icons for volume, from lower to higher.
         Default: none
   --volume-max <int>
         Maximum volume to which to allow increasing.
-        Default: $VOLUME_MAX
+        Default: \"$VOLUME_MAX\"
   --volume-step <int>
         Step size when inc/decrementing volume.
-        Default: $VOLUME_STEP
+        Default: \"$VOLUME_STEP\"
   --sink-blacklist <name>[,<name>...]
-        Sinks to ignore when switching.
+        Sinks to ignore when switching. You can use globs. Don't forget to
+        quote the string when using globs, to avoid unwanted shell glob
+        extension.
         Default: none
   --sink-nicknames-from <prop>
         pactl property to use for sink names, unless overriden by
@@ -388,8 +403,10 @@ Options:
         exactly as listed in the output of \`pactl list sinks short | cut -f2\`.
         Note that you can also specify a port name for the sink with
         \`<name>/<port>\`.
+        It is also possible to use glob matching to match sink and port names.
+        Exact matches are prioritized. Don't forget to quote the string when
+        using globs, to avoid unwanted shell glob extension.
         Default: none
-
 Actions:
   help              display this message and exit
   output            print the PulseAudio status once
@@ -401,7 +418,6 @@ Actions:
   next-sink         switch to the next available sink
   sync              synchronize all the output streams volume to be the same as
                     the current sink's volume
-
 Author:
     Mario Ortiz Manero
 More info on GitHub:
@@ -455,7 +471,7 @@ while [[ "$1" = --* ]]; do
             ICON_SINK="$val"
             ;;
         --icons-volume)
-            IFS=, read -r -a ICONS_VOLUME <<< "$val"
+            IFS=, read -r -a ICONS_VOLUME <<< "${val//[[:space:]]/}"
             ;;
         --volume-max)
             VOLUME_MAX="$val"
@@ -464,7 +480,7 @@ while [[ "$1" = --* ]]; do
             VOLUME_STEP="$val"
             ;;
         --sink-blacklist)
-            IFS=, read -r -a SINK_BLACKLIST <<< "$val"
+            IFS=, read -r -a SINK_BLACKLIST <<< "${val//[[:space:]]/}"
             ;;
         --sink-nicknames-from)
             SINK_NICKNAMES_PROP="$val"
@@ -473,7 +489,13 @@ while [[ "$1" = --* ]]; do
             SINK_NICKNAMES["${val//:*/}"]="${val//*:}"
             ;;
         --format)
-	    FORMAT="$val"
+            FORMAT="$val"
+            ;;
+        # Undocumented because the `help` action already exists, but makes the
+        # help message more accessible.
+        --help)
+            usage
+            exit 0
             ;;
         *)
             echo "Unrecognised option: $arg" >&2
