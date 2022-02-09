@@ -4,5 +4,8 @@
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = [ pkgs.xterm pkgs.nixfmt pkgs.bitwarden pkgs.neofetch ];
+  #xdg.configFile."test".text = "{config.}";
+
+  home.packages =
+    [ pkgs.unstable.xterm pkgs.nixfmt pkgs.bitwarden pkgs.neofetch ];
 }

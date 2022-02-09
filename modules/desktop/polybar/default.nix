@@ -48,9 +48,8 @@ in {
   services.polybar = {
     enable = true;
     package = my-polybar;
-    # TODO use non hardcoded username
     script = ''
-      export PATH=$PATH:/usr/bin:/home/autumnal/.nix-profile/bin
+      export PATH=$PATH:/usr/bin:${config.home.homeDirectory}/.nix-profile/bin
       ${my-polybar}/bin/polybar -q main &
     '';
     settings = {

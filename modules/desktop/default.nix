@@ -9,6 +9,7 @@
     ./redshift.nix
     ./gtk.nix
     ./fcitx
+    ./rofi
   ];
 
   home.packages = with pkgs; [

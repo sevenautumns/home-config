@@ -14,36 +14,41 @@
   };
 
   outputs = { self, nixpkgs, homeManager, my-flakes, nur, deploy-rs
-    , nixpkgs-unstable, nixpkgs-stable, ... }@inputs: {
-      homeConfigurations = {
-        "autumnal@neesama" = homeManager.lib.homeManagerConfiguration {
+    , nixpkgs-unstable, nixpkgs-stable, ... }@inputs:
+    let
+      lib = nixpkgs.lib;
+      machines = {
+        "neesama" = "autumnal";
+        "ft-ssy-sfnb" = "frie_sv";
+      };
+      x86_64 = "x86_64-linux";
+    in {
+      homeConfigurations = lib.attrsets.mapAttrs' (host: user:
+        lib.attrsets.nameValuePair (user + "@" + host)
+        (homeManager.lib.homeManagerConfiguration {
           configuration = { pkgs, ... }: {
             imports = [ ./home.nix ];
             home.packages = [ pkgs.deploy-rs.deploy-rs ];
           };
 
           pkgs = import nixpkgs {
-            system = "x86_64-linux";
+            system = x86_64;
             overlays = [
               deploy-rs.overlay
               (self: super: {
-                unstable = import "${inputs.nixpkgs-unstable}" {
-                  system = "x86_64-linux";
-                };
-                stable = import "${inputs.nixpkgs-stable}" {
-                  system = "x86_64-linux";
-                };
+                unstable =
+                  import "${inputs.nixpkgs-unstable}" { system = x86_64; };
+                stable = import "${inputs.nixpkgs-stable}" { system = x86_64; };
               })
               nur.overlay
             ];
           };
           extraSpecialArgs = { inherit inputs; };
 
-          system = "x86_64-linux";
-          homeDirectory = "/home/autumnal";
-          username = "autumnal";
+          system = x86_64;
+          homeDirectory = "/home/${user}";
+          username = user;
           stateVersion = "21.05";
-        };
-      };
+        })) machines;
     };
 }

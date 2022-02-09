@@ -61,6 +61,9 @@ in {
             "${modifier}+Shift+Return" =
               "exec ${pkgs.gnome.nautilus}/bin/nautilus";
 
+            # Dmenu
+            "${modifier}+d" = "exec rofi -no-lazy-grab -show run -modi run";
+
             # Container Layout
             "${modifier}+s" = "layout stacking";
             "${modifier}+y" = "layout tabbed";
