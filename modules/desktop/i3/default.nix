@@ -20,9 +20,6 @@ let
 in {
   xdg.configFile."i3/scripts/empris.py".source = ./empris.py;
 
-  # TODO
-  # brightnessctl -m info | grep -oP '\d+(?=%)'
-
   xsession = {
     enable = true;
     numlock.enable = true;
@@ -45,6 +42,11 @@ in {
         package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
+          startup = [{
+            command = "${pkgs.stable.betterlockscreen}/bin/betterlockscreen -w";
+            always = true;
+            notification = false;
+          }];
           bars = [ ];
           window.border = 1;
           gaps = {
@@ -59,13 +61,14 @@ in {
           modifier = "Mod4";
           keybindings = pkgs.lib.mkOptionDefault {
             # Open Applications
-            "${modifier}+Return" = "exec alacritty";
-            "${modifier}+w" = "exec ${pkgs.brave}/bin/brave";
+            "${modifier}+Return" = "exec --no-startup-id alacritty";
+            "${modifier}+w" = "exec --no-startup-id ${pkgs.brave}/bin/brave";
             "${modifier}+Shift+Return" =
-              "exec ${pkgs.gnome.nautilus}/bin/nautilus";
+              "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus";
 
             # Dmenu
-            "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
+            "${modifier}+d" =
+              "exec --no-startup-id rofi -no-lazy-grab -show drun -modi drun";
 
             # Container Layout
             "${modifier}+s" = "layout stacking";
@@ -75,54 +78,57 @@ in {
             "${modifier}+v" = "split v";
             "${modifier}+c" = "kill";
 
+            #"${modifier}+l" = "exec --no-startup-id ${pkgs.betterlockscreen}/bin/betterlockscreen -l blur";
+
             # Volume Control
             "XF86AudioRaiseVolume" = ''
-              exec ${pkgs.pamixer}/bin/pamixer -i 5 && ${pkgs.dunst}/bin/dunstify -u low \
+              exec --no-startup-id ${pkgs.pamixer}/bin/pamixer -i 5 && ${pkgs.dunst}/bin/dunstify -u low \
                 "Volume: `${pkgs.pamixer}/bin/pamixer --get-volume`%" \
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
             '';
             "XF86AudioLowerVolume" = ''
-              exec ${pkgs.pamixer}/bin/pamixer -d 5 && ${pkgs.dunst}/bin/dunstify -u low \
+              exec --no-startup-id ${pkgs.pamixer}/bin/pamixer -d 5 && ${pkgs.dunst}/bin/dunstify -u low \
                 "Volume: `${pkgs.pamixer}/bin/pamixer --get-volume`%" \
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
             '';
             "XF86AudioMute" = ''
-              exec ${pkgs.pamixer}/bin/pamixer -t && ${pkgs.dunst}/bin/dunstify -u low \
+              exec --no-startup-id ${pkgs.pamixer}/bin/pamixer -t && ${pkgs.dunst}/bin/dunstify -u low \
                 "Mute: `${pkgs.pamixer}/bin/pamixer --get-mute`" \
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
             '';
             "XF86AudioMicMute" =
-              "exec ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
 
             # Audio Controll
             "XF86AudioPlay" =
-              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
+              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
             "XF86AudioPause" =
-              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
+              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
             "XF86AudioNext" =
-              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py next";
+              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py next";
             "XF86AudioPrev" =
-              "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py prev";
+              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py prev";
 
             # Brightnessctl
             "XF86MonBrightnessUp" = ''
-              exec ${pkgs.brightnessctl}/bin/brightnessctl set +10% && ${pkgs.dunst}/bin/dunstify -u low \
+              exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set +10% && ${pkgs.dunst}/bin/dunstify -u low \
                 "Brightness: `${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`%" \
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
             '';
             "XF86MonBrightnessDown" = ''
-              exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%- && ${pkgs.dunst}/bin/dunstify -u low \
+              exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 10%- && ${pkgs.dunst}/bin/dunstify -u low \
                 "Brightness: `${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`%" \
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
             '';
 
             # Calculator
-            "XF86Calculator" = "exec rofi -show calc -mode calc";
+            "XF86Calculator" =
+              "exec --no-startup-id rofi -show calc -mode calc";
           };
           keycodebindings = {
             # Workspace select numpad

@@ -7,6 +7,7 @@
     ./picom.nix
     ./dunst.nix
     ./redshift.nix
+    ./software.nix
     ./gtk.nix
     ./fcitx
     ./rofi
@@ -17,6 +18,7 @@
     gcc
     calc
     pywal
-    betterlockscreen
   ];
+
+  #services.betterlockscreen.enable = true;
 }
