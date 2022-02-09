@@ -21,11 +21,6 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v10
-        with:
-          name: steav005
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       - name: Validate Nix Flake
         run: GC_DONT_GC=1 nix flake check
   home-manager-build:
@@ -51,11 +46,6 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v10
-        with:
-          name: steav005
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       - name: Install Home Manager
         run: |
           export GC_DONT_GC=1
