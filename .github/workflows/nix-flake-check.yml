@@ -1,0 +1,70 @@
+name: Validate flake and build targets
+# From astralbijection
+# https://github.com/astralbijection/infra/blob/60f3d692e8c694d48adddaac9b8295c9754e686e/.github/workflows/nix-flake-check.yml
+
+on:
+  push: {}
+  pull_request: {}
+  workflow_call: {}
+
+jobs:
+  flake-check:
+    name: Check Flake
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixpkgs-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v10
+        with:
+          name: astralbijection
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Validate Nix Flake
+        run: GC_DONT_GC=1 nix flake check
+    home-manager-build:
+    # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
+    name: Build Home Manager configurations
+    runs-on: ubuntu-latest
+    
+    needs:
+      - flake-check
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - autumnal@neesama
+          - frie_sv@ft-ssy-sfnb
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/cachix-action@v10
+        with:
+          name: astralbijection
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Install Home Manager
+        run: |
+          export GC_DONT_GC=1
+          export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+          nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+          nix-channel --update
+          nix-shell '<home-manager>' -A install
+      - name: Build Home Manager expression
+        run: |
+          export GC_DONT_GC=1
+          export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+          home-manager build --flake '.#${{ matrix.target }}'
