@@ -53,13 +53,12 @@
       shadow-ignore-shape = true;
 
       #Blur
-      #      "blur-method" = "dual_kawase";
-      blur-strength = 6;
-      blur-background = true;
-      blur-kern = "7x7box";
-      blur-background-exclude = [ 
-        "window_type = 'desktop'" 
-      ];
+      #blur-strength = 6;
+      #blur-background = true;
+      #blur-kern = "7x7box";
+      #blur-background-exclude = [ 
+      #  "window_type = 'desktop'" 
+      #];
     '';
     opacityRule = [
       "0:_NET_WM_STATE@[0]:32a *= '_NET_WM_STATE_HIDDEN'"
