@@ -43,7 +43,8 @@ in {
         config = {
           terminal = "alacritty";
           startup = [{
-            command = "${pkgs.stable.betterlockscreen}/bin/betterlockscreen -w";
+            command =
+              "${pkgs.stable.betterlockscreen}/bin/betterlockscreen --new-window";
             always = true;
             notification = false;
           }];
@@ -64,7 +65,7 @@ in {
             "${modifier}+Return" = "exec --no-startup-id alacritty";
             "${modifier}+w" = "exec --no-startup-id ${pkgs.brave}/bin/brave";
             "${modifier}+Shift+Return" =
-              "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus";
+              "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus -w";
 
             # Dmenu
             "${modifier}+d" =
