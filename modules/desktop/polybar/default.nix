@@ -173,18 +173,21 @@ in {
       "module/battery" = {
         type = "internal/battery";
         full-at = 100;
+        time-format = "%H:%M";
         battery = "BAT0";
         adapter = "AC";
         poll-interval = 5;
-        format-discharging = "<ramp-capacity> <label-discharging>";
-        label-charging = "ﮣ %percentage%% - %time%";
+        format-discharging =
+          "{F${nord12}}<ramp-capacity> <label-discharging>{F-}";
+        label-charging = "%{F${nord13}}{T2}ﮣ% {T-}%percentage%% - %time%{F-}";
         label-discharging = "%percentage%% - %time%";
-        label-full = "ﮣ Full";
-        ramp-capacity-0 = "";
-        ramp-capacity-1 = "";
-        ramp-capacity-2 = "";
-        ramp-capacity-3 = "";
-        ramp-capacity-4 = "";
+        label-full = "{F${nord14}}Full{F-}";
+        ramp-capacity-0 = "{T2}{T-}";
+        ramp-capacity-1 = "{T2}{T-}";
+        ramp-capacity-2 = "{T2}{T-}";
+        ramp-capacity-3 = "{T2}{T-}";
+        ramp-capacity-4 = "{T2}{T-}";
+        format-foreground = nord11;
       };
       "module/player-mpris-tail" = {
         type = "custom/script";
