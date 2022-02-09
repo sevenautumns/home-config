@@ -179,7 +179,7 @@ in {
         poll-interval = 5;
         format-discharging =
           "%{F${nord12}}<ramp-capacity> <label-discharging>%{F-}";
-        label-charging = "%{F${nord13}}%{T2}ﮣ% %{T-}%percentage%% - %time%%{F-}";
+        label-charging = "%{F${nord13}}%{T2}ﮣ %{T-}%percentage%% - %time%%{F-}";
         label-discharging = "%percentage%% - %time%";
         label-full = "%{F${nord14}}Full%{F-}";
         ramp-capacity-0 = "%{T2}%{T-}";
