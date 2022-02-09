@@ -28,7 +28,7 @@ jobs:
 
       - name: Validate Nix Flake
         run: GC_DONT_GC=1 nix flake check
-    home-manager-build:
+  home-manager-build:
     # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
     name: Build Home Manager configurations
     runs-on: ubuntu-latest
