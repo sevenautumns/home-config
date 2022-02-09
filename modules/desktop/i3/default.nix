@@ -20,6 +20,9 @@ let
 in {
   xdg.configFile."i3/scripts/empris.py".source = ./empris.py;
 
+  # TODO
+  # brightnessctl -m info | grep -oP '\d+(?=%)'
+
   xsession = {
     enable = true;
     numlock.enable = true;
@@ -62,7 +65,7 @@ in {
               "exec ${pkgs.gnome.nautilus}/bin/nautilus";
 
             # Dmenu
-            "${modifier}+d" = "exec rofi -no-lazy-grab -show run -modi run";
+            "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
 
             # Container Layout
             "${modifier}+s" = "layout stacking";
@@ -91,6 +94,9 @@ in {
                 -h string:x-canonical-private-synchronous:volume \
                 -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
             '';
+            "XF86AudioMicMute" =
+              "exec ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+
             # Audio Controll
             "XF86AudioPlay" =
               "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
@@ -101,6 +107,19 @@ in {
             "XF86AudioPrev" =
               "exec ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py prev";
 
+            # Brightnessctl
+            "XF86MonBrightnessUp" = ''
+              exec ${pkgs.brightnessctl}/bin/brightnessctl set +10% && ${pkgs.dunst}/bin/dunstify -u low \
+                "Brightness: `${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`%" \
+                -h string:x-canonical-private-synchronous:volume \
+                -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
+            '';
+            "XF86MonBrightnessDown" = ''
+              exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%- && ${pkgs.dunst}/bin/dunstify -u low \
+                "Brightness: `${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`%" \
+                -h string:x-canonical-private-synchronous:volume \
+                -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
+            '';
           };
           keycodebindings = {
             # Workspace select numpad

@@ -49,7 +49,7 @@ in {
     enable = true;
     package = my-polybar;
     script = ''
-      export PATH=$PATH:/usr/bin:${config.home.homeDirectory}/.nix-profile/bin
+      export PATH=$PATH:/usr/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
       ${my-polybar}/bin/polybar -q main &
     '';
     settings = {

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, host, ... }: {
   imports = [ modules/desktop modules/shell ];
 
   programs.home-manager.enable = true;
@@ -7,10 +7,10 @@
   #xdg.configFile."test".text = "{config.}";
 
   home.packages = [
-    pkgs.alacritty
+    #pkgs.alacritty
     pkgs.unstable.xterm
     pkgs.nixfmt
     pkgs.bitwarden
     pkgs.neofetch
-  ];
+  ] ++ lib.optional (host == "ft-ssy-sfnb") pkgs.alacritty;
 }
