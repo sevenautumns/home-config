@@ -45,7 +45,8 @@
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
       sw =
         ''home-manager switch --flake $HOME/.config/nixpkgs#"$USER@$hostname"'';
-      update-background = "betterlockscreen -u ~/Pictures/Wallpaper/";
+      update-background =
+        "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
     };
   };
 }
