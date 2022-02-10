@@ -16,7 +16,7 @@
       #misc
       bitwarden
       neofetch
-    ] ++ lib.optional (host == "ft") [
+    ] ++ lib.optional (host == "ft-ssy-sfnb") [
       # Element does not work properly 
       element-desktop
     ];
