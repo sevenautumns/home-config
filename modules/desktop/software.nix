@@ -1,22 +1,23 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, host, lib, ... }: {
 
-  home.packages = with pkgs; [
-    #office  
-    libreoffice
-    thunderbird
+  home.packages = with pkgs;
+    [
+      #office  
+      libreoffice
+      thunderbird
 
-    #social
-    element-desktop
+      #media
+      mpv
 
-    #media
-    mpv
+      #dev
+      rustup
+      nixfmt
 
-    #dev
-    rustup
-    nixfmt
-
-    #misc
-    bitwarden
-    neofetch
-  ];
+      #misc
+      bitwarden
+      neofetch
+    ] ++ lib.optional (host == "ft") [
+      # Element does not work properly 
+      element-desktop
+    ];
 }
