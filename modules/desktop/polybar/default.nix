@@ -182,11 +182,11 @@ in {
         label-charging = "%{F${nord13}}%{T2}ﮣ %{T-}%percentage%% - %time%%{F-}";
         label-discharging = "%percentage%% - %time%";
         label-full = "%{F${nord14}}Full%{F-}";
-        ramp-capacity-0 = "%{T2}%{T-}";
-        ramp-capacity-1 = "%{T2}%{T-}";
-        ramp-capacity-2 = "%{T2}%{T-}";
-        ramp-capacity-3 = "%{T2}%{T-}";
-        ramp-capacity-4 = "%{T2}%{T-}";
+        ramp-capacity-0 = "%{T5}%{T-}";
+        ramp-capacity-1 = "%{T5}%{T-}";
+        ramp-capacity-2 = "%{T5}%{T-}";
+        ramp-capacity-3 = "%{T5}%{T-}";
+        ramp-capacity-4 = "%{T5}%{T-}";
         format-foreground = nord11;
       };
       "module/player-mpris-tail" = {
