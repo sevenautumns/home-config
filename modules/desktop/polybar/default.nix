@@ -9,12 +9,6 @@ let
     ];
   mpris-python = pkgs.python3.withPackages mpris-python-packages;
 
-  home.packages = [
-    # Needed for pactl
-    pkgs.pulseaudio
-    pkgs.pavucontrol
-  ];
-
   nord0 = "#2e3440";
   nord1 = "#3b4252";
   nord2 = "#434c5e";
@@ -41,6 +35,13 @@ let
     jsoncpp = pkgs.jsoncpp;
   };
 in {
+
+  home.packages = [
+    # Needed for pactl
+    pkgs.pulseaudio
+    pkgs.pavucontrol
+  ];
+
   xdg.configFile."polybar/scripts/pulseaudio-control.bash".source =
     ./pulseaudio-control.bash;
   xdg.configFile."polybar/scripts/player-mpris-tail.py".source =
@@ -176,9 +177,9 @@ in {
         time-format = "%H:%M";
         battery = "BAT0";
         adapter = "AC";
-        poll-interval = 5;
+        poll-interval = 1;
         format-discharging = "<ramp-capacity> <label-discharging>%{F-}";
-        label-charging = "%{F${nord13}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
+        label-charging = "%{F${nord14}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
         label-discharging = "%percentage%% (%time%)";
         label-full = "%{F${nord14}}Full%{F-}";
         ramp-capacity-0 = "%{F${nord11}}%{T5}%{T-}";

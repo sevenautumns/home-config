@@ -7,8 +7,5 @@
   #xdg.configFile."test".text = "{config.}";
   xdg.enable = true;
 
-  home.packages = [
-    #pkgs.alacritty
-    pkgs.unstable.xterm
-  ] ++ lib.optional (host == "ft-ssy-sfnb") pkgs.alacritty;
+  home.packages = [ pkgs.unstable.xterm ];
 }
