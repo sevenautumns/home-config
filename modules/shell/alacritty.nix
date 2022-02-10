@@ -17,6 +17,8 @@ let
   nord14 = "#a3be8c";
   nord15 = "#b48ead";
 in {
+  home.packages = lib.optional (host == "ft-ssy-sfnb") pkgs.alacritty;
+
   # Alacritty doesnt work yet with homemanager.
   programs.alacritty = {
     enable = true;

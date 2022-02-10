@@ -7,5 +7,8 @@
   #xdg.configFile."test".text = "{config.}";
   xdg.enable = true;
 
-  home.packages = [ pkgs.unstable.xterm ];
+  home.packages = [
+    #pkgs.alacritty
+    pkgs.unstable.xterm
+  ];
 }
