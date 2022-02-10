@@ -4,6 +4,9 @@
     enable = true;
     userName = "autumnal";
     userEmail = "friedrich122112@me.com";
-    aliases = { st = "status"; };
+    aliases = {
+      st = "status";
+      it = "commit";
+    };
   };
 }
