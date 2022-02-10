@@ -64,7 +64,7 @@ in {
             "${modifier}+Return" = "exec --no-startup-id alacritty";
             "${modifier}+w" = "exec --no-startup-id ${pkgs.brave}/bin/brave";
             "${modifier}+Shift+Return" =
-              "exec --no-startup-id nautilus --new-window";
+              "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
 
             # Dmenu
             "${modifier}+d" =

@@ -22,5 +22,10 @@
     feh
   ];
 
+  # Fix Nautilus gvfs
+  home.sessionVariables = {
+    GIO_EXTRA_MODULES = [ "${pkgs.gnome.gvfs}/lib/gio/modules" ];
+  };
+
   #services.betterlockscreen.enable = true;
 }
