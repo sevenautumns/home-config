@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, host, lib, ... }: {
   home.packages = with pkgs; [ bibata-cursors ];
 
   # TODO symlink .nix-profile/share/icons:themes folder to .local/share/icons:themes
@@ -18,7 +18,10 @@
       package = pkgs.roboto;
     };
     gtk3 = {
-      bookmarks = [ "file:///net/index Index (NFS)" ];
+      bookmarks =
+        [ "ssh://autumnal@clz.autumnal.de/media/torrent_storage Index (SSH)" ]
+        ++ lib.optionals (host == "neesama")
+        [ "file:///net/index Index (NFS)" ];
       extraConfig = {
         gtk-application-prefer-dark-theme = 1;
         gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
