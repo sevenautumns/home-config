@@ -1,4 +1,4 @@
-{ pkgs, config, host, ... }:
+{ pkgs, config, host, lib, ... }:
 let
   nord0 = "#2e3440";
   nord1 = "#3b4252";
