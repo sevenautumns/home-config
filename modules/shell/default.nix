@@ -1,6 +1,7 @@
 { pkgs, config, ... }: {
-  imports = [ ./alacritty.nix ./git.nix ./fish.nix ./starship.nix ];
-  home.packages = with pkgs; [ skim fd bat exa neovim ripgrep ];
+  imports =
+    [ ./alacritty.nix ./git.nix ./fish.nix ./starship.nix ./neovim.nix ];
+  home.packages = with pkgs; [ skim fd bat exa ripgrep ];
 
   programs.nix-index.enable = true;
   programs.bash.enable = true;
