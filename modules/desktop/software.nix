@@ -19,5 +19,7 @@
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # Element does not work properly 
       element-desktop
+      # Nautilus neither
+      gnome.nautilus
     ];
 }
