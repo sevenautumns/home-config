@@ -17,8 +17,6 @@ let
   nord14 = "#a3be8c";
   nord15 = "#b48ead";
 in {
-  home.packages = lib.optional (host == "ft-ssy-sfnb") pkgs.alacritty;
-
   # Alacritty doesnt work yet with homemanager.
   programs.alacritty = {
     enable = true;
@@ -34,7 +32,7 @@ in {
         opacity = 0.9;
       };
       font.size = if host == "neesama" then 11 else 8;
-      shell.program = pkgs.fish;
+      shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         primary = {
           background = nord0;
