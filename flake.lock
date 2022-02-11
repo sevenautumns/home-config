@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cmus-notify": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1612135493,
+        "narHash": "sha256-D0kt7ZJJmFceJC2Gp/MLRzIcwfWfr0FVSBbNOmsofOo=",
+        "owner": "dcx86r",
+        "repo": "cmus-notify",
+        "rev": "e6c34df22d0eba52e60bddcfda9b3f2f8233eb3c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dcx86r",
+        "repo": "cmus-notify",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -54,7 +70,7 @@
     "homeManager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-unstable"
+          "nixpkgs-stable"
         ]
       },
       "locked": {
@@ -125,11 +141,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1644193793,
-        "narHash": "sha256-ggCI5LCXwkUJQwjpkr9qDFbQMiK3JvAfeNR4Uy0ny5Q=",
+        "lastModified": 1644472683,
+        "narHash": "sha256-sP6iM4NksOYO6NFfTJ96cg+ClPnq6cdY30xKA1iYtyU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "521e4d7d13b09bc0a21976b9d19abd197d4e3b1e",
+        "rev": "7adc9c14ec74b27358a8df9b973087e351425a79",
         "type": "github"
       },
       "original": {
@@ -141,11 +157,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1644359234,
-        "narHash": "sha256-u/sBnRgrFrn9W8gZMS6vN3ZnJsoTvbws968TpqwlDJQ=",
+        "lastModified": 1644525281,
+        "narHash": "sha256-D3VuWLdnLmAXIkooWAtbTGSQI9Fc1lkvAr94wTxhnTU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c5051e2b5fe9fab43a64f0e0d06b62c81a890b90",
+        "rev": "48d63e924a2666baf37f4f14a18f19347fbd54a2",
         "type": "github"
       },
       "original": {
@@ -157,11 +173,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1644330694,
-        "narHash": "sha256-bxfJfDL8nKWR+LOwUf9xoZol8WKcahPS4EbD1U4kLT0=",
+        "lastModified": 1644486793,
+        "narHash": "sha256-EeijR4guVHgVv+JpOX3cQO+1XdrkJfGmiJ9XVsVU530=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "18a062b02d6eb382714187b06e3bfc3ba25ace78",
+        "rev": "1882c6b7368fd284ad01b0a5b5601ef136321292",
         "type": "github"
       },
       "original": {
@@ -171,11 +187,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1644379669,
-        "narHash": "sha256-w6/mDLvfG6YeiGsHy2r6gXBBozKJwjpkChIAk3gyR1I=",
+        "lastModified": 1644590610,
+        "narHash": "sha256-kfWiGALCCbiryWHHq3PjTH9PTt7e4YnHqx+qF6UJv4c=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "925ae10cc7bbeaba05f0a0da14a001265233dc2e",
+        "rev": "6d3eb75206fd5a1c6e4147ba979f32165a3c9686",
         "type": "github"
       },
       "original": {
@@ -184,15 +200,50 @@
         "type": "github"
       }
     },
+    "polybar-pulseaudio-control": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1640652910,
+        "narHash": "sha256-wPOQkXXsRF6VWiEcnzyeoC9/u8xe+grsZtx/OuZx+8w=",
+        "owner": "marioortizmanero",
+        "repo": "polybar-pulseaudio-control",
+        "rev": "dabdb49dc4455e7ec198d0ea3015722e7d66cea9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marioortizmanero",
+        "repo": "polybar-pulseaudio-control",
+        "type": "github"
+      }
+    },
+    "polybar-scripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641893360,
+        "narHash": "sha256-sUQWn9940hRxKMfhqdeIl5urkGzX91WqsNHh7gkNI9Q=",
+        "owner": "polybar",
+        "repo": "polybar-scripts",
+        "rev": "4554b599edddb5b44240213c2c4b2f18a593033f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "polybar",
+        "repo": "polybar-scripts",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "cmus-notify": "cmus-notify",
         "deploy-rs": "deploy-rs",
         "homeManager": "homeManager",
         "my-flakes": "my-flakes",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nur": "nur"
+        "nur": "nur",
+        "polybar-pulseaudio-control": "polybar-pulseaudio-control",
+        "polybar-scripts": "polybar-scripts"
       }
     },
     "utils": {

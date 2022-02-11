@@ -2,7 +2,7 @@
   imports = [
     ./audio
     ./font.nix
-    ./polybar
+    ./polybar.nix
     ./i3
     ./picom.nix
     ./dunst.nix

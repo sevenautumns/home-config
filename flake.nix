@@ -8,15 +8,28 @@
     my-flakes.url = "github:steav005/flakes";
     homeManager = {
       url = "github:nix-community/home-manager/release-21.11";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     deploy-rs.url = "github:serokell/deploy-rs";
+
+    polybar-scripts = {
+      url = "github:polybar/polybar-scripts";
+      flake = false;
+    };
+    polybar-pulseaudio-control = {
+      url = "github:marioortizmanero/polybar-pulseaudio-control";
+      flake = false;
+    };
+    cmus-notify = {
+      url = "github:dcx86r/cmus-notify";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, homeManager, my-flakes, nur, deploy-rs
     , nixpkgs-unstable, nixpkgs-stable, ... }@inputs:
     let
-      lib = nixpkgs.lib;
+      lib = nixpkgs-stable.lib;
       machines = {
         "neesama" = "autumnal";
         "ft-ssy-sfnb" = "frie_sv";
@@ -31,7 +44,7 @@
             home.packages = [ pkgs.deploy-rs.deploy-rs ];
           };
 
-          pkgs = import nixpkgs {
+          pkgs = import nixpkgs-stable {
             system = x86_64;
             overlays = [
               deploy-rs.overlay

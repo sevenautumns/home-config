@@ -1,4 +1,4 @@
-{ pkgs, lib, config, host, ... }:
+{ pkgs, lib, config, host, inputs, ... }:
 let
   mpris-python-packages = python-packages:
     with python-packages; [
@@ -8,6 +8,8 @@ let
       pygobject3
     ];
   mpris-python = pkgs.python3.withPackages mpris-python-packages;
+
+  mpris-tail = "${inputs.polybar-scripts}/polybar-scripts/player-mpris-tail";
 
   nord0 = "#2e3440";
   nord1 = "#3b4252";
@@ -41,11 +43,6 @@ in {
     pkgs.pulseaudio
     pkgs.pavucontrol
   ];
-
-  xdg.configFile."polybar/scripts/pulseaudio-control.bash".source =
-    ./pulseaudio-control.bash;
-  xdg.configFile."polybar/scripts/player-mpris-tail.py".source =
-    ./player-mpris-tail.py;
 
   services.polybar = {
     enable = true;
@@ -192,8 +189,11 @@ in {
       "module/player-mpris-tail" = {
         type = "custom/script";
         # TODO link player mpris tail?
-        exec =
-          "${mpris-python}/bin/python3 ~/.config/polybar/scripts/player-mpris-tail.py -f '{artist} - {title}'";
+        exec = (builtins.replaceStrings [ "\n" ] [ "" ] ''
+          ${mpris-python}/bin/python3 
+          ${mpris-tail}/player-mpris-tail.py 
+          -f '{artist} - {title}'
+        '');
         tail = true;
         format-foreground = nord12;
         format-padding = 2;
@@ -203,17 +203,29 @@ in {
         tail = true;
         format-foreground = nord15;
         format-padding = 2;
-        #"${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-nickname 'alsa_output.pci-0000_0c_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.pci-0000_0b_00.4.analog-stereo:%{T5}蓼%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.analog-stereo:%{T5}%{T-}' --sink-nickname 'alsa_output.usb-Yamaha_Corporation_Steinberg_UR12-00.iec958-stereo:%{T5}%{T-}' listen";
-        exec =
-          "${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --format '$SINK_NICKNAME \${VOL_LEVEL}%' --sink-nickname '*pci*analog-stereo:%{T5}蓼%{T-}' --sink-nickname '*Yamaha*:%{T5}%{T-}' listen";
+        exec = (builtins.replaceStrings [ "\n" ] [ "" ] ''
+          ${pkgs.bash}/bin/bash 
+          ${inputs.polybar-pulseaudio-control}/pulseaudio-control.bash
+            --sink-nicknames-from 'node.name' --format '$SINK_NICKNAME ''${VOL_LEVEL}%'
+            --sink-nickname '*pci*analog-stereo:%{T5}蓼%{T-}'
+            --sink-nickname '*Yamaha*:%{T5}%{T-}' 
+            listen
+        '');
         click = {
-          # this is also copied to i3-config
-          left =
-            "${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-blacklist '*hdmi*,easyeffects*' next-sink";
-          #"${pkgs.bash}/bin/bash ~/.config/polybar/scripts/pulseaudio-control.bash --sink-nicknames-from 'node.name' --sink-blacklist 'alsa_output.pci-0000_0a_00.1.hdmi-stereo,alsa_output.pci-0000_09_00.1.hdmi-stereo,alsa_output.pci-0000_09_00.1.hdmi-stereo-extra2,easyeffects_sink,alsa_output.pci-0000_0a_00.1.hdmi-stereo-extra2' next-sink";
+          left = (builtins.replaceStrings [ "\n" ] [ "" ] ''
+            ${pkgs.bash}/bin/bash 
+            ${inputs.polybar-pulseaudio-control}/pulseaudio-control.bash 
+            --sink-nicknames-from 'node.name' 
+            --sink-blacklist '*hdmi*,easyeffects*' 
+            next-sink
+          '');
           # With pactl set-card-profile we can force the audio out to be available
-          right =
-            "${pkgs.pulseaudio}/bin/pactl set-card-profile alsa_card.pci-0000_0b_00.4 output:analog-stereo && ${pkgs.pulseaudio}/bin/pactl set-card-profile alsa_output.pci-0000_0c_00.4 output:analog-stereo";
+          right = (builtins.replaceStrings [ "\n" ] [ "" ] ''
+            ${pkgs.pulseaudio}/bin/pactl 
+            set-card-profile alsa_card.pci-0000_0b_00.4 output:analog-stereo &&
+             ${pkgs.pulseaudio}/bin/pactl 
+            set-card-profile alsa_output.pci-0000_0c_00.4 output:analog-stereo
+          '');
         };
       };
       "module/network" = {

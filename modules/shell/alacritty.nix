@@ -17,7 +17,6 @@ let
   nord14 = "#a3be8c";
   nord15 = "#b48ead";
 in {
-  # Alacritty doesnt work yet with homemanager.
   programs.alacritty = {
     enable = true;
 

@@ -10,7 +10,6 @@
       mpv
 
       #dev
-      rustup
       nixfmt
 
       #misc
@@ -19,5 +18,6 @@
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # Element does not work properly 
       element-desktop
+      rustup
     ];
 }
