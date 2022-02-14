@@ -12,6 +12,7 @@
     ./fcitx
     ./rofi
     ./mpv.nix
+    ./syndaemon.nix
   ];
 
   home.packages = with pkgs; [
