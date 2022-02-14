@@ -12,6 +12,7 @@
     ./fcitx
     ./rofi
     ./mpv.nix
+    ./mime.nix
   ];
 
   home.packages = with pkgs; [

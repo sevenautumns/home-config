@@ -6,6 +6,9 @@
       libreoffice
       thunderbird
 
+      #image
+      gnome.eog
+
       #dev
       nixfmt
       rustup
