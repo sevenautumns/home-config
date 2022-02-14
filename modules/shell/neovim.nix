@@ -4,7 +4,6 @@
     viAlias = true;
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
-      skim
 
       table-mode
 

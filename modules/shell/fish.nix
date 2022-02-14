@@ -27,16 +27,14 @@
       set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
       set -g fish_color_user brgreen
       set -g fish_color_valid_path --underline
-      # Hooks. Starship is sourced by programs.starship.enableFishIntegration
+
+      # Hooks.
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
     '';
     shellInit = ''
       set -x BAT_THEME Nord
-      set -x FZF_DEFAULT_OPTS "--preview='${pkgs.bat}/bin/bat {} --color=always'" \n
-      set -x SKIM_DEFAULT_COMMAND "${pkgs.ripgrep}/bin/rg --files || ${pkgs.fd}/bin/fd || ${pkgs.findutils}/bin/find ."
     '';
     shellAliases = {
-      find = "${pkgs.fd}/bin/fd";
       vim = "${pkgs.neovim}/bin/nvim";
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
       sw =

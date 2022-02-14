@@ -56,7 +56,11 @@ in {
     enable = true;
     package = my-polybar;
     script = ''
-      export PATH=$PATH:/usr/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin
+      export PATH=$PATH:/usr/bin
+      export PATH=$PATH:/run/current-system/sw/bin
+      export PATH=$PATH:${config.home.homeDirectory}/.nix-profile/bin
+      export PATH=$PATH:${config.xsession.windowManager.i3.package}/bin
+
       ${my-polybar}/bin/polybar -q main &
     '';
     settings = {

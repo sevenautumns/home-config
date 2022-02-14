@@ -4,6 +4,7 @@
     enableFishIntegration = true;
     settings = {
       add_newline = false;
+      #right_format = "\${custom.nix-shell-info}";
       username = {
         show_always = true;
         format = "[$user]($style) on ";
@@ -39,6 +40,14 @@
       scala.symbol = " ";
       shlvl.symbol = " ";
       swift.symbol = "ﯣ ";
+      # Print packages of shell if we are in nix-shell
+      custom.nix-shell-info = {
+        command =
+          "${pkgs.any-nix-shell}/bin/nix-shell-info | sed 's/x1B[[0-9;]{1,}[A-Za-z]//g'";
+        when = "test 0 -ne $(${pkgs.any-nix-shell}/bin/nix-shell-info | wc -w)";
+        format = "with \\[[$output]($style)\\] ";
+        shell = [ "${pkgs.bash}/bin/bash" ];
+      };
     };
   };
 }
