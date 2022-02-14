@@ -56,13 +56,13 @@ in {
               always = true;
               notification = false;
             }
-            {
-              # Disable Caps
-              command =
-                "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option caps:ctrl_modifier";
-              always = true;
-              notification = false;
-            }
+            #{
+            #  # Disable Caps
+            #  command =
+            #    "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option caps:ctrl_modifier";
+            #  always = true;
+            #  notification = false;
+            #}
           ];
           bars = [ ];
           window.border = 1;

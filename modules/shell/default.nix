@@ -1,6 +1,12 @@
 { pkgs, config, ... }: {
-  imports =
-    [ ./alacritty.nix ./git.nix ./fish.nix ./starship.nix ./neovim.nix ];
+  imports = [
+    ./alacritty.nix
+    ./git.nix
+    ./fish.nix
+    ./starship.nix
+    ./neovim.nix
+    ./keyboard.nix
+  ];
   home.packages = with pkgs; [ fd ripgrep du-dust any-nix-shell ];
 
   programs.skim = {
