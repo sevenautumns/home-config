@@ -46,12 +46,6 @@ let
   };
 in {
 
-  home.packages = [
-    # Needed for pactl
-    pkgs.pulseaudio
-    pkgs.pavucontrol
-  ];
-
   services.polybar = {
     enable = true;
     package = my-polybar;
@@ -200,7 +194,6 @@ in {
       };
       "module/player-mpris-tail" = {
         type = "custom/script";
-        # TODO link player mpris tail?
         exec = (builtins.replaceStrings [ "\n" ] [ "" ] ''
           ${mpris-python}/bin/python3 
           ${mpris-tail}/player-mpris-tail.py 
