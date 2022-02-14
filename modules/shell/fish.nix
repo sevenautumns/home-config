@@ -31,20 +31,18 @@
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
     '';
     shellInit = ''
-      source ${pkgs.skim}/share/skim/key-bindings.fish
-      function fish_user_key_bindings
-        skim_key_bindings
-      end
+      set -x BAT_THEME Nord
       set -x FZF_DEFAULT_OPTS "--preview='${pkgs.bat}/bin/bat {} --color=always'" \n
       set -x SKIM_DEFAULT_COMMAND "${pkgs.ripgrep}/bin/rg --files || ${pkgs.fd}/bin/fd || ${pkgs.findutils}/bin/find ."
     '';
     shellAliases = {
-      ls = "${pkgs.exa}/bin/exa";
       find = "${pkgs.fd}/bin/fd";
       vim = "${pkgs.neovim}/bin/nvim";
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
       sw =
         ''home-manager switch --flake $HOME/.config/nixpkgs#"$USER@$hostname"'';
+      fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";
+      fu = "fish_update_completions";
       update-background =
         "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
     };

@@ -1,4 +1,4 @@
-{ pkgs, lib, config, host, inputs, ... }:
+{ pkgs, lib, config, host, inputs, runCommand, ... }:
 let
   mpris-python-packages = python-packages:
     with python-packages; [
@@ -8,8 +8,16 @@ let
       pygobject3
     ];
   mpris-python = pkgs.python3.withPackages mpris-python-packages;
-
   mpris-tail = "${inputs.polybar-scripts}/polybar-scripts/player-mpris-tail";
+
+  # Patch pulse audio control for usage with easy effects
+  # Remove move-sink-input because it causes issues with effect-sink
+  ppc = pkgs.runCommand "ppc-patched" { } ''
+    mkdir $out
+    cp ${inputs.polybar-pulseaudio-control}/pulseaudio-control.bash $out/pulseaudio-control.bash
+    # Replace move-sink-input with null command ":"
+    sed -i '/move-sink-input/c\\:' $out/pulseaudio-control.bash
+  '';
 
   nord0 = "#2e3440";
   nord1 = "#3b4252";
@@ -205,7 +213,7 @@ in {
         format-padding = 2;
         exec = (builtins.replaceStrings [ "\n" ] [ "" ] ''
           ${pkgs.bash}/bin/bash 
-          ${inputs.polybar-pulseaudio-control}/pulseaudio-control.bash
+          ${ppc}/pulseaudio-control.bash
             --sink-nicknames-from 'node.name' --format '$SINK_NICKNAME ''${VOL_LEVEL}%'
             --sink-nickname '*pci*analog-stereo:%{T5}蓼%{T-}'
             --sink-nickname '*Yamaha*:%{T5}%{T-}' 
@@ -214,7 +222,7 @@ in {
         click = {
           left = (builtins.replaceStrings [ "\n" ] [ "" ] ''
             ${pkgs.bash}/bin/bash 
-            ${inputs.polybar-pulseaudio-control}/pulseaudio-control.bash 
+            ${ppc}/pulseaudio-control.bash 
             --sink-nicknames-from 'node.name' 
             --sink-blacklist '*hdmi*,easyeffects*' 
             next-sink
