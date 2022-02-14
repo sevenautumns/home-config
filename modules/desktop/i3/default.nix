@@ -42,11 +42,28 @@ in {
         package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
-          startup = [{
-            command = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
-            always = true;
-            notification = false;
-          }];
+          startup = [
+            {
+              # Set Background Images
+              command = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
+              always = true;
+              notification = false;
+            }
+            {
+              # Polybar sometimes starts faster than i3, 
+              # resulting in the i3-module not activating
+              command = "systemctl --user restart polybar.service";
+              always = true;
+              notification = false;
+            }
+            {
+              # Disable Caps
+              command =
+                "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option caps:ctrl_modifier";
+              always = true;
+              notification = false;
+            }
+          ];
           bars = [ ];
           window.border = 1;
           gaps = {
