@@ -10,5 +10,6 @@
   home.packages = [
     #pkgs.alacritty
     pkgs.unstable.xterm
+    pkgs.glibc
   ];
 }

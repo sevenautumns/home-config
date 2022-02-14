@@ -11,6 +11,7 @@
     ./gtk.nix
     ./fcitx
     ./rofi
+    ./mpv.nix
   ];
 
   home.packages = with pkgs; [
@@ -25,6 +26,17 @@
   # Fix Nautilus gvfs
   home.sessionVariables = {
     GIO_EXTRA_MODULES = [ "${pkgs.gnome.gvfs}/lib/gio/modules" ];
+
+    # help building locally compiled programs
+    LIBRARY_PATH = "$HOME/.nix-profile/lib";
+    # header files
+    CPATH = "$HOME/.nix-profile/include";
+    C_INCLUDE_PATH = "$CPATH";
+    CPLUS_INCLUDE_PATH = "$CPATH";
+    # pkg-config
+    PKG_CONFIG_PATH =
+      "$HOME/.nix-profile/lib/pkgconfig:$HOME/.nix-profile/share/pkgconfig";
+    PATH = "$PATH:$HOME/.cargo/bin";
   };
 
   #services.betterlockscreen.enable = true;

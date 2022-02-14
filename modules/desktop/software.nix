@@ -6,11 +6,21 @@
       libreoffice
       thunderbird
 
-      #media
-      mpv
-
       #dev
       nixfmt
+      rustup
+      pkg-config
+      pkgconfig
+      openssl
+      openssl.dev
+      jetbrains.idea-ultimate
+
+      #dev dependencies
+      cairo
+      pango
+      gtk3
+      gtk3-x11
+      glib
 
       #misc
       bitwarden
@@ -18,6 +28,5 @@
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # Element does not work properly 
       element-desktop
-      rustup
     ];
 }
