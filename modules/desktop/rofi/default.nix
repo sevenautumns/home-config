@@ -26,6 +26,7 @@ in {
     font = "FiraCode Nerd Font 11";
     plugins = [ pkgs.rofi-calc ];
     extraConfig = {
+      drun-icon-theme = config.gtk.iconTheme.name;
       width = 30;
       line-margin = 10;
       lines = 6;
