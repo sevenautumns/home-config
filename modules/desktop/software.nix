@@ -17,6 +17,7 @@
       #misc
       bitwarden
       neofetch
+      arandr
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # Element does not work properly 
       element-desktop
