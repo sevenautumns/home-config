@@ -26,8 +26,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, homeManager, my-flakes, nur, deploy-rs
-    , nixpkgs-unstable, nixpkgs-stable, ... }@inputs:
+  outputs = { self, homeManager, my-flakes, nur, deploy-rs, nixpkgs-unstable
+    , nixpkgs-stable, ... }@inputs:
     let
       lib = nixpkgs-stable.lib;
       machines = {
