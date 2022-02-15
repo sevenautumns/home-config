@@ -20,6 +20,8 @@ let
 in {
   xdg.configFile."i3/scripts/empris.py".source = ./empris.py;
 
+  services.network-manager-applet.enable = true;
+
   xsession = {
     enable = true;
     numlock.enable = true;
