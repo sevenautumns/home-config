@@ -184,7 +184,7 @@ in {
         format-discharging = "<ramp-capacity> <label-discharging>%{F-}";
         label-charging = "%{F${nord14}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
         label-discharging = "%percentage%% (%time%)";
-        label-full = "%{F${nord14}}Full%{F-}";
+        label-full = "%{F${nord14}}%{T5} %{T-}Full%{F-}";
         ramp-capacity-0 = "%{F${nord11}}%{T5}%{T-}";
         ramp-capacity-1 = "%{F${nord12}}%{T5}%{T-}";
         ramp-capacity-2 = "%{F${nord13}}%{T5}%{T-}";

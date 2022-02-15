@@ -12,18 +12,7 @@
       #dev
       nixfmt
       rustup
-      pkg-config
-      pkgconfig
-      openssl
-      openssl.dev
       jetbrains.idea-ultimate
-
-      #dev dependencies
-      cairo
-      pango
-      gtk3
-      gtk3-x11
-      glib
 
       #misc
       bitwarden

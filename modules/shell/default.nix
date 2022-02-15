@@ -33,6 +33,9 @@
   };
 
   home.sessionVariables.PATH = if host == "neesama" then
+  # Reorder PATH for non-Nix system
+  # - Nix packages work flawlessly with unfavorable PATH-Order
+  # - Arch packages don't
     (builtins.replaceStrings [ "\n" ] [ "" ] ''
       /usr/local/bin:
       /usr/bin:/bin:
@@ -40,12 +43,12 @@
       /usr/bin/site_perl:
       /usr/bin/vendor_perl:
       /usr/bin/core_perl:
-      /home/autumnal/.cargo/bin:
-      /home/autumnal/.nix-profile/bin:
+      $HOME/.cargo/bin:
+      $HOME/.nix-profile/bin:
       /nix/var/nix/profiles/default/bin
     '')
   else
-    "$PATH:/home/autumnal/.cargo/bin";
+    "$PATH:$HOME/.cargo/bin";
 
   xdg.systemDirs.data = [
     "/usr/share"
