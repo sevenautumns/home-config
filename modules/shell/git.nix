@@ -10,11 +10,6 @@
     };
     extraConfig = {
       core.pager = "${pkgs.delta}/bin/delta";
-      delta = {
-        navigate = true;
-        theme = "Nord";
-      };
-      #interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };
@@ -24,7 +19,10 @@
     enable = true;
     options = {
       syntax-theme = "Nord";
+      navigate = true;
+      line-numbers = true;
       diff-so-fancy = true;
+      side-by-side = true;
     };
   };
 }

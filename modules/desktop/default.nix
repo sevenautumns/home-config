@@ -29,15 +29,25 @@
     GIO_EXTRA_MODULES = [ "${pkgs.gnome.gvfs}/lib/gio/modules" ];
 
     # help building locally compiled programs
-    LIBRARY_PATH = "$HOME/.nix-profile/lib";
+    ##LIBRARY_PATH = "$HOME/.nix-profile/lib:/lib:/usr/lib";
     # header files
-    CPATH = "$HOME/.nix-profile/include";
-    C_INCLUDE_PATH = "$CPATH";
-    CPLUS_INCLUDE_PATH = "$CPATH";
+    ##CPATH = "$HOME/.nix-profile/include";
+    ##C_INCLUDE_PATH = "$CPATH";
+    ##CPLUS_INCLUDE_PATH = "$CPATH";
     # pkg-config
-    PKG_CONFIG_PATH =
-      "$HOME/.nix-profile/lib/pkgconfig:$HOME/.nix-profile/share/pkgconfig";
-    PATH = "$PATH:$HOME/.cargo/bin";
+    ##PKG_CONFIG_PATH =
+    ##  "$HOME/.nix-profile/lib/pkgconfig:$HOME/.nix-profile/share/pkgconfig";
+    PATH = (builtins.replaceStrings [ "\n" ] [ "" ] ''
+      /usr/local/bin:
+      /usr/bin:/bin:
+      /usr/local/sbin:
+      /usr/bin/site_perl:
+      /usr/bin/vendor_perl:
+      /usr/bin/core_perl:
+      /home/autumnal/.cargo/bin:
+      /home/autumnal/.nix-profile/bin:
+      /nix/var/nix/profiles/default/bin
+    '');
   };
 
   #services.betterlockscreen.enable = true;
