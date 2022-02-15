@@ -13,6 +13,7 @@
     ./rofi
     ./mpv.nix
     ./mime.nix
+    ./autorandr.nix
   ];
 
   home.packages = with pkgs; [

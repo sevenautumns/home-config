@@ -223,19 +223,19 @@ in {
             }
             {
               workspace = "7";
-              output = "HDMI-0 HDMI-1 DP-0";
+              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
             }
             {
               workspace = "8";
-              output = "HDMI-0 HDMI-1 DP-0";
+              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
             }
             {
               workspace = "9";
-              output = "HDMI-0 HDMI-1 DP-0";
+              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
             }
             {
               workspace = "10";
-              output = "HDMI-0 HDMI-1 DP-0";
+              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
             }
           ];
 
