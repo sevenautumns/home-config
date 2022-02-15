@@ -24,6 +24,19 @@
     feh
   ];
 
+  xdg.desktopEntries = {
+    screenshot = {
+      name = "Screenshot";
+      genericName = "Gnome Screenshot Tool";
+      # Manually create desktop entry which calls this with --interactive
+      exec =
+        "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot --interactive";
+      terminal = false;
+      categories = [ "Application" "Graphics" ];
+      icon = "org.gnome.Screenshot";
+    };
+  };
+
   # Fix Nautilus gvfs
   home.sessionVariables = {
     GIO_EXTRA_MODULES = [ "${pkgs.gnome.gvfs}/lib/gio/modules" ];

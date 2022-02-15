@@ -41,8 +41,6 @@
         ''home-manager switch --flake $HOME/.config/nixpkgs#"$USER@$hostname"'';
       fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";
       fu = "fish_update_completions";
-      screenshot =
-        "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot --interactive";
       update-background =
         "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
     };
