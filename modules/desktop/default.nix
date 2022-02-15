@@ -21,7 +21,6 @@
     gcc
     calc
     pywal
-    betterlockscreen
     feh
   ];
 
@@ -52,6 +51,4 @@
     ##PKG_CONFIG_PATH =
     ##  "$HOME/.nix-profile/lib/pkgconfig:$HOME/.nix-profile/share/pkgconfig";
   };
-
-  #services.betterlockscreen.enable = true;
 }

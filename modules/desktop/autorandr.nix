@@ -16,17 +16,17 @@ in {
       update-background = ''
         systemctl --user restart polybar.service &
         ${config.programs.fish.shellAliases.update-background}
-        ${pkgs.betterlockscreen}/bin/betterlockscreen -w
+        ${config.programs.fish.shellAliases.load-background}
       '';
     };
     profiles = {
       "clz" = {
         fingerprint = {
-          DP-0 = monitor.asus-240-dp;
+          DP-2 = monitor.asus-240-dp;
           HDMI-0 = monitor.samsung-4k-hdmi;
         };
         config = {
-          DP-0 = {
+          DP-2 = {
             enable = true;
             crtc = 0;
             primary = true;

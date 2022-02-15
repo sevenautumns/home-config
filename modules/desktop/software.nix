@@ -20,5 +20,7 @@
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # Element does not work properly 
       element-desktop
+      # betterlockscreen cant access pem in arch
+      betterlockscreen
     ];
 }

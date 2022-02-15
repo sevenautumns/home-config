@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, host, ... }:
 let
   nord0 = "#2e3440";
   nord1 = "#3b4252";
@@ -48,7 +48,7 @@ in {
           startup = [
             {
               # Set Background Images
-              command = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
+              command = "${config.programs.fish.shellAliases.load-background}";
               always = true;
               notification = false;
             }
@@ -98,7 +98,7 @@ in {
             "${modifier}+v" = "split v";
             "${modifier}+c" = "kill";
 
-            #"${modifier}+l" = "exec --no-startup-id ${pkgs.betterlockscreen}/bin/betterlockscreen -l blur";
+            "${modifier}+l" = "exec --no-startup-id betterlockscreen -l";
 
             # Volume Control
             "XF86AudioRaiseVolume" = ''
@@ -223,19 +223,19 @@ in {
             }
             {
               workspace = "7";
-              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
+              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
             }
             {
               workspace = "8";
-              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
+              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
             }
             {
               workspace = "9";
-              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
+              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
             }
             {
               workspace = "10";
-              output = "HDMI-0 HDMI-1 DP-1 DP-2 DP-3";
+              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
             }
           ];
 

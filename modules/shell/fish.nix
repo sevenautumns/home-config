@@ -45,6 +45,7 @@
         "${pkgs.autorandr}/bin/autorandr --skip-options gamma,panning --change";
       update-background =
         "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
+      load-background = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
     };
     functions.fish_greeting = { body = ""; };
   };
