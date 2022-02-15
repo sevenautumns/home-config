@@ -17,6 +17,13 @@ let
   nord14 = "#a3be8c";
   nord14_sat = "#a0e565";
   nord15 = "#b48ead";
+
+  secondars-monitors = if host == "neesama" then
+    "HDMI-0 HDMI-1 DP-0 DP-1 DP-3"
+  else if host == "ft-ssy-sfnb" then
+    "HDMI-1 DP-1 DP-2"
+  else
+    "";
 in {
   xdg.configFile."i3/scripts/empris.py".source = ./empris.py;
 
@@ -223,19 +230,19 @@ in {
             }
             {
               workspace = "7";
-              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
+              output = secondars-monitors;
             }
             {
               workspace = "8";
-              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
+              output = secondars-monitors;
             }
             {
               workspace = "9";
-              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
+              output = secondars-monitors;
             }
             {
               workspace = "10";
-              output = "HDMI-0 HDMI-1 DP-0 DP-1 DP-3";
+              output = secondars-monitors;
             }
           ];
 
