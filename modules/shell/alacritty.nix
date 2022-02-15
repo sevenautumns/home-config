@@ -21,7 +21,8 @@ in {
     enable = true;
 
     # https://github.com/NixOS/nixpkgs/issues/80702
-    package = if host == "ft-ssy-sfnb" then pkgs.alacritty else pkgs.hello;
+    package =
+      if host == "ft-ssy-sfnb" then pkgs.unstable.alacritty else pkgs.hello;
     settings = {
       window = {
         padding = {

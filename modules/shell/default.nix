@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, host, ... }: {
   imports = [
     ./alacritty.nix
     ./git.nix
@@ -31,6 +31,21 @@
     enable = true;
     enableAliases = true;
   };
+
+  home.sessionVariables.PATH = if host == "neesama" then
+    (builtins.replaceStrings [ "\n" ] [ "" ] ''
+      /usr/local/bin:
+      /usr/bin:/bin:
+      /usr/local/sbin:
+      /usr/bin/site_perl:
+      /usr/bin/vendor_perl:
+      /usr/bin/core_perl:
+      /home/autumnal/.cargo/bin:
+      /home/autumnal/.nix-profile/bin:
+      /nix/var/nix/profiles/default/bin
+    '')
+  else
+    "$PATH:/home/autumnal/.cargo/bin";
 
   xdg.systemDirs.data = [
     "/usr/share"

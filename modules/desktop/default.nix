@@ -37,17 +37,6 @@
     # pkg-config
     ##PKG_CONFIG_PATH =
     ##  "$HOME/.nix-profile/lib/pkgconfig:$HOME/.nix-profile/share/pkgconfig";
-    PATH = (builtins.replaceStrings [ "\n" ] [ "" ] ''
-      /usr/local/bin:
-      /usr/bin:/bin:
-      /usr/local/sbin:
-      /usr/bin/site_perl:
-      /usr/bin/vendor_perl:
-      /usr/bin/core_perl:
-      /home/autumnal/.cargo/bin:
-      /home/autumnal/.nix-profile/bin:
-      /nix/var/nix/profiles/default/bin
-    '');
   };
 
   #services.betterlockscreen.enable = true;
