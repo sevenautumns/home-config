@@ -31,7 +31,7 @@ in {
         };
         opacity = 0.9;
       };
-      font.size = if host == "neesama" then 11 else 8;
+      font.size = if host == "ft-ssy-sfnb" then 8 else 11;
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;
