@@ -9,6 +9,9 @@
       #image
       gnome.eog
 
+      #music
+      spotify
+
       #dev
       nixfmt
       rustup

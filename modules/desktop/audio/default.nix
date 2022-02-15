@@ -2,5 +2,5 @@
   imports = [ ./easyeffects ./cmus ];
 
   services.playerctld.enable = true;
-  home.packages = [ pkgs.pulseaudio pkgs.playerctl ];
+  home.packages = with pkgs; [ pulseaudio playerctl pavucontrol ];
 }
