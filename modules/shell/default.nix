@@ -23,6 +23,8 @@
     defaultOptions = config.programs.skim.defaultOptions;
   };
 
+  programs.htop.enable = true;
+  programs.bottom.enable = true;
   programs.bat.enable = true;
   programs.nix-index.enable = true;
   programs.bash.enable = true;
