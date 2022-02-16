@@ -10,10 +10,11 @@
     ./software.nix
     ./gtk.nix
     ./fcitx
-    ./rofi
+    ./rofi.nix
     ./mpv.nix
     ./mime.nix
     ./autorandr.nix
+    ./betterlockscreen.nix
   ];
 
   home.packages = with pkgs; [

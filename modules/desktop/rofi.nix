@@ -1,22 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  nord0 = "#2e3440";
-  nord1 = "#3b4252";
-  nord2 = "#434c5e";
-  nord3 = "#4c566a";
-  nord4 = "#d8dee9";
-  nord5 = "#e5e0f0";
-  nord6 = "#eceff4";
-  nord7 = "#8fbcbb";
-  nord8 = "#88c0d0";
-  nord9 = "#81a1c1";
-  nord10 = "#5e81ac";
-  nord11 = "#bf616a";
-  nord12 = "#d08770";
-  nord13 = "#ebcb8b";
-  nord14 = "#a3be8c";
-  nord14_sat = "#a0e565";
-  nord15 = "#b48ead";
+  theme = config.theme;
 in {
   # TODO use global colors like https://github.com/minijackson/nixos-config/blob/4259ed78426537d3eaab25366b15cf3783441e6b/home.nix
   # TODO Calc & emoji?
@@ -42,10 +26,10 @@ in {
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {
       "*" = {
-        foreground = mkLiteral nord6;
+        foreground = mkLiteral theme.nord6;
         backlight = mkLiteral "#ccffeedd";
         background-color = mkLiteral "transparent";
-        highlight = mkLiteral "underline bold ${nord6}";
+        highlight = mkLiteral "underline bold ${theme.nord6}";
         transparent = mkLiteral "rgba(46,52,64,0)";
       };
       "window" = {
@@ -65,20 +49,20 @@ in {
         children = mkLiteral "[ inputbar, message, listview ]";
       };
       "message" = {
-        color = mkLiteral nord0;
+        color = mkLiteral theme.nord0;
         padding = 5;
         border-color = mkLiteral "@foreground";
         border = mkLiteral "0px 1px 1px 1px";
-        background-color = mkLiteral nord9;
+        background-color = mkLiteral theme.nord9;
       };
       "inputbar" = {
-        color = mkLiteral nord6;
+        color = mkLiteral theme.nord6;
         padding = mkLiteral "11px";
-        background-color = mkLiteral nord1;
+        background-color = mkLiteral theme.nord1;
 
         border = mkLiteral "1px";
         border-radius = mkLiteral "6px 6px 0px 0px";
-        border-color = mkLiteral nord6;
+        border-color = mkLiteral theme.nord6;
       };
       "entry, prompt, case-indicator" = {
         text-font = mkLiteral "inherit";
@@ -88,7 +72,7 @@ in {
       "listview" = {
         padding = mkLiteral "8px";
         border-radius = "0px 0px 6px 6px";
-        border-color = mkLiteral nord6;
+        border-color = mkLiteral theme.nord6;
         border = mkLiteral "0px 1px 1px 1px";
         background-color = mkLiteral "rgba(46,52,64,0.9)";
         dynamic = false;
@@ -103,8 +87,8 @@ in {
         text-color = mkLiteral "rgb(216, 222, 233)";
       };
       "element selected.normal" = {
-        background-color = mkLiteral nord9;
-        text-color = mkLiteral nord0;
+        background-color = mkLiteral theme.nord9;
+        text-color = mkLiteral theme.nord0;
       };
       "element-text, element-icon" = {
         background-color = mkLiteral "inherit";

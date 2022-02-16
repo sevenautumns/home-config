@@ -1,22 +1,6 @@
 { pkgs, lib, config, host, ... }:
 let
-  nord0 = "#2e3440";
-  nord1 = "#3b4252";
-  nord2 = "#434c5e";
-  nord3 = "#4c566a";
-  nord4 = "#d8dee9";
-  nord5 = "#e5e0f0";
-  nord6 = "#eceff4";
-  nord7 = "#8fbcbb";
-  nord8 = "#88c0d0";
-  nord9 = "#81a1c1";
-  nord10 = "#5e81ac";
-  nord11 = "#bf616a";
-  nord12 = "#d08770";
-  nord13 = "#ebcb8b";
-  nord14 = "#a3be8c";
-  nord14_sat = "#a0e565";
-  nord15 = "#b48ead";
+  theme = config.theme;
 
   secondars-monitors = if host == "neesama" then
     "HDMI-0 HDMI-1 DP-0 DP-1 DP-3"
@@ -248,32 +232,32 @@ in {
 
           colors = {
             focused = {
-              background = nord0;
-              text = nord6;
-              border = nord6;
-              childBorder = nord4;
-              indicator = nord14_sat;
+              background = theme.nord0;
+              text = theme.nord6;
+              border = theme.nord6;
+              childBorder = theme.nord4;
+              indicator = theme.nord14_sat;
             };
             unfocused = {
-              background = nord0;
-              text = nord5;
-              border = nord0;
-              childBorder = nord2;
-              indicator = nord14_sat;
+              background = theme.nord0;
+              text = theme.nord5;
+              border = theme.nord0;
+              childBorder = theme.nord2;
+              indicator = theme.nord14_sat;
             };
             focusedInactive = {
-              background = nord0;
-              text = nord5;
-              border = nord0;
-              childBorder = nord0;
-              indicator = nord14_sat;
+              background = theme.nord0;
+              text = theme.nord5;
+              border = theme.nord0;
+              childBorder = theme.nord0;
+              indicator = theme.nord14_sat;
             };
             urgent = {
-              background = nord11;
-              text = nord6;
-              border = nord11;
-              childBorder = nord12;
-              indicator = nord14_sat;
+              background = theme.nord11;
+              text = theme.nord6;
+              border = theme.nord11;
+              childBorder = theme.nord12;
+              indicator = theme.nord14_sat;
             };
           };
         };

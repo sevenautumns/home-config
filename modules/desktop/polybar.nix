@@ -19,23 +19,8 @@ let
     sed -i '/move-sink-input/c\\:' $out/pulseaudio-control.bash
   '';
 
-  nord0 = "#2e3440";
-  nord1 = "#3b4252";
-  nord2 = "#434c5e";
-  nord3 = "#4c566a";
-  nord4 = "#d8dee9";
-  nord5 = "#e5e0f0";
-  nord6 = "#eceff4";
-  nord7 = "#8fbcbb";
-  nord8 = "#88c0d0";
-  nord9 = "#81a1c1";
-  nord10 = "#5e81ac";
-  nord11 = "#bf616a";
-  nord12 = "#d08770";
-  nord13 = "#ebcb8b";
-  nord14 = "#a3be8c";
-  nord14_sat = "#a0e565";
-  nord15 = "#b48ead";
+  theme = config.theme;
+
   my-polybar = pkgs.polybar.override {
     i3GapsSupport = true;
     alsaSupport = true;
@@ -65,10 +50,10 @@ in {
         width = "100%";
         border = {
           size = 4;
-          color = nord0;
+          color = theme.nord0;
         };
-        background = nord0;
-        foreground = nord6;
+        background = theme.nord0;
+        foreground = theme.nord6;
         line-size = 0;
         padding = {
           left = 8;
@@ -144,7 +129,7 @@ in {
         internal = 2;
         format = "<label>";
         format-prefix = "%{T2}︁ %{T-}";
-        format-foreground = nord14;
+        format-foreground = theme.nord14;
         label = "%mb_used%";
         label-minlen = 9;
         label-font = 6;
@@ -153,7 +138,7 @@ in {
         type = "internal/cpu";
         interval = 1;
         format-prefix = "%{T5} %{T-}";
-        format-foreground = nord9;
+        format-foreground = theme.nord9;
         label = "%percentage%%";
         label-minlen = 4;
         label-font = 6;
@@ -163,7 +148,7 @@ in {
         interval = 5;
         date = "  %h %d %a";
         date-alt = "  %Y-%m-%d";
-        format-foreground = nord8;
+        format-foreground = theme.nord8;
         label = "%date%";
       };
       "module/time" = {
@@ -171,7 +156,7 @@ in {
         interval = 1;
         time = "  %I:%M %p";
         time-alt = " %H:%M:%S";
-        format-foreground = nord13;
+        format-foreground = theme.nord13;
         label = "%time%";
       };
       "module/battery" = {
@@ -182,15 +167,15 @@ in {
         adapter = "AC";
         poll-interval = 1;
         format-discharging = "<ramp-capacity> <label-discharging>%{F-}";
-        label-charging = "%{F${nord14}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
+        label-charging = "%{F${theme.nord14}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
         label-discharging = "%percentage%% (%time%)";
-        label-full = "%{F${nord14}}%{T5} %{T-}Full%{F-}";
-        ramp-capacity-0 = "%{F${nord11}}%{T5}%{T-}";
-        ramp-capacity-1 = "%{F${nord12}}%{T5}%{T-}";
-        ramp-capacity-2 = "%{F${nord13}}%{T5}%{T-}";
-        ramp-capacity-3 = "%{F${nord14}}%{T5}%{T-}";
-        ramp-capacity-4 = "%{F${nord14}}%{T5}%{T-}";
-        format-foreground = nord11;
+        label-full = "%{F${theme.nord14}}%{T5} %{T-}Full%{F-}";
+        ramp-capacity-0 = "%{F${theme.nord11}}%{T5}%{T-}";
+        ramp-capacity-1 = "%{F${theme.nord12}}%{T5}%{T-}";
+        ramp-capacity-2 = "%{F${theme.nord13}}%{T5}%{T-}";
+        ramp-capacity-3 = "%{F${theme.nord14}}%{T5}%{T-}";
+        ramp-capacity-4 = "%{F${theme.nord14}}%{T5}%{T-}";
+        format-foreground = theme.nord11;
       };
       "module/player-mpris-tail" = {
         type = "custom/script";
@@ -200,13 +185,13 @@ in {
           -f '{artist} - {title}'
         '');
         tail = true;
-        format-foreground = nord12;
+        format-foreground = theme.nord12;
         format-padding = 2;
       };
       "module/pulseaudio-control" = {
         type = "custom/script";
         tail = true;
-        format-foreground = nord15;
+        format-foreground = theme.nord15;
         format-padding = 2;
         exec = (builtins.replaceStrings [ "\n" ] [ "" ] ''
           ${pkgs.bash}/bin/bash 
@@ -236,7 +221,7 @@ in {
       "module/network" = {
         type = "internal/network";
         interface = "enp5s0";
-        format-connected-foreground = nord11;
+        format-connected-foreground = theme.nord11;
         format-connected = "<label-connected>";
         label-connected = "%{T5}ﰬ%{T-}%downspeed:9% %{T5}ﰵ%{T-}%upspeed:9%";
       };

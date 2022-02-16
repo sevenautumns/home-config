@@ -1,21 +1,6 @@
 { pkgs, config, host, lib, ... }:
 let
-  nord0 = "#2e3440";
-  nord1 = "#3b4252";
-  nord2 = "#434c5e";
-  nord3 = "#4c566a";
-  nord4 = "#d8dee9";
-  nord5 = "#e5e0f0";
-  nord6 = "#eceff4";
-  nord7 = "#8fbcbb";
-  nord8 = "#88c0d0";
-  nord9 = "#81a1c1";
-  nord10 = "#5e81ac";
-  nord11 = "#bf616a";
-  nord12 = "#d08770";
-  nord13 = "#ebcb8b";
-  nord14 = "#a3be8c";
-  nord15 = "#b48ead";
+  theme = config.theme;
 in {
   programs.alacritty = {
     enable = true;
@@ -36,51 +21,51 @@ in {
       colors = {
         transparent_background_colors = true;
         primary = {
-          background = nord0;
-          foreground = nord4;
+          background = theme.nord0;
+          foreground = theme.nord4;
           dim_foreground = "#a5abb6";
         };
         cursor = {
-          text = nord0;
-          cursor = nord4;
+          text = theme.nord0;
+          cursor = theme.nord4;
         };
         vi_mode_cursor = {
-          text = nord0;
-          cursor = nord4;
+          text = theme.nord0;
+          cursor = theme.nord4;
         };
         selection = {
           text = "CellForeground";
-          background = nord3;
+          background = theme.nord3;
         };
         search = {
           matches = {
             foreground = "CellBackground";
-            background = nord8;
+            background = theme.nord8;
           };
           bar = {
-            background = nord2;
-            foreground = nord4;
+            background = theme.nord2;
+            foreground = theme.nord4;
           };
         };
         normal = {
-          black = nord1;
-          red = nord11;
-          green = nord14;
-          yellow = nord13;
-          blue = nord9;
-          magenta = nord15;
-          cyan = nord8;
+          black = theme.nord1;
+          red = theme.nord11;
+          green = theme.nord14;
+          yellow = theme.nord13;
+          blue = theme.nord9;
+          magenta = theme.nord15;
+          cyan = theme.nord8;
           white = "#e5e9f0";
         };
         bright = {
-          black = nord3;
-          red = nord11;
-          green = nord14;
-          yellow = nord13;
-          blue = nord9;
-          magenta = nord15;
-          cyan = nord7;
-          white = nord6;
+          black = theme.nord3;
+          red = theme.nord11;
+          green = theme.nord14;
+          yellow = theme.nord13;
+          blue = theme.nord9;
+          magenta = theme.nord15;
+          cyan = theme.nord7;
+          white = theme.nord6;
         };
         dim = {
           black = "#373e4d";
