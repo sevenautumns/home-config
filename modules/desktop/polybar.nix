@@ -167,7 +167,8 @@ in {
         adapter = "AC";
         poll-interval = 1;
         format-discharging = "<ramp-capacity> <label-discharging>%{F-}";
-        label-charging = "%{F${theme.nord14}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
+        label-charging =
+          "%{F${theme.nord14}}%{T2}ﮣ %{T-}%percentage%% (%time%)%{F-}";
         label-discharging = "%percentage%% (%time%)";
         label-full = "%{F${theme.nord14}}%{T5} %{T-}Full%{F-}";
         ramp-capacity-0 = "%{F${theme.nord11}}%{T5}%{T-}";

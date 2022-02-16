@@ -1,6 +1,5 @@
 { pkgs, config, ... }:
-let
-  theme = config.theme;
+let theme = config.theme;
 in {
   services.dunst = {
     enable = true;

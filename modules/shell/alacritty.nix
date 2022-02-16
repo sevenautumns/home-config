@@ -1,6 +1,5 @@
 { pkgs, config, host, lib, ... }:
-let
-  theme = config.theme;
+let theme = config.theme;
 in {
   programs.alacritty = {
     enable = true;

@@ -1,6 +1,5 @@
 { pkgs, config, lib, ... }:
-let
-  theme = config.theme;
+let theme = config.theme;
 in {
   # TODO use global colors like https://github.com/minijackson/nixos-config/blob/4259ed78426537d3eaab25366b15cf3783441e6b/home.nix
   # TODO Calc & emoji?
