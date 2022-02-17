@@ -2,15 +2,30 @@
 let
   browser = [ "brave-browser.desktop" ];
   image = [ "org.gnome.eog.desktop" ];
+  text = [ "visual-studio-code.desktop" ];
   associations = {
     "text/html" = browser;
     "x-scheme-handler/http" = browser;
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/about" = browser;
-    "x-scheme-handler/unknown" = browser;
 
     "image/jpeg" = image;
     "image/png" = image;
+
+    "text/english" = text;
+    "text/x-c" = text;
+    "text/x-c++" = text;
+    "text/x-c++hdr" = text;
+    "text/x-c++src" = text;
+    "text/x-chdr" = text;
+    "text/x-csrc" = text;
+    "text/x-java" = text;
+    "text/x-makefile" = text;
+    "text/x-moc" = text;
+    "text/x-pascal" = text;
+    "text/x-tcl" = text;
+    "text/x-tex" = text;
+    "text/xml" = text;
 
     "x-scheme-handler/tg" = [ "userapp-Telegram Desktop-ONADH1.desktop" ];
   };

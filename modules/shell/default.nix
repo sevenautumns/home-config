@@ -12,16 +12,21 @@
   programs.skim = {
     enable = true;
     enableFishIntegration = true;
-    defaultCommand =
-      "${pkgs.ripgrep}/bin/rg --files || ${pkgs.fd}/bin/fd || ${pkgs.findutils}/bin/find .";
-    defaultOptions = [ "--preview='${pkgs.bat}/bin/bat {} --color=always'" ];
+    fileWidgetCommand = "${pkgs.fd}/bin/fd --hidden --type f";
+    fileWidgetOptions = [ "--preview='${pkgs.bat}/bin/bat {} --color=always'" ];
+    changeDirWidgetCommand = "${pkgs.fd}/bin/fd --hidden --type d";
+    changeDirWidgetOptions =
+      [ "--preview='${pkgs.exa}/bin/exa --tree {} | head -200'" ];
+    historyWidgetOptions = [ "--tac" "--exact" ];
   };
 
-  programs.fzf = {
-    enable = true;
-    defaultCommand = config.programs.skim.defaultCommand;
-    defaultOptions = config.programs.skim.defaultOptions;
-  };
+  #programs.fzf = {
+  #  enable = true;
+  #  fileWidgetCommand = config.programs.skim.fileWidgetCommand;
+  #  fileWidgetOptions = config.programs.skim.fileWidgetOptions;
+  #  changeDirWidgetCommand = config.programs.skim.changeDirWidgetCommand;
+  #  changeDirWidgetOptions = config.programs.skim.changeDirWidgetOptions;
+  #};
 
   programs.htop.enable = true;
   programs.bottom.enable = true;
