@@ -17,7 +17,7 @@
     changeDirWidgetCommand = "${pkgs.fd}/bin/fd --hidden --type d";
     changeDirWidgetOptions =
       [ "--preview='${pkgs.exa}/bin/exa --tree {} | head -200'" ];
-    historyWidgetOptions = [ "--tac" "--exact" ];
+    historyWidgetOptions = [ ];
   };
 
   #programs.fzf = {
