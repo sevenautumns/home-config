@@ -61,6 +61,7 @@
           extraSpecialArgs = {
             inherit inputs;
             inherit host;
+            inherit user;
           };
 
           system = x86_64;

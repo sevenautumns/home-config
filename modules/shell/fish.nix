@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, host, user, ... }: {
   programs.command-not-found.enable = false;
   programs.fish = {
     enable = true;
@@ -38,7 +38,7 @@
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
       topnep = "${pkgs.topgrade}/bin/topgrade";
       sw =
-        ''home-manager switch --flake $HOME/.config/nixpkgs#"$USER@$hostname"'';
+        ''home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"'';
       fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";
       fu = "fish_update_completions";
       zf = ''z --pipe="sk --height 40% --layout=reverse"'';

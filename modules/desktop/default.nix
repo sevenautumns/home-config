@@ -6,7 +6,6 @@
 
     ./font.nix
     ./gtk.nix
-    ./mime.nix
   ];
 
   home.packages = with pkgs; [
