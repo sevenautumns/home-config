@@ -10,6 +10,7 @@
 
   services.sxhkd.keybindings = {
     "super + w" = "${pkgs.brave}/bin/brave";
+    "super + shift + w" = "${pkgs.firefox}/bin/firefox";
     "super + shift + Return" =
       "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
   };
@@ -37,6 +38,7 @@
       neofetch
       arandr
       brave
+      firefox
       gnome.nautilus
 
       #learning

@@ -3,6 +3,15 @@ let theme = config.theme-non_hex;
 in {
   services.sxhkd.keybindings = { "super + l" = "betterlockscreen -l"; };
 
+  systemd.user.services.wallpaper = {
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${config.programs.fish.shellAliases.load-background}";
+      IOSchedulingClass = "idle";
+    };
+  };
+
   xdg.configFile."betterlockscreenrc".text = ''
     font="${config.gtk.font.name}"
     loginbox=${theme.nord0}66

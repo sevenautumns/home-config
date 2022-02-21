@@ -15,7 +15,7 @@
             {
               command = "Execute";
               value = "alacritty";
-              modifier = [ "modkey" ];
+              modifier = [ "modkey" "Shift" ];
               key = "Return";
             }
             {

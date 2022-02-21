@@ -30,28 +30,13 @@ in {
         package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
-          startup = [
-            {
-              # Set Background Images
-              command = "${config.programs.fish.shellAliases.load-background}";
-              always = true;
-              notification = false;
-            }
-            {
-              # Polybar sometimes starts faster than i3, 
-              # resulting in the i3-module not activating
-              command = "systemctl --user restart polybar.service";
-              always = true;
-              notification = false;
-            }
-            #{
-            #  # Disable Caps
-            #  command =
-            #    "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option caps:ctrl_modifier";
-            #  always = true;
-            #  notification = false;
-            #}
-          ];
+          startup = [{
+            # Polybar sometimes starts faster than i3, 
+            # resulting in the i3-module not activating
+            command = "systemctl --user restart polybar.service";
+            always = true;
+            notification = false;
+          }];
           bars = [ ];
           window.border = 1;
           gaps = {
@@ -66,7 +51,7 @@ in {
           modifier = "Mod4";
           keybindings = pkgs.lib.mkOptionDefault {
             # Open Applications
-            "${modifier}+Return" = "exec --no-startup-id alacritty";
+            "${modifier}+Shift+Return" = "exec --no-startup-id alacritty";
 
             # Container Layout
             "${modifier}+s" = "layout stacking";
