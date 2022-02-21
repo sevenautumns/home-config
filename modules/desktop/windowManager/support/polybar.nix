@@ -197,6 +197,8 @@ in {
             --sink-nicknames-from 'node.name' --format '$SINK_NICKNAME ''${VOL_LEVEL}%'
             --sink-nickname '*pci*analog-stereo:%{T5}蓼%{T-}'
             --sink-nickname '*Yamaha*:%{T5}%{T-}' 
+            --sink-nickname 'alsa_output.pci-0000_00_1f.3.analog-stereo/analog-output-speaker:%{T5}蓼%{T-}'
+            --sink-nickname 'alsa_output.pci-0000_00_1f.3.analog-stereo/analog-output-headphones:%{T5}%{T-}'
             listen
         '');
         click = {
