@@ -1,6 +1,15 @@
 { pkgs, config, host, ... }: {
   imports = [ ./git.nix ./fish.nix ./starship.nix ./neovim.nix ./keyboard.nix ];
-  home.packages = with pkgs; [ fd ripgrep du-dust any-nix-shell ];
+  home.packages = with pkgs; [
+    fd
+    ripgrep
+    du-dust
+    any-nix-shell
+    lfs
+    hyperfine
+    calc
+    neofetch
+  ];
 
   programs.skim = {
     enable = true;
