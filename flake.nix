@@ -7,9 +7,11 @@
     nur.url = "github:nix-community/NUR";
     my-flakes.url = "github:steav005/flakes";
     homeManager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      #url = "github:nix-community/home-manager/release-21.11";
+      url = "github:Steav005/home-manager/feat/leftwm-module";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+    leftwm.url = "github:leftwm/leftwm";
     deploy-rs.url = "github:serokell/deploy-rs";
 
     polybar-scripts = {

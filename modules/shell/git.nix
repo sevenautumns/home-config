@@ -9,11 +9,14 @@
       it = "commit";
     };
     extraConfig = {
+      core = { editor = "${pkgs.neovim}/bin/nvim"; };
       core.pager = "${pkgs.delta}/bin/delta";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };
   };
+
+  programs.lazygit.enable = true;
 
   programs.git.delta = {
     enable = true;

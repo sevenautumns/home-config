@@ -7,12 +7,11 @@ in {
 
   # TODO doesnt work yet
   xdg.configFile = {
-    "cmus/merge_status_script.sh".text = ''
-      #!/usr/bin/env bash
-
-      ${pkgs.cmusfm}/bin/cmusfm "$@"
-      ${cmus-perl}/bin/perl ${inputs.cmus-notify}/cmus-notify.pl "$@"
-    '';
+    "cmus/merge_status_script.sh".source =
+      pkgs.writeShellScript "merge_status_script.sh" ''
+        ${pkgs.cmusfm}/bin/cmusfm "$@"
+        ${cmus-perl}/bin/perl ${inputs.cmus-notify}/cmus-notify.pl "$@"
+      '';
     "cmus/notify.cfg".source = ./notify.cfg;
   };
 }

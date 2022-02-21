@@ -1,20 +1,12 @@
 { pkgs, config, ... }: {
   imports = [
+    ./windowManager
+    ./software
     ./audio
+
     ./font.nix
-    ./polybar.nix
-    ./i3
-    ./picom.nix
-    ./dunst.nix
-    ./redshift.nix
-    ./software.nix
     ./gtk.nix
-    ./fcitx
-    ./rofi.nix
-    ./mpv.nix
     ./mime.nix
-    ./autorandr.nix
-    ./betterlockscreen.nix
   ];
 
   home.packages = with pkgs; [
@@ -24,6 +16,11 @@
     pywal
     feh
   ];
+
+  services.network-manager-applet.enable = true;
+  services.blueman-applet.enable = true;
+  xsession.numlock.enable = true;
+  services.sxhkd.enable = true;
 
   xdg.desktopEntries = {
     screenshot = {

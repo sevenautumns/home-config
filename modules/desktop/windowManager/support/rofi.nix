@@ -1,9 +1,14 @@
 { pkgs, config, lib, ... }:
 let theme = config.theme;
 in {
-  # TODO use global colors like https://github.com/minijackson/nixos-config/blob/4259ed78426537d3eaab25366b15cf3783441e6b/home.nix
-  # TODO Calc & emoji?
   # TODO Terminal?
+
+  services.sxhkd.keybindings = {
+    "super + d" = "rofi -no-lazy-grab -show drun -modi drun";
+    "super + t" = "rofi -show window -modi window";
+    "XF86Calculator" = "rofi -show calc -mode calc";
+  };
+
   programs.rofi = {
     enable = true;
     font = "FiraCode Nerd Font 11";

@@ -9,14 +9,8 @@ let
   else
     "";
 in {
-  xdg.configFile."i3/scripts/empris.py".source = ./empris.py;
-
-  services.network-manager-applet.enable = true;
-  services.blueman-applet.enable = true;
-
   xsession = {
     enable = true;
-    numlock.enable = true;
     windowManager = {
       i3 = let
         modifier = config.xsession.windowManager.i3.config.modifier;
@@ -73,13 +67,6 @@ in {
           keybindings = pkgs.lib.mkOptionDefault {
             # Open Applications
             "${modifier}+Return" = "exec --no-startup-id alacritty";
-            "${modifier}+w" = "exec --no-startup-id ${pkgs.brave}/bin/brave";
-            "${modifier}+Shift+Return" =
-              "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
-
-            # Dmenu
-            "${modifier}+d" =
-              "exec --no-startup-id rofi -no-lazy-grab -show drun -modi drun";
 
             # Container Layout
             "${modifier}+s" = "layout stacking";
@@ -88,58 +75,6 @@ in {
             "${modifier}+h" = "split h";
             "${modifier}+v" = "split v";
             "${modifier}+c" = "kill";
-
-            "${modifier}+l" = "exec --no-startup-id betterlockscreen -l";
-
-            # Volume Control
-            "XF86AudioRaiseVolume" = ''
-              exec --no-startup-id ${pkgs.pamixer}/bin/pamixer -i 5 && ${pkgs.dunst}/bin/dunstify -u low \
-                "Volume: `${pkgs.pamixer}/bin/pamixer --get-volume`%" \
-                -h string:x-canonical-private-synchronous:volume \
-                -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
-            '';
-            "XF86AudioLowerVolume" = ''
-              exec --no-startup-id ${pkgs.pamixer}/bin/pamixer -d 5 && ${pkgs.dunst}/bin/dunstify -u low \
-                "Volume: `${pkgs.pamixer}/bin/pamixer --get-volume`%" \
-                -h string:x-canonical-private-synchronous:volume \
-                -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
-            '';
-            "XF86AudioMute" = ''
-              exec --no-startup-id ${pkgs.pamixer}/bin/pamixer -t && ${pkgs.dunst}/bin/dunstify -u low \
-                "Mute: `${pkgs.pamixer}/bin/pamixer --get-mute`" \
-                -h string:x-canonical-private-synchronous:volume \
-                -h int:value:"`${pkgs.pamixer}/bin/pamixer --get-volume`"
-            '';
-            "XF86AudioMicMute" =
-              "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-
-            # Audio Controll
-            "XF86AudioPlay" =
-              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
-            "XF86AudioPause" =
-              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py playpause";
-            "XF86AudioNext" =
-              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py next";
-            "XF86AudioPrev" =
-              "exec --no-startup-id ${pkgs.python3}/bin/python3 ~/.config/i3/scripts/empris.py prev";
-
-            # Brightnessctl
-            "XF86MonBrightnessUp" = ''
-              exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set +10% && ${pkgs.dunst}/bin/dunstify -u low \
-                "Brightness: `${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`%" \
-                -h string:x-canonical-private-synchronous:volume \
-                -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
-            '';
-            "XF86MonBrightnessDown" = ''
-              exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 10%- && ${pkgs.dunst}/bin/dunstify -u low \
-                "Brightness: `${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`%" \
-                -h string:x-canonical-private-synchronous:volume \
-                -h int:value:"`${pkgs.brightnessctl}/bin/brightnessctl -m info | grep -oP '\d+(?=%)'`"
-            '';
-
-            # Calculator
-            "XF86Calculator" =
-              "exec --no-startup-id rofi -show calc -mode calc";
           };
           keycodebindings = {
             # Workspace select numpad

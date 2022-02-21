@@ -1,12 +1,13 @@
 { pkgs, config, host, lib, ... }:
 let theme = config.theme;
 in {
+  services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
+
   programs.alacritty = {
     enable = true;
 
     # https://github.com/NixOS/nixpkgs/issues/80702
-    package =
-      if host == "ft-ssy-sfnb" then pkgs.unstable.alacritty else pkgs.hello;
+    package = if host == "neesama" then pkgs.hello else pkgs.unstable.alacritty;
     settings = {
       window = {
         padding = {
@@ -15,7 +16,7 @@ in {
         };
         opacity = 0.9;
       };
-      font.size = if host == "ft-ssy-sfnb" then 8 else 11;
+      font.size = if host == "neesama" then 11 else 8;
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;

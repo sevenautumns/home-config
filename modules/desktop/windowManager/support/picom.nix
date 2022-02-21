@@ -3,22 +3,10 @@
     #    package = pkgs.nur.repos.reedrw.picom-next-ibhagwan;
 
     enable = true;
-    backend = if host == "neesama" then
-      "xrender"
-    else if host == "ft-ssy-sfnb" then
-      "glx"
-      # This last one is for failing if the system is not defined
-    else
-      2;
+    backend = if host == "neesama" then "xrender" else "glx";
     vSync = false;
     experimentalBackends = true;
-    refreshRate = if host == "neesama" then
-      240
-    else if host == "ft-ssy-sfnb" then
-      60
-      # This last one is for failing if the system is not defined
-    else
-      "Error";
+    refreshRate = if host == "neesama" then 240 else 60;
     shadow = true;
     #shadowOffsets = [ (-12) (-6) ];
     shadowOffsets = [ (-5) (-5) ];

@@ -80,13 +80,10 @@ in {
         modules = {
           left = "i3";
           center = "player-mpris-tail";
-          right = if host == "neesama" then
-            "memory cpu pulseaudio-control date time"
-          else if host == "ft-ssy-sfnb" then
+          right = if host == "ft-ssy-sfnb" then
             "memory cpu pulseaudio-control battery date time"
-            # This last one is for failing if the system is not defined
           else
-            0;
+            "memory cpu pulseaudio-control date time";
         };
         tray = {
           position = "right";

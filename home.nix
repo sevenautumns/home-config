@@ -12,4 +12,10 @@
     pkgs.unstable.xterm
     pkgs.glibc
   ];
+
+  home.file = if host == "neesama" then {
+    "GitRepos".source =
+      config.lib.file.mkOutOfStoreSymlink "/media/ssddata/GitRepos";
+  } else
+    { };
 }

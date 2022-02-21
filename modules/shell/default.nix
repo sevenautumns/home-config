@@ -1,12 +1,5 @@
 { pkgs, config, host, ... }: {
-  imports = [
-    ./alacritty.nix
-    ./git.nix
-    ./fish.nix
-    ./starship.nix
-    ./neovim.nix
-    ./keyboard.nix
-  ];
+  imports = [ ./git.nix ./fish.nix ./starship.nix ./neovim.nix ./keyboard.nix ];
   home.packages = with pkgs; [ fd ripgrep du-dust any-nix-shell ];
 
   programs.skim = {
@@ -17,26 +10,52 @@
     changeDirWidgetCommand = "${pkgs.fd}/bin/fd --hidden --type d";
     changeDirWidgetOptions =
       [ "--preview='${pkgs.exa}/bin/exa --tree {} | head -200'" ];
-    historyWidgetOptions = [ ];
+    historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
   };
 
-  #programs.fzf = {
-  #  enable = true;
-  #  fileWidgetCommand = config.programs.skim.fileWidgetCommand;
-  #  fileWidgetOptions = config.programs.skim.fileWidgetOptions;
-  #  changeDirWidgetCommand = config.programs.skim.changeDirWidgetCommand;
-  #  changeDirWidgetOptions = config.programs.skim.changeDirWidgetOptions;
-  #};
+  programs.atuin = {
+    enable = true;
+    package = pkgs.unstable.atuin;
+    enableFishIntegration = true;
+    settings = {
+      auto_sync = false;
+      search_mode = "fuzzy";
+      dialect = "uk";
+    };
+  };
 
   programs.htop.enable = true;
   programs.bottom.enable = true;
   programs.bat.enable = true;
-  programs.nix-index.enable = true;
-  programs.bash.enable = true;
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  programs.pazi = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  programs.zsh.enable = true;
 
   programs.exa = {
     enable = true;
     enableAliases = true;
+  };
+
+  programs.topgrade = {
+    enable = true;
+    settings = {
+      disable = [ "nix" "home_manager" ];
+      linux.arch_package_manager = "paru";
+      commands = {
+        nix-channel = "nix-channel --update";
+        home-config = (builtins.replaceStrings [ "\n" ] [ "" ] ''
+          cd ~/.config/nixpkgs &&
+            nix flake update &&
+            ${config.programs.fish.shellAliases.sw}
+        '');
+      };
+    };
   };
 
   home.sessionVariables.PATH = if host == "neesama" then

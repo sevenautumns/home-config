@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 let theme = config.theme-non_hex;
 in {
+  services.sxhkd.keybindings = { "super + l" = "betterlockscreen -l"; };
 
   xdg.configFile."betterlockscreenrc".text = ''
     font="${config.gtk.font.name}"

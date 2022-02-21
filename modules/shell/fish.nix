@@ -35,18 +35,40 @@
       set -x BAT_THEME Nord
     '';
     shellAliases = {
-      vim = "${pkgs.neovim}/bin/nvim";
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
+      topnep = "${pkgs.topgrade}/bin/topgrade";
       sw =
         ''home-manager switch --flake $HOME/.config/nixpkgs#"$USER@$hostname"'';
       fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";
       fu = "fish_update_completions";
+      zf = ''z --pipe="sk --height 40% --layout=reverse"'';
       detect-screen =
         "${pkgs.autorandr}/bin/autorandr --skip-options gamma,panning --change";
       update-background =
         "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
       load-background = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
     };
-    functions.fish_greeting = { body = ""; };
+    functions = {
+      fish_greeting = { body = ""; };
+      fish_user_key_bindings = {
+        description = "Set custom key bindings";
+        body = ''
+          bind \cy pazi_skim_binding
+        '';
+      };
+      # Use pazi as a keybind
+      pazi_skim_binding = {
+        description = "Set custom key bindings";
+        body = ''
+          set -l commandline (__skim_parse_commandline)
+          set -l query $commandline[2]
+          commandline (commandline --cut-at-cursor)
+          ${config.programs.fish.shellAliases.zf} $query
+
+          commandline -t ""
+          commandline -f repaint
+        '';
+      };
+    };
   };
 }
