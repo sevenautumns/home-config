@@ -7,7 +7,10 @@ in {
     Install.WantedBy = [ "graphical-session.target" ];
     Service = {
       Type = "oneshot";
-      ExecStart = "${config.programs.fish.shellAliases.load-background}";
+      ExecStart = toString (pkgs.writeShellScript "set-wallpaper.sh" ''
+        export PATH=$PATH:${pkgs.feh}/bin 
+        ${config.programs.fish.shellAliases.load-background}
+      '');
       IOSchedulingClass = "idle";
     };
   };

@@ -17,7 +17,7 @@ let
     nord13 = "#ebcb8b";
     nord14 = "#a3be8c";
     nord15 = "#b48ead";
-    
+
     dark0 = theme.nord0;
     dark1 = theme.nord1;
     dark2 = theme.nord2;
