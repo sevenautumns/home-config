@@ -19,9 +19,11 @@ in {
         notification_height = 0;
         separator_height = 2;
         padding = 8;
+        origin = "top-right";
+        offset = "6x38";
         horizontal_padding = 8;
         text_icon_padding = 0;
-        frame_width = 3;
+        frame_width = 2;
         frame_color = "#eceff4";
         separator_color = "frame";
         idle_threshold = 120;
@@ -39,7 +41,7 @@ in {
         min_icon_size = 0;
         max_icon_size = 54;
         history_length = 20;
-        dmenu = "${pkgs.dmenu}/bin/dmenu -p dunst";
+        dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst";
         browser = "${pkgs.brave}/bin/brave -new-tab";
         corner_radius = 0;
         ignore_dbusclose = false;

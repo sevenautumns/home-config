@@ -42,7 +42,7 @@ in {
         transparency = "screenshot";
         padding = mkLiteral "0px";
         border = mkLiteral "0px";
-        border-radius = mkLiteral "6px";
+        #border-radius = mkLiteral "6px";
         background-color = mkLiteral "@transparent";
         spacing = 0;
         children = mkLiteral "[mainbox]";
@@ -65,7 +65,7 @@ in {
         background-color = mkLiteral theme.nord1;
 
         border = mkLiteral "1px";
-        border-radius = mkLiteral "6px 6px 0px 0px";
+        #border-radius = mkLiteral "6px 6px 0px 0px";
         border-color = mkLiteral theme.nord6;
       };
       "entry, prompt, case-indicator" = {
@@ -75,17 +75,17 @@ in {
       "prompt" = { margin = mkLiteral "0px 0.3em 0em 0em"; };
       "listview" = {
         padding = mkLiteral "8px";
-        border-radius = "0px 0px 6px 6px";
+        #border-radius = "0px 0px 6px 6px";
         border-color = mkLiteral theme.nord6;
         border = mkLiteral "0px 1px 1px 1px";
-        background-color = mkLiteral "rgba(46,52,64,0.9)";
+        background-color = mkLiteral "rgba(46,52,64,1.0)";
         dynamic = false;
         columns = 2;
       };
       "element" = {
         padding = mkLiteral "3px";
         vertical-align = mkLiteral "0.5";
-        border-radius = mkLiteral "4px";
+        #border-radius = mkLiteral "4px";
         background-color = "transparent";
         color = "@foreground";
         text-color = mkLiteral "rgb(216, 222, 233)";
@@ -104,7 +104,7 @@ in {
         horizontal-align = mkLiteral "0.5";
 
         border = mkLiteral "2px 0px 2px 2px";
-        border-radius = mkLiteral "4px 0px 0px 4px";
+        #border-radius = mkLiteral "4px 0px 0px 4px";
         border-color = mkLiteral "@foreground";
       };
       "button selected normal" = {

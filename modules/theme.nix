@@ -17,12 +17,7 @@ let
     nord13 = "#ebcb8b";
     nord14 = "#a3be8c";
     nord15 = "#b48ead";
-    nord11_sat = "#e53b4b";
-    nord12_sat = "#ec7854";
-    nord13_sat = "#f7cf7f";
-    nord14_sat = "#a0e565";
-    nord15_sat = "#e161c9";
-
+    
     dark0 = theme.nord0;
     dark1 = theme.nord1;
     dark2 = theme.nord2;
@@ -32,22 +27,16 @@ let
     light1 = theme.nord5;
     light2 = theme.nord4;
 
-    blue_green = theme.nord7;
-    blue_light = theme.nord8;
-    blue = theme.nord9;
-    blue_dark = theme.nord10;
+    primary_ui = theme.nord8;
+    primary_ui2 = theme.nord7;
+    secondary_ui = theme.nord9;
+    tertiary_ui = theme.nord10;
 
-    red = theme.nord11;
-    orange = theme.nord12;
-    yellow = theme.nord13;
-    green = theme.nord14;
-    pink = theme.nord15;
-
-    red_sat = theme.nord11_sat;
-    orange_sat = theme.nord12_sat;
-    yellow_sat = theme.nord13_sat;
-    green_sat = theme.nord14_sat;
-    pink_sat = theme.nord15_sat;
+    error = theme.nord11;
+    danger = theme.nord12;
+    warning = theme.nord13;
+    success = theme.nord14;
+    uncommon = theme.nord15;
   };
 
 in {

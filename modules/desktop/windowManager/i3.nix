@@ -156,28 +156,28 @@ in {
               text = theme.nord6;
               border = theme.nord6;
               childBorder = theme.nord4;
-              indicator = theme.nord14_sat;
+              indicator = theme.nord14;
             };
             unfocused = {
               background = theme.nord0;
               text = theme.nord5;
               border = theme.nord0;
               childBorder = theme.nord2;
-              indicator = theme.nord14_sat;
+              indicator = theme.nord14;
             };
             focusedInactive = {
               background = theme.nord0;
               text = theme.nord5;
               border = theme.nord0;
               childBorder = theme.nord0;
-              indicator = theme.nord14_sat;
+              indicator = theme.nord14;
             };
             urgent = {
               background = theme.nord11;
               text = theme.nord6;
               border = theme.nord11;
               childBorder = theme.nord12;
-              indicator = theme.nord14_sat;
+              indicator = theme.nord14;
             };
           };
         };
