@@ -47,13 +47,14 @@
       update-background =
         "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
       load-background = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
-    };
+    } // config.keyboard-commands;
     functions = {
       fish_greeting = { body = ""; };
       fish_user_key_bindings = {
         description = "Set custom key bindings";
         body = ''
           bind \cy pazi_skim_binding
+          bind \cz pazi_skim_binding
         '';
       };
       # Use pazi as a keybind

@@ -56,6 +56,7 @@ in {
             # Container Layout
             "${modifier}+s" = "layout stacking";
             "${modifier}+y" = "layout tabbed";
+            "${modifier}+z" = "layout tabbed";
             "${modifier}+e" = "layout toggle split";
             "${modifier}+h" = "split h";
             "${modifier}+v" = "split v";
