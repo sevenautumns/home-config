@@ -16,6 +16,7 @@ in {
   };
 
   xdg.configFile."betterlockscreenrc".text = ''
+    fx_list=()
     font="${config.gtk.font.name}"
     loginbox=${theme.nord0}66
     loginshadow=00000000
