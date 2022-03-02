@@ -14,10 +14,10 @@ let
       model = "pc105";
       options = [ "caps:ctrl_modifier" ];
     };
-    de-apple = { options = layouts.de.options ++ apple-options; } // layouts.de;
-    de_us-apple = {
+    de-apple = layouts.de // { options = layouts.de.options ++ apple-options; };
+    de_us-apple = layouts.de_us // {
       options = layouts.de_us.options ++ apple-options;
-    } // layouts.de_us;
+    };
   };
 in {
 
@@ -26,6 +26,7 @@ in {
       lib.attrsets.nameValuePair ("keyboard-" + name) (mkOption {
         type = types.str;
         default = (builtins.replaceStrings [ "\n" ] [ " " ] ''
+          ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option &&
           ${pkgs.xorg.setxkbmap}/bin/setxkbmap 
             -layout ${l.layout}
             -variant ${l.variant}
