@@ -186,21 +186,6 @@
         "type": "github"
       }
     },
-    "nixgl": {
-      "locked": {
-        "lastModified": 1644013836,
-        "narHash": "sha256-8J6HqBr8+JlZzjyMV8FrCS6ZI6rHo1pTMPilSBf6TaE=",
-        "owner": "guibou",
-        "repo": "nixGL",
-        "rev": "17658df1e17a64bc23ee5c93cfa9e8b663a4ac81",
-        "type": "github"
-      },
-      "original": {
-        "owner": "guibou",
-        "repo": "nixGL",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643472818,
@@ -235,11 +220,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1646011258,
-        "narHash": "sha256-+aen4zu5uVp52arEcgL2maCS0zQDuG1t+Azwd/O1gN4=",
+        "lastModified": 1646406548,
+        "narHash": "sha256-xp+3f76ycZXNf9pG65Ef9KfDl1fas2UQu/cBe/pLd+c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a25df4c2b79c4343bcc72ad671200e5a3e286c41",
+        "rev": "47cd6702934434dd02bc53a67dbce3e5493e33a2",
         "type": "github"
       },
       "original": {
@@ -251,11 +236,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1645433236,
-        "narHash": "sha256-4va4MvJ076XyPp5h8sm5eMQvCrJ6yZAbBmyw95dGyw4=",
+        "lastModified": 1646254136,
+        "narHash": "sha256-8nQx02tTzgYO21BP/dy5BCRopE8OwE8Drsw98j+Qoaw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7f9b6e2babf232412682c09e57ed666d8f84ac2d",
+        "rev": "3e072546ea98db00c2364b81491b893673267827",
         "type": "github"
       },
       "original": {
@@ -282,11 +267,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1646072721,
-        "narHash": "sha256-afsz8ORhM864ATOblpUtF1PTCNz93+4l8+z/+BjYCYI=",
+        "lastModified": 1646591110,
+        "narHash": "sha256-mcpi+8j5/RnBN+28H8BIJ7iR4JyC3pIgbNd0yR/9bQw=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "6b0666bd784fe769717862674ac1beba68563c40",
+        "rev": "6ff84ed2336e1bd753dafe33e6067babc6aea611",
         "type": "github"
       },
       "original": {
@@ -334,7 +319,6 @@
         "homeManager": "homeManager",
         "leftwm": "leftwm",
         "my-flakes": "my-flakes",
-        "nixgl": "nixgl",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",

@@ -30,7 +30,6 @@
 
       #dev
       nixfmt
-      rustup
       jetbrains.idea-ultimate
 
       #browser
@@ -50,6 +49,8 @@
       element-desktop
       # betterlockscreen cant access pem in arch
       betterlockscreen
+      # nix forces glibc via binary
+      rustup
     ];
 
   services.network-manager-applet.enable = true;

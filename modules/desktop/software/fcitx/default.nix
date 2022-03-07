@@ -1,4 +1,8 @@
-{ pkgs, inputs, config, ... }: {
+{ pkgs, inputs, config, ... }:
+let
+  default-keyboard = config.home.keyboard.layout
+    + (if config.home.keyboard.variant == "us" then "-us" else "");
+in {
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = [ pkgs.fcitx5-mozc ];
@@ -37,7 +41,30 @@
     };
     "fcitx5/profile" = {
       force = true;
-      source = ./profile;
+      text = ''
+        [Groups/0]
+        # Group Name
+        Name=Default
+        # Layout
+        Default Layout=${default-keyboard}
+        # Default Input Method
+        DefaultIM=mozc
+
+        [Groups/0/Items/0]
+        # Name
+        Name=keyboard-${default-keyboard}
+        # Layout
+        Layout=
+
+        [Groups/0/Items/1]
+        # Name
+        Name=mozc
+        # Layout
+        Layout=
+
+        [GroupOrder]
+        0=Default
+      '';
     };
   };
 }
