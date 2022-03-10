@@ -1,9 +1,9 @@
 { pkgs, host, ... }: {
   services.picom = {
-    #    package = pkgs.nur.repos.reedrw.picom-next-ibhagwan;
+    package = with pkgs; fixGL picom;
 
     enable = true;
-    backend = if host == "neesama" then "xrender" else "glx";
+    backend = "glx";
     vSync = false;
     experimentalBackends = true;
     refreshRate = if host == "neesama" then 240 else 60;

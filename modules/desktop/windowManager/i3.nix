@@ -27,7 +27,7 @@ in {
         transparent = "#00000000";
       in {
         enable = true;
-        package = pkgs.i3-gaps;
+        package = with pkgs; i3-gaps;
         config = {
           terminal = "alacritty";
           startup = [{

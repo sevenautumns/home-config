@@ -6,11 +6,12 @@
     ./fcitx
     ./redshift.nix
     ./autorandr.nix
+    ./rust.nix
   ];
 
-  services.sxhkd.keybindings = {
-    "super + w" = "${pkgs.brave}/bin/brave";
-    "super + shift + w" = "${pkgs.firefox}/bin/firefox";
+  services.sxhkd.keybindings = with pkgs; {
+    "super + w" = "${fixGL brave}/bin/brave";
+    "super + shift + w" = "${fixGL firefox}/bin/firefox";
     "super + shift + Return" =
       "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
   };
@@ -33,14 +34,21 @@
       jetbrains.idea-ultimate
 
       #browser
-      brave
-      firefox
+      (fixGL brave)
+      (fixGL firefox)
 
       #misc
       bitwarden
       arandr
       gnome.nautilus
       feh
+
+      #Social
+      (fixGL discord)
+      (fixGL discord-canary)
+      tdesktop
+
+      (nixGLCommon nixGLNvidia)
 
       #learning
       anki
@@ -49,8 +57,6 @@
       element-desktop
       # betterlockscreen cant access pem in arch
       betterlockscreen
-      # nix forces glibc via binary
-      rustup
     ];
 
   services.network-manager-applet.enable = true;

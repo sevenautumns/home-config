@@ -1,13 +1,15 @@
 { pkgs, config, host, lib, ... }:
 let theme = config.theme;
 in {
-  services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
+  services.sxhkd.keybindings = {
+    "super + Return" = "${config.programs.alacritty.package}/bin/alacritty";
+    "super + shift + t" = with pkgs;
+      "${intelGL unstable.alacritty}/bin/alacritty";
+  };
 
   programs.alacritty = {
     enable = true;
-
-    # https://github.com/NixOS/nixpkgs/issues/80702
-    package = if host == "neesama" then pkgs.hello else pkgs.unstable.alacritty;
+    package = with pkgs; fixGL unstable.alacritty;
     settings = {
       window = {
         padding = {

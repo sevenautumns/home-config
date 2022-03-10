@@ -5,6 +5,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    nixgl.url = "github:guibou/nixGL";
     my-flakes.url = "github:steav005/flakes";
     homeManager = {
       #url = "github:nix-community/home-manager/release-21.11";
@@ -28,18 +29,28 @@
     };
   };
 
-  outputs = { self, homeManager, my-flakes, nur, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, ... }@inputs:
+  outputs = { self, homeManager, my-flakes, nur, nixgl, deploy-rs
+    , nixpkgs-unstable, nixpkgs-stable, ... }@inputs:
     let
       lib = nixpkgs-stable.lib;
       machines = {
-        "neesama" = "autumnal";
-        "ft-ssy-sfnb" = "frie_sv";
+        "neesama" = {
+          user = "autumnal";
+          system = "x86_64-linux";
+          patch-opengl = {
+            version = "510.54";
+            hash = "sha256-TCDezK4/40et/Q5piaMG+QJP2t+DGtwejmCFVnUzUWE=";
+          };
+        };
+        "ft-ssy-sfnb" = {
+          user = "frie_sv";
+          system = "x86_64-linux";
+          patch-opengl = null;
+        };
       };
-      x86_64 = "x86_64-linux";
     in {
-      homeConfigurations = lib.attrsets.mapAttrs' (host: user:
-        lib.attrsets.nameValuePair (user + "@" + host)
+      homeConfigurations = lib.attrsets.mapAttrs' (host: machine:
+        lib.attrsets.nameValuePair (machine.user + "@" + host)
         (homeManager.lib.homeManagerConfiguration {
           configuration = { pkgs, ... }: {
             imports = [ ./home.nix ];
@@ -47,26 +58,31 @@
           };
 
           pkgs = import nixpkgs-stable {
-            system = x86_64;
+            system = machine.system;
             overlays = [
               deploy-rs.overlay
               (self: super: {
-                unstable =
-                  import "${inputs.nixpkgs-unstable}" { system = x86_64; };
-                stable = import "${inputs.nixpkgs-stable}" { system = x86_64; };
+                unstable = import "${inputs.nixpkgs-unstable}" {
+                  system = machine.system;
+                };
+                stable = import "${inputs.nixpkgs-stable}" {
+                  system = machine.system;
+                };
               })
               nur.overlay
+              (import ./nixgl-overlay.nix machine nixgl)
             ];
           };
-          extraSpecialArgs = {
+          extraSpecialArgs = let user = machine.user;
+          in {
             inherit inputs;
             inherit host;
             inherit user;
           };
 
-          system = x86_64;
-          homeDirectory = "/home/${user}";
-          username = user;
+          system = machine.system;
+          homeDirectory = "/home/${machine.user}";
+          username = machine.user;
           stateVersion = "21.05";
         })) machines;
     };
