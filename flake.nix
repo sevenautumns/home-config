@@ -78,6 +78,7 @@
             inherit inputs;
             inherit host;
             inherit user;
+            inherit machine;
           };
 
           system = machine.system;

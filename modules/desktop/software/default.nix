@@ -1,4 +1,4 @@
-{ pkgs, config, host, lib, inputs, ... }: {
+{ pkgs, config, host, lib, inputs, machine, ... }: {
   imports = [
     ./mpv.nix
     ./vscode.nix
@@ -48,8 +48,6 @@
       (fixGL discord-canary)
       tdesktop
 
-      (nixGLCommon nixGLNvidia)
-
       #learning
       anki
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
@@ -57,7 +55,8 @@
       element-desktop
       # betterlockscreen cant access pem in arch
       betterlockscreen
-    ];
+    ] ++ lib.optionals (machine.patch-opengl != null)
+    [ (nixGLCommon nixGLNvidia) ];
 
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;
