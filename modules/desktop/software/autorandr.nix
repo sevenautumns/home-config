@@ -12,15 +12,19 @@ let
     aoc-us-hdmi =
       "00ffffffffffff0005e380178331000030100103a0221b78ba388fa358469d24174c55bfef008180010101010101010101010101010164190040410026301888360030e410000018000000ff0038343136424841303132363735000000fd00374b1e530e000a202020202020000000fc00313732530a2020202020202020014e02031b71230907078301000067030c001000802143011084e2000f011d007251d01e206e28550081490000001e00000010000000000000000000000000000000000010000000000000000000000000000000000010000000000000000000000000000000000010000000000000000000000000000000000000000000000000bf";
   };
+  detect-screen = pkgs.writeShellScriptBin "detect-screen" ''
+    ${pkgs.autorandr}/bin/autorandr --skip-options gamma,panning --change
+  '';
 in {
+  home.packages = [ detect-screen ];
 
   programs.autorandr = {
     enable = true;
     hooks.postswitch = {
       update-background = ''
         systemctl --user restart polybar.service &
-        ${config.programs.fish.shellAliases.update-background}
-        ${config.programs.fish.shellAliases.load-background}
+        update-background
+        load-background
       '';
     };
     profiles = {

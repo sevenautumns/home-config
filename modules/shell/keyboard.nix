@@ -19,25 +19,17 @@ let
       options = layouts.de_us.options ++ apple-options;
     };
   };
-in {
-
-  options = with lib; {
-    keyboard-commands = lib.attrsets.mapAttrs' (name: l:
-      lib.attrsets.nameValuePair ("keyboard-" + name) (mkOption {
-        type = types.str;
-        default = (builtins.replaceStrings [ "\n" ] [ " " ] ''
-          ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option &&
-          ${pkgs.xorg.setxkbmap}/bin/setxkbmap 
-            -layout ${l.layout}
-            -variant ${l.variant}
-            -model ${l.model}
-            ${(builtins.toString (builtins.map (o: "-option " + o) l.options))}
-        '');
-      })) layouts;
-  };
-
-  config = with layouts; {
-    home.keyboard =
-      if host == "neesama" then layouts.de_us-apple else layouts.de_us;
-  };
+  commands = lib.attrsets.mapAttrsToList (name: l:
+    pkgs.writeShellScriptBin ("keyboard-" + name) ''
+      ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option
+      ${pkgs.xorg.setxkbmap}/bin/setxkbmap \
+        -layout ${l.layout} \
+        -variant ${l.variant} \
+        -model ${l.model} \
+        ${(builtins.toString (builtins.map (o: "-option " + o) l.options))}
+    '') layouts;
+in with layouts; {
+  home.keyboard =
+    if host == "neesama" then layouts.de_us-apple else layouts.de_us;
+  home.packages = commands;
 }

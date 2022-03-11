@@ -1,5 +1,12 @@
 { pkgs, config, ... }:
-let theme = config.theme-non_hex;
+let
+  theme = config.theme-non_hex;
+  update-background = pkgs.writeShellScriptBin "update-background" ''
+    ${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/
+  '';
+  load-background = pkgs.writeShellScriptBin "load-background" ''
+    ${pkgs.betterlockscreen}/bin/betterlockscreen -w
+  '';
 in {
   services.sxhkd.keybindings = { "super + l" = "betterlockscreen -l"; };
 
@@ -9,11 +16,13 @@ in {
       Type = "oneshot";
       ExecStart = toString (pkgs.writeShellScript "set-wallpaper.sh" ''
         export PATH=$PATH:${pkgs.feh}/bin 
-        ${config.programs.fish.shellAliases.load-background}
+        update-background
       '');
       IOSchedulingClass = "idle";
     };
   };
+
+  home.packages = [ update-background load-background ];
 
   xdg.configFile."betterlockscreenrc".text = ''
     fx_list=()

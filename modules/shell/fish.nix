@@ -1,4 +1,4 @@
-{ pkgs, config, host, user, ... }: {
+{ pkgs, config, ... }: {
   programs.command-not-found.enable = false;
   programs.fish = {
     enable = true;
@@ -36,17 +36,10 @@
     '';
     shellAliases = {
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
-      sw =
-        ''home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"'';
       fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";
       fu = "fish_update_completions";
       zf = ''z --pipe="sk --height 40% --layout=reverse"'';
-      detect-screen =
-        "${pkgs.autorandr}/bin/autorandr --skip-options gamma,panning --change";
-      update-background =
-        "${pkgs.betterlockscreen}/bin/betterlockscreen -u ~/Pictures/Wallpaper/";
-      load-background = "${pkgs.betterlockscreen}/bin/betterlockscreen -w";
-    } // config.keyboard-commands;
+    };
     functions = {
       fish_greeting = { body = ""; };
       fish_user_key_bindings = {
