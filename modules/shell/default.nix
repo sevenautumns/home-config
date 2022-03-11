@@ -1,4 +1,4 @@
-{ pkgs, config, host, ... }: {
+{ pkgs, config, host, machine, ... }: {
   imports = [ ./git.nix ./fish.nix ./starship.nix ./neovim.nix ./keyboard.nix ];
   home.packages = with pkgs; [
     fd
@@ -14,9 +14,9 @@
   programs.skim = {
     enable = true;
     enableFishIntegration = true;
-    fileWidgetCommand = "${pkgs.fd}/bin/fd --hidden --type f";
+    fileWidgetCommand = "${pkgs.fd}/bin/fd -E /net --hidden --type f";
     fileWidgetOptions = [ "--preview='${pkgs.bat}/bin/bat {} --color=always'" ];
-    changeDirWidgetCommand = "${pkgs.fd}/bin/fd --hidden --type d";
+    changeDirWidgetCommand = "${pkgs.fd}/bin/fd -E /net d--hidden --type d";
     changeDirWidgetOptions =
       [ "--preview='${pkgs.exa}/bin/exa --tree {} | head -200'" ];
     historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
@@ -49,22 +49,6 @@
   programs.exa = {
     enable = true;
     enableAliases = true;
-  };
-
-  programs.topgrade = {
-    enable = true;
-    settings = {
-      disable = [ "nix" "home_manager" ];
-      linux.arch_package_manager = "paru";
-      commands = {
-        nix-channel = "nix-channel --update";
-        home-config = (builtins.replaceStrings [ "\n" ] [ "" ] ''
-          cd ~/.config/nixpkgs &&
-            nix flake update &&
-            ${config.programs.fish.shellAliases.sw}
-        '');
-      };
-    };
   };
 
   home.sessionVariables.PATH = if host == "neesama" then

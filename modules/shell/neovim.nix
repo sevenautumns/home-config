@@ -10,7 +10,6 @@
       table-mode
 
       vim-css-color
-      vim-grammarous
       vim-nix
       vim-toml
     ];

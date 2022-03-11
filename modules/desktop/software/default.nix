@@ -42,20 +42,20 @@
       arandr
       gnome.nautilus
       feh
+      syncplay
 
       #Social
       (fixGL discord)
       (fixGL discord-canary)
       tdesktop
+      (fixAlsa element-desktop)
 
       #learning
       anki
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
-      # Element does not work properly 
-      element-desktop
       # betterlockscreen cant access pem in arch
       betterlockscreen
-    ] ++ lib.optionals (machine.patch-opengl != null)
+    ] ++ lib.optionals (machine.non-nix.patch-opengl != null)
     [ (nixGLCommon nixGLNvidia) ];
 
   services.network-manager-applet.enable = true;

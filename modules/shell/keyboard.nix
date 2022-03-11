@@ -38,6 +38,6 @@ in {
 
   config = with layouts; {
     home.keyboard =
-      if host == "ft-ssy-sfnb" then layouts.de_us else layouts.de_us-apple;
+      if host == "neesama" then layouts.de_us-apple else layouts.de_us;
   };
 }

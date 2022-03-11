@@ -34,7 +34,7 @@
       detect-client-leader = true;
       detect-rounded-corners = true;
       detect-client-opacity = true;
-      #      "use-damage" = false;
+      use-damage = false;
 
       # Shadow
       shadow-radius = 20;

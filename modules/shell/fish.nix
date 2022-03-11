@@ -36,7 +36,6 @@
     '';
     shellAliases = {
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
-      topnep = "${pkgs.topgrade}/bin/topgrade";
       sw =
         ''home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"'';
       fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";

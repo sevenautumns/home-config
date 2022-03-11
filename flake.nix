@@ -37,15 +37,17 @@
         "neesama" = {
           user = "autumnal";
           system = "x86_64-linux";
-          patch-opengl = {
-            version = "510.54";
-            hash = "sha256-TCDezK4/40et/Q5piaMG+QJP2t+DGtwejmCFVnUzUWE=";
+          non-nix = {
+            patch-opengl = {
+              version = "510.54";
+              hash = "sha256-TCDezK4/40et/Q5piaMG+QJP2t+DGtwejmCFVnUzUWE=";
+            };
           };
         };
         "ft-ssy-sfnb" = {
           user = "frie_sv";
           system = "x86_64-linux";
-          patch-opengl = null;
+          non-nix = null;
         };
       };
     in {
@@ -70,7 +72,8 @@
                 };
               })
               nur.overlay
-              (import ./nixgl-overlay.nix machine nixgl)
+              (import ./overlay/nixgl-overlay.nix machine nixgl)
+              (import ./overlay/alsa-overlay.nix machine)
             ];
           };
           extraSpecialArgs = let user = machine.user;
