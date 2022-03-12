@@ -45,6 +45,7 @@ jobs:
         target:
           - autumnal@neesama
           - frie_sv@ft-ssy-sfnb
+          - autumnal@index
     steps:
       - uses: actions/checkout@v2
 
