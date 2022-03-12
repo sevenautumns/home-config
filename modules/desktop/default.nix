@@ -1,4 +1,6 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }:
+let headless = config.machine.headless;
+in {
   imports = [
     ./windowManager
     ./software

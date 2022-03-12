@@ -1,4 +1,4 @@
-{ pkgs, config, host, lib, inputs, ... }: {
+{ pkgs, config, lib, inputs, ... }: {
 
   xsession = {
     enable = true;

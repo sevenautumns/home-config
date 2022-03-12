@@ -36,9 +36,10 @@
       machines = {
         "neesama" = {
           user = "autumnal";
-          system = "x86_64-linux";
+          arch = "x86_64-linux";
+          headless = false;
           non-nix = {
-            patch-opengl = {
+            nvidia = {
               version = "510.54";
               hash = "sha256-TCDezK4/40et/Q5piaMG+QJP2t+DGtwejmCFVnUzUWE=";
             };
@@ -46,45 +47,50 @@
         };
         "ft-ssy-sfnb" = {
           user = "frie_sv";
-          system = "x86_64-linux";
-          non-nix = null;
+          arch = "x86_64-linux";
+          headless = false;
+        };
+        "index" = {
+          user = "autumnal";
+          arch = "aarch64-linux";
+          headless = true;
         };
       };
     in {
-      homeConfigurations = lib.attrsets.mapAttrs' (host: machine:
-        lib.attrsets.nameValuePair (machine.user + "@" + host)
+      homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:
+        let
+          machine = pre_machine // { inherit host; };
+          headless = machine.headless;
+        in lib.attrsets.nameValuePair (machine.user + "@" + host)
         (homeManager.lib.homeManagerConfiguration {
-          configuration = { pkgs, ... }: {
+          configuration = { pkgs, config, ... }: {
+            inherit machine;
             imports = [ ./home.nix ];
             home.packages = [ pkgs.deploy-rs.deploy-rs ];
           };
 
           pkgs = import nixpkgs-stable {
-            system = machine.system;
+            system = machine.arch;
             overlays = [
               deploy-rs.overlay
               (self: super: {
                 unstable = import "${inputs.nixpkgs-unstable}" {
-                  system = machine.system;
+                  system = machine.arch;
                 };
-                stable = import "${inputs.nixpkgs-stable}" {
-                  system = machine.system;
-                };
+                stable =
+                  import "${inputs.nixpkgs-stable}" { system = machine.arch; };
               })
               nur.overlay
               (import ./overlay/nixgl-overlay.nix machine nixgl)
               (import ./overlay/alsa-overlay.nix machine)
             ];
           };
-          extraSpecialArgs = let user = machine.user;
-          in {
+          extraSpecialArgs = {
             inherit inputs;
-            inherit host;
-            inherit user;
-            inherit machine;
+            inherit headless;
           };
 
-          system = machine.system;
+          system = machine.arch;
           homeDirectory = "/home/${machine.user}";
           username = machine.user;
           stateVersion = "21.05";

@@ -1,4 +1,6 @@
-{ pkgs, host, lib, ... }: {
+{ pkgs, lib, config, ... }:
+let host = config.machine.host;
+in {
   home.packages = with pkgs; [ bibata-cursors ];
 
   # TODO symlink .nix-profile/share/icons:themes folder to .local/share/icons:themes

@@ -1,4 +1,6 @@
-{ pkgs, host, ... }: {
+{ pkgs, config, ... }:
+let host = config.machine.host;
+in {
   services.picom = {
     package = with pkgs; fixGL picom;
 

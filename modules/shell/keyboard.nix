@@ -1,5 +1,6 @@
-{ pkgs, config, lib, host, ... }:
+{ pkgs, config, lib, ... }:
 let
+  host = config.machine.host;
   apple-options = [ "altwin:swap_alt_win" "lv3:rwin_switch" ];
   layouts = {
     de = {

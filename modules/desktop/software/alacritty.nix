@@ -1,5 +1,7 @@
-{ pkgs, config, host, lib, ... }:
-let theme = config.theme;
+{ pkgs, config, lib, ... }:
+let
+  host = config.machine.host;
+  theme = config.theme;
 in {
   services.sxhkd.keybindings = {
     "super + Return" = "${config.programs.alacritty.package}/bin/alacritty";

@@ -1,10 +1,14 @@
-{ config, pkgs, lib, user, host, ... }:
+{ config, pkgs, lib, headless, ... }:
 let
+  non-nix = config.machine.non-nix;
+  host = config.machine.host;
+  user = config.machine.user;
   sw = pkgs.writeShellScriptBin "sw" ''
     home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"
   '';
 in {
-  imports = [ modules/desktop modules/shell options/default.nix ];
+  imports = [ modules/shell options/default.nix ]
+    ++ lib.optionals (!headless) [ modules/desktop ];
 
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -18,7 +22,7 @@ in {
     sw
   ];
 
-  home.sessionVariables.PATH = if host == "neesama" then
+  home.sessionVariables.PATH = if non-nix != null then
   # Reorder PATH for non-Nix system
   # - Nix packages work flawlessly with unfavorable PATH-Order
   # - Arch packages don't
@@ -26,12 +30,8 @@ in {
       /usr/local/bin:
       /usr/bin:/bin:
       /usr/local/sbin:
-      /usr/bin/site_perl:
-      /usr/bin/vendor_perl:
-      /usr/bin/core_perl:
       $HOME/.cargo/bin:
-      $HOME/.nix-profile/bin:
-      /nix/var/nix/profiles/default/bin
+      $PATH
     '')
   else
     "$PATH:$HOME/.cargo/bin";

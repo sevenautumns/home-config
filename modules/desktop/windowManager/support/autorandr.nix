@@ -23,8 +23,8 @@ in {
     hooks.postswitch = {
       update-background = ''
         systemctl --user restart polybar.service &
-        update-background
-        load-background
+        ${config.bls.update-background}/bin/update-background
+        ${config.bls.load-background}/bin/load-background
       '';
     };
     profiles = {

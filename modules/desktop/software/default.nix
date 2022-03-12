@@ -1,11 +1,14 @@
-{ pkgs, config, host, lib, inputs, machine, ... }: {
+{ pkgs, config, lib, inputs, ... }:
+let
+  machine = config.machine;
+  host = machine.host;
+in {
   imports = [
     ./mpv.nix
     ./vscode.nix
     ./alacritty.nix
     ./fcitx
     ./redshift.nix
-    ./autorandr.nix
     ./rust.nix
   ];
 
@@ -55,8 +58,7 @@
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # betterlockscreen cant access pem in arch
       betterlockscreen
-    ] ++ lib.optionals (machine.non-nix.patch-opengl != null)
-    [ (nixGLCommon nixGLNvidia) ];
+    ] ++ lib.optionals (machine.non-nix != null) [ (nixGLCommon nixGLNvidia) ];
 
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;

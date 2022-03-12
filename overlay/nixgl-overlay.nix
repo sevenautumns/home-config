@@ -3,14 +3,10 @@ machine: nixgl: final: prev:
 with builtins;
 let inherit (prev) lib;
 in let
-  nvidiaVersion = if machine.non-nix.patch-opengl != null then
-    machine.non-nix.patch-opengl.version
-  else
-    null;
-  nvidiaHash = if machine.non-nix.patch-opengl != null then
-    machine.non-nix.patch-opengl.hash
-  else
-    null;
+  nvidiaVersion =
+    if machine.non-nix != null then machine.non-nix.nvidia.version else null;
+  nvidiaHash =
+    if machine.non-nix != null then machine.non-nix.nvidia.hash else null;
   nixGL = import nixgl {
     inherit nvidiaVersion nvidiaHash;
     pkgs = final;
@@ -38,8 +34,7 @@ in {
   inherit (nixGL) nixGLNvidia nixGLCommon nixGLIntel;
   intelGL = fixGL final.nixGLIntel "nixGLIntel";
   fixGL = if nvidiaVersion != null then
-    fixGL final.nixGLNvidia
-    "nixGLNvidia-${machine.non-nix.patch-opengl.version}"
+    fixGL final.nixGLNvidia "nixGLNvidia-${machine.non-nix.nvidia.version}"
   else
     pkg: pkg;
 }
