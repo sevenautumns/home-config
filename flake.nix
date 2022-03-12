@@ -49,11 +49,13 @@
           user = "frie_sv";
           arch = "x86_64-linux";
           headless = false;
+          non-nix = null;
         };
         "index" = {
           user = "autumnal";
           arch = "aarch64-linux";
           headless = true;
+          non-nix = null;
         };
       };
     in {
