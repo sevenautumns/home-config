@@ -1,7 +1,5 @@
-{ pkgs, config, lib, inputs, ... }:
-let
-  machine = config.machine;
-  host = machine.host;
+{ pkgs, config, lib, inputs, machine, ... }:
+let host = machine.host;
 in {
   imports = [
     ./mpv.nix
@@ -58,7 +56,7 @@ in {
     ] ++ lib.optionals (host == "ft-ssy-sfnb") [
       # betterlockscreen cant access pem in arch
       betterlockscreen
-    ] ++ lib.optionals (machine.non-nix != null) [ (nixGLCommon nixGLNvidia) ];
+    ] ++ lib.optionals (machine ? non-nixos) [ (nixGLCommon nixGLNvidia) ];
 
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;

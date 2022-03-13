@@ -21,4 +21,4 @@ in let
       pname = package.pname;
       paths = (map wrapBin binFiles) ++ [ package ];
     };
-in { fixAlsa = if machine.non-nix != null then fixAlsa else pkg: pkg; }
+in { fixAlsa = if (machine ? non-nixos) then fixAlsa else pkg: pkg; }

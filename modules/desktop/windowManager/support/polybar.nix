@@ -1,6 +1,6 @@
-{ pkgs, lib, config, inputs, runCommand, ... }:
+{ pkgs, lib, config, inputs, runCommand, machine, ... }:
 let
-  host = config.machine.host;
+  host = machine.host;
   mpris-python-packages = python-packages:
     with python-packages; [
       numpy

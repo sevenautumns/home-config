@@ -1,6 +1,6 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, machine, ... }:
 let
-  host = config.machine.host;
+  host = machine.host;
   theme = config.theme;
 
   secondars-monitors = if host == "neesama" then

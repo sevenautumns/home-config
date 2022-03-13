@@ -1,5 +1,5 @@
-{ pkgs, lib, config, ... }:
-let host = config.machine.host;
+{ pkgs, lib, config, machine, ... }:
+let host = machine.host;
 in {
   home.packages = with pkgs; [ bibata-cursors ];
 

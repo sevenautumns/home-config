@@ -38,35 +38,41 @@
           user = "autumnal";
           arch = "x86_64-linux";
           headless = false;
-          non-nix = {
+          non-nixos = {
             nvidia = {
               version = "510.54";
               hash = "sha256-TCDezK4/40et/Q5piaMG+QJP2t+DGtwejmCFVnUzUWE=";
             };
           };
+          managed-nixos = false;
         };
         "ft-ssy-sfnb" = {
           user = "frie_sv";
           arch = "x86_64-linux";
           headless = false;
-          non-nix = null;
+          managed-nixos = false;
         };
         "index" = {
           user = "autumnal";
+          address = "192.168.177.2";
           arch = "aarch64-linux";
           headless = true;
-          non-nix = null;
+          managed-nixos = true;
+        };
+        "tenshi" = {
+          user = "autumnal";
+          address = "autumnal.de";
+          arch = "x86_64-linux";
+          headless = true;
+          managed-nixos = true;
         };
       };
     in {
       homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:
-        let
-          machine = pre_machine // { inherit host; };
-          headless = machine.headless;
+        let machine = pre_machine // { inherit host; };
         in lib.attrsets.nameValuePair (machine.user + "@" + host)
         (homeManager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
-            inherit machine;
             imports = [ ./home.nix ];
             home.packages = [ pkgs.deploy-rs.deploy-rs ];
           };
@@ -78,9 +84,12 @@
               (self: super: {
                 unstable = import "${inputs.nixpkgs-unstable}" {
                   system = machine.arch;
+                  config.allowUnfree = true;
                 };
-                stable =
-                  import "${inputs.nixpkgs-stable}" { system = machine.arch; };
+                stable = import "${inputs.nixpkgs-stable}" {
+                  system = machine.arch;
+                  config.allowUnfree = true;
+                };
               })
               nur.overlay
               (import ./overlay/nixgl-overlay.nix machine nixgl)
@@ -89,7 +98,7 @@
           };
           extraSpecialArgs = {
             inherit inputs;
-            inherit headless;
+            inherit machine;
           };
 
           system = machine.arch;
@@ -97,5 +106,54 @@
           username = machine.user;
           stateVersion = "21.05";
         })) machines;
+
+      nixosConfigurations = lib.mapAttrs (host: machine:
+        lib.nixosSystem rec {
+          system = machine.arch;
+          modules = [
+            {
+              nixpkgs.overlays = [
+                deploy-rs.overlay
+                (self: super: {
+                  unstable = import "${inputs.nixpkgs-unstable}" {
+                    system = machine.arch;
+                    config.allowUnfree = true;
+                  };
+                  stable = import "${inputs.nixpkgs-stable}" {
+                    system = machine.arch;
+                    config.allowUnfree = true;
+                  };
+                })
+                nur.overlay
+              ];
+            }
+            { networking.hostName = host; }
+            (./machines + "/${host}.nix")
+          ];
+          specialArgs = {
+            inherit inputs;
+            inherit machine;
+          };
+
+        }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
+
+      deploy.nodes = lib.mapAttrs (host: machine: {
+        hostname = machine.address;
+        fastConnection = false;
+        profiles = {
+          #user = {
+          #  sshUser = machine.user;
+          #  path = deploy-rs.lib.${machine.arch}.activate.home-manager
+          #    self.homeConfigurations."${machine.user}@${host}";
+          #};
+        } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
+          system = {
+            #sshUser = "admin";
+            sshUser = "root";
+            path = deploy-rs.lib.${machine.arch}.activate.nixos
+              self.nixosConfigurations."${host}";
+          };
+        };
+      }) (lib.filterAttrs (h: m: m ? address) machines);
     };
 }

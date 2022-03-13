@@ -1,1 +1,1 @@
-{ pkgs, config, host, ... }: { imports = [ ./theme.nix ./machine.nix ]; }
+{ pkgs, config, host, ... }: { imports = [ ./theme.nix ]; }

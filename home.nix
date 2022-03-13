@@ -1,8 +1,8 @@
-{ config, pkgs, lib, headless, ... }:
+{ config, pkgs, lib, machine, ... }:
 let
-  non-nix = config.machine.non-nix;
-  host = config.machine.host;
-  user = config.machine.user;
+  host = machine.host;
+  user = machine.user;
+  headless = machine.headless;
   sw = pkgs.writeShellScriptBin "sw" ''
     home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"
   '';
@@ -22,26 +22,27 @@ in {
     sw
   ];
 
-  home.sessionVariables.PATH = if non-nix != null then
-  # Reorder PATH for non-Nix system
-  # - Nix packages work flawlessly with unfavorable PATH-Order
-  # - Arch packages don't
-    (builtins.replaceStrings [ "\n" ] [ "" ] ''
-      /usr/local/bin:
-      /usr/bin:/bin:
-      /usr/local/sbin:
-      $HOME/.cargo/bin:
-      $PATH
-    '')
-  else
-    "$PATH:$HOME/.cargo/bin";
+  targets.genericLinux.enable = machine ? non-nixos;
+  #home.sessionVariables.PATH = if machine ? non-nixos then
+  ## Reorder PATH for non-Nix system
+  ## - Nix packages work flawlessly with unfavorable PATH-Order
+  ## - Arch packages don't
+  #  (builtins.replaceStrings [ "\n" ] [ "" ] ''
+  #    /usr/local/bin:
+  #    /usr/bin:/bin:
+  #    /usr/local/sbin:
+  #    $HOME/.cargo/bin:
+  #    $PATH
+  #  '')
+  #else
+  #  "$PATH:$HOME/.cargo/bin";
 
-  xdg.systemDirs.data = [
-    "/usr/share"
-    "/usr/local/share"
-    "$HOME/.nix-profile/share"
-    "$HOME/.share"
-  ];
+  #xdg.systemDirs.data = [
+  #  "/usr/share"
+  #  "/usr/local/share"
+  #  "$HOME/.nix-profile/share"
+  #  "$HOME/.share"
+  #];
 
   home.file = if host == "neesama" then {
     "GitRepos".source =

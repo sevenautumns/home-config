@@ -1,6 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, machine, ... }:
 let
-  host = config.machine.host;
+  host = machine.host;
   theme = config.theme;
 in {
   services.sxhkd.keybindings = {
