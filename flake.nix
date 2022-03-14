@@ -141,17 +141,17 @@
         hostname = machine.address;
         fastConnection = false;
         profiles = {
-          #user = {
-          #  sshUser = machine.user;
-          #  path = deploy-rs.lib.${machine.arch}.activate.home-manager
-          #    self.homeConfigurations."${machine.user}@${host}";
-          #};
+          user = {
+            sshUser = machine.user;
+            path = deploy-rs.lib.${machine.arch}.activate.home-manager
+              self.homeConfigurations."${machine.user}@${host}";
+          };
         } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
           system = {
-            #sshUser = "admin";
-            sshUser = "root";
+            sshUser = "admin";
             path = deploy-rs.lib.${machine.arch}.activate.nixos
               self.nixosConfigurations."${host}";
+            user = "root";
           };
         };
       }) (lib.filterAttrs (h: m: m ? address) machines);

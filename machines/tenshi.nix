@@ -8,7 +8,7 @@
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.devices = [ "nodev" ];
+  boot.loader.grub.device = "/dev/sda";
   boot.initrd.availableKernelModules =
     [ "ata_piix" "uhci_hcd" "virtio_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
@@ -17,6 +17,51 @@
 
   networking.useDHCP = false;
   networking.interfaces.ens3.useDHCP = true;
+
+  networking.firewall.allowedTCPPorts = [ 80 443 8999 ];
+  services.nextcloud = {
+    enable = true;
+    hostName = "cloud.autumnal.de";
+    config = {
+      adminuser = "autumnal";
+      adminpassFile = "/var/lib/nextcloud/adminpassfile";
+    };
+  };
+  services.syncplay = {
+    enable = true;
+    port = 8999;
+    certDir = "/var/lib/acme/autumnal.de";
+    group = "nginx";
+  };
+  services.nginx.enable = true;
+  services.nginx.virtualHosts = {
+    "autumnal.de" = {
+      forceSSL = true;
+      enableACME = true;
+    };
+    "docker.autumnal.de" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "http://127.0.0.1:9000";
+    };
+    "cloud.autumnal.de" = {
+      forceSSL = true;
+      enableACME = true;
+    };
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    email = "friedrich122112@googlemail.com";
+    certs = {
+      "autumnal.de" = {
+        postRun = ''
+          cp key.pem privkey.pem
+          systemctl restart syncplay.service
+        '';
+      };
+    };
+  };
 
   # File systems configuration for using the installer's partition layout
   fileSystems = {

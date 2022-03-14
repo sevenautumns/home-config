@@ -15,7 +15,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  nix = { trustedUsers = [ "admin" ]; };
+  nix = { trustedUsers = [ "admin" "autumnal" ]; };
   nixpkgs.config = {
     allowUnfree = true;
     #allowUnsupportedSystem = true;
