@@ -1,8 +1,10 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
-    ./modules/nix-flakes.nix
-    ./modules/virtualisation-docker.nix
-    ./modules/common.nix
+    ./modules/adguard.nix
+    ./modules/docker.nix
+    ./modules/rr.nix
+    ./modules/torrent.nix
+    ../../common.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -16,7 +18,6 @@
   environment.systemPackages = with pkgs; [ libraspberrypi ];
 
   services.netdata.enable = true;
-  services.adguardhome.enable = true;
 
   networking = {
     hostName = "index";
@@ -30,27 +31,12 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    53 # adguardhome dns
-    139 # Samba
-    445 # Samba
     2049 # NFS Server
     2342 # Grafana
-    3000 # adguardhome admin
-    6767 # Bazarr
-    7878 # Radarr
-    8080 # Scrunity
-    8989 # Sonarr
-    9000 # Portainer
-    9091 # Transmission
-    9117 # Jackett
+
+    9001 # Prometheus
     19999 # Netdata
     32400 # Plex
-  ];
-
-  networking.firewall.allowedUDPPorts = [
-    53 # adguardhome dns
-    137 # Samba
-    138 # Samba
   ];
 
   # Join share network
@@ -68,11 +54,6 @@
   services.prometheus = {
     enable = true;
     port = 9001;
-    listenAddress = "127.0.0.1";
-    scrapeConfigs = [{
-      job_name = "transmission";
-      static_configs = [{ targets = [ "localhost:19091" ]; }];
-    }];
   };
 
   # Limit Bandwidth for weebwork network
@@ -138,6 +119,7 @@
   services.samba = {
     enable = true;
     nsswins = true;
+    openFirewall = true;
     extraConfig = ''
       guest account = nobody
       map to guest = bad user

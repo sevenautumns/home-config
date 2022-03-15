@@ -1,6 +1,4 @@
-{ lib, pkgs, info, ... }:
-
-{
+{ lib, pkgs, info, ... }: {
   boot.cleanTmpDir = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
@@ -15,28 +13,28 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  nix = { trustedUsers = [ "admin" "autumnal" ]; };
-  nixpkgs.config = {
-    allowUnfree = true;
-    #allowUnsupportedSystem = true;
+  nix = {
+    trustedUsers = [ "admin" "autumnal" ];
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
+  nixpkgs.config = { allowUnfree = true; };
 
   # enable zerotier virtual switch
-  #services.zerotierone = {
-  #  enable = true;
-  #  package = pkgs.zerotierone.overrideAttrs(orig: {
-  #    doCheck = false;
-  #    checkPhase = '''';
-  #    buildFlags = [ ];
-  #  });
-  #  joinNetworks = [
-  #    "565799d8f6299e0c" # Network for my devices
-  #  ];
-  #};
+  services.zerotierone = {
+    enable = true;
+    package = pkgs.zerotierone.overrideAttrs (orig: {
+      buildInputs = orig.buildInputs ++ [ pkgs.miniupnpc pkgs.libnatpmp ];
+    });
+    joinNetworks = [
+      "565799d8f6299e0c" # Network for my devices
+    ];
+  };
 
   networking.extraHosts = ''
     10.0.0.1 neesama
-    10.0.0.2 last-order
     10.3.0.0 tenshi
     10.4.0.0 index
   '';

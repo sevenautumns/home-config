@@ -51,10 +51,6 @@ in {
           };
           modifier = "Mod4";
           keybindings = pkgs.lib.mkOptionDefault {
-            # Open Applications
-            "${modifier}+Shift+Return" = "exec --no-startup-id alacritty";
-
-            # Container Layout
             "${modifier}+s" = "layout stacking";
             "${modifier}+y" = "layout tabbed";
             "${modifier}+z" = "layout tabbed";
@@ -62,6 +58,7 @@ in {
             "${modifier}+h" = "split h";
             "${modifier}+v" = "split v";
             "${modifier}+c" = "kill";
+            "${modifier}+x" = "move workspace to output next";
           };
           keycodebindings = {
             # Workspace select numpad
@@ -109,48 +106,6 @@ in {
             "${modifier}+Shift+Mod2+81" = "move container to workspace ${ws9}";
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
           };
-          workspaceOutputAssign = [
-            {
-              workspace = "1";
-              output = "primary";
-            }
-            {
-              workspace = "2";
-              output = "primary";
-            }
-            {
-              workspace = "3";
-              output = "primary";
-            }
-            {
-              workspace = "4";
-              output = "primary";
-            }
-            {
-              workspace = "5";
-              output = "primary";
-            }
-            {
-              workspace = "6";
-              output = "primary";
-            }
-            {
-              workspace = "7";
-              output = secondars-monitors;
-            }
-            {
-              workspace = "8";
-              output = secondars-monitors;
-            }
-            {
-              workspace = "9";
-              output = secondars-monitors;
-            }
-            {
-              workspace = "10";
-              output = secondars-monitors;
-            }
-          ];
 
           colors = {
             focused = {

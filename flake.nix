@@ -54,14 +54,14 @@
         };
         "index" = {
           user = "autumnal";
-          address = "192.168.177.2";
+          address = "10.4.0.0";
           arch = "aarch64-linux";
           headless = true;
           managed-nixos = true;
         };
         "tenshi" = {
           user = "autumnal";
-          address = "autumnal.de";
+          address = "10.3.0.0";
           arch = "x86_64-linux";
           headless = true;
           managed-nixos = true;
@@ -128,7 +128,7 @@
               ];
             }
             { networking.hostName = host; }
-            (./machines + "/${host}.nix")
+            (./nixos/machines + "/${host}")
           ];
           specialArgs = {
             inherit inputs;
@@ -139,6 +139,7 @@
 
       deploy.nodes = lib.mapAttrs (host: machine: {
         hostname = machine.address;
+        profilesOrder = [ "system" "user" ];
         fastConnection = false;
         profiles = {
           user = {
