@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   # https://forum.openwrt.org/t/instruction-config-nordvpn-wireguard-nordlynx-on-openwrt/89976
 
   # https://discourse.nixos.org/t/setting-up-wireguard-in-a-network-namespace-for-selectively-routing-traffic-through-vpn/10252/8
@@ -76,22 +76,43 @@
     };
   };
 
-  services.transmission.enable = true;
-  services.transmission.user = "autumnal";
-  systemd.services.transmission = {
+  services.deluge = {
+    enable = true;
+    web.enable = true;
+  };
+
+  # Assertions guaranteeing Wireguard usage
+  assertions = [
+    {
+      # This is for guaranteeing that the deluged service still exists and the name didn"t change
+      assertion = config.systemd.services.deluged.enable;
+      message = ''
+        Deluge Daemon service changed!
+        Please verify Wireguard usage
+      '';
+    }
+    {
+      # This is for guaranteeing that we are using the wireguard namespace with the deluged service
+      assertion =
+        config.systemd.services.deluged.serviceConfig.NetworkNamespacePath
+        == "/var/run/netns/wg";
+      message = "Deluge Daemon Network namespace changed!";
+    }
+  ];
+  systemd.services.deluged = {
     bindsTo = [ "netns@wg.service" ];
     requires = [ "network-online.target" ];
     after = [ "wg.service" ];
-    serviceConfig = { NetworkNamespacePath = "/var/run/netns/wg"; };
+    serviceConfig.NetworkNamespacePath = "/var/run/netns/wg";
   };
 
-  systemd.services.transmission-forwarder = {
+  systemd.services.deluged-forwarder = {
     enable = true;
-    after = [ "transmission.service" ];
-    requires = [ "transmission.service" ];
-    bindsTo = [ "transmission.service" ];
+    after = [ "deluged.service" ];
+    requires = [ "deluged.service" ];
+    bindsTo = [ "deluged.service" ];
     script = ''
-      ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr,bind=127.0.0.1 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:9091"',nofork
+      ${pkgs.socat}/bin/socat tcp-listen:58846,fork,reuseaddr,bind=127.0.0.1 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:58846"',nofork
     '';
   };
 
@@ -100,7 +121,7 @@
       forceSSL = true;
       enableACME = true;
       basicAuthFile = "/var/lib/transmission/basicauth";
-      locations."/".proxyPass = "http://127.0.0.1:9091";
+      locations."/".proxyPass = "http://127.0.0.1:8112";
     };
   };
 }

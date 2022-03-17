@@ -3,8 +3,8 @@
     enable = true;
     port = 8999;
     certDir = "/var/lib/acme/autumnal.de";
-    group = "nginx";
   };
+  users.users.syncplay.extraGroups = [ "nginx" "acme" ];
 
   networking.firewall.allowedTCPPorts = [ config.services.syncplay.port ];
 
