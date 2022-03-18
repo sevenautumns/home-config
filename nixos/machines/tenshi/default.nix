@@ -18,6 +18,9 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  ### Cross Compilation ###
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   networking.useDHCP = false;
   networking.interfaces.ens3.useDHCP = true;
 
