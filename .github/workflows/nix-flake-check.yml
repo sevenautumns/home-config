@@ -21,6 +21,7 @@ jobs:
           nix_path: nixpkgs=channel:nixpkgs-unstable
           extra_nix_config: |
             experimental-features = nix-command flakes
+            extra-platforms = aarch64-linux
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - uses: docker/setup-qemu-action@v1
