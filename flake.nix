@@ -7,6 +7,7 @@
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
     my-flakes.url = "github:steav005/flakes";
+    agenix.url = "github:ryantm/agenix";
     homeManager = {
       #url = "github:nix-community/home-manager/release-21.11";
       url = "github:Steav005/home-manager/feat/leftwm-module";
@@ -14,23 +15,36 @@
     };
     leftwm.url = "github:leftwm/leftwm";
     deploy-rs.url = "github:serokell/deploy-rs";
+    mach-nix.url = "github:DavHau/mach-nix";
 
-    polybar-scripts = {
-      url = "github:polybar/polybar-scripts";
-      flake = false;
-    };
-    polybar-pulseaudio-control = {
-      url = "github:marioortizmanero/polybar-pulseaudio-control";
-      flake = false;
-    };
-    cmus-notify = {
-      url = "github:dcx86r/cmus-notify";
-      flake = false;
-    };
+    # Home manager used repos
+    polybar-scripts.url = "github:polybar/polybar-scripts";
+    polybar-scripts.flake = false;
+    polybar-pulseaudio-control.url =
+      "github:marioortizmanero/polybar-pulseaudio-control";
+    polybar-pulseaudio-control.flake = false;
+    cmus-notify.url = "github:dcx86r/cmus-notify";
+    cmus-notify.flake = false;
+
+    #Prometheus Exporter
+    adguard-exporter.url = "github:ebrianne/adguard-exporter";
+    adguard-exporter.flake = false;
+    deluge-exporter.url = "github:tobbez/deluge_exporter";
+    deluge-exporter.flake = false;
+
+    #Plex
+    services-bundle.url = "github:pierre1313/Services.bundle";
+    services-bundle.flake = false;
+    myanimelist-bundle.url = "github:Fribb/MyAnimeList.bundle";
+    myanimelist-bundle.flake = false;
+    hama-bundle.url = "github:ZeroQI/Hama.bundle";
+    hama-bundle.flake = false;
+    absolut-series-scanner.url = "github:ZeroQI/Absolute-Series-Scanner";
+    absolut-series-scanner.flake = false;
   };
 
   outputs = { self, homeManager, my-flakes, nur, nixgl, deploy-rs
-    , nixpkgs-unstable, nixpkgs-stable, ... }@inputs:
+    , nixpkgs-unstable, nixpkgs-stable, agenix, ... }@inputs:
     let
       lib = nixpkgs-stable.lib;
       machines = {
@@ -74,7 +88,10 @@
         (homeManager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
             imports = [ ./home.nix ];
-            home.packages = [ pkgs.deploy-rs.deploy-rs ];
+            home.packages = [
+              pkgs.deploy-rs.deploy-rs
+              agenix.packages."${machine.arch}".agenix
+            ];
           };
 
           pkgs = import nixpkgs-stable {
@@ -127,6 +144,7 @@
                 nur.overlay
               ];
             }
+            agenix.nixosModule
             { networking.hostName = host; }
             (./nixos/machines + "/${host}")
           ];

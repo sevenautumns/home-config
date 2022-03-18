@@ -2,6 +2,7 @@
   imports = [
     ./modules/adguard.nix
     ./modules/docker.nix
+    ./modules/plex.nix
     ./modules/rr.nix
     ./modules/torrent.nix
     ../../common.nix
@@ -14,6 +15,12 @@
   boot.loader.generic-extlinux-compatible.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_rpi4;
   boot.initrd.availableKernelModules = [ "usbhid" "usb_storage" "vc4" ];
+
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.all.disable_ipv6" = 1;
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv4.conf.all.src_valid_mark" = 1;
+  };
 
   environment.systemPackages = with pkgs; [ libraspberrypi ];
 
@@ -32,11 +39,11 @@
 
   networking.firewall.allowedTCPPorts = [
     2049 # NFS Server
-    2342 # Grafana
+    config.services.grafana.port
 
-    9001 # Prometheus
+    config.services.prometheus.port
     19999 # Netdata
-    32400 # Plex
+    config.services.plex.port
   ];
 
   # Join share network

@@ -48,7 +48,7 @@ in {
       #Social
       (fixGL discord)
       (fixGL discord-canary)
-      tdesktop
+      (fixGL tdesktop)
       (fixAlsa element-desktop)
 
       #learning
