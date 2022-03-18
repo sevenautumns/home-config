@@ -5,8 +5,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      # TODO delete on start if exists
-      ExecStart = "${pkgs.iproute}/bin/ip netns add %I";
+      ExecStart = "${pkgs.iproute}/bin/ip netns add %I || true";
       ExecStop = "${pkgs.iproute}/bin/ip netns del %I";
     };
   };
