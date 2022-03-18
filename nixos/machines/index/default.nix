@@ -43,7 +43,7 @@
 
     config.services.prometheus.port
     19999 # Netdata
-    config.services.plex.port
+    32400 # Plex
   ];
 
   # Join share network
