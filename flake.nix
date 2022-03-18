@@ -174,5 +174,8 @@
           };
         };
       }) (lib.filterAttrs (h: m: m ? address) machines);
+
+      checks = builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }
