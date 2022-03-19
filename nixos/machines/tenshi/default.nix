@@ -23,6 +23,11 @@
 
   networking.useDHCP = false;
   networking.interfaces.ens3.useDHCP = true;
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.all.disable_ipv6" = 1;
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv4.conf.all.src_valid_mark" = 1;
+  };
 
   # File systems configuration for using the installer's partition layout
   fileSystems = {

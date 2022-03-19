@@ -66,22 +66,6 @@
         "type": "github"
       }
     },
-    "deluge-exporter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1642457024,
-        "narHash": "sha256-ivBM8Y2J6Y0uqKfpMKa3IOB5JX6UPfObhyypXy2iPbM=",
-        "owner": "tobbez",
-        "repo": "deluge_exporter",
-        "rev": "34e4e120e7fdd177bcf4000e1daaa24996858756",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tobbez",
-        "repo": "deluge_exporter",
-        "type": "github"
-      }
-    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -513,7 +497,6 @@
         "adguard-exporter": "adguard-exporter",
         "agenix": "agenix",
         "cmus-notify": "cmus-notify",
-        "deluge-exporter": "deluge-exporter",
         "deploy-rs": "deploy-rs",
         "hama-bundle": "hama-bundle",
         "homeManager": "homeManager",
@@ -527,7 +510,8 @@
         "nur": "nur",
         "polybar-pulseaudio-control": "polybar-pulseaudio-control",
         "polybar-scripts": "polybar-scripts",
-        "services-bundle": "services-bundle"
+        "services-bundle": "services-bundle",
+        "transmission-exporter": "transmission-exporter"
       }
     },
     "rust-analyzer-src": {
@@ -560,6 +544,22 @@
       "original": {
         "owner": "pierre1313",
         "repo": "Services.bundle",
+        "type": "github"
+      }
+    },
+    "transmission-exporter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1604488969,
+        "narHash": "sha256-sILsGs+88GjIWh1/vdGRZim1pvcKp2LILy4a08d8+mo=",
+        "owner": "metalmatze",
+        "repo": "transmission-exporter",
+        "rev": "7206d9815d745c1ea3a86f0b8f39188104b9c6e9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "metalmatze",
+        "repo": "transmission-exporter",
         "type": "github"
       }
     },

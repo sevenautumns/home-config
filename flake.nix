@@ -29,8 +29,8 @@
     #Prometheus Exporter
     adguard-exporter.url = "github:ebrianne/adguard-exporter";
     adguard-exporter.flake = false;
-    deluge-exporter.url = "github:tobbez/deluge_exporter";
-    deluge-exporter.flake = false;
+    transmission-exporter.url = "github:metalmatze/transmission-exporter";
+    transmission-exporter.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";

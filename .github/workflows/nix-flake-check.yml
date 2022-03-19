@@ -83,3 +83,42 @@ jobs:
           export GC_DONT_GC=1
           export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
           home-manager build --flake '.#${{ matrix.target }}'
+
+  nixos-build:
+    # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
+    name: Build NixOS configurations
+    runs-on: ubuntu-latest
+    
+    needs:
+      - flake-check
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - index
+          - tenshi
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: cachix/install-nix-action@v13
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            extra-platforms = aarch64-linux
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/setup-qemu-action@v1
+        if: ${{ matrix.target == 'index' }}
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: arm64
+      - uses: cachix/cachix-action@v10
+        with:
+          name: autumnal
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Build NixOS expression
+        run: |
+          export GC_DONT_GC=1
+          export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+          nix build .#nixosConfigurations.${{ matrix.target }}.config.system.build.toplevel

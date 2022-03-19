@@ -1,10 +1,9 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, config, inputs, lib, ... }:
 let
-
-  python = "python39";
-  python-deluge-exporter = inputs.mach-nix.lib.${pkgs.system}.mkPython {
-    requirements =
-      builtins.readFile "${inputs.deluge-exporter}/requirements.txt";
+  transmission-exporter = pkgs.buildGoModule {
+    name = "transmission-exporter";
+    src = inputs.transmission-exporter;
+    vendorSha256 = "sha256-YhmfrM5iAK0zWcUM7LmbgFnH+k2M/tE+f/QQIQmQlZs=";
   };
 in {
   imports = [ ../../../torrent.nix ];
@@ -12,84 +11,111 @@ in {
   # Assertions guaranteeing Wireguard usage
   assertions = [
     {
-      # This is for guaranteeing that the deluged service still exists and the name didn"t change
-      assertion = config.systemd.services.deluged.enable;
+      # This is for guaranteeing that the transmission service still exists and the name didn"t change
+      assertion = config.systemd.services.transmission.enable;
       message = ''
-        Deluge Daemon service changed!
+        Transmission service changed!
         Please verify Wireguard usage
       '';
     }
     {
-      # This is for guaranteeing that we are using the wireguard namespace with the deluged service
+      # This is for guaranteeing that we are using the wireguard namespace with the transmission service
       assertion =
-        config.systemd.services.deluged.serviceConfig.NetworkNamespacePath
+        config.systemd.services.transmission.serviceConfig.NetworkNamespacePath
         == "/var/run/netns/wg";
-      message = "Deluge Daemon Network namespace changed!";
+      message = "Transmission Network namespace changed!";
     }
   ];
 
   age.secrets = {
-    deluge_auth = {
-      file = ../../../../secrets/deluge_auth.age;
-      path = "/var/lib/deluge/auth";
+    transmission_auth = {
+      file = ../../../../secrets/transmission_auth.age;
+      path = "/var/lib/transmission/auth";
       owner = "autumnal";
     };
-    deluge_exporter = {
-      file = ../../../../secrets/deluge_exporter.age;
-      path = "/var/lib/deluge-exporter/auth";
+    transmission_exporter = {
+      file = ../../../../secrets/transmission_exporter.age;
+      path = "/var/lib/transmission-exporter/auth";
+    };
+    nordvpn = {
+      file = ../../../../secrets/nordvpn_index.age;
+      path = "/var/lib/nordvpn/nordvpn.conf";
     };
   };
 
-  services.deluge = {
+  services.transmission = {
     enable = true;
     user = "autumnal";
-    group = "deluge";
-    web.enable = true;
-    declarative = true;
-    authFile = "/var/lib/deluge/auth";
-    config = {
-      max_upload_slots_global = -1;
-      enabled_plugins = [ "Label" ];
-      download_location = "/media/torrent_storage/incomplete";
-      move_completed = true;
-      move_completed_path = "/media/torrent_storage/completed";
-      max_download_speed = 5000;
-      max_upload_speed = 500;
+    group = "transmission";
+    credentialsFile = "/var/lib/transmission/auth";
+    settings = {
+      download-dir = "/media/torrent_storage/completed";
+      incomplete-dir = "/media/torrent_storage/incomplete";
+      incomplete-dir-enabled = true;
+      rpc-authentication-required = true;
+      rpc-username = "admin";
+      rpc-host-whitelist-enabled = false;
+      rpc-whitelist-enabled = false;
+      speed-limit-down = 5000;
+      speed-limit-down-enabled = true;
+      speed-limit-up = 500;
+      speed-limit-up-enabled = true;
+      alt-speed-down = 5000;
+      alt-speed-enabled = false;
+      alt-speed-time-begin = 240;
+      alt-speed-time-day = 127;
+      alt-speed-time-enabled = true;
+      alt-speed-time-end = 480;
+      alt-speed-up = 1500;
+      utp-enabled = false;
     };
   };
 
-  systemd.services.delugeweb-forwarder = {
+  systemd.services.transmission-forwarder = {
     enable = true;
-    bindsTo = [ "delugeweb.service" ];
+    bindsTo = [ "transmission.service" ];
     wantedBy = [ "multi-user.target" ];
     script = ''
-      ${pkgs.socat}/bin/socat tcp-listen:58846,fork,reuseaddr,bind=127.0.0.1 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:58846"',nofork &
-      ${pkgs.socat}/bin/socat tcp-listen:8112,fork,reuseaddr,bind=192.168.178.2 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:8112"',nofork &
-      ${pkgs.socat}/bin/socat tcp-listen:8112,fork,reuseaddr,bind=10.4.0.0 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:8112"',nofork &
-      ${pkgs.socat}/bin/socat tcp-listen:8112,fork,reuseaddr,bind=127.0.0.1 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:8112"',nofork
+      ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr,bind=0.0.0.0 exec:'${pkgs.iproute}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:9091"',nofork
     '';
   };
 
-  systemd.services.deluge-exporter = {
+  systemd.services.flood = {
     enable = true;
-    bindsTo = [ "deluged.service" ];
+    description = "Flood torrent UI";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = lib.concatStringsSep " " [
+        "${pkgs.flood}/bin/flood"
+        "--port 3030"
+        "--host 0.0.0.0"
+        "--rundir /var/lib/flood"
+      ];
+      User = "autumnal";
+      Group = "transmission";
+    };
+  };
+  systemd.tmpfiles.rules =
+    [ "d '/var/lib/flood' 0700 autumnal transmission - -" ];
+
+  systemd.services.transmission-exporter = {
+    enable = true;
+    bindsTo = [ "transmission.service" ];
     wantedBy = [ "multi-user.target" ];
     script = ''
-      LISTEN_ADDRESS=localhost \
-      LISTEN_PORT=9354 \
-      PER_TORRENT_METRICS=1 \
-      DELUGE_HOST=localhost \
-      DELUGE_PORT=58846 \
-      DELUGE_USER=localclient \
-      DELUGE_PASSWORD=$(cat /var/lib/deluge-exporter/auth) \
-      ${python-deluge-exporter}/bin/python ${inputs.deluge-exporter}/deluge_exporter.py
+      WEB_ADDR=127.0.0.1:19091 \
+      TRANSMISSION_USERNAME=admin \
+      TRANSMISSION_PASSWORD=$(cat /var/lib/transmission-exporter/auth) \
+      ${transmission-exporter}/bin/transmission-exporter
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 8112 ];
+  networking.firewall.allowedTCPPorts = [ 3030 9091 ];
 
   services.prometheus.scrapeConfigs = [{
-    job_name = "deluge";
-    static_configs = [{ targets = [ "localhost:9354" ]; }];
+    job_name = "transmission";
+    static_configs = [{ targets = [ "localhost:19091" ]; }];
   }];
 }

@@ -1,4 +1,5 @@
 { pkgs, config, ... }: {
+  # Creates network namespace
   systemd.services."netns@" = {
     description = "%I network namespace";
     before = [ "network.target" ];
@@ -10,6 +11,16 @@
     };
   };
 
+  # Define resolv.conf for wireguard namespace
+  environment.etc."netns/wg/resolv.conf" = {
+    text = ''
+      nameserver 103.86.96.100
+      nameserver 103.86.99.100
+    '';
+    mode = "0664";
+  };
+
+  # Creates network namespace for/with wireguard
   systemd.services.wg = {
     description = "wg network interface";
     bindsTo = [ "netns@wg.service" ];
@@ -27,6 +38,8 @@
           ${iproute}/bin/ip netns exec wg \
             ${wireguard}/bin/wg setconf wg0 /var/lib/nordvpn/nordvpn.conf
           ${iproute}/bin/ip -n wg link set wg0 up
+          # lo needs to be started because otherwise transmission can
+          # not bind to 127.0.0.1:9091
           ${iproute}/bin/ip -n wg link set lo up
           ${iproute}/bin/ip -n wg route add default dev wg0
         '';
@@ -38,38 +51,36 @@
     };
   };
 
-  age.secrets.nordvpn = {
-    file = ../secrets/nordvpn.age;
-    path = "/var/lib/nordvpn/nordvpn.conf";
-  };
-
   # Assertions guaranteeing Wireguard usage
   assertions = [
     {
-      # This is for guaranteeing that the deluged service still exists and the name didn"t change
-      assertion = config.systemd.services.deluged.enable;
+      # This is for guaranteeing that the transmission service still exists and the name didn"t change
+      assertion = config.systemd.services.transmission.enable;
       message = ''
-        Deluge Daemon service changed!
+        Transmission service changed!
         Please verify Wireguard usage
       '';
     }
     {
-      # This is for guaranteeing that we are using the wireguard namespace with the deluged service
+      # This is for guaranteeing that we are using the wireguard namespace with the transmission service
       assertion =
-        config.systemd.services.deluged.serviceConfig.NetworkNamespacePath
+        config.systemd.services.transmission.serviceConfig.NetworkNamespacePath
         == "/var/run/netns/wg";
-      message = "Deluge Daemon Network namespace changed!";
+      message = "Transmission Network namespace changed!";
     }
   ];
 
-  systemd.services.deluged = {
+  systemd.services.transmission = {
     bindsTo = [ "netns@wg.service" ];
     requires = [ "network-online.target" ];
     after = [ "wg.service" ];
+    # Make transmission run in network namespace wireguard (wg)
     serviceConfig.NetworkNamespacePath = "/var/run/netns/wg";
-  };
-  systemd.services.delugeweb = {
-    bindsTo = [ "netns@wg.service" ];
-    serviceConfig.NetworkNamespacePath = "/var/run/netns/wg";
+
+    # Re-add network namespace resolv.conf for transmission
+    # Because Transmission overrides /etc and would use the original
+    # /etc/resolv.conf otherwise
+    serviceConfig.BindReadOnlyPaths =
+      [ "/etc/netns/wg/resolv.conf:/etc/resolv.conf" ];
   };
 }

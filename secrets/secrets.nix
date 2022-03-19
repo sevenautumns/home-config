@@ -11,9 +11,10 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKd6aKgl2xDyW3/yoWYQa+/sFbiRxXfeXZfOY9vEwTLR";
   systems = [ tenshi index ];
 in {
-  "nordvpn.age".publicKeys = [ tenshi index ] ++ users;
-  "deluge_auth.age".publicKeys = [ tenshi index ] ++ users;
-  "deluge_exporter.age".publicKeys = [ tenshi index ] ++ users;
+  "nordvpn_index.age".publicKeys = [ tenshi index ] ++ users;
+  "nordvpn_tenshi.age".publicKeys = [ tenshi index ] ++ users;
   "nextcloud_adminpass.age".publicKeys = [ tenshi index ] ++ users;
   "adguard.age".publicKeys = [ tenshi index ] ++ users;
+  "transmission_auth.age".publicKeys = [ tenshi index ] ++ users;
+  "transmission_exporter.age".publicKeys = [ tenshi index ] ++ users;
 }
