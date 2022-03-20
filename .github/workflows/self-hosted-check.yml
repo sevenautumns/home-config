@@ -20,8 +20,7 @@ jobs:
   home-manager-build:
     # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
     name: Build Home Manager configurations
-    runs-on: ubuntu-latest
-    #runs-on: self-hosted
+    runs-on: self-hosted
     
     needs:
       - flake-check
@@ -45,7 +44,7 @@ jobs:
   nixos-build:
     # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
     name: Build NixOS configurations
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     needs:
       - flake-check
@@ -60,7 +59,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build NixOS expression
-        shell: nix shell -p nix
         run: |
           export GC_DONT_GC=1
           nix build .#nixosConfigurations.${{ matrix.target }}.config.system.build.toplevel
