@@ -39,6 +39,7 @@ jobs:
         shell: nix-shell -p home-manager --command "bash {0}"
         run: |
           export GC_DONT_GC=1
+          export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
           home-manager build --flake '.#${{ matrix.target }}'
 
   nixos-build:
