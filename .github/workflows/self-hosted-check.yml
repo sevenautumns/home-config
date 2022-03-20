@@ -37,6 +37,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Build Home Manager expression
+        shell: nix shell -p home-manager
         run: |
           export GC_DONT_GC=1
           home-manager build --flake '.#${{ matrix.target }}'
@@ -59,6 +60,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build NixOS expression
+        shell: nix shell -p nix
         run: |
           export GC_DONT_GC=1
           nix build .#nixosConfigurations.${{ matrix.target }}.config.system.build.toplevel
