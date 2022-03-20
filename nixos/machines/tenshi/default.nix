@@ -3,6 +3,7 @@
     ./modules/docker.nix
     ./modules/nextcloud.nix
     ./modules/nginx.nix
+    ./modules/runner.nix
     ./modules/syncplay.nix
     ./modules/torrent.nix
     ../../common.nix

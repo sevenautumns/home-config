@@ -17,4 +17,5 @@ in {
   "adguard.age".publicKeys = [ tenshi index ] ++ users;
   "transmission_auth.age".publicKeys = [ tenshi index ] ++ users;
   "transmission_exporter.age".publicKeys = [ tenshi index ] ++ users;
+  "github_runner.age".publicKeys = [ tenshi index ] ++ users;
 }
