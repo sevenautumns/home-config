@@ -28,14 +28,12 @@
     };
   };
 
-  networking.wireguard.interfaces.wg0.peers = [
-    {
-      publicKey = "3ZNjosvvIqfvu3/BqaLzNNXs9zWO4jXpcXNOmDMDpX0=";
-      allowedIPs = [ "0.0.0.0/0" ];
-      endpoint = "de805.nordvpn.com:51820";
-      persistentKeepalive = 25;
-    }
-  ];
+  networking.wireguard.interfaces.wg0.peers = [{
+    publicKey = "3ZNjosvvIqfvu3/BqaLzNNXs9zWO4jXpcXNOmDMDpX0=";
+    allowedIPs = [ "0.0.0.0/0" ];
+    endpoint = "de805.nordvpn.com:51820";
+    persistentKeepalive = 25;
+  }];
 
   services.transmission = {
     enable = true;

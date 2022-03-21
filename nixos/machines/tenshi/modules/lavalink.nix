@@ -4,9 +4,8 @@
       lavalink = {
         image = "fredboat/lavalink:master";
         user = "1000:1000";
-        volumes = [
-          "/var/lib/lavalink/application.yml:/opt/Lavalink/application.yml"
-        ];
+        volumes =
+          [ "/var/lib/lavalink/application.yml:/opt/Lavalink/application.yml" ];
         ports = [ "2333:2333" ];
       };
     };

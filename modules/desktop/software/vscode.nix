@@ -8,7 +8,6 @@
       streetsidesoftware.code-spell-checker
       matklad.rust-analyzer
       arrterian.nix-env-selector
-      ms-vscode-remote.remote-ssh
       github.copilot
     ];
     userSettings = {

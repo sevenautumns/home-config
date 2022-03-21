@@ -1,4 +1,4 @@
-name: Validate flake and build targets
+name: Validate flake and build targets GitHub Hosted
 # From astralbijection
 # https://github.com/astralbijection/infra/blob/60f3d692e8c694d48adddaac9b8295c9754e686e/.github/workflows/nix-flake-check.yml
 
@@ -51,6 +51,7 @@ jobs:
         target:
           - autumnal@neesama
           - frie_sv@ft-ssy-sfnb
+          - frie_sv@ft-ssy-stonks
           - autumnal@index
     steps:
       - uses: actions/checkout@v2

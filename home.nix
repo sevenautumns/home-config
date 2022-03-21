@@ -13,10 +13,6 @@ in {
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  # TODO vscodium server
-  # TODO spotifyd
-  # TODO disallow nonfree
-  # TODO stonks config
   # TODO nixGL mpv
 
   #xdg.configFile."test".text = "${config.theme.nord0}";

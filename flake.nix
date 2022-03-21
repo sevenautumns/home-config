@@ -25,9 +25,9 @@
     polybar-pulseaudio-control.flake = false;
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
-    rdf.url = "github:mfs/rust-df";
-    rdf.flake = false;
-    naersk.url = "github:nix-community/naersk";
+    #rdf.url = "github:mfs/rust-df";
+    #rdf.flake = false;
+    #naersk.url = "github:nix-community/naersk";
 
     #Prometheus Exporter
     adguard-exporter.url = "github:ebrianne/adguard-exporter";
@@ -67,6 +67,12 @@
           user = "frie_sv";
           arch = "x86_64-linux";
           headless = false;
+          managed-nixos = false;
+        };
+        "ft-ssy-stonks" = {
+          user = "frie_sv";
+          arch = "x86_64-linux";
+          headless = true;
           managed-nixos = false;
         };
         "index" = {

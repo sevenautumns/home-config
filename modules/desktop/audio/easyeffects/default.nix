@@ -1,5 +1,4 @@
 { pkgs, config, host, ... }: {
-  # ft-ssy-sfnb is still on pulseaudio
   services.easyeffects.enable = true;
 
   xdg.configFile = {
