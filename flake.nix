@@ -25,6 +25,9 @@
     polybar-pulseaudio-control.flake = false;
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
+    rdf.url = "github:mfs/rust-df";
+    rdf.flake = false;
+    naersk.url = "github:nix-community/naersk";
 
     #Prometheus Exporter
     adguard-exporter.url = "github:ebrianne/adguard-exporter";

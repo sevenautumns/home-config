@@ -1,5 +1,8 @@
 { pkgs, config, lib, inputs, machine, ... }:
-let host = machine.host;
+let 
+  host = machine.host;
+  naersk = pkgs.callPackage inputs.naersk {};
+  rdf = naersk.buildPackage inputs.rdf;
 in {
   imports = [
     ./mpv.nix

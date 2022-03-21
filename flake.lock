@@ -303,6 +303,24 @@
         "type": "github"
       }
     },
+    "naersk_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1639947939,
+        "narHash": "sha256-pGsM8haJadVP80GFq4xhnSpNitYNQpaXk4cnA796Cso=",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "rev": "2fc8ce9d3c025d59fee349c1f80be9785049d653",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
     "nixgl": {
       "locked": {
         "lastModified": 1644013836,
@@ -368,11 +386,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1647297614,
-        "narHash": "sha256-ulGq3W5XsrBMU/u5k9d4oPy65pQTkunR4HKKtTq0RwY=",
+        "lastModified": 1647800324,
+        "narHash": "sha256-rjwoxrk16zfrcO5Torh6CbAd5GHsHrXw+EwxOvh9AUI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "73ad5f9e147c0d2a2061f1d4bd91e05078dc0b58",
+        "rev": "9bc841fec1c0e8b9772afa29f934d2c7ce57da8e",
         "type": "github"
       },
       "original": {
@@ -428,13 +446,26 @@
         "type": "indirect"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1647297614,
+        "narHash": "sha256-ulGq3W5XsrBMU/u5k9d4oPy65pQTkunR4HKKtTq0RwY=",
+        "path": "/nix/store/f71alr07xb2swc37fiqjr5h416qcs6wr-source",
+        "rev": "73ad5f9e147c0d2a2061f1d4bd91e05078dc0b58",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "nur": {
       "locked": {
-        "lastModified": 1647732151,
-        "narHash": "sha256-kKsCI22r15RokPdjWrsH93p8umrvVCi9fzuqGuRHIUc=",
+        "lastModified": 1647843981,
+        "narHash": "sha256-Ug5krnnJc/OVkLpnEhfBRoosLXJ6HYnHa2nw7cppHXw=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "854cd34363d3a681ad3ff6cb597381d7f84bf9fb",
+        "rev": "0367c3938355bf4b92b9ad15acd4658b46b6b23a",
         "type": "github"
       },
       "original": {
@@ -491,6 +522,22 @@
         "type": "github"
       }
     },
+    "rdf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1596201184,
+        "narHash": "sha256-Ph2wNwTnNm5o0tkpEZNPLrpPzXsm3V7fNY3V4hBIIuU=",
+        "owner": "mfs",
+        "repo": "rust-df",
+        "rev": "d49914d9907945b8da0e57171daf603dd55925de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfs",
+        "repo": "rust-df",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "absolut-series-scanner": "absolut-series-scanner",
@@ -504,12 +551,14 @@
         "mach-nix": "mach-nix",
         "my-flakes": "my-flakes",
         "myanimelist-bundle": "myanimelist-bundle",
+        "naersk": "naersk_2",
         "nixgl": "nixgl",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "polybar-pulseaudio-control": "polybar-pulseaudio-control",
         "polybar-scripts": "polybar-scripts",
+        "rdf": "rdf",
         "services-bundle": "services-bundle",
         "transmission-exporter": "transmission-exporter"
       }
