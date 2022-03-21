@@ -33,6 +33,12 @@
     };
   };
 
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+  };
+
   programs.htop.enable = true;
   programs.bottom.enable = true;
   programs.bat.enable = true;

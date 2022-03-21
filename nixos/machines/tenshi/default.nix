@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
     ./modules/docker.nix
+    ./modules/lavalink.nix
     ./modules/nextcloud.nix
     ./modules/nginx.nix
     ./modules/runner.nix

@@ -29,19 +29,19 @@ in {
   ];
 
   targets.genericLinux.enable = machine ? non-nixos;
-  #home.sessionVariables.PATH = if machine ? non-nixos then
+  home.sessionVariables.PATH = if machine ? non-nixos then
   ## Reorder PATH for non-Nix system
   ## - Nix packages work flawlessly with unfavorable PATH-Order
   ## - Arch packages don't
-  #  (builtins.replaceStrings [ "\n" ] [ "" ] ''
-  #    /usr/local/bin:
-  #    /usr/bin:/bin:
-  #    /usr/local/sbin:
-  #    $HOME/.cargo/bin:
-  #    $PATH
-  #  '')
-  #else
-  #  "$PATH:$HOME/.cargo/bin";
+    (builtins.replaceStrings [ "\n" ] [ "" ] ''
+      /usr/local/bin:
+      /usr/bin:/bin:
+      /usr/local/sbin:
+      $HOME/.cargo/bin:
+      $PATH
+    '')
+  else
+    "$PATH:$HOME/.cargo/bin";
 
   #xdg.systemDirs.data = [
   #  "/usr/share"
