@@ -31,7 +31,7 @@ in {
       gnome.eog
 
       #music
-      spotify
+      (fixGL spotify)
 
       #dev
       nixfmt

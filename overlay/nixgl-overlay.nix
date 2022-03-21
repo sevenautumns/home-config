@@ -27,9 +27,9 @@ in let
         '';
     in final.symlinkJoin {
       name = "${package.name}-nixgl";
-      pname = package.pname;
       paths = (map wrapBin binFiles) ++ [ package ];
-    };
+    }
+    // lib.attrsets.optionalAttrs (package ? pname) { pname = package.pname; };
 in {
   inherit (nixGL) nixGLNvidia nixGLCommon nixGLIntel;
   intelGL = fixGL final.nixGLIntel "nixGLIntel";

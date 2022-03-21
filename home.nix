@@ -13,8 +13,6 @@ in {
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
 
-  # TODO nixGL mpv
-
   #xdg.configFile."test".text = "${config.theme.nord0}";
   xdg.enable = true;
 
