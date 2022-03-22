@@ -8,6 +8,7 @@ in {
     ./mpv.nix
     ./vscode.nix
     ./alacritty.nix
+    ./kitty.nix
     ./fcitx
     ./redshift.nix
     ./rust.nix

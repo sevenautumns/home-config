@@ -107,16 +107,20 @@
             system = machine.arch;
             overlays = [
               deploy-rs.overlay
-              (self: super: {
-                unstable = import "${inputs.nixpkgs-unstable}" {
-                  system = machine.arch;
-                  config.allowUnfree = true;
-                };
-                stable = import "${inputs.nixpkgs-stable}" {
-                  system = machine.arch;
-                  config.allowUnfree = true;
-                };
-              })
+              (self: super:
+                let
+                  unstable = import "${inputs.nixpkgs-unstable}" {
+                    system = machine.arch;
+                    config.allowUnfree = true;
+                  };
+                  stable = import "${inputs.nixpkgs-stable}" {
+                    system = machine.arch;
+                    config.allowUnfree = true;
+                  };
+                in {
+                  inherit unstable stable;
+                  kitty-themes = unstable.kitty-themes;
+                })
               nur.overlay
               (import ./overlay/nixgl-overlay.nix machine nixgl)
               (import ./overlay/alsa-overlay.nix machine)

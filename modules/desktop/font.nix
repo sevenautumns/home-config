@@ -3,11 +3,14 @@
     (nerdfonts.override {
       fonts = [ "FiraMono" "FiraCode" "RobotoMono" "SourceCodePro" ];
     })
-    roboto
     sarasa-gothic
     font-awesome
     symbola
-    siji
+    roboto
+    #siji
+    dina-font
+    twitter-color-emoji
+    #efont-unicode
   ];
 
   #fonts
@@ -20,7 +23,8 @@
         <family>sans-serif</family>
         <prefer>
           <family>Roboto</family>
-          <family>Siji</family>
+          <family>Twitter Color Emoji</family>
+          <family>FiraCode Nerd Font</family>
           <family>Sarasa UI J</family>
         </prefer>
       </alias>
@@ -28,19 +32,27 @@
         <family>sans</family>
         <prefer>
           <family>Roboto</family>
-          <family>Siji</family>
+          <family>Twitter Color Emoji</family>
+          <family>FiraCode Nerd Font</family>
           <family>Sarasa UI J</family>
         </prefer>
       </alias>
       <alias binding="strong">
         <family>monospace</family>
         <prefer>
+          <family>Dina</family>
           <family>FiraCode Nerd Font Mono</family>
-          <family>Siji</family>
+          <family>Twitter Color Emoji</family>
           <family>Sarasa Mono J</family>
-          <family>Symbola</family>
         </prefer>
       </alias>
+      <selectfont>
+        <acceptfont>
+          <pattern>
+            <patelt name="scalable"><bool>false</bool></patelt>
+          </pattern>
+        </acceptfont>
+      </selectfont>
     </fontconfig>
   '';
 }

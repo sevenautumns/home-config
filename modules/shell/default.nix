@@ -1,5 +1,12 @@
 { pkgs, config, ... }: {
-  imports = [ ./git.nix ./fish.nix ./starship.nix ./neovim.nix ./keyboard.nix ];
+  imports = [
+    ./git.nix
+    ./fish.nix
+    ./starship.nix
+    ./neovim.nix
+    ./keyboard.nix
+    ./zsh.nix
+  ];
   home.packages = with pkgs; [
     fd
     ripgrep

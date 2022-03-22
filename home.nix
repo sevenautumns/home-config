@@ -16,6 +16,8 @@ in {
   #xdg.configFile."test".text = "${config.theme.nord0}";
   xdg.enable = true;
 
+  #TODO use hinted roboto
+
   home.packages = [
     #pkgs.alacritty
     pkgs.unstable.xterm
