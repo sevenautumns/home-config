@@ -9,8 +9,8 @@
     my-flakes.url = "github:steav005/flakes";
     agenix.url = "github:ryantm/agenix";
     homeManager = {
-      #url = "github:nix-community/home-manager/release-21.11";
-      url = "github:Steav005/home-manager/feat/leftwm-module";
+      url = "github:nix-community/home-manager";
+      #url = "github:Steav005/home-manager/feat/leftwm-module";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     leftwm.url = "github:leftwm/leftwm";
@@ -49,7 +49,7 @@
   outputs = { self, homeManager, my-flakes, nur, nixgl, deploy-rs
     , nixpkgs-unstable, nixpkgs-stable, agenix, ... }@inputs:
     let
-      lib = nixpkgs-stable.lib;
+      lib = nixpkgs-unstable.lib;
       machines = {
         "neesama" = {
           user = "autumnal";
@@ -103,7 +103,7 @@
             ];
           };
 
-          pkgs = import nixpkgs-stable {
+          pkgs = import nixpkgs-unstable {
             system = machine.arch;
             overlays = [
               deploy-rs.overlay
@@ -117,10 +117,7 @@
                     system = machine.arch;
                     config.allowUnfree = true;
                   };
-                in {
-                  inherit unstable stable;
-                  kitty-themes = unstable.kitty-themes;
-                })
+                in { inherit unstable stable; })
               nur.overlay
               (import ./overlay/nixgl-overlay.nix machine nixgl)
               (import ./overlay/alsa-overlay.nix machine)

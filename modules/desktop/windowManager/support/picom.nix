@@ -6,7 +6,7 @@ in {
 
     enable = true;
     backend = "glx";
-    vSync = false;
+    vSync = if host == "neesama" then false else true;
     experimentalBackends = true;
     refreshRate = if host == "neesama" then 240 else 60;
     shadow = true;
