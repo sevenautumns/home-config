@@ -4,6 +4,6 @@
   services.nginx.enable = true;
   security.acme = {
     acceptTerms = true;
-    email = "friedrich122112@googlemail.com";
+    defaults.email = "friedrich122112@googlemail.com";
   };
 }
