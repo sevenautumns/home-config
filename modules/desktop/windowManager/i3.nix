@@ -41,9 +41,9 @@ in {
           bars = [ ];
           window.border = 1;
           gaps = {
-            inner = 12;
-            outer = 0;
-            smartBorders = "no_gaps";
+            #inner = 12;
+            #outer = 0;
+            #smartBorders = "no_gaps";
           };
           fonts = {
             names = [ "Roboto" ];
