@@ -8,42 +8,39 @@ on:
   workflow_call: {}
 
 jobs:
-  flake-check:
-    name: Check Flake
-    runs-on: ubuntu-latest
-    #runs-on: self-hosted
+  #flake-check:
+  #  name: Check Flake
+  #  runs-on: ubuntu-latest
+  #  #runs-on: self-hosted
 
-    steps:
-      - uses: actions/checkout@v2
+  #  steps:
+  #    - uses: actions/checkout@v2
 
-      - uses: cachix/install-nix-action@v13
-        with:
-          nix_path: nixpkgs=channel:nixpkgs-unstable
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-            extra-platforms = aarch64-linux
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+  #    - uses: cachix/install-nix-action@v13
+  #      with:
+  #        nix_path: nixpkgs=channel:nixpkgs-unstable
+  #        extra_nix_config: |
+  #          experimental-features = nix-command flakes
+  #          extra-platforms = aarch64-linux
+  #          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - uses: docker/setup-qemu-action@v1
-        with:
-          image: tonistiigi/binfmt:latest
-          platforms: arm64
+  #    - uses: docker/setup-qemu-action@v1
+  #      with:
+  #        image: tonistiigi/binfmt:latest
+  #        platforms: arm64
 
-      - uses: cachix/cachix-action@v10
-        with:
-          name: autumnal
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+  #    - uses: cachix/cachix-action@v10
+  #      with:
+  #        name: autumnal
+  #        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
-      - name: Validate Nix Flake
-        run: GC_DONT_GC=1 nix flake check
+  #    - name: Validate Nix Flake
+  #      run: GC_DONT_GC=1 nix flake check
   home-manager-build:
     # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
     name: Build Home Manager configurations
     runs-on: ubuntu-latest
     #runs-on: self-hosted
-    
-    needs:
-      - flake-check
     
     strategy:
       fail-fast: false
@@ -89,9 +86,6 @@ jobs:
     # See https://nix-community.github.io/home-manager/index.html#sec-install-standalone
     name: Build NixOS configurations
     runs-on: ubuntu-latest
-    
-    needs:
-      - flake-check
     
     strategy:
       fail-fast: false
