@@ -57,8 +57,8 @@
           headless = false;
           non-nixos = {
             nvidia = {
-              version = "510.54";
-              hash = "sha256-TCDezK4/40et/Q5piaMG+QJP2t+DGtwejmCFVnUzUWE=";
+              version = "510.60.02";
+              hash = "sha256-qADfwFSQeP2Mbo5ngO+47uh4cuYFXH9fOGpHaM4H4AM=";
             };
           };
           managed-nixos = false;
