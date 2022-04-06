@@ -33,7 +33,7 @@
       prefixLength = 24;
     }];
     defaultGateway = "192.168.178.1";
-    nameservers = [ "127.0.0.1" ];
+    nameservers = [ "127.0.0.1" "1.1.1.1" ];
     enableIPv6 = false;
   };
 

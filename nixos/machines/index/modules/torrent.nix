@@ -40,7 +40,7 @@ in {
   };
 
   networking.wireguard.interfaces.wg0.peers = [{
-    publicKey = "3ZNjosvvIqfvu3/BqaLzNNXs9zWO4jXpcXNOmDMDpX0=";
+    publicKey = "5p4RkybdRU5uaDi90eu4KZPTFif0lKCg4Qp6t1c4F30=";
     allowedIPs = [ "0.0.0.0/0" ];
     endpoint = "nl900.nordvpn.com:51820";
     persistentKeepalive = 25;
