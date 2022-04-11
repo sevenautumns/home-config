@@ -192,11 +192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1649130493,
-        "narHash": "sha256-tp2UxeS1A5ESb+I/rh4GoD0DH7edOGdc2fsP6D8o27Y=",
+        "lastModified": 1649642044,
+        "narHash": "sha256-V9ZjTJcbDPgWG+H3rIC6XuPHZAPK1VupBbSsuDbptkQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "07b941f0c45ac4af6732d96f4cb6142824eee3df",
+        "rev": "e39a9d0103e3b2e42059c986a8c633824b96c193",
         "type": "github"
       },
       "original": {
@@ -351,11 +351,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1649117019,
-        "narHash": "sha256-ID7nw/8MDgqj/cbJ0wy6AtQ9wp58hSnE6+weZwuHnso=",
+        "lastModified": 1649537291,
+        "narHash": "sha256-V6VYIwTeI5BCfYK9f5EsMbjsjsis1rUDHMsaDbTvt+A=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ccb90fb9e11459aeaf83cc28d5f8910816d90dd0",
+        "rev": "715dc137b08213aabbbe0965b78ab938e5d8d3b7",
         "type": "github"
       },
       "original": {
@@ -367,11 +367,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1649012074,
-        "narHash": "sha256-vQUROcJ3FfT3GTB/nJrXwVvjuq8WfK0ImN+RUgDVN1c=",
+        "lastModified": 1649497218,
+        "narHash": "sha256-groqC9m1P4hpnL6jQvZ3C8NEtduhdkvwGT0+0LUrcYw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bc4b9eef3ce3d5a90d8693e8367c9cbfc9fc1e13",
+        "rev": "fd364d268852561223a5ada15caad669fd72800e",
         "type": "github"
       },
       "original": {
@@ -429,11 +429,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1649247410,
-        "narHash": "sha256-2GzZpeJtgBA/OD8KipVtZxohl+dkhW5ry7OLAaU4Kho=",
+        "lastModified": 1649663939,
+        "narHash": "sha256-Wwtm2OjXHOCmKhCCggwcanlAY7K72hEJQs11mzx5b6A=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "52122c2c929d02abe62bdf14cb003cd77b1aea3b",
+        "rev": "46dee4539765ac3602d82d9fdf383c1f4309e304",
         "type": "github"
       },
       "original": {
@@ -461,11 +461,11 @@
     "polybar-scripts": {
       "flake": false,
       "locked": {
-        "lastModified": 1648726964,
-        "narHash": "sha256-npt4aT6wc/jp8WuhyAh+zhNVrN1WKzrRjooeUhzoslk=",
+        "lastModified": 1649365375,
+        "narHash": "sha256-5rMqHJTetMAKY0+gRmOc2lebut6YGtZTAPxrDcjC5rU=",
         "owner": "polybar",
         "repo": "polybar-scripts",
-        "rev": "a26dde1507cb660ceb4833a90e9c52974a891466",
+        "rev": "5afd923c2c1f27de93a8161213103a362687922e",
         "type": "github"
       },
       "original": {
