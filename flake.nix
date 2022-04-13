@@ -25,6 +25,8 @@
     polybar-pulseaudio-control.flake = false;
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
+    mpv-discord.url = "github:tnychn/mpv-discord";
+    mpv-discord.flake = false;
     #rdf.url = "github:mfs/rust-df";
     #rdf.flake = false;
     #naersk.url = "github:nix-community/naersk";

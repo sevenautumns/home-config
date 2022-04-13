@@ -3,11 +3,11 @@
     "absolut-series-scanner": {
       "flake": false,
       "locked": {
-        "lastModified": 1648708682,
-        "narHash": "sha256-2RgCjxTSJVTqwtKdjNljUbHCMGlnthEnIlScAn1Aklk=",
+        "lastModified": 1649862101,
+        "narHash": "sha256-wxJBnr1erEGHtMNHIQWC5iO6iqq36EF/jJa8kdCdOPg=",
         "owner": "ZeroQI",
         "repo": "Absolute-Series-Scanner",
-        "rev": "abace37216777f8fd97d6cfa8e2f417e96daf1f1",
+        "rev": "e2ad6a3092fe59eefe649a58ed29d03990e0f467",
         "type": "github"
       },
       "original": {
@@ -192,11 +192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1649642044,
-        "narHash": "sha256-V9ZjTJcbDPgWG+H3rIC6XuPHZAPK1VupBbSsuDbptkQ=",
+        "lastModified": 1649887921,
+        "narHash": "sha256-h2LZzn5LLwIFvVFLCdR8+VWluEP3U1I5y+0mDZjFjAk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e39a9d0103e3b2e42059c986a8c633824b96c193",
+        "rev": "92f58b6728e7c631a7ea0ed68cd21bb29a4876ff",
         "type": "github"
       },
       "original": {
@@ -246,6 +246,22 @@
         "type": "github"
       }
     },
+    "mpv-discord": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645436349,
+        "narHash": "sha256-P1UaXGboOiqrXapfLzJI6IT3esNtflkQkcNXt4Umukc=",
+        "owner": "tnychn",
+        "repo": "mpv-discord",
+        "rev": "861bfe54f4b3a1538c475fcf8e4e1fea38039419",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tnychn",
+        "repo": "mpv-discord",
+        "type": "github"
+      }
+    },
     "my-flakes": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -268,11 +284,11 @@
     "myanimelist-bundle": {
       "flake": false,
       "locked": {
-        "lastModified": 1641630201,
-        "narHash": "sha256-UYG5XxbePYArt/TYXFK99u/gRcd9w0zKPJO5mzCQ5hM=",
+        "lastModified": 1649773626,
+        "narHash": "sha256-EtqIi7OWy2wSYGzcgQVNbR8aWq7oWw/1ax/ahE8kp6g=",
         "owner": "Fribb",
         "repo": "MyAnimeList.bundle",
-        "rev": "6bac1c2a70b375524c6fabbd57f78ecd60c02a39",
+        "rev": "581fe562664c38016439f4f034bb2f89694abc75",
         "type": "github"
       },
       "original": {
@@ -351,11 +367,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1649537291,
-        "narHash": "sha256-V6VYIwTeI5BCfYK9f5EsMbjsjsis1rUDHMsaDbTvt+A=",
+        "lastModified": 1649760692,
+        "narHash": "sha256-b+5Uo3yA2eFjvaGGeeLN7I3IJCxHL+jIQpB0HmBlqK4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "715dc137b08213aabbbe0965b78ab938e5d8d3b7",
+        "rev": "838eefb4f93f2306d4614aafb9b2375f315d917f",
         "type": "github"
       },
       "original": {
@@ -367,11 +383,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1649497218,
-        "narHash": "sha256-groqC9m1P4hpnL6jQvZ3C8NEtduhdkvwGT0+0LUrcYw=",
+        "lastModified": 1649784051,
+        "narHash": "sha256-XN6gEvLzUglWIClT1CyyriZfcAhdFj28krCtWLJ/UBI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fd364d268852561223a5ada15caad669fd72800e",
+        "rev": "e1118817a12dba39081d9e70ae52dd38aa184c2e",
         "type": "github"
       },
       "original": {
@@ -429,11 +445,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1649663939,
-        "narHash": "sha256-Wwtm2OjXHOCmKhCCggwcanlAY7K72hEJQs11mzx5b6A=",
+        "lastModified": 1649887424,
+        "narHash": "sha256-sq1MyS0QhHTsDSwcSasheeA1kFq4OXTSiwwcsH5y0gI=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "46dee4539765ac3602d82d9fdf383c1f4309e304",
+        "rev": "4952e271bcffb9af16011f8e163d46536bfef3d6",
         "type": "github"
       },
       "original": {
@@ -501,6 +517,7 @@
         "homeManager": "homeManager",
         "leftwm": "leftwm",
         "mach-nix": "mach-nix",
+        "mpv-discord": "mpv-discord",
         "my-flakes": "my-flakes",
         "myanimelist-bundle": "myanimelist-bundle",
         "nixgl": "nixgl",

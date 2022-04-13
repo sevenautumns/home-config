@@ -8,6 +8,7 @@ in {
     ./mpv.nix
     ./vscode.nix
     ./alacritty.nix
+    ./firefox.nix
     ./kitty.nix
     ./fcitx
     ./redshift.nix
@@ -15,8 +16,8 @@ in {
   ];
 
   services.sxhkd.keybindings = with pkgs; {
-    "super + w" = "${fixGL brave}/bin/brave";
-    "super + shift + w" = "${fixGL firefox}/bin/firefox";
+    "super + w" = "${fixGL stable.firefox}/bin/firefox";
+    "super + shift + w" = "${fixGL brave}/bin/brave";
     "super + shift + Return" =
       "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
   };
@@ -27,9 +28,12 @@ in {
       libreoffice
       thunderbird
       mattermost-desktop
+      okular
 
       #image
       gnome.eog
+      inkscape
+      gimp
 
       #music
       (fixGL spotify)
@@ -40,7 +44,6 @@ in {
 
       #browser
       (fixGL brave)
-      (fixGL firefox)
 
       #misc
       bitwarden
