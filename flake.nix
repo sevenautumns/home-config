@@ -91,6 +91,13 @@
           headless = true;
           managed-nixos = true;
         };
+        "castle" = {
+          user = "autumnal";
+          address = "192.168.2.32";
+          arch = "aarch64-linux";
+          headless = true;
+          managed-nixos = true;
+        };
       };
     in {
       homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:
