@@ -8,7 +8,6 @@ in {
     backend = "glx";
     vSync = if host == "neesama" then false else true;
     experimentalBackends = true;
-    refreshRate = if host == "neesama" then 240 else 60;
     shadow = true;
     #shadowOffsets = [ (-12) (-6) ];
     shadowOffsets = [ (-5) (-5) ];

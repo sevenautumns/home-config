@@ -4,6 +4,7 @@
     ./modules/docker.nix
     ./modules/plex.nix
     ./modules/rr.nix
+    ./modules/syncthing.nix
     ./modules/torrent.nix
     ../../common.nix
     (modulesPath + "/installer/scan/not-detected.nix")

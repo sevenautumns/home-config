@@ -70,6 +70,9 @@ in {
   xsession.numlock.enable = true;
   services.sxhkd.enable = true;
 
+  services.syncthing.enable = true;
+  services.syncthing.tray.enable = true;
+
   xdg.desktopEntries = {
     screenshot = {
       name = "Screenshot";
