@@ -93,7 +93,8 @@
         };
         "castle" = {
           user = "autumnal";
-          address = "192.168.2.32";
+          #address = "10.2.0.0";
+          address = "192.168.2.250";
           arch = "aarch64-linux";
           headless = true;
           managed-nixos = true;

@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
     ./modules/adguard.nix
+    ./modules/docker.nix
     ./modules/wireguard.nix
     ../../common.nix
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -22,13 +23,9 @@
       prefixLength = 24;
     }];
     defaultGateway = "192.168.2.1";
-    nameservers = [ "127.0.0.1" "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
     enableIPv6 = true;
   };
-
-  networking.firewall.allowedTCPPorts = [
-
-  ];
 
   # File systems configuration for using the installer's partition layout
   fileSystems = {
