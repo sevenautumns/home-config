@@ -2,6 +2,7 @@
   services = {
     syncthing = {
       enable = true;
+      user = "autumnal";
       openDefaultPorts = true;
       overrideDevices = true;
       overrideFolders = true;

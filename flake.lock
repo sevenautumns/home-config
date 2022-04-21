@@ -192,11 +192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1650234580,
-        "narHash": "sha256-wTmlRedCrDl+XYJom65GMfI3RgA3eZE/w03lD28Txoc=",
+        "lastModified": 1650301786,
+        "narHash": "sha256-9rz9NqL+mC+BIggn2emuzZ+3MYogxVBTdsFK7E3Vv1k=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "742c6cb3e9d866e095c629162fe5faf519adeb26",
+        "rev": "8d38ca886880265d523a66fe3da4d42e92ab0748",
         "type": "github"
       },
       "original": {
@@ -445,11 +445,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1650299178,
-        "narHash": "sha256-CdtXNA1ol0fh5KpMjSISh5+u2YnnOtIZzCYQqUiKjVc=",
+        "lastModified": 1650399020,
+        "narHash": "sha256-TqyQ9p4B7LBdwiY3gHuwW2Wx7nKVmNhl1WKyo6X1i4A=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "28b90c97885e1b5f99bcaecd7b652fee615dcfbf",
+        "rev": "54b5ff94277f7478def346a92c4328653981ac6f",
         "type": "github"
       },
       "original": {
@@ -490,6 +490,22 @@
         "type": "github"
       }
     },
+    "pop-launcher": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648660013,
+        "narHash": "sha256-BQAO9IodZxGgV8iBmUaOF0yDbAMVDFslKCqlh3pBnb0=",
+        "owner": "pop-os",
+        "repo": "launcher",
+        "rev": "089399065377b9c457cc963165614e5d125025b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pop-os",
+        "repo": "launcher",
+        "type": "github"
+      }
+    },
     "pypi-deps-db": {
       "flake": false,
       "locked": {
@@ -526,6 +542,7 @@
         "nur": "nur",
         "polybar-pulseaudio-control": "polybar-pulseaudio-control",
         "polybar-scripts": "polybar-scripts",
+        "pop-launcher": "pop-launcher",
         "services-bundle": "services-bundle",
         "transmission-exporter": "transmission-exporter"
       }

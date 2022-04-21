@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: {
   imports = [
-    ./windowManager
+    ./gnome
     ./software
     ./audio
 

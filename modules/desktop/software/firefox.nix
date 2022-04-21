@@ -10,6 +10,7 @@ in {
       ublock-origin
       bitwarden
       videospeed
+      sponsorblock
     ];
     profiles.default = {
       id = 0;
@@ -85,6 +86,11 @@ in {
         "browser.theme.content-theme" = 0;
 
         "signon.rememberSignons" = false;
+
+        # Font config
+        "font.name.monospace.ja" = "Sarasa Mono J";
+        "font.name.sans-serif.ja" = "Sarasa UI J";
+        "font.name.serif.ja" = "Sarasa UI J";
       };
     };
   };

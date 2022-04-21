@@ -31,6 +31,9 @@
     #rdf.flake = false;
     #naersk.url = "github:nix-community/naersk";
 
+    pop-launcher.url = "github:pop-os/launcher";
+    pop-launcher.flake = false;
+
     #Prometheus Exporter
     adguard-exporter.url = "github:ebrianne/adguard-exporter";
     adguard-exporter.flake = false;

@@ -65,13 +65,13 @@ in {
       betterlockscreen
     ] ++ lib.optionals (machine ? non-nixos) [ (nixGLCommon nixGLNvidia) ];
 
-  services.network-manager-applet.enable = true;
-  services.blueman-applet.enable = true;
+  services.network-manager-applet.enable = false;
+  services.blueman-applet.enable = false;
   xsession.numlock.enable = true;
   services.sxhkd.enable = true;
 
   services.syncthing.enable = true;
-  services.syncthing.tray.enable = true;
+  #services.syncthing.tray.enable = true;
 
   xdg.desktopEntries = {
     screenshot = {
