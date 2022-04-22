@@ -11,7 +11,7 @@ in {
     ./firefox.nix
     ./kitty.nix
     ./fcitx
-    ./redshift.nix
+    #./redshift.nix
     ./rust.nix
   ];
 
