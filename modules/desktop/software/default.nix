@@ -53,7 +53,7 @@ in {
       syncplay
 
       #Social
-      (fixGL discord)
+      #(fixGL discord)
       (fixGL discord-canary)
       (fixGL tdesktop)
       (fixAlsa element-desktop)

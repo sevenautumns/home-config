@@ -50,5 +50,19 @@
       use-split-layout = [ "<Super>e" ];
       use-float-layout = [ "<Super>v" ];
     };
+    # Adjust tray reloaded for material shell
+    "org/gnome/shell/extensions/trayIconsReloaded" = {
+      icon-margin-horizontal = 0;
+      icon-padding-horizontal = 0;
+      icon-padding-vertical = 5;
+      icon-size = 20;
+      icons-limit = 15;
+      invoke-to-workspace = true;
+      position-weight = 0;
+      tray-margin-left = 0;
+      tray-margin-right = 0;
+      tray-position = "right";
+      wine-behavior = true;
+    };
   };
 }

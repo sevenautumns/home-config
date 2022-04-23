@@ -18,13 +18,13 @@
       disable-user-extensions = false;
       enabled-extensions = [
         "audio-output-switcher@anduchs"
-        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
         #"pop-shell@system76.com"
-        "material-shell@papyelgringo"
         "trayIconsReloaded@selfmade.pl"
+        "material-shell@papyelgringo"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
       ];
       disabled-extensions = [
+        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
         "pop-shell@system76.com"
         "native-window-placement@gnome-shell-extensions.gcampax.github.com"
         "places-menu@gnome-shell-extensions.gcampax.github.com"
