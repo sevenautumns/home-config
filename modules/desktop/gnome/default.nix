@@ -9,6 +9,7 @@
   xsession.windowManager.command = "gnome-session";
 
   home.packages = with pkgs; [
+    gnome.gnome-session
     gnomeExtensions.audio-output-switcher
     gnomeExtensions.tray-icons-reloaded
   ];
@@ -72,6 +73,7 @@
       switch-to-workspace-up = [ ];
       switch-to-workspace-last = [ ];
     };
+    "org/gnome/desktop/peripherals/touchpad".tap-to-click = true;
     "org/gnome/mutter" = {
       workspaces-only-on-primary = true;
       attach-modal-dialogs = false;

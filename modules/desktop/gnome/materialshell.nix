@@ -50,6 +50,30 @@
       use-split-layout = [ "<Super>e" ];
       use-float-layout = [ "<Super>v" ];
     };
+    "org/gnome/shell/extensions/materialshell/tweaks" = {
+      cycle-through-windows = true;
+      cycle-through-workspaces = true;
+      enable-persistence = true;
+    };
+    "org/gnome/shell/extensions/materialshell/layouts" = {
+      default-layout = "half";
+      gap = 0;
+      screen-gap = 0;
+      simple-vertical = false;
+    };
+    "org/gnome/shell/extensions/materialshell/theme" = {
+      clock-app-launcher = true;
+      clock-horizontal = true;
+      focus-effect = "none";
+      horizontal-panel-position = "top";
+      panel-icon-color = false;
+      panel-icon-style = "category";
+      panel-opacity = 100;
+      panel-size = 39;
+      primary-color = "#5e81ac";
+      theme = "dark";
+      vertical-panel-position = "right";
+    };
     # Adjust tray reloaded for material shell
     "org/gnome/shell/extensions/trayIconsReloaded" = {
       icon-margin-horizontal = 0;
