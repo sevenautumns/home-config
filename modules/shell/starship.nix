@@ -17,6 +17,10 @@
         read_only = " ";
         truncation_length = 5;
       };
+      localip = {
+        ssh_only = false;
+        disabled = true;
+      };
       aws.symbol = "  ";
       conda.symbol = " ";
       dart.symbol = " ";
