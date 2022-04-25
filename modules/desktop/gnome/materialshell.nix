@@ -13,10 +13,10 @@
       last-workspace = [ "" ];
       move-window-bottom = [ "" ];
       move-window-left = [ "<Shift><Super>Left" ];
-      move-window-monitor-down = [ "<Shift><Super>Down" ];
+      move-window-monitor-down = [ "" ];
       move-window-monitor-left = [ "<Shift><Super>KP_Home" ];
       move-window-monitor-right = [ "<Shift><Super>KP_Page_Up" ];
-      move-window-monitor-up = [ "<Shift><Super>Up" ];
+      move-window-monitor-up = [ "" ];
       move-window-right = [ "<Shift><Super>Right" ];
       move-window-top = [ "" ];
       move-window-to-workspace-1 = [ "<Shift><Super>KP_End" ];
@@ -25,10 +25,10 @@
       move-window-to-workspace-4 = [ "<Shift><Super>KP_Left" ];
       move-window-to-workspace-5 = [ "<Shift><Super>KP_Begin" ];
       move-window-to-workspace-6 = [ "<Shift><Super>KP_Right" ];
-      move-window-to-workspace-7 = [ "<Shift><Super>KP_Home" ];
-      move-window-to-workspace-8 = [ "<Shift><Super>KP_Up" ];
-      move-window-to-workspace-9 = [ "<Shift><Super>KP_Page_Up" ];
-      move-window-to-workspace-10 = [ "<Shift><Super>KP_Insert" ];
+      move-window-to-workspace-7 = [ "" ];
+      move-window-to-workspace-8 = [ "" ];
+      move-window-to-workspace-9 = [ "" ];
+      move-window-to-workspace-10 = [ "" ];
       navigate-to-workspace-1 = [ "<Super>KP_1" ];
       navigate-to-workspace-2 = [ "<Super>KP_2" ];
       navigate-to-workspace-3 = [ "<Super>KP_3" ];
@@ -38,7 +38,7 @@
       navigate-to-workspace-7 = [ "" ];
       navigate-to-workspace-8 = [ "" ];
       navigate-to-workspace-9 = [ "" ];
-      navigate-to-workspace-10 = [ "<Super>KP_0" ];
+      navigate-to-workspace-10 = [ "" ];
       next-window = [ "<Super>Right" ];
       next-workspace = [ "<Super>Down" ];
       previous-window = [ "<Super>Left" ];
@@ -64,7 +64,8 @@
     "org/gnome/shell/extensions/materialshell/theme" = {
       clock-app-launcher = true;
       clock-horizontal = true;
-      focus-effect = "none";
+      taskbar-item-style = "name";
+      focus-effect = "border";
       horizontal-panel-position = "top";
       panel-icon-color = false;
       panel-icon-style = "category";

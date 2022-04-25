@@ -8,11 +8,11 @@
   '';
   xsession.windowManager.command = "gnome-session";
 
-  home.packages = with pkgs; [
-    gnome.gnome-session
-    gnomeExtensions.audio-output-switcher
-    gnomeExtensions.tray-icons-reloaded
-  ];
+  home.packages = with pkgs;
+    [
+      gnomeExtensions.audio-output-switcher
+      gnomeExtensions.tray-icons-reloaded
+    ] ++ lib.optionals (host != "neesama") [ gnome.gnome-session ];
   dconf.settings = let mkTuple = lib.hm.gvariant.mkTuple;
   in {
     "org/gnome/shell" = {
@@ -72,6 +72,10 @@
       switch-to-workspace-right = [ ];
       switch-to-workspace-up = [ ];
       switch-to-workspace-last = [ ];
+    };
+    "org/gnome/desktop/screensaver" = {
+      lock-delay = lib.hm.gvariant.mkUint32 30;
+      lock-enabled = true;
     };
     "org/gnome/desktop/peripherals/touchpad".tap-to-click = true;
     "org/gnome/mutter" = {

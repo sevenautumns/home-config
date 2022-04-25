@@ -5,6 +5,7 @@ let
 in {
   i18n.inputMethod = {
     enabled = "fcitx5";
+    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
     fcitx5.addons = [ pkgs.fcitx5-mozc ];
   };
 
