@@ -35,6 +35,7 @@
       toggle-stacking-global = [ "<Super>z" "<Super>y" ];
       toggle-tiling = [ ];
 
+      tile-by-default = true;
       show-title = false;
       active-hint = true;
       hint-color-rgba = "rgba(216, 222, 233, 1)";
