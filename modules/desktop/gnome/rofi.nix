@@ -11,32 +11,28 @@ in {
 
   programs.rofi = {
     enable = true;
-    font = "FiraCode Nerd Font 11";
+    #font = "FiraCode Nerd Font 11";
+    font = "Noto Sans Regular 11";
     plugins = [ pkgs.rofi-calc ];
-    #theme = "${inputs.rofi-themes}/1080p/launchers/misc/kde_krunner.rasi";
     extraConfig = {
       icon-theme = config.gtk.iconTheme.name;
       display-ssh = "";
       display-run = "";
-      display-drun = "";
+      display-drun = "";
       display-window = "";
       display-combi = "";
+      drun-display-format = "{name}";
       show-icons = true;
       modi = "drun,window,run,ssh,calc";
     };
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {
       "*" = {
-        background = mkLiteral "#2f3541F2";
+        background = mkLiteral "#303030FB";
         background-alt = mkLiteral "#00000000";
-        background-bar = mkLiteral "#f2f2f215";
+        background-bar = mkLiteral "#444444FF";
         foreground = mkLiteral "#f2f2f2EE";
         accent = mkLiteral "#3DAEE966";
-        #foreground = mkLiteral theme.nord6;
-        #backlight = mkLiteral "#ccffeedd;
-        #background-color = mkLiteral "transparent";
-        #highlight = mkLiteral "underline bold ${theme.nord6}";
-        #transparent = mkLiteral "rgba(46,52,64,0)";
       };
       "window" = {
         transparency = "real";
@@ -63,6 +59,7 @@ in {
         text-color = mkLiteral "@foreground";
         placeholder-color = mkLiteral "@foreground";
         expand = true;
+        font = "Noto Sans Bold 11";
         horizontal-align = 0;
         placeholder = "Search";
         padding = mkLiteral "0.10% 0% 0% 0%";
@@ -83,9 +80,13 @@ in {
 
       "listview" = {
         background-color = mkLiteral "@background-alt";
-        columns = 5;
-        lines = 3;
+        columns = 1;
+        #columns = 5;
+        lines = 10;
+        #lines = 4;
         spacing = mkLiteral "0%";
+        fixed-height = true;
+        fixed-columns = true;
         cycle = false;
         dynamic = true;
         layout = mkLiteral "vertical";
@@ -104,9 +105,11 @@ in {
       "element" = {
         background-color = mkLiteral "@background-alt";
         text-color = mkLiteral "@foreground";
-        orientation = mkLiteral "vertical";
+        orientation = mkLiteral "horizontal";
+        #orientation = mkLiteral "vertical";
         border-radius = mkLiteral "0%";
-        padding = mkLiteral "2% 0% 2% 0%";
+        padding = mkLiteral "1% 1% 1% 1%";
+        #padding = mkLiteral "2% 0% 2% 0%";
       };
 
       "element-icon" = {
@@ -114,7 +117,8 @@ in {
         text-color = mkLiteral "inherit";
         horizontal-align = mkLiteral "0.5";
         vertical-align = mkLiteral "0.5";
-        size = mkLiteral "64px";
+        size = mkLiteral "30px";
+        #size = mkLiteral "64px";
         border = mkLiteral "0px";
       };
 
@@ -122,9 +126,11 @@ in {
         background-color = mkLiteral "@background-alt";
         text-color = mkLiteral "inherit";
         expand = true;
-        horizontal-align = mkLiteral "0.5";
+        #horizontal-align = mkLiteral "0.5";
+        horizontal-align = mkLiteral "0";
         vertical-align = mkLiteral "0.5";
-        margin = mkLiteral "0.5% 0.5% -0.5% 0.5%";
+        margin = mkLiteral "0.5% 0.5% 0.5% 0.5%";
+        #margin = mkLiteral "0.5% 0.5% -0.5% 0.5%";
       };
 
       "element selected" = {
