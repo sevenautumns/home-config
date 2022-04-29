@@ -80,10 +80,10 @@ in {
 
       "listview" = {
         background-color = mkLiteral "@background-alt";
-        columns = 1;
-        #columns = 5;
-        lines = 10;
-        #lines = 4;
+        #columns = 1;
+        columns = 5;
+        #lines = 10;
+        lines = 4;
         spacing = mkLiteral "0%";
         fixed-height = true;
         fixed-columns = true;
@@ -105,11 +105,11 @@ in {
       "element" = {
         background-color = mkLiteral "@background-alt";
         text-color = mkLiteral "@foreground";
-        orientation = mkLiteral "horizontal";
-        #orientation = mkLiteral "vertical";
+        #orientation = mkLiteral "horizontal";
+        orientation = mkLiteral "vertical";
         border-radius = mkLiteral "0%";
-        padding = mkLiteral "1% 1% 1% 1%";
-        #padding = mkLiteral "2% 0% 2% 0%";
+        #padding = mkLiteral "1% 1% 1% 1%";
+        padding = mkLiteral "2% 0% 2% 0%";
       };
 
       "element-icon" = {
@@ -117,8 +117,8 @@ in {
         text-color = mkLiteral "inherit";
         horizontal-align = mkLiteral "0.5";
         vertical-align = mkLiteral "0.5";
-        size = mkLiteral "30px";
-        #size = mkLiteral "64px";
+        #size = mkLiteral "30px";
+        size = mkLiteral "64px";
         border = mkLiteral "0px";
       };
 
@@ -126,11 +126,11 @@ in {
         background-color = mkLiteral "@background-alt";
         text-color = mkLiteral "inherit";
         expand = true;
-        #horizontal-align = mkLiteral "0.5";
-        horizontal-align = mkLiteral "0";
+        horizontal-align = mkLiteral "0.5";
+        #horizontal-align = mkLiteral "0";
         vertical-align = mkLiteral "0.5";
-        margin = mkLiteral "0.5% 0.5% 0.5% 0.5%";
-        #margin = mkLiteral "0.5% 0.5% -0.5% 0.5%";
+        #margin = mkLiteral "0.5% 0.5% 0.5% 0.5%";
+        margin = mkLiteral "0.5% 0.5% -0.5% 0.5%";
       };
 
       "element selected" = {
