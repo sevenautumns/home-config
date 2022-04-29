@@ -23,6 +23,8 @@
     polybar-pulseaudio-control.url =
       "github:marioortizmanero/polybar-pulseaudio-control";
     polybar-pulseaudio-control.flake = false;
+    rofi-themes.url = "github:adi1090x/rofi";
+    rofi-themes.flake = false;
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
     mpv-discord.url = "github:tnychn/mpv-discord";

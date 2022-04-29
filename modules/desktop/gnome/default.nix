@@ -1,5 +1,7 @@
-{ pkgs, config, inputs, lib, ... }: {
-  imports = [ ./rofi.nix ./materialshell.nix ];
+{ pkgs, config, inputs, lib, machine, ... }:
+let host = machine.host;
+in {
+  imports = [ ./rofi.nix ./popshell.nix ];
 
   xsession.enable = true;
   xsession.initExtra = ''
@@ -19,19 +21,23 @@
       disable-user-extensions = false;
       enabled-extensions = [
         "audio-output-switcher@anduchs"
-        #"pop-shell@system76.com"
+        "pop-shell@system76.com"
+        #"material-shell@papyelgringo"
         "trayIconsReloaded@selfmade.pl"
-        "material-shell@papyelgringo"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
+        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
       ];
       disabled-extensions = [
-        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
-        "pop-shell@system76.com"
+        #"pop-shell@system76.com"
+        "material-shell@papyelgringo"
         "native-window-placement@gnome-shell-extensions.gcampax.github.com"
         "places-menu@gnome-shell-extensions.gcampax.github.com"
         "windowsNavigator@gnome-shell-extensions.gcampax.github.com"
         "window-list@gnome-shell-extensions.gcampax.github.com"
       ];
+    };
+    "org/gnome/desktop/applications/terminal" = {
+      exec = "${config.programs.alacritty.package}/bin/alacritty";
     };
     "org/gnome/desktop/wm/keybindings" = {
       toggle-maximized = [ ];
@@ -39,19 +45,21 @@
       maximize = [ ];
       unmaximize = [ ];
       minimize = [ ];
-      close = [ ];
+      close = [ "<Super>C" ];
       move-to-monitor-down = [ ];
       move-to-monitor-left = [ ];
       move-to-monitor-right = [ ];
       move-to-monitor-up = [ ];
-      move-to-workspace-1 = [ ];
-      move-to-workspace-2 = [ ];
-      move-to-workspace-3 = [ ];
-      move-to-workspace-4 = [ ];
-      move-to-workspace-5 = [ ];
-      move-to-workspace-6 = [ ];
-      move-to-workspace-7 = [ ];
-      move-to-workspace-8 = [ ];
+      move-to-workspace-1 = [ "<Shift><Super>KP_End" ];
+      move-to-workspace-2 = [ "<Shift><Super>KP_Down" ];
+      move-to-workspace-3 = [ "<Shift><Super>KP_Next" ];
+      move-to-workspace-4 = [ "<Shift><Super>KP_Left" ];
+      move-to-workspace-5 = [ "<Shift><Super>KP_Begin" ];
+      move-to-workspace-6 = [ "<Shift><Super>KP_Right" ];
+      move-to-workspace-7 = [ "<Shift><Super>KP_Home" ];
+      move-to-workspace-8 = [ "<Shift><Super>KP_Up" ];
+      move-to-workspace-9 = [ "<Shift><Super>KP_Prior" ];
+      move-to-workspace-10 = [ "<Shift><Super>KP_Insert" ];
       move-to-workspace-down = [ ];
       move-to-workspace-left = [ ];
       move-to-workspace-right = [ ];
@@ -59,17 +67,19 @@
       move-to-workspace-last = [ ];
       switch-input-source = [ ];
       switch-input-source-backward = [ ];
-      switch-to-workspace-1 = [ ];
-      switch-to-workspace-2 = [ ];
-      switch-to-workspace-3 = [ ];
-      switch-to-workspace-4 = [ ];
-      switch-to-workspace-5 = [ ];
-      switch-to-workspace-6 = [ ];
-      switch-to-workspace-7 = [ ];
-      switch-to-workspace-8 = [ ];
+      switch-to-workspace-1 = [ "<Super>KP_End" ];
+      switch-to-workspace-2 = [ "<Super>KP_Down" ];
+      switch-to-workspace-3 = [ "<Super>KP_Next" ];
+      switch-to-workspace-4 = [ "<Super>KP_Left" ];
+      switch-to-workspace-5 = [ "<Super>KP_Begin" ];
+      switch-to-workspace-6 = [ "<Super>KP_Right" ];
+      switch-to-workspace-7 = [ "<Super>KP_Home" ];
+      switch-to-workspace-8 = [ "<Super>KP_Up" ];
+      switch-to-workspace-9 = [ "<Super>KP_Prior" ];
+      switch-to-workspace-10 = [ "<Super>KP_Insert" ];
       switch-to-workspace-down = [ ];
-      switch-to-workspace-left = [ ];
-      switch-to-workspace-right = [ ];
+      switch-to-workspace-left = [ "<Primary><Super>Left" ];
+      switch-to-workspace-right = [ "<Primary><Super>Right" ];
       switch-to-workspace-up = [ ];
       switch-to-workspace-last = [ ];
     };

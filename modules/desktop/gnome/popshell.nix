@@ -8,34 +8,8 @@
     default_pointer_position = "CENTER";
     float = [
       { class = "Authy Desktop"; }
-      {
-        class = "Enpass";
-        title = "Enpass Assistant";
-      }
-      {
-        class = "Zotero";
-        title = "Quick Format Citation";
-      }
-      { class = "Com.github.donadigo.eddy"; }
-      { class = "Conky"; }
       { class = "gnome-screenshot"; }
       { class = "jetbrains-toolbox"; }
-      {
-        class = "jetbrains-webstorm";
-        title = "License Activation";
-      }
-      {
-        class = "jetbrains-webstorm";
-        title = "Customize WebStorm";
-      }
-      {
-        class = "jetbrains-webstorm";
-        title = "Welcome to WebStorm";
-      }
-      {
-        class = "KotatogramDesktop";
-        title = "Media viewer";
-      }
       {
         class = "Steam";
         title = "^((?!Steam).)*$";
@@ -44,32 +18,17 @@
         class = "TelegramDesktop";
         title = "Media viewer";
       }
-      {
-        class = "Slack";
-        title = "Slack | mini panel";
-      }
-      { class = "Solaar"; }
-      { class = "system76-driver"; }
       { class = "zoom"; }
-      {
-        class = "Gnome-terminal";
-        title = "Preferences – General";
-      }
-      {
-        class = "Gjs";
-        title = "Settings";
-      }
       {
         class = "syncplay";
         title = "Syncplay configuration";
       }
-      { class = "Io.elementary.sideload"; }
     ];
   };
 
   dconf.settings = {
     "org/gnome/shell/extensions/pop-shell" = {
-      activate-launcher = [ ];
+      activate-launcher = [ "<Super>Space" ];
       tile-enter = [ "<Super>x" ];
       tile-orientation = [ "<Super>o" ];
       toggle-floating = [ "<Super><Shift>space" ];

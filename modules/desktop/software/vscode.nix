@@ -12,7 +12,7 @@
     ];
     userSettings = {
       "rust-analyzer.checkOnSave.command" = "clippy";
-      "editor.formatOnSave" = true;
+      "editor.formatOnSave" = false;
       "editor.tabSize" = 2;
     };
   };
