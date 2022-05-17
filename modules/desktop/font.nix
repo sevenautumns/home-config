@@ -5,7 +5,7 @@
     })
     sarasa-gothic
     font-awesome
-    symbola
+    unstable.symbola
     roboto
     #siji
     dina-font

@@ -12,6 +12,7 @@ in {
 
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
   #xdg.configFile."test".text = "${config.theme.nord0}";
   xdg.enable = true;
@@ -24,8 +25,8 @@ in {
     sw
   ];
 
-  targets.genericLinux.enable = machine ? non-nixos;
-  home.sessionVariables.PATH = if machine ? non-nixos then
+  targets.genericLinux.enable = !machine.nixos;
+  home.sessionVariables.PATH = if !machine.nixos then
   ## Reorder PATH for non-Nix system
   ## - Nix packages work flawlessly with unfavorable PATH-Order
   ## - Arch packages don't

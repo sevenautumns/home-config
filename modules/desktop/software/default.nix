@@ -16,8 +16,8 @@ in {
   ];
 
   services.sxhkd.keybindings = with pkgs; {
-    "super + w" = "${fixGL stable.firefox}/bin/firefox";
-    "super + shift + w" = "${fixGL brave}/bin/brave";
+    "super + w" = "firefox";
+    "super + shift + w" = "brave";
     "super + shift + Return" =
       "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
   };
@@ -35,15 +35,10 @@ in {
       inkscape
       gimp
 
-      #music
-      (fixGL spotify)
-
       #dev
       nixfmt
       jetbrains.idea-ultimate
-
-      #browser
-      (fixGL brave)
+      jetbrains.pycharm-professional
 
       #misc
       bitwarden
@@ -52,18 +47,15 @@ in {
       feh
       syncplay
 
-      #Social
-      (fixGL discord)
-      (fixGL discord-canary)
-      (fixGL tdesktop)
-      (fixAlsa element-desktop)
-
       #learning
       anki
-    ] ++ lib.optionals (host == "ft-ssy-sfnb") [
-      # betterlockscreen cant access pem in arch
-      betterlockscreen
-    ] ++ lib.optionals (machine ? non-nixos) [ (nixGLCommon nixGLNvidia) ];
+    ] ++ lib.optionals (machine.nixos) [
+      discord-canary
+      tdesktop
+      element-desktop
+      spotify
+      brave
+    ];
 
   services.network-manager-applet.enable = false;
   services.blueman-applet.enable = false;

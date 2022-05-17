@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }: {
   programs.vscode = {
     enable = true;
-    package = with pkgs; fixGL vscodium;
+    package = with pkgs; vscodium;
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       brettm12345.nixfmt-vscode

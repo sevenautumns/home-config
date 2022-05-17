@@ -20,7 +20,7 @@
       experimental-features = nix-command flakes
     '';
   };
-  nixpkgs.config = { allowUnfree = true; };
+  nixpkgs.config.allowUnfree = true;
 
   # enable zerotier virtual switch
   services.zerotierone = {

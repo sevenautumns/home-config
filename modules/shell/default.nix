@@ -23,7 +23,7 @@
     enableFishIntegration = true;
     fileWidgetCommand = "${pkgs.fd}/bin/fd -E /net --hidden --type f";
     fileWidgetOptions = [ "--preview='${pkgs.bat}/bin/bat {} --color=always'" ];
-    changeDirWidgetCommand = "${pkgs.fd}/bin/fd -E /net d--hidden --type d";
+    changeDirWidgetCommand = "${pkgs.fd}/bin/fd -E /net --hidden --type d";
     changeDirWidgetOptions =
       [ "--preview='${pkgs.exa}/bin/exa --tree {} | head -200'" ];
     historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
@@ -40,9 +40,10 @@
     };
   };
 
-  programs.gpg.enable = true;
+  services.gnome-keyring.enable = true;
+  programs.gpg.enable = false;
   services.gpg-agent = {
-    enable = true;
+    enable = false;
     enableSshSupport = true;
   };
 

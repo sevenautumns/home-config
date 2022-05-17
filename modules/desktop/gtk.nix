@@ -47,7 +47,8 @@ in {
     style.name = "Nordic";
   };
 
-  xsession.pointerCursor = {
+  home.pointerCursor = {
+    x11.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Original-Classic";
     size = 12;

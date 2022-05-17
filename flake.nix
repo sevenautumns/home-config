@@ -62,24 +62,21 @@
           user = "autumnal";
           arch = "x86_64-linux";
           headless = false;
-          non-nixos = {
-            nvidia = {
-              version = "510.60.02";
-              hash = "sha256-qADfwFSQeP2Mbo5ngO+47uh4cuYFXH9fOGpHaM4H4AM=";
-            };
-          };
+          nixos = false;
           managed-nixos = false;
         };
         "ft-ssy-sfnb" = {
           user = "frie_sv";
           arch = "x86_64-linux";
           headless = false;
+          nixos = true;
           managed-nixos = false;
         };
         "ft-ssy-stonks" = {
           user = "frie_sv";
           arch = "x86_64-linux";
           headless = true;
+          nixos = true;
           managed-nixos = false;
         };
         "index" = {
@@ -87,6 +84,7 @@
           address = "10.4.0.0";
           arch = "aarch64-linux";
           headless = true;
+          nixos = true;
           managed-nixos = true;
         };
         "tenshi" = {
@@ -94,6 +92,7 @@
           address = "10.3.0.0";
           arch = "x86_64-linux";
           headless = true;
+          nixos = true;
           managed-nixos = true;
         };
         "castle" = {
@@ -102,6 +101,7 @@
           address = "192.168.2.250";
           arch = "aarch64-linux";
           headless = true;
+          nixos = true;
           managed-nixos = true;
         };
       };
@@ -134,8 +134,6 @@
                   };
                 in { inherit unstable stable; })
               nur.overlay
-              (import ./overlay/nixgl-overlay.nix machine nixgl)
-              (import ./overlay/alsa-overlay.nix machine)
             ];
           };
           extraSpecialArgs = {

@@ -3,15 +3,11 @@ let
   host = machine.host;
   theme = config.theme;
 in {
-  services.sxhkd.keybindings = {
-    "super + Return" = "${config.programs.alacritty.package}/bin/alacritty";
-    "super + shift + t" = with pkgs;
-      "${intelGL unstable.alacritty}/bin/alacritty";
-  };
+  services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
 
   programs.alacritty = {
     enable = true;
-    package = with pkgs; fixGL unstable.alacritty;
+    package = with pkgs; if machine.nixos then unstable.alacritty else hello;
     settings = {
       window = {
         padding = {
