@@ -16,22 +16,6 @@
         "type": "github"
       }
     },
-    "adguard-exporter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1644655605,
-        "narHash": "sha256-EoI7aHCqfLbthiKtV6Hx4La6Ve4LJQ/NCTFNIpXO/Ow=",
-        "owner": "ebrianne",
-        "repo": "adguard-exporter",
-        "rev": "23838bf07e3b116f267677e3eb891e5425f99af8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ebrianne",
-        "repo": "adguard-exporter",
-        "type": "github"
-      }
-    },
     "agenix": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -83,6 +67,22 @@
       "original": {
         "owner": "serokell",
         "repo": "deploy-rs",
+        "type": "github"
+      }
+    },
+    "fcitx5-nord": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627385945,
+        "narHash": "sha256-qVo/0ivZ5gfUP17G29CAW0MrRFUO0KN1ADl1I/rvchE=",
+        "owner": "tonyfettes",
+        "repo": "fcitx5-nord",
+        "rev": "bdaa8fb723b8d0b22f237c9a60195c5f9c9d74d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tonyfettes",
+        "repo": "fcitx5-nord",
         "type": "github"
       }
     },
@@ -146,21 +146,6 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "846b2ae0fc4cc943637d3d1def4454213e203cba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
-      "locked": {
-        "lastModified": 1637014545,
-        "narHash": "sha256-26IZAc5yzlD9FlDT54io1oqG/bBoyka+FJk5guaX4x4=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "bba5dcc8e0b20ab664967ad83d24d64cb64ec4f4",
         "type": "github"
       },
       "original": {
@@ -246,41 +231,6 @@
         "type": "github"
       }
     },
-    "mpv-discord": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1645436349,
-        "narHash": "sha256-P1UaXGboOiqrXapfLzJI6IT3esNtflkQkcNXt4Umukc=",
-        "owner": "tnychn",
-        "repo": "mpv-discord",
-        "rev": "861bfe54f4b3a1538c475fcf8e4e1fea38039419",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tnychn",
-        "repo": "mpv-discord",
-        "type": "github"
-      }
-    },
-    "my-flakes": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs-stable": "nixpkgs-stable"
-      },
-      "locked": {
-        "lastModified": 1638022342,
-        "narHash": "sha256-/Gwe6LS9HDVGtPVhEihtHxcF7awVKdt0pcnXATN/sBM=",
-        "owner": "steav005",
-        "repo": "flakes",
-        "rev": "9809fcd5c02af6643d80c1cc1529a6526c85af70",
-        "type": "github"
-      },
-      "original": {
-        "owner": "steav005",
-        "repo": "flakes",
-        "type": "github"
-      }
-    },
     "myanimelist-bundle": {
       "flake": false,
       "locked": {
@@ -353,22 +303,6 @@
       }
     },
     "nixpkgs-stable": {
-      "locked": {
-        "lastModified": 1637875414,
-        "narHash": "sha256-Ica++SXFuLyxX9Q7YxhfZulUif6/gwM8AEQYlUxqSgE=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "3bea86e918d8b54aa49780505d2d4cd9261413be",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-21.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-stable_2": {
       "locked": {
         "lastModified": 1652559422,
         "narHash": "sha256-jPVTNImBTUIFdtur+d4IVot6eXmsvtOcBm0TzxmhWPk=",
@@ -558,27 +492,24 @@
     "root": {
       "inputs": {
         "absolut-series-scanner": "absolut-series-scanner",
-        "adguard-exporter": "adguard-exporter",
         "agenix": "agenix",
         "cmus-notify": "cmus-notify",
         "deploy-rs": "deploy-rs",
+        "fcitx5-nord": "fcitx5-nord",
         "hama-bundle": "hama-bundle",
         "homeManager": "homeManager",
         "leftwm": "leftwm",
         "mach-nix": "mach-nix",
-        "mpv-discord": "mpv-discord",
-        "my-flakes": "my-flakes",
         "myanimelist-bundle": "myanimelist-bundle",
         "nixgl": "nixgl",
-        "nixpkgs-stable": "nixpkgs-stable_2",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "polybar-pulseaudio-control": "polybar-pulseaudio-control",
         "polybar-scripts": "polybar-scripts",
         "pop-launcher": "pop-launcher",
         "rofi-themes": "rofi-themes",
-        "services-bundle": "services-bundle",
-        "transmission-exporter": "transmission-exporter"
+        "services-bundle": "services-bundle"
       }
     },
     "rust-analyzer-src": {
@@ -611,22 +542,6 @@
       "original": {
         "owner": "pierre1313",
         "repo": "Services.bundle",
-        "type": "github"
-      }
-    },
-    "transmission-exporter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1604488969,
-        "narHash": "sha256-sILsGs+88GjIWh1/vdGRZim1pvcKp2LILy4a08d8+mo=",
-        "owner": "metalmatze",
-        "repo": "transmission-exporter",
-        "rev": "7206d9815d745c1ea3a86f0b8f39188104b9c6e9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "metalmatze",
-        "repo": "transmission-exporter",
         "type": "github"
       }
     },

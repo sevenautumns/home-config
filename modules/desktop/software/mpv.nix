@@ -8,8 +8,8 @@
         });
     config = {
       no-keepaspect-window = "";
-      vo = "gpu";
-      hwdec = "auto";
+      #vo = "gpu";
+      #hwdec = "auto";
     };
     bindings = {
       "Ctrl+j" = "cycle secondary-sid";

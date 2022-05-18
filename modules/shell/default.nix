@@ -41,11 +41,7 @@
   };
 
   services.gnome-keyring.enable = true;
-  programs.gpg.enable = false;
-  services.gpg-agent = {
-    enable = false;
-    enableSshSupport = true;
-  };
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
 
   programs.htop.enable = true;
   programs.bottom.enable = true;

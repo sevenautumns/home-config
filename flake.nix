@@ -6,7 +6,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
-    my-flakes.url = "github:steav005/flakes";
     agenix.url = "github:ryantm/agenix";
     homeManager = {
       url = "github:nix-community/home-manager";
@@ -27,20 +26,14 @@
     rofi-themes.flake = false;
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
-    mpv-discord.url = "github:tnychn/mpv-discord";
-    mpv-discord.flake = false;
+    fcitx5-nord.url = "github:tonyfettes/fcitx5-nord";
+    fcitx5-nord.flake = false;
     #rdf.url = "github:mfs/rust-df";
     #rdf.flake = false;
     #naersk.url = "github:nix-community/naersk";
 
     pop-launcher.url = "github:pop-os/launcher";
     pop-launcher.flake = false;
-
-    #Prometheus Exporter
-    adguard-exporter.url = "github:ebrianne/adguard-exporter";
-    adguard-exporter.flake = false;
-    transmission-exporter.url = "github:metalmatze/transmission-exporter";
-    transmission-exporter.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";
@@ -53,8 +46,8 @@
     absolut-series-scanner.flake = false;
   };
 
-  outputs = { self, homeManager, my-flakes, nur, nixgl, deploy-rs
-    , nixpkgs-unstable, nixpkgs-stable, agenix, ... }@inputs:
+  outputs = { self, homeManager, nur, nixgl, deploy-rs, nixpkgs-unstable
+    , nixpkgs-stable, agenix, ... }@inputs:
     let
       lib = nixpkgs-unstable.lib;
       machines = {

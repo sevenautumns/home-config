@@ -1,11 +1,12 @@
 { pkgs, config, inputs, lib, ... }:
-let
-  transmission-exporter = pkgs.buildGoModule {
-    name = "transmission-exporter";
-    src = inputs.transmission-exporter;
-    vendorSha256 = "sha256-YhmfrM5iAK0zWcUM7LmbgFnH+k2M/tE+f/QQIQmQlZs=";
-  };
-in {
+#let
+#  transmission-exporter = pkgs.buildGoModule {
+#    name = "transmission-exporter";
+#    src = inputs.transmission-exporter;
+#    vendorSha256 = "sha256-YhmfrM5iAK0zWcUM7LmbgFnH+k2M/tE+f/QQIQmQlZs=";
+#  };
+#in 
+{
   imports = [ ../../../torrent.nix ];
 
   # Assertions guaranteeing Wireguard usage
@@ -33,10 +34,10 @@ in {
       path = "/var/lib/transmission/auth";
       owner = "autumnal";
     };
-    transmission_exporter = {
-      file = ../../../../secrets/transmission_exporter.age;
-      path = "/var/lib/transmission-exporter/auth";
-    };
+    #transmission_exporter = {
+    #  file = ../../../../secrets/transmission_exporter.age;
+    #  path = "/var/lib/transmission-exporter/auth";
+    #};
   };
 
   networking.wireguard.interfaces.wg0.peers = [{
@@ -103,22 +104,22 @@ in {
   systemd.tmpfiles.rules =
     [ "d '/var/lib/flood' 0700 autumnal transmission - -" ];
 
-  systemd.services.transmission-exporter = {
-    enable = true;
-    bindsTo = [ "transmission.service" ];
-    wantedBy = [ "multi-user.target" ];
-    script = ''
-      WEB_ADDR=127.0.0.1:19091 \
-      TRANSMISSION_USERNAME=admin \
-      TRANSMISSION_PASSWORD=$(cat /var/lib/transmission-exporter/auth) \
-      ${transmission-exporter}/bin/transmission-exporter
-    '';
-  };
+  #systemd.services.transmission-exporter = {
+  #  enable = true;
+  #  bindsTo = [ "transmission.service" ];
+  #  wantedBy = [ "multi-user.target" ];
+  #  script = ''
+  #    WEB_ADDR=127.0.0.1:19091 \
+  #    TRANSMISSION_USERNAME=admin \
+  #    TRANSMISSION_PASSWORD=$(cat /var/lib/transmission-exporter/auth) \
+  #    ${transmission-exporter}/bin/transmission-exporter
+  #  '';
+  #};
 
   networking.firewall.allowedTCPPorts = [ 3030 9091 ];
 
-  services.prometheus.scrapeConfigs = [{
-    job_name = "transmission";
-    static_configs = [{ targets = [ "localhost:19091" ]; }];
-  }];
+  #services.prometheus.scrapeConfigs = [{
+  #  job_name = "transmission";
+  #  static_configs = [{ targets = [ "localhost:19091" ]; }];
+  #}];
 }

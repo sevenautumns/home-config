@@ -40,9 +40,9 @@
 
   networking.firewall.allowedTCPPorts = [
     2049 # NFS Server
-    config.services.grafana.port
+    #config.services.grafana.port
 
-    config.services.prometheus.port
+    #config.services.prometheus.port
     19999 # Netdata
     32400 # Plex
   ];
@@ -52,17 +52,17 @@
     "12ac4a1e711ec1f6" # Weebwork
   ];
 
-  services.grafana = {
-    enable = true;
-    domain = "localhost";
-    port = 2342;
-    addr = "10.4.0.0";
-  };
+  #services.grafana = {
+  #  enable = true;
+  #  domain = "localhost";
+  #  port = 2342;
+  #  addr = "10.4.0.0";
+  #};
 
-  services.prometheus = {
-    enable = true;
-    port = 9001;
-  };
+  #services.prometheus = {
+  #  enable = true;
+  #  port = 9001;
+  #};
 
   # Limit Bandwidth for weebwork network
   services.cron = {

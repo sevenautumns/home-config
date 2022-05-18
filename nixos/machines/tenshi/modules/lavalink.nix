@@ -16,4 +16,18 @@
     path = "/var/lib/lavalink/application.yml";
     owner = "autumnal";
   };
+
+  services.nginx.virtualHosts = {
+    "lavalink.autumnal.de" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyWebsockets = true;
+        proxyPass = "http://127.0.0.1:2333";
+        extraConfig =
+          # required when the server wants to use HTTP Authentication
+          "proxy_pass_header Authorization;";
+      };
+    };
+  };
 }

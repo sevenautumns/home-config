@@ -2,6 +2,14 @@
 let
   default-keyboard = config.home.keyboard.layout
     + (if config.home.keyboard.variant == "us" then "-us" else "");
+  fcitx5-nord = pkgs.stdenv.mkDerivation rec {
+    name = "fcitx5-nord";
+    version = "git";
+    src = inputs.fcitx5-nord;
+    unpackPhase = "mkdir $out";
+    installPhase = "cd ${src} && cp -r * $out";
+  };
+
 in {
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -13,8 +21,7 @@ in {
     ];
   };
 
-  home.file.".local/share/fcitx5/themes/".source =
-    inputs.my-flakes.packages."x86_64-linux".fcitx5-nord;
+  home.file.".local/share/fcitx5/themes/".source = fcitx5-nord;
 
   xdg.configFile = {
     "fcitx5/config" = {
