@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, machine, ... }: {
   imports = [
     ./git.nix
     ./fish.nix
@@ -41,7 +41,10 @@
   };
 
   services.gnome-keyring.enable = true;
-  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
+  home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then
+    "/run/user/125030/keyring/ssh"
+  else
+    "/run/user/1000/keyring/ssh";
 
   programs.htop.enable = true;
   programs.bottom.enable = true;
