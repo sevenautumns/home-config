@@ -13,6 +13,17 @@
       #  ];
       #  ports = [ "8000:8000" "9000:9000" ];
       #};
+      #ror2 = {
+      #  image = "avivace/ror2server:latest";
+      #  environment = {
+      #    R2_HEARTBEAT = "1";
+      #    R2_QUERY_PORT = "27000";
+      #    R2_HOSTNAME = "Autumnal";
+      #    R2_PSW = "secret";
+      #  };
+      #  ports = [ "27000:27000/udp" "27015:27015/udp" ];
+      #  extraOptions = [ "--cpus=2.0" ];
+      #};
     };
   };
 

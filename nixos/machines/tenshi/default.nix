@@ -2,6 +2,7 @@
   imports = [
     ./modules/docker.nix
     ./modules/lavalink.nix
+    ./modules/gobot.nix
     ./modules/nextcloud.nix
     ./modules/nginx.nix
     ./modules/runner.nix

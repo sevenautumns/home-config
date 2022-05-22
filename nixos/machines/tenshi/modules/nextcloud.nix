@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud23;
+    package = pkgs.nextcloud24;
     hostName = "cloud.autumnal.de";
     https = true;
     autoUpdateApps.enable = true;

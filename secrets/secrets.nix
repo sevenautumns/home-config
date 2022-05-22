@@ -15,6 +15,7 @@ let
 in {
   "nordvpn_private.age".publicKeys = [ tenshi index ] ++ users;
   "nextcloud_adminpass.age".publicKeys = [ tenshi ] ++ users;
+  "gobot.age".publicKeys = [ tenshi ] ++ users;
   "adguard.age".publicKeys = [ index ] ++ users;
   "transmission_auth.age".publicKeys = [ index ] ++ users;
   "transmission_exporter.age".publicKeys = [ index ] ++ users;

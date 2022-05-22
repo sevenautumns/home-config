@@ -16,6 +16,9 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     mach-nix.url = "github:DavHau/mach-nix";
 
+    gobot.url = "github:c0nvulsiv3/gobot";
+    gobot.flake = false;
+
     # Home manager used repos
     polybar-scripts.url = "github:polybar/polybar-scripts";
     polybar-scripts.flake = false;
@@ -105,6 +108,7 @@
         (homeManager.lib.homeManagerConfiguration {
           configuration = { pkgs, config, ... }: {
             imports = [ ./home.nix ];
+
             home.packages = [
               pkgs.deploy-rs.deploy-rs
               agenix.packages."${machine.arch}".agenix
