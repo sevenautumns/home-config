@@ -34,7 +34,7 @@
       prefixLength = 24;
     }];
     defaultGateway = "192.168.178.1";
-    nameservers = [ "127.0.0.1" "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
     enableIPv6 = false;
   };
 
@@ -68,10 +68,10 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      # Limit WeebWork upload to 24mbits with 8192kbit bursts. Drop packages with more than 800ms latency
+      # Limit WeebWork upload to 30mbits with 8192kbit bursts. Drop packages with more than 1000ms latency
       # https://netbeez.net/blog/how-to-use-the-linux-traffic-control/
       # Use replace instead of add. This way id works whether its been added already or not
-      "*/5 * * * *   root   tc qdisc replace dev ztbtovjx4h root tbf rate 24mbit burst 8192kbit latency 800ms"
+      "*/5 * * * *   root   tc qdisc replace dev ztbtovjx4h root tbf rate 30mbit burst 8192kbit latency 1000ms"
     ];
   };
 

@@ -100,6 +100,7 @@ in {
     "org/gnome/desktop/interface" = {
       clock-format = "12h";
       color-scheme = "prefer-dark";
+      cursor-theme = "Bibata-Original-Classic";
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-temperature = lib.hm.gvariant.mkUint32 3600;

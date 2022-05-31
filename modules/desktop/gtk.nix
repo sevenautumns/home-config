@@ -4,6 +4,15 @@ in {
   home.packages = with pkgs; [ bibata-cursors ];
 
   # TODO symlink .nix-profile/share/icons:themes folder to .local/share/icons:themes
+  home.file.".local/share/icons".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/icons";
+  home.file.".local/share/themes".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/themes";
+  home.file.".icons/icons".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/icons";
+  home.file.".themes".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/themes";
+  
   gtk = {
     enable = true;
     theme = {

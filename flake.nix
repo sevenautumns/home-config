@@ -2,7 +2,7 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     nixgl.url = "github:guibou/nixGL";
@@ -77,7 +77,8 @@
         };
         "index" = {
           user = "autumnal";
-          address = "10.4.0.0";
+          #address = "10.4.0.0";
+          address = "192.168.178.2";
           arch = "aarch64-linux";
           headless = true;
           nixos = true;
