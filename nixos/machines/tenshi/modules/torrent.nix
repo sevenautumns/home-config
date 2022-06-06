@@ -29,9 +29,9 @@
   };
 
   networking.wireguard.interfaces.wg0.peers = [{
-    publicKey = "3ZNjosvvIqfvu3/BqaLzNNXs9zWO4jXpcXNOmDMDpX0=";
+    publicKey = "SqAWBSVdnUJ859Bz2Nyt82rlSebMwPgvwQxIb1DzyF8=";
     allowedIPs = [ "0.0.0.0/0" ];
-    endpoint = "de805.nordvpn.com:51820";
+    endpoint = "ch298.nordvpn.com:51820";
     persistentKeepalive = 25;
   }];
 
