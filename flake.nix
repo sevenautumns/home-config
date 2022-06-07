@@ -5,12 +5,15 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    nixgl.url = "github:guibou/nixGL";
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     agenix.url = "github:ryantm/agenix";
     homeManager = {
       url = "github:nix-community/home-manager";
       #url = "github:Steav005/home-manager/feat/leftwm-module";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     leftwm.url = "github:leftwm/leftwm";
     deploy-rs.url = "github:serokell/deploy-rs";
