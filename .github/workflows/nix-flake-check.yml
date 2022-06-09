@@ -30,7 +30,7 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: |
             experimental-features = nix-command flakes
-            extra-platforms = aarch64-linux
+            extra-platforms = aarch64-linux i686-linux
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - uses: docker/setup-qemu-action@v1
         #if: ${{ matrix.target == 'autumnal@index' }}
@@ -74,7 +74,7 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: |
             experimental-features = nix-command flakes
-            extra-platforms = aarch64-linux
+            extra-platforms = aarch64-linux i686-linux
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - uses: docker/setup-qemu-action@v1
         #if: ${{ matrix.target == 'index' }}

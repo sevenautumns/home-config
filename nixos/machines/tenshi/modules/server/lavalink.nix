@@ -12,7 +12,7 @@
   };
 
   age.secrets.lavalink = {
-    file = ../../../../secrets/lavalink.age;
+    file = ../../../../../secrets/lavalink.age;
     path = "/var/lib/lavalink/application.yml";
     owner = "autumnal";
   };

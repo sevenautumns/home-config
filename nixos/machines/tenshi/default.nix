@@ -1,11 +1,12 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
     ./modules/docker.nix
-    ./modules/lavalink.nix
-    ./modules/gobot.nix
     ./modules/nextcloud.nix
     ./modules/nginx.nix
     ./modules/runner.nix
+    ./modules/server/lavalink.nix
+    ./modules/server/gobot.nix
+    ./modules/server/satisfactory.nix
     ./modules/syncplay.nix
     ./modules/torrent.nix
     ../../common.nix
@@ -26,6 +27,7 @@
 
   networking.useDHCP = false;
   networking.interfaces.ens3.useDHCP = true;
+  networking.enableIPv6 = false;
   boot.kernel.sysctl = {
     "net.ipv6.conf.all.disable_ipv6" = 1;
     "net.ipv4.ip_forward" = 1;

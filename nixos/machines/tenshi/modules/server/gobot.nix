@@ -29,7 +29,7 @@ in {
   };
 
   age.secrets.gobot = {
-    file = ../../../../secrets/gobot.age;
+    file = ../../../../../secrets/gobot.age;
     path = "/var/lib/gobot/config.json";
     owner = "gobot";
   };
