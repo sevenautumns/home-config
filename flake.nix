@@ -21,6 +21,9 @@
 
     gobot.url = "github:c0nvulsiv3/gobot";
     gobot.flake = false;
+    lavalink.url =
+      "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs/heads/dev";
+    lavalink.flake = false;
 
     # Home manager used repos
     polybar-scripts.url = "github:polybar/polybar-scripts";

@@ -1,17 +1,10 @@
-{ pkgs, ... }:
-let
-  lavalink = pkgs.fetchurl {
-    url =
-      "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs/heads/dev";
-    sha256 = "sha256-NDdDLifUUyWU8qY6xNKs49I6kJSZPajUD7RzN0EGA0E=";
-  };
-in {
+{ pkgs, inputs, ... }: {
   systemd.services.lavalink = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "lavalink";
-      ExecStart = "${pkgs.jre}/bin/java -jar ${lavalink}";
+      ExecStart = "${pkgs.jre}/bin/java -jar ${inputs.lavalink}";
       Restart = "always";
       RestartSec = 2;
       WorkingDirectory = "/var/lib/lavalink";

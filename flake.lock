@@ -226,6 +226,18 @@
         "type": "github"
       }
     },
+    "lavalink": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-iVlWQIodqE+M1vKVsx5Hha1AtgCWZHIC4n3aAdp/SQ0=",
+        "type": "file",
+        "url": "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs%2fheads%2fdev"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs%2fheads%2fdev"
+      }
+    },
     "leftwm": {
       "inputs": {
         "fenix": "fenix",
@@ -555,6 +567,7 @@
         "gobot": "gobot",
         "hama-bundle": "hama-bundle",
         "homeManager": "homeManager",
+        "lavalink": "lavalink",
         "leftwm": "leftwm",
         "mach-nix": "mach-nix",
         "myanimelist-bundle": "myanimelist-bundle",
