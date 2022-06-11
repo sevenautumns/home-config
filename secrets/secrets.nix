@@ -13,13 +13,12 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPyt1iJTNRkpRaSO+wZ8WX4XnAbiPHUc1+s5hNwOGiLr";
   systems = [ tenshi index ];
 in {
-  "nordvpn_private.age".publicKeys = [ tenshi index ] ++ users;
-  "nextcloud_adminpass.age".publicKeys = [ tenshi ] ++ users;
-  "gobot.age".publicKeys = [ tenshi ] ++ users;
   "adguard.age".publicKeys = [ index ] ++ users;
-  "transmission_auth.age".publicKeys = [ index ] ++ users;
-  "transmission_exporter.age".publicKeys = [ index ] ++ users;
-  "github_runner.age".publicKeys = [ tenshi ] ++ users;
+  "gobot.age".publicKeys = [ tenshi ] ++ users;
   "lavalink.age".publicKeys = [ tenshi ] ++ users;
+  "nextcloud_adminpass.age".publicKeys = [ tenshi ] ++ users;
+  "nordvpn_private.age".publicKeys = [ tenshi index ] ++ users;
+  "ror2.age".publicKeys = [ tenshi ] ++ users;
+  "transmission_auth.age".publicKeys = [ index ] ++ users;
   "wireguard-castle.age".publicKeys = [ castle ] ++ users;
 }

@@ -18,18 +18,18 @@ in {
   systemd.services.gobot = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
+    wants = [ "lavalink.service" ];
     serviceConfig = {
       User = "gobot";
-      ExecStart = "${gobot}/bin/gobot -config /var/lib/gobot/config.json";
+      ExecStart = "${gobot}/bin/gobot -config config.json";
       Restart = "always";
       RestartSec = 2;
-      # Creates /var/lib/gobot
-      StateDirectory = "gobot";
+      WorkingDirectory = "/var/lib/gobot";
     };
   };
 
   age.secrets.gobot = {
-    file = ../../../../../secrets/gobot.age;
+    file = ../../../../secrets/gobot.age;
     path = "/var/lib/gobot/config.json";
     owner = "gobot";
   };
@@ -38,7 +38,7 @@ in {
     uid = 1025;
     isNormalUser = true;
     shell = pkgs.fish;
-    home = "/home/gobot";
+    home = "/var/lib/gobot";
     description = "GoBot Service User";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@neesama"
@@ -46,4 +46,12 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrXLTP6n3DEhDwMX/69MMenKeuEsA/k0WkmAE3DvOaN hendrikbertram@protonmail.com"
     ];
   };
+
+  security.sudo.extraRules = [{
+    users = [ "gobot" ];
+    commands = [{
+      command = "${pkgs.systemd}/bin/systemctl restart gobot";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
 }

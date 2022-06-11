@@ -5,9 +5,12 @@
     after = [ "network.target" ];
 
     serviceConfig = {
-      TimeoutSec = "15min";
-      ExecStart =
-        "${pkgs.steam-run}/bin/steam-run /var/lib/satisfactory/FactoryServer.sh -multihome=192.145.45.214";
+      TimeoutSec = "1min";
+      ExecStart = ''
+        ${pkgs.steam-run}/bin/steam-run \
+          /var/lib/satisfactory/FactoryServer.sh \
+            -multihome=192.145.45.214
+      '';
       Restart = "on-failure";
       User = "satisfactory";
       Group = "users";
@@ -23,7 +26,7 @@
     description = "Satisfactory server service user";
     home = "/var/lib/satisfactory";
     createHome = true;
-    homeMode = "770";
+    homeMode = "750";
     isSystemUser = true;
     group = "users";
   };
