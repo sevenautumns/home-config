@@ -12,12 +12,9 @@
     agenix.url = "github:ryantm/agenix";
     homeManager = {
       url = "github:nix-community/home-manager";
-      #url = "github:Steav005/home-manager/feat/leftwm-module";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    leftwm.url = "github:leftwm/leftwm";
     deploy-rs.url = "github:serokell/deploy-rs";
-    mach-nix.url = "github:DavHau/mach-nix";
 
     gobot.url = "github:c0nvulsiv3/gobot";
     gobot.flake = false;
@@ -26,13 +23,6 @@
     lavalink.flake = false;
 
     # Home manager used repos
-    polybar-scripts.url = "github:polybar/polybar-scripts";
-    polybar-scripts.flake = false;
-    polybar-pulseaudio-control.url =
-      "github:marioortizmanero/polybar-pulseaudio-control";
-    polybar-pulseaudio-control.flake = false;
-    rofi-themes.url = "github:adi1090x/rofi";
-    rofi-themes.flake = false;
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
     fcitx5-nord.url = "github:tonyfettes/fcitx5-nord";
@@ -40,9 +30,6 @@
     #rdf.url = "github:mfs/rust-df";
     #rdf.flake = false;
     #naersk.url = "github:nix-community/naersk";
-
-    pop-launcher.url = "github:pop-os/launcher";
-    pop-launcher.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";

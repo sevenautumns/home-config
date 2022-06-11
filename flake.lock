@@ -86,28 +86,6 @@
         "type": "github"
       }
     },
-    "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "leftwm",
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
-      "locked": {
-        "lastModified": 1640644357,
-        "narHash": "sha256-P3DOh+9f0kqfZVqRCrVAHyyx/vYgLN8GaoHdbRv/BcM=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "ac55b49c49b53a60e8eb5761687fa741c7c80265",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -137,36 +115,6 @@
       "original": {
         "owner": "edolstra",
         "repo": "flake-compat",
-        "type": "github"
-      }
-    },
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1638122382,
-        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
-      "locked": {
-        "lastModified": 1642700792,
-        "narHash": "sha256-XqHrk7hFb+zBvRg6Ghl+AZDq03ov6OshJLiSWOoX5es=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "846b2ae0fc4cc943637d3d1def4454213e203cba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -238,47 +186,6 @@
         "url": "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs%2fheads%2fdev"
       }
     },
-    "leftwm": {
-      "inputs": {
-        "fenix": "fenix",
-        "flake-utils": "flake-utils",
-        "naersk": "naersk",
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1652785024,
-        "narHash": "sha256-eZ0eNQ3mMsjP+oGUNXeHnYLX8BAQy/Yf3eS41lGUVFk=",
-        "owner": "leftwm",
-        "repo": "leftwm",
-        "rev": "4f765b4ba148c94b9ff6942ed12818b51b516589",
-        "type": "github"
-      },
-      "original": {
-        "owner": "leftwm",
-        "repo": "leftwm",
-        "type": "github"
-      }
-    },
-    "mach-nix": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_4",
-        "pypi-deps-db": "pypi-deps-db"
-      },
-      "locked": {
-        "lastModified": 1654084003,
-        "narHash": "sha256-j/XrVVistvM+Ua+0tNFvO5z83isL+LBgmBi9XppxuKA=",
-        "owner": "DavHau",
-        "repo": "mach-nix",
-        "rev": "7e14360bde07dcae32e5e24f366c83272f52923f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DavHau",
-        "repo": "mach-nix",
-        "type": "github"
-      }
-    },
     "myanimelist-bundle": {
       "flake": false,
       "locked": {
@@ -292,27 +199,6 @@
       "original": {
         "owner": "Fribb",
         "repo": "MyAnimeList.bundle",
-        "type": "github"
-      }
-    },
-    "naersk": {
-      "inputs": {
-        "nixpkgs": [
-          "leftwm",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1639947939,
-        "narHash": "sha256-pGsM8haJadVP80GFq4xhnSpNitYNQpaXk4cnA796Cso=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "2fc8ce9d3c025d59fee349c1f80be9785049d653",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "naersk",
         "type": "github"
       }
     },
@@ -400,36 +286,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1640540585,
-        "narHash": "sha256-cCmknKFjWgam9jq+58wSd0Z4REia8mjBP65kXcL3ki8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ac169ec6371f0d835542db654a65e0f2feb07838",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1643805626,
-        "narHash": "sha256-AXLDVMG+UaAGsGSpOtQHPIKB+IZ0KSd9WS77aanGzgc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "554d2d8aa25b6e583575459c297ec23750adb6cb",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
-      }
-    },
     "nmd": {
       "flake": false,
       "locked": {
@@ -477,86 +333,6 @@
         "type": "github"
       }
     },
-    "polybar-pulseaudio-control": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1640652910,
-        "narHash": "sha256-wPOQkXXsRF6VWiEcnzyeoC9/u8xe+grsZtx/OuZx+8w=",
-        "owner": "marioortizmanero",
-        "repo": "polybar-pulseaudio-control",
-        "rev": "dabdb49dc4455e7ec198d0ea3015722e7d66cea9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "marioortizmanero",
-        "repo": "polybar-pulseaudio-control",
-        "type": "github"
-      }
-    },
-    "polybar-scripts": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1652615951,
-        "narHash": "sha256-5MuY58dSVDRNQEFaytsL6Ct2LF+jDTgF5Ko/xEcqQqo=",
-        "owner": "polybar",
-        "repo": "polybar-scripts",
-        "rev": "150e46840236a91725fed6cbe61192a9a582ba97",
-        "type": "github"
-      },
-      "original": {
-        "owner": "polybar",
-        "repo": "polybar-scripts",
-        "type": "github"
-      }
-    },
-    "pop-launcher": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653576846,
-        "narHash": "sha256-U7Is+wHkZDdo1KRGXle2mXpeeJSdt8UYv93tn0Uw6Q0=",
-        "owner": "pop-os",
-        "repo": "launcher",
-        "rev": "3f8253ad76bb6e7ca2032b0f2a3b8772da634140",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pop-os",
-        "repo": "launcher",
-        "type": "github"
-      }
-    },
-    "pypi-deps-db": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1643877077,
-        "narHash": "sha256-jv8pIvRFTP919GybOxXE5TfOkrjTbdo9QiCO1TD3ZaY=",
-        "owner": "DavHau",
-        "repo": "pypi-deps-db",
-        "rev": "da53397f0b782b0b18deb72ef8e0fb5aa7c98aa3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DavHau",
-        "repo": "pypi-deps-db",
-        "type": "github"
-      }
-    },
-    "rofi-themes": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653743125,
-        "narHash": "sha256-t07DbkZeAq8bMDZnD9SN5IOy76WPvDirKAiQ/IrIe8w=",
-        "owner": "adi1090x",
-        "repo": "rofi",
-        "rev": "7af63b1ffd6f83137f4ea1095aab45d9c85dd7d1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "adi1090x",
-        "repo": "rofi",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "absolut-series-scanner": "absolut-series-scanner",
@@ -568,35 +344,12 @@
         "hama-bundle": "hama-bundle",
         "homeManager": "homeManager",
         "lavalink": "lavalink",
-        "leftwm": "leftwm",
-        "mach-nix": "mach-nix",
         "myanimelist-bundle": "myanimelist-bundle",
         "nixgl": "nixgl",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "polybar-pulseaudio-control": "polybar-pulseaudio-control",
-        "polybar-scripts": "polybar-scripts",
-        "pop-launcher": "pop-launcher",
-        "rofi-themes": "rofi-themes",
         "services-bundle": "services-bundle"
-      }
-    },
-    "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1640459636,
-        "narHash": "sha256-lvHBAWuCd+7cYq6AwThqD6uMRqsKoGJFPKUqeyn3UEU=",
-        "owner": "rust-analyzer",
-        "repo": "rust-analyzer",
-        "rev": "c456b217d808058d2515dd909bc4f68206de340e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-analyzer",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
       }
     },
     "services-bundle": {
