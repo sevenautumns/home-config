@@ -1,7 +1,8 @@
 { pkgs, inputs, ... }: let
   lavalink = pkgs.fetchurl {
-    url = "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/9388:id/Lavalink.jar";
-    sha256 = "11nq06d131y4wmf3drm0yk502d2xc6n5qy82cg88rb9nqd2lj41k";
+    url = "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs/heads/dev";
+    #url = "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/9388:id/Lavalink.jar";
+    sha256 = "sha256-NDdDLifUUyWU8qY6xNKs49I6kJSZPajUD7RzN0EGA0E=";
   };
 in {
   systemd.services.lavalink = {

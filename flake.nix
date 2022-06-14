@@ -24,9 +24,6 @@
     cmus-notify.flake = false;
     fcitx5-nord.url = "github:tonyfettes/fcitx5-nord";
     fcitx5-nord.flake = false;
-    #rdf.url = "github:mfs/rust-df";
-    #rdf.flake = false;
-    #naersk.url = "github:nix-community/naersk";
 
     pop-shell.url = "github:pop-os/shell/master_jammy";
     pop-shell.flake = false;

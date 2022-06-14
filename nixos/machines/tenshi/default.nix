@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
     ./modules/gobot.nix
+    ./modules/jaeger.nix
     ./modules/lavalink.nix
     ./modules/nextcloud.nix
     ./modules/nginx.nix
