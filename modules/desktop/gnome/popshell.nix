@@ -1,5 +1,11 @@
-{ pkgs, config, inputs, lib, ... }: {
-  home.packages = with pkgs; [ gnomeExtensions.pop-shell ];
+{ pkgs, config, inputs, lib, ... }:
+let
+  pop-shell = (pkgs.gnomeExtensions.pop-shell.overrideAttrs (old: {
+    src = inputs.pop-shell;
+    version = "unstable-master_jammy";
+  }));
+in {
+  home.packages = with pkgs; [ pop-shell ];
 
   xdg.configFile."pop-shell/config.json".text = builtins.toJSON {
     skiptaskbarhidden = [ ];

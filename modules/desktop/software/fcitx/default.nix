@@ -8,6 +8,7 @@ let
     src = inputs.fcitx5-nord;
     unpackPhase = "mkdir $out";
     installPhase = "cd ${src} && cp -r * $out";
+    # https://github.com/escape0707/fcitx5-adwaita-dark
   };
 
 in {

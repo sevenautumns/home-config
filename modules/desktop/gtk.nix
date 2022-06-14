@@ -16,13 +16,14 @@ in {
   gtk = {
     enable = true;
     theme = {
-      name = "Nordic";
-      package = pkgs.nordic;
+      name = "Adwaita-dark";
+      #package = pkgs.nordic;
     };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+    # Font in org gnome desktop interface
     font = {
       name = "Roboto";
       size = 11;
@@ -52,8 +53,8 @@ in {
     enable = true;
     # Use same theme as GTK applications
     platformTheme = "gtk";
-    style.package = pkgs.nordic;
-    style.name = "Nordic";
+    style.package = pkgs.adwaita-qt;
+    style.name = "adwaita-dark";
   };
 
   home.pointerCursor = {

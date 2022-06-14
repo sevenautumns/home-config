@@ -161,29 +161,17 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1654628474,
-        "narHash": "sha256-Llm9X8Af15uC9IMStxqjCfO15WgYTqTnsQq8wMcpp5Q=",
+        "lastModified": 1655199284,
+        "narHash": "sha256-R/g2ZWplGWVOfm2TyB4kR+YcOE/uWkgjkYrl/RYgJ/U=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "70824bb5c790b820b189f62f643f795b1d2ade2e",
+        "rev": "87d30c164849a7471d99749aa4d2d28b81564f69",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "lavalink": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-iVlWQIodqE+M1vKVsx5Hha1AtgCWZHIC4n3aAdp/SQ0=",
-        "type": "file",
-        "url": "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs%2fheads%2fdev"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs%2fheads%2fdev"
       }
     },
     "myanimelist-bundle": {
@@ -240,11 +228,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1654847188,
-        "narHash": "sha256-MC+eP7XOGE1LAswOPqdcGoUqY9mEQ3ZaaxamVTbc0hM=",
+        "lastModified": 1655200170,
+        "narHash": "sha256-/yzkX+10sJhYNIcTtZ5ObS+nh/HrJp01XLaubzbRDcU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8b66e3f2ebcc644b78cec9d6f152192f4e7d322f",
+        "rev": "9ff91ce2e4c5d70551d4c8fd8830931c6c6b26b8",
         "type": "github"
       },
       "original": {
@@ -256,11 +244,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1654682581,
-        "narHash": "sha256-Jb1PQCwKgwdNAp907eR5zPzuxV+kRroA3UIxUxCMJ9s=",
+        "lastModified": 1655130522,
+        "narHash": "sha256-5dzlxE4okyu+M39yeVtHWQXzDZQxFF5rUB1iY9R6Lb4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e0169d7a9d324afebf5679551407756c77af8930",
+        "rev": "13f08d71ceff5101321e0291854495a1ec153a5e",
         "type": "github"
       },
       "original": {
@@ -320,16 +308,49 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1654842944,
-        "narHash": "sha256-vt/RS6W32xx96rmwm15tzSx9Xd0wg5p8qherY7H3+wo=",
+        "lastModified": 1655199919,
+        "narHash": "sha256-DOwpi0H4SVMKJ+QX/REgNESw6EHVoiQYjdHWyZLOuQs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f378bcebe4455277d6deb118f11aaaad69db9e9a",
+        "rev": "c92906e4e6425ffe1be7d1a52018c1b8d5b40ca6",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "pop-launcher": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1653576846,
+        "narHash": "sha256-U7Is+wHkZDdo1KRGXle2mXpeeJSdt8UYv93tn0Uw6Q0=",
+        "owner": "pop-os",
+        "repo": "launcher",
+        "rev": "3f8253ad76bb6e7ca2032b0f2a3b8772da634140",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pop-os",
+        "repo": "launcher",
+        "type": "github"
+      }
+    },
+    "pop-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1654875799,
+        "narHash": "sha256-PUreQ+eNqZfAWb100M9psG5Wo9b7CRx2uO7XEGma6kE=",
+        "owner": "pop-os",
+        "repo": "shell",
+        "rev": "811201b37a6dafa51539f26cf7da029d4ccdbafb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pop-os",
+        "ref": "master_jammy",
+        "repo": "shell",
         "type": "github"
       }
     },
@@ -343,12 +364,13 @@
         "gobot": "gobot",
         "hama-bundle": "hama-bundle",
         "homeManager": "homeManager",
-        "lavalink": "lavalink",
         "myanimelist-bundle": "myanimelist-bundle",
         "nixgl": "nixgl",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
+        "pop-launcher": "pop-launcher",
+        "pop-shell": "pop-shell",
         "services-bundle": "services-bundle"
       }
     },

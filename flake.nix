@@ -18,9 +18,6 @@
 
     gobot.url = "github:c0nvulsiv3/gobot";
     gobot.flake = false;
-    lavalink.url =
-      "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs/heads/dev";
-    lavalink.flake = false;
 
     # Home manager used repos
     cmus-notify.url = "github:dcx86r/cmus-notify";
@@ -30,6 +27,11 @@
     #rdf.url = "github:mfs/rust-df";
     #rdf.flake = false;
     #naersk.url = "github:nix-community/naersk";
+
+    pop-shell.url = "github:pop-os/shell/master_jammy";
+    pop-shell.flake = false;
+    pop-launcher.url = "github:pop-os/launcher";
+    pop-launcher.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";
