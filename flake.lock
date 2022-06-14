@@ -70,19 +70,19 @@
         "type": "github"
       }
     },
-    "fcitx5-nord": {
+    "fcitx5-adwaita": {
       "flake": false,
       "locked": {
-        "lastModified": 1627385945,
-        "narHash": "sha256-qVo/0ivZ5gfUP17G29CAW0MrRFUO0KN1ADl1I/rvchE=",
-        "owner": "tonyfettes",
-        "repo": "fcitx5-nord",
-        "rev": "bdaa8fb723b8d0b22f237c9a60195c5f9c9d74d1",
+        "lastModified": 1630136072,
+        "narHash": "sha256-A71xTbAvX9iae4T8TvflJuv7NV+lXZr3nb7L6f2/IZs=",
+        "owner": "escape0707",
+        "repo": "fcitx5-adwaita-dark",
+        "rev": "1d45848312368595f3eeb9c246f203ca7032cbdd",
         "type": "github"
       },
       "original": {
-        "owner": "tonyfettes",
-        "repo": "fcitx5-nord",
+        "owner": "escape0707",
+        "repo": "fcitx5-adwaita-dark",
         "type": "github"
       }
     },
@@ -321,22 +321,6 @@
         "type": "github"
       }
     },
-    "pop-launcher": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653576846,
-        "narHash": "sha256-U7Is+wHkZDdo1KRGXle2mXpeeJSdt8UYv93tn0Uw6Q0=",
-        "owner": "pop-os",
-        "repo": "launcher",
-        "rev": "3f8253ad76bb6e7ca2032b0f2a3b8772da634140",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pop-os",
-        "repo": "launcher",
-        "type": "github"
-      }
-    },
     "pop-shell": {
       "flake": false,
       "locked": {
@@ -360,7 +344,7 @@
         "agenix": "agenix",
         "cmus-notify": "cmus-notify",
         "deploy-rs": "deploy-rs",
-        "fcitx5-nord": "fcitx5-nord",
+        "fcitx5-adwaita": "fcitx5-adwaita",
         "gobot": "gobot",
         "hama-bundle": "hama-bundle",
         "homeManager": "homeManager",
@@ -369,7 +353,6 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "pop-launcher": "pop-launcher",
         "pop-shell": "pop-shell",
         "services-bundle": "services-bundle"
       }

@@ -21,7 +21,7 @@
   programs.git.delta = {
     enable = true;
     options = {
-      syntax-theme = "Nord";
+      syntax-theme = "base16";
       navigate = true;
       line-numbers = true;
       diff-so-fancy = true;

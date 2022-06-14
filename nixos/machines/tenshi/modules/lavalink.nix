@@ -1,7 +1,7 @@
-{ pkgs, inputs, ... }: let
+{ pkgs, inputs, ... }:
+let
   lavalink = pkgs.fetchurl {
     url = "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs/heads/dev";
-    #url = "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/9388:id/Lavalink.jar";
     sha256 = "sha256-NDdDLifUUyWU8qY6xNKs49I6kJSZPajUD7RzN0EGA0E=";
   };
 in {

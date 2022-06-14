@@ -22,13 +22,11 @@
     # Home manager used repos
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;
-    fcitx5-nord.url = "github:tonyfettes/fcitx5-nord";
-    fcitx5-nord.flake = false;
+    fcitx5-adwaita.url = "github:escape0707/fcitx5-adwaita-dark";
+    fcitx5-adwaita.flake = false;
 
     pop-shell.url = "github:pop-os/shell/master_jammy";
     pop-shell.flake = false;
-    pop-launcher.url = "github:pop-os/launcher";
-    pop-launcher.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";

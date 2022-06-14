@@ -6,9 +6,11 @@ let
   sw = pkgs.writeShellScriptBin "sw" ''
     home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"
   '';
+  hinted = {
+
+  };
 in {
-  imports = [ modules/shell options/default.nix ]
-    ++ lib.optionals (!headless) [ modules/desktop ];
+  imports = [ modules/shell ] ++ lib.optionals (!headless) [ modules/desktop ];
 
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;

@@ -100,6 +100,9 @@ in {
     "org/gnome/desktop/interface" = {
       clock-format = "12h";
       color-scheme = "prefer-dark";
+      font-name = "Roboto 11";
+      document-font-name = "Roboto 11";
+      monospace-font-name = "Dina 10";
       cursor-theme = "Bibata-Original-Classic";
     };
     "org/gnome/settings-daemon/plugins/color" = {
@@ -108,7 +111,10 @@ in {
       night-light-schedule-automatic = true;
     };
     "org/gnome/mutter".overlay-key = "Super_R";
-    "org/gnome/desktop/wm/preferences".focus-mode = "click";
+    "org/gnome/desktop/wm/preferences" = {
+      focus-mode = "click";
+      titlebar-font = "Roboto Bold 11";
+    };
     "org/gnome/desktop/input-sources" = let
       layout = config.home.keyboard.layout;
       variant = config.home.keyboard.variant;

@@ -2,13 +2,13 @@
 let
   default-keyboard = config.home.keyboard.layout
     + (if config.home.keyboard.variant == "us" then "-us" else "");
-  fcitx5-nord = pkgs.stdenv.mkDerivation rec {
-    name = "fcitx5-nord";
+  fcitx5-adwaita = pkgs.stdenv.mkDerivation rec {
+    name = "fcitx5-adwaita";
     version = "git";
-    src = inputs.fcitx5-nord;
-    unpackPhase = "mkdir $out";
-    installPhase = "cd ${src} && cp -r * $out";
-    # https://github.com/escape0707/fcitx5-adwaita-dark
+    src = inputs.fcitx5-adwaita;
+    unpackPhase = "mkdir -p $out/Adwaita-dark";
+    installPhase = "cd ${src} && cp -r * $out/Adwaita-dark";
+    # 
   };
 
 in {
@@ -22,7 +22,7 @@ in {
     ];
   };
 
-  home.file.".local/share/fcitx5/themes/".source = fcitx5-nord;
+  home.file.".local/share/fcitx5/themes/".source = fcitx5-adwaita;
 
   xdg.configFile = {
     "fcitx5/config" = {
@@ -49,7 +49,7 @@ in {
         # Use input method langauge to display text
         UseInputMethodLangaugeToDisplayText=True
         # Theme
-        Theme=Nord-Dark
+        Theme=Adwaita-dark
       '';
     };
     "fcitx5/profile" = {

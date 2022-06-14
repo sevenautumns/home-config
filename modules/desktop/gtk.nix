@@ -15,15 +15,12 @@ in {
 
   gtk = {
     enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      #package = pkgs.nordic;
-    };
+    theme = { name = "Adwaita-dark"; };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-    # Font in org gnome desktop interface
+    # TODO Font in org gnome desktop interface
     font = {
       name = "Roboto";
       size = 11;
