@@ -19,6 +19,8 @@
     gobot.url = "github:c0nvulsiv3/gobot";
     gobot.flake = false;
 
+    knock.url = "github:BentonEdmondson/knock";
+
     # Home manager used repos
     cmus-notify.url = "github:dcx86r/cmus-notify";
     cmus-notify.flake = false;

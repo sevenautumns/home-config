@@ -83,6 +83,7 @@ in {
       switch-to-workspace-up = [ ];
       switch-to-workspace-last = [ ];
     };
+    "org.gnome.desktop.sound".theme-name = "Yaru";
     "org/gnome/desktop/screensaver" = {
       lock-delay = lib.hm.gvariant.mkUint32 30;
       lock-enabled = true;

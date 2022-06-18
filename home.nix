@@ -29,6 +29,7 @@ in {
 
   targets.genericLinux.enable = !machine.nixos;
   home.sessionVariables.PATH = if !machine.nixos then
+
   ## Reorder PATH for non-Nix system
   ## - Nix packages work flawlessly with unfavorable PATH-Order
   ## - Arch packages don't

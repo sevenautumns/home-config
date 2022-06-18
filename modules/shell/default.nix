@@ -49,6 +49,7 @@
   programs.htop.enable = true;
   programs.bottom.enable = true;
   programs.bat.enable = true;
+  home.sessionVariables.BAT_THEME = "base16";
   programs.nix-index = {
     enable = true;
     enableFishIntegration = true;

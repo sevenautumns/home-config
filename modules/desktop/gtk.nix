@@ -1,7 +1,20 @@
 { pkgs, lib, config, machine, ... }:
-let host = machine.host;
+let
+  host = machine.host;
+  user = machine.user;
+  yaru-papirus = pkgs.stdenv.mkDerivation {
+    name = "yaru-papirus";
+    src = pkgs.yaru-theme;
+    buildPhase = ''
+      sed -i 's/Humanity\,/Papirus-Dark\,Papirus\,/g' $(find -type f share/**/index.theme)
+    '';
+    installPhase = ''
+      mkdir -p $out
+      cp -r share $out/
+    '';
+  };
 in {
-  home.packages = with pkgs; [ bibata-cursors ];
+  home.packages = with pkgs; [ bibata-cursors papirus-icon-theme ];
 
   # TODO symlink .nix-profile/share/icons:themes folder to .local/share/icons:themes
   #home.file.".local/share/icons".source =
@@ -15,21 +28,27 @@ in {
 
   gtk = {
     enable = true;
-    theme = { name = "Adwaita-dark"; };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+    theme = {
+      #name = "Adwaita-dark"; 
+      name = "Yaru-blue-dark";
+      package = yaru-papirus;
     };
-    # TODO Font in org gnome desktop interface
+    iconTheme = {
+      #name = "Papirus-Dark";
+      #package = pkgs.papirus-icon-theme;
+      name = "Yaru-blue-dark";
+      package = yaru-papirus;
+    };
     font = {
       name = "Roboto";
       size = 11;
       package = pkgs.roboto;
     };
     gtk3 = {
-      bookmarks =
-        [ "ssh://autumnal@clz.autumnal.de/media/torrent_storage Index (SSH)" ]
-        ++ lib.optionals (host == "neesama")
+      bookmarks = [
+        #"ssh://autumnal@clz.autumnal.de/media/torrent_storage Index (SSH)"
+        "file:///home/${user}/GitRepos GitRepos"
+      ] ++ lib.optionals (host == "neesama")
         [ "file:///net/index Index (NFS)" ];
       extraConfig = {
         gtk-application-prefer-dark-theme = 1;

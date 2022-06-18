@@ -10,7 +10,7 @@ in {
     ./alacritty.nix
     ./firefox.nix
     ./kitty.nix
-    ./fcitx
+    ./fcitx.nix
     #./redshift.nix
     ./rust.nix
   ];
@@ -46,6 +46,7 @@ in {
       gnome.nautilus
       feh
       syncplay
+      inputs.knock.packages.x86_64-linux.knock
 
       #learning
       anki
@@ -64,19 +65,6 @@ in {
 
   services.syncthing.enable = true;
   #services.syncthing.tray.enable = true;
-
-  xdg.desktopEntries = {
-    screenshot = {
-      name = "Screenshot";
-      genericName = "Gnome Screenshot Tool";
-      # Manually create desktop entry which calls this with --interactive
-      exec =
-        "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot --interactive";
-      terminal = false;
-      categories = [ "Application" "Graphics" ];
-      icon = "org.gnome.Screenshot";
-    };
-  };
 
   # Fix Nautilus gvfs
   home.sessionVariables = {

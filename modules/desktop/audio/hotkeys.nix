@@ -1,7 +1,4 @@
 { pkgs, config, ... }: {
-
-  xdg.configFile."audio/empris.py".source = ./empris.py;
-
   services.sxhkd.keybindings = {
     "{XF86AudioRaiseVolume,XF86AudioLowerVolume}" = ''
       ${pkgs.pamixer}/bin/pamixer -{i,d} 5 && \
@@ -19,10 +16,6 @@
     '';
     "XF86AudioMicMute" =
       "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-
-    # Audio Controll
-    "{XF86AudioPlay,XF86AudioPause,XF86AudioNext,XF86AudioPrev}" =
-      "${pkgs.python3}/bin/python3 ~/.config/audio/empris.py {playpause,playpause,next,prev}";
 
     # Brightnessctl
     "{XF86MonBrightnessUp,XF86MonBrightnessDown}" = ''

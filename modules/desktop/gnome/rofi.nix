@@ -1,8 +1,6 @@
 { pkgs, config, lib, inputs, ... }:
 let theme = config.theme;
 in {
-  # TODO Terminal?
-
   services.sxhkd.keybindings = {
     "super + d" = "rofi -no-lazy-grab -show drun -modi drun";
     "super + t" = "rofi -show window -modi window";
