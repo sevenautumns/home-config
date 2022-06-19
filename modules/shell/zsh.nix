@@ -32,9 +32,6 @@
     #  # Hooks.
     #  ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
     #'';
-    #shellInit = ''
-    #  set -x BAT_THEME Nord
-    #'';
     shellAliases = {
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
       fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";

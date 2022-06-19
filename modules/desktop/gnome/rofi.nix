@@ -13,7 +13,7 @@ in {
     font = "Noto Sans Regular 11";
     plugins = [ pkgs.rofi-calc ];
     extraConfig = {
-      icon-theme = config.gtk.iconTheme.name;
+      icon-theme = "Yaru";
       display-ssh = "";
       display-run = "";
       display-drun = "";
