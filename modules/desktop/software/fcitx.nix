@@ -107,18 +107,18 @@ in {
       text = lib.generators.toINI { } {
         "Group/0" = {
           Name = "Default";
-          "Default Layout" = "de";
+          "Default Layout" = default-keyboard;
           DefaultIM = "mozc";
         };
         "Group/0/Items/0" = {
-          Name = "keyboard-de";
+          Name = "keyboard-${default-keyboard}";
           Layout = "";
         };
         "Groups/0/Items/1" = {
           Name = "mozc";
           Layout = "";
         };
-        "GroupOrder" = { "0" = "Default"; };
+        GroupOrder."0" = "Default";
       };
     };
   };

@@ -14,6 +14,7 @@
           ${pkgs.wineWowPackages.stable}/bin/wine \
           ./"Risk of Rain 2.exe"
       '';
+      ExecStop = ''pkill -f "Risk of Rain 2.exe"'';
       Restart = "on-failure";
       User = "ror2";
       Group = "users";

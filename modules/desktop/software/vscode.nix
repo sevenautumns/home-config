@@ -7,6 +7,7 @@
       brettm12345.nixfmt-vscode
       streetsidesoftware.code-spell-checker
       matklad.rust-analyzer
+      vadimcn.vscode-lldb
       #arrterian.nix-env-selector
       #github.copilot
     ];
@@ -14,6 +15,7 @@
       "rust-analyzer.checkOnSave.command" = "clippy";
       "editor.formatOnSave" = false;
       "editor.tabSize" = 2;
+      "debug.allowBreakpointsEverywhere" = true;
     };
   };
 }
