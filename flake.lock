@@ -280,6 +280,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-pop-launcher": {
+      "locked": {
+        "lastModified": 1654380480,
+        "narHash": "sha256-m9zAaiqDEoZnxEYfcsJJwvdP5FGpN+b6fOgADWXi+N0=",
+        "owner": "samhug",
+        "repo": "nixpkgs",
+        "rev": "4c7afbe511d57bae821315819365d01dea0dd344",
+        "type": "github"
+      },
+      "original": {
+        "owner": "samhug",
+        "ref": "pop-launcher",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1655456688,
@@ -391,6 +407,22 @@
         "type": "github"
       }
     },
+    "pop-launcher": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1653576846,
+        "narHash": "sha256-U7Is+wHkZDdo1KRGXle2mXpeeJSdt8UYv93tn0Uw6Q0=",
+        "owner": "pop-os",
+        "repo": "launcher",
+        "rev": "3f8253ad76bb6e7ca2032b0f2a3b8772da634140",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pop-os",
+        "repo": "launcher",
+        "type": "github"
+      }
+    },
     "pop-shell": {
       "flake": false,
       "locked": {
@@ -438,9 +470,11 @@
         "knock": "knock",
         "myanimelist-bundle": "myanimelist-bundle",
         "nixgl": "nixgl",
+        "nixpkgs-pop-launcher": "nixpkgs-pop-launcher",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
+        "pop-launcher": "pop-launcher",
         "pop-shell": "pop-shell",
         "services-bundle": "services-bundle"
       }

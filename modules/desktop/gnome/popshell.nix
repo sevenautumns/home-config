@@ -4,8 +4,54 @@ let
     src = inputs.pop-shell;
     version = "unstable-master_jammy";
   }));
+  pop-launcher = (pkgs.pop-launcher.pop-launcher.overrideAttrs (old: {
+    src = inputs.pop-launcher;
+    version = "unstable-master";
+    cargoSha256 = null;
+    cargoDeps = pkgs.rustPlatform.importCargoLock {
+      lockFile = "${inputs.pop-launcher}/Cargo.lock";
+    };
+  }));
 in {
-  home.packages = with pkgs; [ pop-shell ];
+  home.packages = with pkgs; [ pop-shell pop-launcher ];
+
+  home.file.".local/share/pop-launcher/plugins/web/config.ron".text = ''
+    (
+        rules: [
+            (
+                matches: ["arch"],
+                queries: [(name: "Arch Wiki", query: "wiki.archlinux.org/index.php/" )]
+            ),
+            (
+                matches: ["crates"],
+                queries: [
+                    (name: "Crates.io", query: "crates.io/search?q="),
+                    (name: "Lib.rs", query: "lib.rs/search?q="),
+                ]
+            ),
+            (
+                matches: ["ddg", "duckduckgo"],
+                queries: [(name: "DuckDuckGo", query: "duckduckgo.com/?q=")]
+            ),
+            (
+                matches: ["gh", "github"],
+                queries: [(name: "GitHub", query: "github.com/search?q=")]
+            ),
+            (
+                matches: ["np", "nixpkgs"],
+                queries: [(name: "Nix Packages", query: "search.nixos.org/packages?channel=unstable&query=test")]
+            ),
+            (
+                matches: ["gs", "google"],
+                queries: [(name: "Search", query: "google.com/search?q=")]
+            ),
+            (
+                matches: ["yt", "youtube"],
+                queries: [(name: "YouTube", query: "youtube.com/results?search_query=")]
+            ),
+        ]
+    )
+  '';
 
   xdg.configFile."pop-shell/config.json".text = builtins.toJSON {
     skiptaskbarhidden = [ ];

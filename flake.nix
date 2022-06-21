@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-pop-launcher.url = "github:samhug/nixpkgs/pop-launcher";
     nur.url = "github:nix-community/NUR";
     nixgl = {
       url = "github:guibou/nixGL";
@@ -29,6 +30,8 @@
 
     pop-shell.url = "github:pop-os/shell/master_jammy";
     pop-shell.flake = false;
+    pop-launcher.url = "github:pop-os/launcher";
+    pop-launcher.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";
@@ -122,7 +125,11 @@
                     system = machine.arch;
                     config.allowUnfree = true;
                   };
-                in { inherit unstable stable; })
+                  pop-launcher = import "${inputs.nixpkgs-pop-launcher}" {
+                    system = machine.arch;
+                    config.allowUnfree = true;
+                  };
+                in { inherit unstable stable pop-launcher; })
               nur.overlay
             ];
           };
