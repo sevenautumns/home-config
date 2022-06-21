@@ -46,7 +46,6 @@ in {
       gnome.nautilus
       feh
       syncplay
-      inputs.knock.packages.x86_64-linux.knock
 
       #learning
       anki
@@ -56,7 +55,8 @@ in {
       element-desktop
       spotify
       brave
-    ];
+    ] ++ lib.optionals (host == "neesama")
+    [ inputs.knock.packages.x86_64-linux.knock ];
 
   services.network-manager-applet.enable = false;
   services.blueman-applet.enable = false;

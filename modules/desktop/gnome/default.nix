@@ -1,5 +1,11 @@
 { pkgs, config, inputs, lib, machine, ... }:
-let host = machine.host;
+let
+  host = machine.host;
+  disable-nmapplet = pkgs.runCommand "disable-nmapplet" { } ''
+    touch $out
+    cp ${pkgs.networkmanagerapplet}/etc/xdg/autostart/nm-applet.desktop $out
+    echo 'X-GNOME-Autostart-enabled=false' >> $out
+  '';
 in {
   imports = [ ./rofi.nix ./popshell.nix ];
 
@@ -10,6 +16,7 @@ in {
   '';
   xsession.windowManager.command = "gnome-session";
 
+  xdg.configFile."autostart/nm-applet.desktop".source = disable-nmapplet;
   home.packages = with pkgs;
     [
       gnomeExtensions.audio-output-switcher
