@@ -88,14 +88,9 @@ in {
           "Vertical Candidate List" = false;
           PerScreenDPI = true;
           WheelForPaging = true;
-          Font = ''
-            "Sarasa Mono J ${
-              builtins.toString config.programs.alacritty.settings.font.size
-            }"'';
-          MenuFont = ''
-            "Sarasa Mono J ${
-              builtins.toString config.programs.alacritty.settings.font.size
-            }"'';
+          Font = ''"Sarasa Mono J ${builtins.toString config.gtk.font.size}"'';
+          MenuFont =
+            ''"Sarasa Mono J ${builtins.toString config.gtk.font.size}"'';
           UseInputMethodLangaugeToDisplayText = true;
           Theme = "Adwaita-dark";
         };

@@ -22,6 +22,13 @@ in {
       "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
   };
 
+  nixpkgs.config.packageOverrides = super: {
+    syncplay = (pkgs.stable.syncplay.overrideAttrs (old: {
+      src = inputs.syncplay;
+      version = "unstable-master";
+    }));
+  };
+
   home.packages = with pkgs;
     [
       #office  
@@ -46,6 +53,7 @@ in {
       gnome.nautilus
       feh
       syncplay
+      gnome-feeds
 
       #learning
       anki

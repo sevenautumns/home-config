@@ -32,6 +32,8 @@
     pop-shell.flake = false;
     pop-launcher.url = "github:pop-os/launcher";
     pop-launcher.flake = false;
+    syncplay.url = "github:Syncplay/syncplay";
+    syncplay.flake = false;
 
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";

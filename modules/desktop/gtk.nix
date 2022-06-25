@@ -14,7 +14,7 @@ let
     '';
   };
 in {
-  home.packages = with pkgs; [ bibata-cursors papirus-icon-theme ];
+  home.packages = with pkgs; [ papirus-icon-theme pkgs.stable.bibata-cursors ];
 
   # TODO symlink .nix-profile/share/icons:themes folder to .local/share/icons:themes
   #home.file.".local/share/icons".source =
@@ -75,7 +75,7 @@ in {
 
   home.pointerCursor = {
     x11.enable = true;
-    package = pkgs.bibata-cursors;
+    package = pkgs.stable.bibata-cursors;
     name = "Bibata-Original-Classic";
     size = 12;
   };

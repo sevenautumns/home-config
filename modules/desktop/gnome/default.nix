@@ -29,13 +29,11 @@ in {
       enabled-extensions = [
         "audio-output-switcher@anduchs"
         "pop-shell@system76.com"
-        #"material-shell@papyelgringo"
         "trayIconsReloaded@selfmade.pl"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
         "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
       ];
       disabled-extensions = [
-        #"pop-shell@system76.com"
         "material-shell@papyelgringo"
         "native-window-placement@gnome-shell-extensions.gcampax.github.com"
         "places-menu@gnome-shell-extensions.gcampax.github.com"
@@ -105,11 +103,14 @@ in {
       toggle-tiled-left = [ ];
       toggle-tiled-right = [ ];
     };
-    "org/gnome/desktop/interface" = {
+    "org/gnome/desktop/interface" = let
+      font-name = config.gtk.font.name;
+      font-size = builtins.toString config.gtk.font.size;
+    in {
       clock-format = "12h";
       color-scheme = "prefer-dark";
-      font-name = "Roboto 11";
-      document-font-name = "Roboto 11";
+      font-name = "${font-name} ${font-size}";
+      document-font-name = "${font-name} ${font-size}";
       monospace-font-name = "Dina 10";
       cursor-theme = "Bibata-Original-Classic";
     };
