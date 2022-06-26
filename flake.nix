@@ -104,15 +104,6 @@
         let machine = pre_machine // { inherit host; };
         in lib.attrsets.nameValuePair (machine.user + "@" + host)
         (homeManager.lib.homeManagerConfiguration {
-          configuration = { pkgs, config, ... }: {
-            imports = [ ./home.nix ];
-
-            home.packages = [
-              pkgs.deploy-rs.deploy-rs
-              agenix.packages."${machine.arch}".agenix
-            ];
-          };
-
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
             overlays = [
@@ -135,15 +126,21 @@
               nur.overlay
             ];
           };
+          modules = [
+            ./home.nix
+            {
+              home = {
+                username = machine.user;
+                homeDirectory = "/home/${machine.user}";
+                stateVersion = "21.05";
+                packages = [ agenix.packages."${machine.arch}".agenix ];
+              };
+            }
+          ];
           extraSpecialArgs = {
             inherit inputs;
             inherit machine;
           };
-
-          system = machine.arch;
-          homeDirectory = "/home/${machine.user}";
-          username = machine.user;
-          stateVersion = "21.05";
         })) machines;
 
       nixosConfigurations = lib.mapAttrs (host: machine:

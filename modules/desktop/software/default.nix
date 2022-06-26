@@ -54,6 +54,7 @@ in {
       feh
       syncplay
       gnome-feeds
+      deploy-rs.deploy-rs
 
       #learning
       anki
