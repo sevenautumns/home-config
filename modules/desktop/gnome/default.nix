@@ -21,6 +21,8 @@ in {
     [
       gnomeExtensions.audio-output-switcher
       gnomeExtensions.tray-icons-reloaded
+      gnomeExtensions.user-themes
+      pop-gtk-theme
     ] ++ lib.optionals (host != "neesama") [ gnome.gnome-session ];
   dconf.settings = let mkTuple = lib.hm.gvariant.mkTuple;
   in {
@@ -32,6 +34,7 @@ in {
         "trayIconsReloaded@selfmade.pl"
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
         "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
       disabled-extensions = [
         "material-shell@papyelgringo"
@@ -44,6 +47,7 @@ in {
     "org/gnome/desktop/applications/terminal" = {
       exec = "${config.programs.alacritty.package}/bin/alacritty";
     };
+    "org/gnome/shell/extensions/user-theme".name = config.gtk.theme.name;
     "org/gnome/desktop/wm/keybindings" = {
       toggle-maximized = [ ];
       toggle-fullscreen = [ "<Super>F" ];

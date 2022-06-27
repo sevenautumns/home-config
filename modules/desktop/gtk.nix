@@ -5,6 +5,7 @@ let
   yaru-papirus = pkgs.stdenv.mkDerivation {
     name = "yaru-papirus";
     src = pkgs.yaru-theme;
+    propagatedBuildInputs = [ pkgs.papirus-icon-theme ];
     buildPhase = ''
       sed -i 's/Humanity\,/Papirus-Dark\,Papirus\,/g' $(find -type f share/**/index.theme)
     '';
@@ -32,6 +33,8 @@ in {
       #name = "Adwaita-dark"; 
       name = "Yaru-blue-dark";
       package = yaru-papirus;
+      #name = "Pop-dark";
+      #package = pkgs.pop-gtk-theme;
     };
     iconTheme = {
       #name = "Papirus-Dark";

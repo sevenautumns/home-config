@@ -38,8 +38,12 @@ in {
                 queries: [(name: "GitHub", query: "github.com/search?q=")]
             ),
             (
+                matches: ["gn", "githubnix"],
+                queries: [(name: "GitHub Nix Code", query: "github.com/search?type=Code&l=Nix&q=")]
+            ),
+            (
                 matches: ["np", "nixpkgs"],
-                queries: [(name: "Nix Packages", query: "search.nixos.org/packages?channel=unstable&query=test")]
+                queries: [(name: "Nix Packages", query: "search.nixos.org/packages?channel=unstable&query=")]
             ),
             (
                 matches: ["gs", "google"],
