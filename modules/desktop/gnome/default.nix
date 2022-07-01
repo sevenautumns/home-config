@@ -74,7 +74,7 @@ in {
       move-to-workspace-right = [ ];
       move-to-workspace-up = [ ];
       move-to-workspace-last = [ ];
-      switch-input-source = [ ];
+      switch-input-source = [ "<Super>space" ];
       switch-input-source-backward = [ ];
       switch-to-workspace-1 = [ "<Super>KP_End" ];
       switch-to-workspace-2 = [ "<Super>KP_Down" ];
@@ -133,10 +133,11 @@ in {
       variant = config.home.keyboard.variant;
     in {
       xkb-options = config.home.keyboard.options;
-      sources = if variant == ''""'' then
+      sources = (if variant == ''""'' then
         [ (mkTuple [ "xkb" layout ]) ]
       else
-        [ (mkTuple [ "xkb" "${layout}+${variant}" ]) ];
+        [ (mkTuple [ "xkb" "${layout}+${variant}" ]) ])
+        ++ [ (mkTuple [ "ibus" "mozc-jp" ]) ];
     };
   };
 }

@@ -30,11 +30,15 @@ in {
                 ]
             ),
             (
-                matches: ["ddg", "duckduckgo"],
+                matches: ["rd"],
+                queries: [(name: "Rust Docs", query: "docs.rs/")]
+            ),
+            (
+                matches: ["ds", "ddg", "duckduckgo"],
                 queries: [(name: "DuckDuckGo", query: "duckduckgo.com/?q=")]
             ),
             (
-                matches: ["gh", "github"],
+                matches: ["gs", "github"],
                 queries: [(name: "GitHub", query: "github.com/search?q=")]
             ),
             (
@@ -44,6 +48,10 @@ in {
             (
                 matches: ["np", "nixpkgs"],
                 queries: [(name: "Nix Packages", query: "search.nixos.org/packages?channel=unstable&query=")]
+            ),
+            (
+                matches: ["no"],
+                queries: [(name: "Nix Options", query: "search.nixos.org/options?channel=unstable&type=packages&query=")]
             ),
             (
                 matches: ["gs", "google"],
@@ -84,7 +92,7 @@ in {
 
   dconf.settings = {
     "org/gnome/shell/extensions/pop-shell" = {
-      activate-launcher = [ "<Super>Space" ];
+      activate-launcher = [ "<Super>d" ];
       tile-enter = [ "<Super>x" ];
       tile-orientation = [ "<Super>o" ];
       toggle-floating = [ "<Super><Shift>space" ];

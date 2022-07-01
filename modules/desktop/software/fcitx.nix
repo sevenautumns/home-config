@@ -13,13 +13,13 @@ let
 
 in {
   i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-mozc
-      fcitx5-lua
-      libsForQt5.fcitx5-qt
-      fcitx5-gtk
-    ];
+    #enabled = "fcitx5";
+    #fcitx5.addons = with pkgs; [
+    #  fcitx5-mozc
+    #  fcitx5-lua
+    #  libsForQt5.fcitx5-qt
+    #  fcitx5-gtk
+    #];
   };
 
   home.file.".local/share/fcitx5/themes/".source = fcitx5-adwaita;

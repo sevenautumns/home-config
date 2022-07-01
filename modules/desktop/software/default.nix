@@ -5,14 +5,14 @@ let
   #rdf = naersk.buildPackage inputs.rdf;
 in {
   imports = [
-    ./mpv.nix
-    ./vscode.nix
     ./alacritty.nix
     ./firefox.nix
+    ./ibus.nix
     ./kitty.nix
-    ./fcitx.nix
+    ./mpv.nix
     #./redshift.nix
     ./rust.nix
+    ./vscode.nix
   ];
 
   services.sxhkd.keybindings = with pkgs; {
