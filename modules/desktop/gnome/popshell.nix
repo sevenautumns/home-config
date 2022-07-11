@@ -105,6 +105,8 @@ in {
       hint-color-rgba = "rgba(216, 222, 233, 1)";
       snap-to-grid = false;
       smart-gaps = true;
+      gap-inner = lib.hm.gvariant.mkUint32 0;
+      gap-outer = lib.hm.gvariant.mkUint32 0;
 
       # Focus Shifting
       focus-left = [ "<Super>Left" ];

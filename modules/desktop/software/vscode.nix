@@ -8,6 +8,7 @@
       streetsidesoftware.code-spell-checker
       matklad.rust-analyzer
       vadimcn.vscode-lldb
+      bungcip.better-toml
       #arrterian.nix-env-selector
       #github.copilot
     ];
