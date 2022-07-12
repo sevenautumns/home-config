@@ -16,6 +16,7 @@
     hyperfine
     calc
     neofetch
+    btop
   ];
 
   programs.skim = {
@@ -39,6 +40,8 @@
       dialect = "uk";
     };
   };
+
+  programs.tealdeer.enable = true;
 
   services.gnome-keyring.enable = true;
   home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then

@@ -11,7 +11,7 @@
       };
       hostname = {
         ssh_only = false;
-        format = "[$hostname]($style) in ";
+        format = "[$ssh_symbol$hostname]($style) in ";
       };
       directory = {
         read_only = " ";
