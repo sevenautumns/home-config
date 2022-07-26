@@ -122,10 +122,10 @@ in {
       #tile-move-left = [ "Left" ];
       #tile-move-right = [ "Right" ];
       #tile-move-up = [ "Up" ];
-      #tile-move-down-global = [ "<Super><Shift>Down" ];
-      #tile-move-left-global = [ "<Super><Shift>Left" ];
-      #tile-move-right-global = [ "<Super><Shift>Right" ];
-      #tile-move-up-global = [ "<Super><Shift>Up" ];
+      tile-move-down-global = [ "<Super><Shift>Down" ];
+      tile-move-left-global = [ "<Super><Shift>Left" ];
+      tile-move-right-global = [ "<Super><Shift>Right" ];
+      tile-move-up-global = [ "<Super><Shift>Up" ];
       tile-reject = [ "Escape" ];
       #toggle-stacking = [ "s" ];
 
