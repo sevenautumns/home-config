@@ -14,7 +14,7 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   nix = {
-    trustedUsers = [ "admin" "autumnal" ];
+    settings.trusted-users = [ "admin" "autumnal" ];
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes

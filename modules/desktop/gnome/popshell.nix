@@ -93,7 +93,8 @@ in {
   dconf.settings = {
     "org/gnome/shell/extensions/pop-shell" = {
       activate-launcher = [ "<Super>d" ];
-      tile-enter = [ "<Super>x" ];
+      #tile-enter = [ "<Super>x" ];
+      tile-enter = [ ];
       tile-orientation = [ "<Super>o" ];
       toggle-floating = [ "<Super><Shift>space" ];
       toggle-stacking-global = [ "<Super>z" "<Super>y" ];
@@ -115,14 +116,18 @@ in {
       focus-right = [ "<Super>Right" ];
 
       # Tile Management Mode
-      management-orientation = [ "o" ];
+      #management-orientation = [ "o" ];
       tile-accept = [ "Return" ];
-      tile-move-down = [ "Down" ];
-      tile-move-left = [ "Left" ];
-      tile-move-right = [ "Right" ];
-      tile-move-up = [ "Up" ];
+      #tile-move-down = [ "Down" ];
+      #tile-move-left = [ "Left" ];
+      #tile-move-right = [ "Right" ];
+      #tile-move-up = [ "Up" ];
+      #tile-move-down-global = [ "<Super><Shift>Down" ];
+      #tile-move-left-global = [ "<Super><Shift>Left" ];
+      #tile-move-right-global = [ "<Super><Shift>Right" ];
+      #tile-move-up-global = [ "<Super><Shift>Up" ];
       tile-reject = [ "Escape" ];
-      toggle-stacking = [ "s" ];
+      #toggle-stacking = [ "s" ];
 
       # Resize in normal direction
       tile-resize-left = [ "<Shift>Left" ];
@@ -133,10 +138,10 @@ in {
       # Workspace Management -->
       pop-workspace-down = [ ];
       pop-workspace-up = [ ];
-      pop-monitor-down = [ "<Super><Shift>Down" ];
-      pop-monitor-up = [ "<Super><Shift>Up" ];
-      pop-monitor-left = [ "<Super><Shift>Left" ];
-      pop-monitor-right = [ "<Super><Shift>Right" ];
+      pop-monitor-down = [ "<Super><Alt>Down" ];
+      pop-monitor-up = [ "<Super><Alt>Up" ];
+      pop-monitor-left = [ "<Super><Alt>Left" ];
+      pop-monitor-right = [ "<Super><Alt>Right" ];
     };
   };
 }
