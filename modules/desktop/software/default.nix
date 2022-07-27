@@ -55,6 +55,7 @@ in {
       syncplay
       gnome-feeds
       deploy-rs.deploy-rs
+      gnome-network-displays
 
       #learning
       anki
