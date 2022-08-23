@@ -27,6 +27,13 @@ in {
     sw
   ];
 
+  home.sessionVariables = {
+    LANGUAGE = "en_GB.UTF-8";
+    LC_ALL = "en_GB.UTF-8";
+    LANG = "en_GB.UTF-8";
+    LC_CTYPE = "en_GB.UTF-8";
+  };
+
   targets.genericLinux.enable = !machine.nixos;
   home.sessionVariables.PATH = if !machine.nixos then
 

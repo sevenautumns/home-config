@@ -1,11 +1,11 @@
 { pkgs, config, lib, inputs, ... }:
 let theme = config.theme;
 in {
-  services.sxhkd.keybindings = {
-    #"super + d" = "rofi -no-lazy-grab -show drun -modi drun";
-    #"super + t" = "rofi -show window -modi window";
-    #"XF86Calculator" = "rofi -show calc -mode calc";
-  };
+  #services.sxhkd.keybindings = {
+  #  #"super + d" = "rofi -no-lazy-grab -show drun -modi drun";
+  #  #"super + t" = "rofi -show window -modi window";
+  #  #"XF86Calculator" = "rofi -show calc -mode calc";
+  #};
 
   programs.rofi = {
     enable = true;

@@ -3,7 +3,7 @@ let
   host = machine.host;
   theme = config.theme;
 in {
-  services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
+  # services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
 
   programs.alacritty = {
     enable = true;

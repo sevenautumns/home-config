@@ -26,6 +26,38 @@ in {
     ] ++ lib.optionals (host != "neesama") [ gnome.gnome-session ];
   dconf.settings = let mkTuple = lib.hm.gvariant.mkTuple;
   in {
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+      {
+        binding = "<Super>w";
+        command = "firefox";
+        name = "Firefox";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
+      {
+        binding = "<Super><Shift>w";
+        command = "brave";
+        name = "Brave";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
+      {
+        binding = "<Super><Shift>Return";
+        command = "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+        name = "File Browser";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" =
+      {
+        binding = "<Super>Return";
+        command = "alacritty";
+        name = "Terminal";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+      ];
+    };
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
@@ -42,6 +74,13 @@ in {
         "places-menu@gnome-shell-extensions.gcampax.github.com"
         "windowsNavigator@gnome-shell-extensions.gcampax.github.com"
         "window-list@gnome-shell-extensions.gcampax.github.com"
+      ];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "firefox.desktop"
+        "Alacritty.desktop"
+        "codium.desktop"
+        "spotify.desktop"
       ];
     };
     "org/gnome/desktop/applications/terminal" = {

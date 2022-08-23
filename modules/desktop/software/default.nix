@@ -15,12 +15,12 @@ in {
     ./vscode.nix
   ];
 
-  services.sxhkd.keybindings = with pkgs; {
-    "super + w" = "firefox";
-    "super + shift + w" = "brave";
-    "super + shift + Return" =
-      "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
-  };
+  #services.sxhkd.keybindings = with pkgs; {
+  #  "super + w" = "firefox";
+  #  "super + shift + w" = "brave";
+  #  "super + shift + Return" =
+  #    "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+  #};
 
   nixpkgs.config.packageOverrides = super: {
     syncplay = (pkgs.stable.syncplay.overrideAttrs (old: {
@@ -71,7 +71,7 @@ in {
   services.network-manager-applet.enable = false;
   services.blueman-applet.enable = false;
   xsession.numlock.enable = true;
-  services.sxhkd.enable = true;
+  # services.sxhkd.enable = true;
 
   #services.syncthing.enable = true;
   #services.syncthing.tray.enable = true;
