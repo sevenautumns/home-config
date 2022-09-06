@@ -4,6 +4,9 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    extraConfig = ''
+      vnoremap y "+y 
+    '';
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
 
@@ -14,4 +17,8 @@
       vim-toml
     ];
   };
+  home.packages = with pkgs;
+    [
+      xclip
+    ];
 }

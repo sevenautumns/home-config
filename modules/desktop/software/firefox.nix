@@ -1,4 +1,4 @@
-{ pkgs, config, lib, machine, ... }:
+{ pkgs, config, lib, machine, hm-firefox, ... }:
 let
   host = machine.host;
   theme = config.theme;
@@ -15,71 +15,160 @@ in {
     profiles.default = {
       id = 0;
 
-      bookmarks = {
-        "Duck Duck Go" = {
-          keyword = ":d";
-          url = "https://duckduckgo.com/?q=%s";
-        };
-        "Google" = {
-          keyword = ":g";
-          url = "https://www.google.com/search?q=%s";
-        };
-        "AUR" = {
-          keyword = ":a";
-          url = "https://aur.archlinux.org/packages/?K=%s";
-        };
-        "Crates.io" = {
-          keyword = ":c";
-          url = "https://crates.io/search?q=%s";
-        };
-        "Dict.cc English" = {
-          keyword = ":e";
-          url = "https://www.dict.cc/?s=%s";
-        };
-        "Github" = {
-          keyword = ":git";
-          url = "https://github.com/search?q=%s";
-        };
-        "Github Nix" = {
-          keyword = ":gn";
-          url =
-            "https://github.com/search?q=%s+language%3ANix&type=Code&ref=advsearch&l=Nix";
-        };
-        "Nixpkgs" = {
-          keyword = ":np";
-          url =
-            "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s";
-        };
-        "Nix Options" = {
-          keyword = ":no";
-          url =
-            "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s";
-        };
-        "Nyaa" = {
-          keyword = ":nyaa";
-          url = "https://nyaa.si/?q=%s";
-        };
-        "YouTube".url = "https://www.youtube.com/?gl=DE&hl=de";
-        "WaniKani".url = "https://www.wanikani.com/";
-      };
+      #search = {
+      #  force = true;
+      #  default = "DuckDuckGo";
+      #  order = [ "DuckDuckGo" "Google" ];
+      #  engines = {
+      #    "Bing".metaData.hidden = true;
+      #    "eBay".metaData.hidden = true;
+      #    "Google".metaData.alias = "@g";
+      #    "DuckDuckGo".metaData.alias = "@d";
+      #    "GitHub Nix" = {
+      #      urls = [{
+      #        template = "https://github.com/search";
+      #        params = [
+      #          { name = "q"; value = "{searchTerms}+language%3ANix"; }
+      #          { name = "type"; value = "Code"; }
+      #          { name = "ref"; value = "advsearch"; }
+      #          { name = "l"; value = "Nix"; }
+      #        ];
+      #      }];
+      #      icon = "${pkgs.fetchurl {
+      #        url = "https://github.githubassets.com/favicons/favicon.svg";
+      #        sha256 = "sha256-apV3zU9/prdb3hAlr4W5ROndE4g3O1XMum6fgKwurmA=";
+      #      }}";
+      #      definedAliases = [ "@gn" ];
+      #    };
+      #  };
+      #};
+
+      bookmarks = [
+        {
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "YouTube";
+              url = "https://www.youtube.com/?gl=DE&hl=de";
+            }
+            {
+              name = "WaniKani";
+              url = "https://www.wanikani.com/";
+            }
+            {
+              name = "Bunpro";
+              url = "https://bunpro.jp/";
+            }
+            {
+              name = "DLR";
+              bookmarks = [
+                {
+                  name = "Mail";
+                  url = "https://mail.dlr.de/owa/#path=/mail";
+                }
+                {
+                  name = "Gleitzeit";
+                  url = "https://gleitzeit.bs.dlr.de/primeweb/index.jsp";
+                }
+                {
+                  name = "WebPostkorb";
+                  url = "https://webpostkorb.dlr.de/";
+                }
+                {
+                  name = "Intra";
+                  url = "https://intranet.dlr.de/Seiten/start.aspx";
+                }
+              ];
+            }
+          ];
+        }
+        {
+          name = "Searches";
+          bookmarks = [
+            {
+              name = "Duck Duck Go";
+              keyword = ":d";
+              url = "https://duckduckgo.com/?q=%s";
+            }
+            {
+              name = "Google";
+              keyword = ":g";
+              url = "https://www.google.com/search?q=%s";
+            }
+            {
+              name = "AUR";
+              keyword = ":a";
+              url = "https://aur.archlinux.org/packages/?K=%s";
+            }
+            {
+              name = "Crates.io";
+              keyword = ":c";
+              url = "https://crates.io/search?q=%s";
+            }
+            {
+              name = "Dict.cc English";
+              keyword = ":e";
+              url = "https://www.dict.cc/?s=%s";
+            }
+            {
+              name = "Github";
+              keyword = ":git";
+              url = "https://github.com/search?q=%s";
+            }
+            {
+              name = "Github Nix";
+              keyword = ":gn";
+              url =
+                "https://github.com/search?q=%s+language%3ANix&type=Code&ref=advsearch&l=Nix";
+            }
+            {
+              name = "Github Rust";
+              keyword = ":gr";
+              url =
+                "https://github.com/search?q=%s+language%3ARust&type=Code&ref=advsearch&l=Rust";
+            }
+            {
+              name = "Nixpkgs";
+              keyword = ":np";
+              url =
+                "https://search.nixos.org/packages?channel=unstable&query=%s";
+            }
+            {
+              name = "Nix Options";
+              keyword = ":no";
+              url =
+                "https://search.nixos.org/options?channel=unstable&query=%s";
+            }
+            {
+              name = "Nyaa";
+              keyword = ":nyaa";
+              url = "https://nyaa.si/?q=%s";
+            }
+          ];
+        }
+      ];
+
       settings = {
+        "extensions.pocket.enabled" = false;
+
         "extensions.autoDisableScopes" = 0;
 
-        #"browser.search.defaultenginename" = "Startpage.com - English";
-        #"browser.search.selectedEngine" = "Startpage.com - English";
-        #"browser.urlbar.placeholderName" = "Startpage.com - English";
-        #"browser.search.region" = "US";
+        "general.smoothScroll" = false;
+
+        "browser.search.defaultenginename" = "DuckDuckGo";
+        "browser.search.selectedEngine" = "DuckDuckGo";
+        #"browser.search.region" = "US";fi
         #"browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = true;
         "webgl.disabled" = false;
-        #"services.sync.username" = "stefan-machmeier@outlook.com";
 
         "gfx.webrender.all" = true;
         "gfx.webrender.enabled" = true;
         "browser.toolbars.bookmarks.visibility" = "always";
+        "browser.toolbars.bookmarks.showOtherBookmarks" = false;
+        "browser.bookmarks.restore_default_bookmarks" = false;
 
         "browser.uidensity" = 1;
-        #"browser.search.openintab" = true;
 
         "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
         "browser.theme.toolbar-theme" = 0;
@@ -87,10 +176,19 @@ in {
 
         "signon.rememberSignons" = false;
 
+        # Disable legacy webrtc sharing icon
+        "privacy.webrtc.legacyGlobalIndicator" = false;
+        "privacy.webrtc.hideGlobalIndicator" = true;
+
         # Font config
         "font.name.monospace.ja" = "Sarasa Mono J";
         "font.name.sans-serif.ja" = "Sarasa UI J";
         "font.name.serif.ja" = "Sarasa UI J";
+
+        # DLR Auth
+        "network.negotiate-auth.trusted-uris" = "dlr.de";
+        "network.automatisc-ntlm-auth.trusted-uris" = "dlr.de";
+        "security.identityblock.show_extended_validation" = true;
       };
     };
   };

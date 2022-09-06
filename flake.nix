@@ -35,6 +35,9 @@
     syncplay.url = "github:Syncplay/syncplay";
     syncplay.flake = false;
 
+    open-remote-ssh.url = "github:jeanp413/open-remote-ssh";
+    open-remote-ssh.flake = false;
+
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";
     services-bundle.flake = false;

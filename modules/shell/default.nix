@@ -19,6 +19,9 @@
     btop
   ];
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   programs.skim = {
     enable = true;
     enableFishIntegration = true;
