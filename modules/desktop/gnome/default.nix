@@ -23,7 +23,7 @@ in {
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.user-themes
       pop-gtk-theme
-    ] ++ lib.optionals (host != "neesama") [ gnome.gnome-session ];
+    ] ++ lib.optionals machine.nixos [ gnome.gnome-session ];
   dconf.settings = let mkTuple = lib.hm.gvariant.mkTuple;
   in {
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =

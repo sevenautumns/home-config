@@ -60,6 +60,7 @@ in {
       #learning
       anki
     ] ++ lib.optionals (machine.nixos) [
+      discord
       discord-canary
       tdesktop
       element-desktop

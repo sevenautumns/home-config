@@ -52,6 +52,8 @@
     passwordAuthentication = false;
   };
 
+  fonts.fontDir.enable = true;
+
   security.sudo.extraRules = [{
     users = [ "admin" ];
     commands = [{

@@ -58,8 +58,8 @@
           user = "autumnal";
           arch = "x86_64-linux";
           headless = false;
-          nixos = false;
-          managed-nixos = false;
+          nixos = true;
+          managed-nixos = true;
         };
         "ft-ssy-sfnb" = {
           user = "frie_sv";

@@ -30,7 +30,7 @@ let
         ${(builtins.toString (builtins.map (o: "-option " + o) l.options))}
     '') layouts;
 in with layouts; {
-  home.keyboard =
-    if host == "neesama" then layouts.de_us-apple else layouts.de_us;
+  home.keyboard = layouts.de_us;
+  # if host == "neesama" then layouts.de_us-apple else layouts.de_us;
   home.packages = commands;
 }
