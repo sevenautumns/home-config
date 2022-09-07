@@ -14,10 +14,10 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
   boot.extraModulePackages = [ ];
-  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   hardware.nvidia.package =
-    pkgs.unstable.linuxKernel.packages.linux_zen.nvidia_x11;
+    config.boot.kernelPackages.nvidia_x11;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
 

@@ -8,11 +8,12 @@
     };
 
     displayManager = {
-      #defaultSession = "user";
-      #autoLogin = {
-      #  enable = true;
-      #  user = "autumnal";
-      #};
+      defaultSession = "user";
+      job.preStart = "sleep 2";
+      autoLogin = {
+        enable = true;
+        user = "autumnal";
+      };
       session = [{
         manage = "desktop";
         name = "user";

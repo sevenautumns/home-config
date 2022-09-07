@@ -1,6 +1,7 @@
 { pkgs, config, machine, ... }: {
   imports = [
     ./git.nix
+    ./helix.nix
     ./fish.nix
     ./starship.nix
     ./neovim.nix
