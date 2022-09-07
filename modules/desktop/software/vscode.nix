@@ -2,22 +2,23 @@
   programs.vscode = {
     enable = true;
     package = with pkgs; vscodium;
-    extensions = with pkgs.vscode-extensions; with pkgs.vscode-utils; [
-      bbenoist.nix
-      # brettm12345.nixfmt-vscode
-      streetsidesoftware.code-spell-checker
-      matklad.rust-analyzer
-      vadimcn.vscode-lldb
-      bungcip.better-toml
-      james-yu.latex-workshop
-      mkhl.direnv
-      #bierner.markdown-shiki
-      #vscode-icons-team.vscode-icons
-      oderwat.indent-rainbow
-      # davidlday.languagetool-linter
-      jnoortheen.nix-ide
-      asvetliakov.vscode-neovim
-    ];
+    extensions = with pkgs.vscode-extensions;
+      with pkgs.vscode-utils; [
+        bbenoist.nix
+        # brettm12345.nixfmt-vscode
+        streetsidesoftware.code-spell-checker
+        matklad.rust-analyzer
+        vadimcn.vscode-lldb
+        bungcip.better-toml
+        james-yu.latex-workshop
+        mkhl.direnv
+        #bierner.markdown-shiki
+        #vscode-icons-team.vscode-icons
+        oderwat.indent-rainbow
+        # davidlday.languagetool-linter
+        jnoortheen.nix-ide
+        asvetliakov.vscode-neovim
+      ];
     keybindings = [
       {
         "key" = "ctrl+shift+c";
@@ -40,7 +41,8 @@
       debug.allowBreakpointsEverywhere = true;
 
       #Neovim integration
-      vscode-neovim.neovimExecutablePaths.linux = "${config.programs.neovim.finalPackage}/bin/nvim";
+      vscode-neovim.neovimExecutablePaths.linux =
+        "${config.programs.neovim.finalPackage}/bin/nvim";
 
       # Language
       # languageToolLinter.serviceType = "external";

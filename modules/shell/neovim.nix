@@ -17,8 +17,5 @@
       vim-toml
     ];
   };
-  home.packages = with pkgs;
-    [
-      xclip
-    ];
+  home.packages = with pkgs; [ xclip ];
 }

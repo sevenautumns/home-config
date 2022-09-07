@@ -19,8 +19,8 @@ in {
       };
       font.size = if host == "neesama" then 11 else 8;
       shell.program = "${pkgs.fish}/bin/fish";
-      colors = { 
-        transparent_background_colors = true; 
+      colors = {
+        transparent_background_colors = true;
         primary = {
           background = "#292929";
           foreground = "#F3F2CC";

@@ -30,7 +30,8 @@
 
     # github:pop-os/shell/master_jammy 
     # Requires new fix-gjs.patch
-    pop-shell.url = "github:pop-os/shell?rev=08abba0b05dadb600ac48844a549b777610f9f66";
+    pop-shell.url =
+      "github:pop-os/shell?rev=08abba0b05dadb600ac48844a549b777610f9f66";
     pop-shell.flake = false;
     pop-launcher.url = "github:pop-os/launcher";
     pop-launcher.flake = false;

@@ -9,7 +9,7 @@
       it = "commit";
     };
     extraConfig = {
-      core = { editor = "${pkgs.neovim}/bin/nvim"; };
+      core.editor = config.home.sessionVariables.EDITOR;
       core.pager = "${pkgs.delta}/bin/delta";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
