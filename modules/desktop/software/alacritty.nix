@@ -17,7 +17,7 @@ in {
         opacity = 1;
         gtk_theme_variant = "dark";
       };
-      font.size = if host == "neesama" then 11 else 8;
+      font.size = 11;
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;

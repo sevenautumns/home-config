@@ -1,13 +1,55 @@
-{ pkgs, config, lib, machine, ... }:
+{ pkgs, config, lib, machine, inputs, ... }:
 {
-  programs.helix.enable = true;
-  programs.helix.settings.theme = "autumn";
+  programs.helix = {
+    enable = true;
+    package = inputs.helix.packages."${pkgs.system}".default;
+    settings =
+      {
+        theme = "autumn";
+        editor = {
+          idle-timeout = 0;
+          #lsp.display-messages = true;
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "block";
+          };
+          shell = [ "fish" ];
+        };
+        keys.normal.space.u = ":format";
+      };
+    languages = [
+      {
+        name = "latex";
+        language-server.command = "ltex-ls";
+      }
+      {
+        name = "git-commit";
+        scope = "git.commitmsg";
+        roots = [ ];
+        file-types = [ "COMMIT_EDITMSG" ];
+        comment-token = "#";
+        indent = { tab-width = 2; unit = "  "; };
+        language-server.command = "ltex-ls";
+      }
+      {
+        name = "markdown";
+        language-server.command = "ltex-ls";
+        file-types = [ "md" ];
+        scope = "source.markdown";
+        roots = [ ];
+      }
+    ];
+  };
 
   home.sessionVariables.EDITOR = "${pkgs.helix}/bin/hx";
 
   home.packages = with pkgs; [
     # Debugging stuff
     lldb
+
+    # Spelling checker
+    ltex-ls
 
     # Language servers
     clang-tools # C-Style

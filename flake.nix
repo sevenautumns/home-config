@@ -6,6 +6,11 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-pop-launcher.url = "github:samhug/nixpkgs/pop-launcher";
     nur.url = "github:nix-community/NUR";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -14,6 +19,7 @@
     homeManager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.utils.follows = "flake-utils";
     };
     deploy-rs.url = "github:serokell/deploy-rs";
 
@@ -21,6 +27,18 @@
     gobot.flake = false;
 
     knock.url = "github:BentonEdmondson/knock";
+
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-utils.follows = "flake-utils";
+    };
 
     # Home manager used repos
     cmus-notify.url = "github:dcx86r/cmus-notify";
@@ -52,8 +70,17 @@
     absolut-series-scanner.flake = false;
   };
 
-  outputs = { self, homeManager, nur, nixgl, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, agenix, ... }@inputs:
+  outputs =
+    { self
+    , homeManager
+    , nur
+    , nixgl
+    , deploy-rs
+    , nixpkgs-unstable
+    , nixpkgs-stable
+    , agenix
+    , ...
+    }@inputs:
     let
       lib = nixpkgs-unstable.lib;
       machines = {
@@ -105,102 +132,112 @@
           managed-nixos = true;
         };
       };
-    in {
-      homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:
-        let machine = pre_machine // { inherit host; };
-        in lib.attrsets.nameValuePair (machine.user + "@" + host)
-        (homeManager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable {
-            system = machine.arch;
-            overlays = [
-              deploy-rs.overlay
-              (self: super:
-                let
-                  unstable = import "${inputs.nixpkgs-unstable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                  stable = import "${inputs.nixpkgs-stable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                  pop-launcher = import "${inputs.nixpkgs-pop-launcher}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                in { inherit unstable stable pop-launcher; })
-              nur.overlay
-            ];
-          };
-          modules = [
-            ./home.nix
-            {
-              home = {
-                username = machine.user;
-                homeDirectory = "/home/${machine.user}";
-                stateVersion = "21.05";
-                packages = [ agenix.packages."${machine.arch}".agenix ];
+    in
+    {
+      homeConfigurations = lib.attrsets.mapAttrs'
+        (host: pre_machine:
+          let machine = pre_machine // { inherit host; };
+          in
+          lib.attrsets.nameValuePair (machine.user + "@" + host)
+            (homeManager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs-unstable {
+                system = machine.arch;
+                overlays = [
+                  deploy-rs.overlay
+                  (self: super:
+                    let
+                      unstable = import "${inputs.nixpkgs-unstable}" {
+                        system = machine.arch;
+                        config.allowUnfree = true;
+                      };
+                      stable = import "${inputs.nixpkgs-stable}" {
+                        system = machine.arch;
+                        config.allowUnfree = true;
+                      };
+                      pop-launcher = import "${inputs.nixpkgs-pop-launcher}" {
+                        system = machine.arch;
+                        config.allowUnfree = true;
+                      };
+                    in
+                    { inherit unstable stable pop-launcher; })
+                  nur.overlay
+                ];
               };
-            }
-          ];
-          extraSpecialArgs = {
-            inherit inputs;
-            inherit machine;
-          };
-        })) machines;
-
-      nixosConfigurations = lib.mapAttrs (host: machine:
-        lib.nixosSystem rec {
-          system = machine.arch;
-          modules = [
-            {
-              nixpkgs.overlays = [
-                deploy-rs.overlay
-                (self: super: {
-                  unstable = import "${inputs.nixpkgs-unstable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
+              modules = [
+                ./home.nix
+                {
+                  home = {
+                    username = machine.user;
+                    homeDirectory = "/home/${machine.user}";
+                    stateVersion = "21.05";
+                    packages = [ agenix.packages."${machine.arch}".agenix ];
                   };
-                  stable = import "${inputs.nixpkgs-stable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                })
-                nur.overlay
+                }
               ];
-            }
-            agenix.nixosModule
-            { networking.hostName = host; }
-            (./nixos/machines + "/${host}")
-          ];
-          specialArgs = {
-            inherit inputs;
-            inherit machine;
-          };
+              extraSpecialArgs = {
+                inherit inputs;
+                inherit machine;
+              };
+            }))
+        machines;
 
-        }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
+      nixosConfigurations = lib.mapAttrs
+        (host: machine:
+          lib.nixosSystem rec {
+            system = machine.arch;
+            modules = [
+              {
+                nixpkgs.overlays = [
+                  deploy-rs.overlay
+                  (self: super: {
+                    unstable = import "${inputs.nixpkgs-unstable}" {
+                      system = machine.arch;
+                      config.allowUnfree = true;
+                    };
+                    stable = import "${inputs.nixpkgs-stable}" {
+                      system = machine.arch;
+                      config.allowUnfree = true;
+                    };
+                  })
+                  nur.overlay
+                ];
+              }
+              agenix.nixosModule
+              { networking.hostName = host; }
+              (./nixos/machines + "/${host}")
+            ];
+            specialArgs = {
+              inherit inputs;
+              inherit machine;
+            };
 
-      deploy.nodes = lib.mapAttrs (host: machine: {
-        hostname = machine.address;
-        profilesOrder = [ "system" "user" ];
-        fastConnection = false;
-        profiles = {
-          user = {
-            sshUser = machine.user;
-            path = deploy-rs.lib.${machine.arch}.activate.home-manager
-              self.homeConfigurations."${machine.user}@${host}";
+          })
+        (lib.filterAttrs (h: m: m.managed-nixos) machines);
+
+      deploy.nodes = lib.mapAttrs
+        (host: machine: {
+          hostname = machine.address;
+          profilesOrder = [ "system" "user" ];
+          fastConnection = false;
+          profiles = {
+            user = {
+              sshUser = machine.user;
+              path = deploy-rs.lib.${machine.arch}.activate.home-manager
+                self.homeConfigurations."${machine.user}@${host}";
+            };
+          } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
+            system = {
+              sshUser = "admin";
+              path = deploy-rs.lib.${machine.arch}.activate.nixos
+                self.nixosConfigurations."${host}";
+              user = "root";
+            };
           };
-        } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
-          system = {
-            sshUser = "admin";
-            path = deploy-rs.lib.${machine.arch}.activate.nixos
-              self.nixosConfigurations."${host}";
-            user = "root";
-          };
-        };
-      }) (lib.filterAttrs (h: m: m ? address) machines);
+        })
+        (lib.filterAttrs (h: m: m ? address) machines);
 
       checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+        (system: deployLib: deployLib.deployChecks self.deploy)
+        deploy-rs.lib;
     };
 }
