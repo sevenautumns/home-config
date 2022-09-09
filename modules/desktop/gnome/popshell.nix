@@ -2,6 +2,13 @@
 let
   pop-shell = (pkgs.gnomeExtensions.pop-shell.overrideAttrs (old: {
     src = inputs.pop-shell;
+    patches = [ ];
+    postPatch = ''
+      substituteInPlace src/panel_settings.ts \
+        --replace '`gjs ''${path}`' 'path'
+      substituteInPlace src/extension.ts \
+        --replace '["gjs", path]' '[path]'
+    '' + old.postPatch;
     version = "unstable-master_jammy";
   }));
   pop-launcher = (pkgs.pop-launcher.pop-launcher.overrideAttrs (old: {

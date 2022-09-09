@@ -1,27 +1,29 @@
-{ pkgs, config, lib, machine, inputs, ... }:
-{
+{ pkgs, config, lib, machine, inputs, ... }: {
   programs.helix = {
     enable = true;
     package = inputs.helix.packages."${pkgs.system}".default;
-    settings =
-      {
-        theme = "autumn";
-        editor = {
-          idle-timeout = 0;
-          #lsp.display-messages = true;
-          cursor-shape = {
-            insert = "bar";
-            normal = "block";
-            select = "block";
-          };
-          shell = [ "fish" ];
+    settings = {
+      theme = "autumn";
+      editor = {
+        idle-timeout = 0;
+        #lsp.display-messages = true;
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "block";
         };
-        keys.normal.space.u = ":format";
+        # shell = [ "fish" ];
       };
+      keys.normal.space.u = ":format";
+    };
     languages = [
       {
         name = "latex";
         language-server.command = "ltex-ls";
+      }
+      {
+        name = "nix";
+        formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
       }
       {
         name = "git-commit";
@@ -29,7 +31,10 @@
         roots = [ ];
         file-types = [ "COMMIT_EDITMSG" ];
         comment-token = "#";
-        indent = { tab-width = 2; unit = "  "; };
+        indent = {
+          tab-width = 2;
+          unit = "  ";
+        };
         language-server.command = "ltex-ls";
       }
       {
@@ -55,7 +60,7 @@
     clang-tools # C-Style
     cmake-language-server # Cmake
     texlab # LaTeX
-    gopls # Go 
+    gopls # Go
     rnix-lsp # Nix
     rust-analyzer # Rust
     sumneko-lua-language-server # Lua

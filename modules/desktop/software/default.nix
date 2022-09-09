@@ -27,6 +27,13 @@ in {
       src = inputs.syncplay;
       version = "unstable-master";
     }));
+    kcc = (pkgs.stable.kcc.overrideAttrs (old: {
+      src = inputs.kcc;
+      postPatch = ''
+        substituteInPlace kindlecomicconverter/startup.py \
+          --replace 'dependencyCheck(' '#dependencyCheck('
+      '';
+    }));
   };
 
   home.packages = with pkgs;
@@ -55,6 +62,7 @@ in {
       syncplay
       gnome-feeds
       deploy-rs.deploy-rs
+      kcc
       gnome-network-displays
 
       #learning
