@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }: {
   imports = [
-    ./gnome
+    # ./gnome
+    ./i3
     ./software
     ./audio
 
