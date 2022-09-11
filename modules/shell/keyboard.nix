@@ -7,13 +7,13 @@ let
       layout = "de";
       variant = ''""'';
       model = "pc105";
-      options = [ "caps:ctrl_modifier" ];
+      options = [ "caps:escape" ];
     };
     de_us = {
       layout = "de";
       variant = "us";
       model = "pc105";
-      options = [ "caps:ctrl_modifier" ];
+      options = [ "caps:escape" ];
     };
     de-apple = layouts.de // { options = layouts.de.options ++ apple-options; };
     de_us-apple = layouts.de_us // {

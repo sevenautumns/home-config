@@ -1,9 +1,10 @@
 { pkgs, config, lib, machine, inputs, ... }: {
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages."${pkgs.system}".default;
+    # package = inputs.helix.packages."${pkgs.system}".default;
     settings = {
       theme = "autumn";
+      # theme = "gruvbox";
       editor = {
         idle-timeout = 0;
         #lsp.display-messages = true;
@@ -15,6 +16,12 @@
         # shell = [ "fish" ];
       };
       keys.normal.space.u = ":format";
+      # keys.insert = {
+      #   up = "move_line_up";
+      #   down = "mode_line_down";
+      #   left = "move_char_left";
+      #   right = "move_char_right";
+      # };
     };
     languages = [
       {

@@ -64,6 +64,7 @@ in {
       deploy-rs.deploy-rs
       kcc
       gnome-network-displays
+      calibre
 
       #learning
       anki

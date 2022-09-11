@@ -16,8 +16,12 @@ in {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  #xdg.configFile."test".text = "${config.theme.nord0}";
+  # xdg.configFile."test".text = "${config.scheme.base07}";
   xdg.enable = true;
+
+  # scheme = (config.lib.base16.mkSchemeAttrs {
+
+  # });
 
   #TODO use hinted roboto
 

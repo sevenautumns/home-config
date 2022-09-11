@@ -1,5 +1,6 @@
 { pkgs, config, machine, ... }: {
   imports = [
+    ./colors.nix
     ./git.nix
     ./helix.nix
     ./fish.nix

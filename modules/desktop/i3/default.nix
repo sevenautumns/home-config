@@ -1,6 +1,46 @@
 { pkgs, config, lib, ... }: {
 
+  services.redshift = {
+    enable = true;
+    latitude = 51.8;
+    longitude = 10.3;
+  };
+
   programs.i3status-rust.enable = true;
+  programs.i3status-rust.bars.default.blocks = [
+    {
+      block = "disk_space";
+      path = "/";
+      alias = "/";
+      info_type = "available";
+      unit = "GB";
+      interval = 60;
+      warning = 20.0;
+      alert = 10.0;
+    }
+    {
+      block = "memory";
+      display_type = "memory";
+      format_mem = "{mem_used_percents}";
+      format_swap = "{swap_used_percents}";
+    }
+    {
+      block = "cpu";
+      interval = 1;
+    }
+    {
+      block = "load";
+      interval = 1;
+      format = "{1m}";
+    }
+    { block = "sound"; }
+    {
+      block = "time";
+      interval = 60;
+      format = "%a %d/%m %r";
+    }
+  ];
+
   xsession = {
     enable = true;
     windowManager = {
@@ -57,6 +97,13 @@
             "${modifier}+w" = "exec firefox";
             "${modifier}+Shift+Return" =
               "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+
+            "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
+            "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
+            "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
+            "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+            "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+            "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
           };
           keycodebindings = {
             # Workspace select numpad
@@ -103,6 +150,37 @@
             "${modifier}+Shift+Mod2+80" = "move container to workspace ${ws8}";
             "${modifier}+Shift+Mod2+81" = "move container to workspace ${ws9}";
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
+          };
+          colors = with config.theme; {
+            background = base00;
+            focused = {
+              background = base0D;
+              text = base00;
+              border = yellow1;
+              childBorder = base0C;
+              indicator = red;
+            };
+            unfocused = {
+              background = base00;
+              text = base05;
+              border = base01;
+              childBorder = base01;
+              indicator = base01;
+            };
+            focusedInactive = {
+              background = base01;
+              text = base05;
+              border = base01;
+              childBorder = base01;
+              indicator = base03;
+            };
+            urgent = {
+              background = base08;
+              text = base00;
+              border = base08;
+              childBorder = base08;
+              indicator = base08;
+            };
           };
         };
       };

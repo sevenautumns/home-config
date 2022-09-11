@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }: {
   services.xserver = {
     enable = true;
+    dpi = 80;
     displayManager.gdm = {
       enable = true;
       wayland = false;
