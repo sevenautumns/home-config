@@ -35,23 +35,6 @@ let
     text = foreground;
     hint = red;
     primary = brown;
-
-    base00 = gray0;
-    base01 = gray1;
-    base02 = gray2;
-    base03 = gray3;
-    base04 = gray4;
-    base05 = gray5;
-    base06 = gray6;
-    base07 = gray7;
-    base08 = white2;
-    base09 = brown; # white3; #Maybe turquoise2 or white2
-    base0A = white3;
-    base0B = green;
-    base0C = brown;
-    base0D = brown;
-    base0E = red;
-    base0F = brown; # maybe something different
   };
 in {
   options = with lib; {

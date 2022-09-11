@@ -152,34 +152,34 @@
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
           };
           colors = with config.theme; {
-            background = base00;
+            background = gray0;
             focused = {
-              background = base0D;
-              text = base00;
+              background = brown;
+              text = gray0;
               border = yellow1;
-              childBorder = base0C;
+              childBorder = brown;
               indicator = red;
             };
             unfocused = {
-              background = base00;
-              text = base05;
-              border = base01;
-              childBorder = base01;
-              indicator = base01;
+              background = gray0;
+              text = gray5;
+              border = gray3;
+              childBorder = gray3;
+              indicator = gray1;
             };
             focusedInactive = {
-              background = base01;
-              text = base05;
-              border = base01;
-              childBorder = base01;
-              indicator = base03;
+              background = gray2;
+              text = gray5;
+              border = gray3;
+              childBorder = gray3;
+              indicator = gray3;
             };
             urgent = {
-              background = base08;
-              text = base00;
-              border = base08;
-              childBorder = base08;
-              indicator = base08;
+              background = red;
+              text = gray0;
+              border = red;
+              childBorder = red;
+              indicator = white2;
             };
           };
         };
