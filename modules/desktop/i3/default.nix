@@ -88,7 +88,8 @@
               -nb '${black}' \
               -nf '${gray5}' \
               -sb '${brown}' \
-              -sf '${gray0}'
+              -sf '${gray0}' \
+              -fn Dina
           '';
           # startup = [{
           #   # Polybar sometimes starts faster than i3, 
