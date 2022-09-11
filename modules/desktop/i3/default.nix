@@ -60,8 +60,11 @@
     ];
   };
 
-  xsession = {
+  xsession = with config.theme; {
     enable = true;
+    initExtra = ''
+      ${pkgs.xorg.xsetroot}/bin/xsetroot -solid '${config.theme.black}'
+    '';
     windowManager = {
       i3 = let
         modifier = config.xsession.windowManager.i3.config.modifier;
@@ -75,12 +78,18 @@
         ws8 = "8";
         ws9 = "9";
         ws10 = "10";
-        transparent = "#00000000";
       in {
         enable = true;
         # package = with pkgs; i3-gaps;
         config = {
           terminal = "alacritty";
+          menu = ''
+            ${pkgs.dmenu}/bin/dmenu_run \
+              -nb '${black}' \
+              -nf '${gray5}' \
+              -sb '${brown}' \
+              -sf '${gray0}'
+          '';
           # startup = [{
           #   # Polybar sometimes starts faster than i3, 
           #   # resulting in the i3-module not activating
@@ -89,11 +98,11 @@
           #   notification = false;
           # }];
           bars = [{
-            colors = with config.theme; {
+            colors = {
               activeWorkspace = {
-                background = gray2;
+                background = gray3;
                 border = gray3;
-                text = gray5;
+                text = white;
               };
               background = gray0;
               bindingMode = {
@@ -103,7 +112,7 @@
               };
               focusedWorkspace = {
                 background = brown;
-                border = yellow1;
+                border = brown;
                 text = gray0;
               };
               inactiveWorkspace = {
@@ -119,7 +128,7 @@
                 text = gray0;
               };
             };
-
+            font.names = [ "Dina" ];
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
@@ -132,7 +141,7 @@
           fonts = {
             # names = [ "Roboto" ];
             names = [ "Dina" "Sarasa UI J" ];
-            size = 10.0;
+            size = 9.0;
           };
           modifier = "Mod4";
           keybindings = pkgs.lib.mkOptionDefault {
@@ -202,7 +211,7 @@
             "${modifier}+Shift+Mod2+81" = "move container to workspace ${ws9}";
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
           };
-          colors = with config.theme; {
+          colors = {
             background = gray0;
             focused = {
               background = brown;
@@ -219,8 +228,8 @@
               indicator = gray1;
             };
             focusedInactive = {
-              background = gray2;
-              text = gray5;
+              background = gray3;
+              text = white;
               border = gray3;
               childBorder = gray3;
               indicator = gray3;
