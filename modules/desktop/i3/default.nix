@@ -7,39 +7,58 @@
   };
 
   programs.i3status-rust.enable = true;
-  programs.i3status-rust.bars.default.blocks = [
-    {
-      block = "disk_space";
-      path = "/";
-      alias = "/";
-      info_type = "available";
-      unit = "GB";
-      interval = 60;
-      warning = 20.0;
-      alert = 10.0;
-    }
-    {
-      block = "memory";
-      display_type = "memory";
-      format_mem = "{mem_used_percents}";
-      format_swap = "{swap_used_percents}";
-    }
-    {
-      block = "cpu";
-      interval = 1;
-    }
-    {
-      block = "load";
-      interval = 1;
-      format = "{1m}";
-    }
-    { block = "sound"; }
-    {
-      block = "time";
-      interval = 60;
-      format = "%a %d/%m %r";
-    }
-  ];
+  programs.i3status-rust.bars.default.settings = {
+    theme = {
+      # name = "plain";
+      overrides = with config.theme; {
+        idle_bg = gray0;
+        idle_fg = gray5;
+        info_bg = gray0;
+        info_fg = gray5;
+        good_bg = gray0;
+        good_fg = green;
+        warning_bg = gray0;
+        warning_fg = yellow1;
+        critical_bg = gray0;
+        critical_fg = red;
+        separator_bg = gray0;
+        separator_fg = gray5;
+      };
+    };
+    blocks = [
+      {
+        block = "disk_space";
+        path = "/";
+        alias = "/";
+        info_type = "available";
+        unit = "GB";
+        interval = 60;
+        warning = 20.0;
+        alert = 10.0;
+      }
+      {
+        block = "memory";
+        display_type = "memory";
+        format_mem = "{mem_used_percents}";
+        format_swap = "{swap_used_percents}";
+      }
+      {
+        block = "cpu";
+        interval = 1;
+      }
+      {
+        block = "load";
+        interval = 1;
+        format = "{1m}";
+      }
+      { block = "sound"; }
+      {
+        block = "time";
+        interval = 60;
+        format = "%a %d/%m %r";
+      }
+    ];
+  };
 
   xsession = {
     enable = true;
@@ -59,7 +78,7 @@
         transparent = "#00000000";
       in {
         enable = true;
-        package = with pkgs; i3-gaps;
+        # package = with pkgs; i3-gaps;
         config = {
           terminal = "alacritty";
           # startup = [{
@@ -70,17 +89,49 @@
           #   notification = false;
           # }];
           bars = [{
+            colors = with config.theme; {
+              activeWorkspace = {
+                background = gray2;
+                border = gray3;
+                text = gray5;
+              };
+              background = gray0;
+              bindingMode = {
+                background = red;
+                border = red;
+                text = gray0;
+              };
+              focusedWorkspace = {
+                background = brown;
+                border = yellow1;
+                text = gray0;
+              };
+              inactiveWorkspace = {
+                background = gray0;
+                border = gray3;
+                text = gray5;
+              };
+              separator = gray5;
+              statusline = gray5;
+              urgentWorkspace = {
+                background = red;
+                border = red;
+                text = gray0;
+              };
+            };
+
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
           window.border = 1;
-          gaps = {
-            #inner = 12;
-            #outer = 0;
-            #smartBorders = "no_gaps";
-          };
+          # gaps = {
+          #   inner = 12;
+          #   outer = 0;
+          #   smartBorders = "no_gaps";
+          # };
           fonts = {
-            names = [ "Roboto" ];
+            # names = [ "Roboto" ];
+            names = [ "Dina" "Sarasa UI J" ];
             size = 10.0;
           };
           modifier = "Mod4";
