@@ -207,7 +207,7 @@
             focused = {
               background = brown;
               text = gray0;
-              border = yellow1;
+              border = brown;
               childBorder = brown;
               indicator = red;
             };
