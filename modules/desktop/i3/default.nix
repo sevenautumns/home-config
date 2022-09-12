@@ -1,4 +1,6 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, lib, ... }:
+let font = "Dina";
+in {
 
   services.redshift = {
     enable = true;
@@ -89,7 +91,7 @@
               -nf '${gray5}' \
               -sb '${brown}' \
               -sf '${gray0}' \
-              -fn Dina
+              -fn ${font}
           '';
           # startup = [{
           #   # Polybar sometimes starts faster than i3, 
@@ -129,7 +131,7 @@
                 text = gray0;
               };
             };
-            fonts.names = [ "Dina" ];
+            fonts.names = [ font ];
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
@@ -141,31 +143,62 @@
           # };
           fonts = {
             # names = [ "Roboto" ];
-            names = [ "Dina" "Sarasa UI J" ];
+            names = [ font "Sarasa UI J" ];
             size = 9.0;
           };
           modifier = "Mod4";
-          keybindings = pkgs.lib.mkOptionDefault {
-            "${modifier}+s" = "layout stacking";
-            "${modifier}+y" = "layout tabbed";
-            "${modifier}+z" = "layout tabbed";
-            "${modifier}+e" = "layout toggle split";
-            "${modifier}+h" = "split h";
-            "${modifier}+v" = "split v";
-            "${modifier}+c" = "kill";
-            "${modifier}+x" = "move workspace to output next";
+          keybindings = with config.theme-non_hex;
+            pkgs.lib.mkOptionDefault {
+              "${modifier}+s" = "layout stacking";
+              "${modifier}+y" = "layout tabbed";
+              "${modifier}+z" = "layout tabbed";
+              "${modifier}+e" = "layout toggle split";
+              "${modifier}+h" = "split h";
+              "${modifier}+v" = "split v";
+              "${modifier}+c" = "kill";
+              "${modifier}+x" = "move workspace to output next";
 
-            "${modifier}+w" = "exec firefox";
-            "${modifier}+Shift+Return" =
-              "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+              "${modifier}+l" = ''
+                exec ${pkgs.i3lock-color}/bin/i3lock-color \
+                  --nofork \
+                  --color '${gray0}' \
+                  --clock \
+                  --indicator \
+                  --insidever-color="${green}" \
+                  --insidewrong-color="${red}" \
+                  --inside-color="${gray0}" \
+                  --ringver-color="${green}" \
+                  --ringwrong-color="${red}" \
+                  --ring-color="${brown}" \
+                  --keyhl-color="${red}" \
+                  --bshl-color="${red}" \
+                  --separator-color="${gray0}" \
+                  --line-uses-inside \
+                  --verif-color="${gray0}" \
+                  --wrong-color="${gray0}" \
+                  --modif-color="${gray0}" \
+                  --layout-color="${white}" \
+                  --date-color="${white}" \
+                  --time-color="${white}"
+                  # --time-font="${font}" \
+                  # --date-font="${font}" \
+                  # --layout-font="${font}" \
+                  # --verif-font="${font}" \
+                  # --wrong-font="${font}" 
+              '';
 
-            "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
-            "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
-            "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
-            "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-            "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
-            "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
-          };
+              "${modifier}+w" = "exec firefox";
+              "${modifier}+Shift+Return" =
+                "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+
+              "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
+              "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
+              "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
+              "XF86AudioPlay" =
+                "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+              "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+              "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+            };
           keycodebindings = {
             # Workspace select numpad
             "${modifier}+87" = "workspace ${ws1}";
