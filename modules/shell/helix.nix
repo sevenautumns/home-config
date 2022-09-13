@@ -26,14 +26,14 @@
       };
     };
     languages = [
-      # {
-      #   name = "rust";
-      #   config = {
-      #     checkOnSave.command = "clippy";
-      #     cargo.allFeatures = true;
-      #     procMacro.enable = true;
-      #   };
-      # }
+      {
+        name = "rust";
+        config = {
+          checkOnSave.command = "clippy";
+          cargo.allFeatures = true;
+          procMacro.enable = true;
+        };
+      }
       {
         name = "latex";
         language-server.command = "ltex-ls";

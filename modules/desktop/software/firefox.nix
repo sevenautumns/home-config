@@ -124,7 +124,7 @@ in {
             {
               name = "Github Code";
               keyword = ":gc";
-              url = "https://github.com/search?q=%s+type=Code&ref=advsearch";
+              url = "https://github.com/search?q=%s&type=Code&ref=advsearch";
             }
             {
               name = "Github Rust";
