@@ -4,7 +4,6 @@
     package = inputs.helix.packages."${pkgs.system}".default;
     settings = {
       theme = "autumn";
-      # theme = "gruvbox";
       editor = {
         true-color = true;
         idle-timeout = 0;
@@ -14,15 +13,27 @@
           normal = "block";
           select = "block";
         };
-        # shell = [ "fish" ];
       };
-      keys.normal.space.u = ":format";
-      keys.normal.space.n = ":new";
+      keys.normal = {
+        "^" = "goto_first_nonwhitespace";
+        "$" = "goto_line_end";
+        space.space = "file_picker";
+        space.w = ":write";
+        space.q = ":quit";
+        # space.c = ":buffer-close";
+        space.o = ":reload";
+        space.u = ":format";
+        space.n = ":new";
+      };
       keys.insert = {
         up = "move_line_up";
         down = "move_line_down";
         left = "move_char_left";
         right = "move_char_right";
+      };
+      keys.select = {
+        "^" = "goto_line_start";
+        "$" = "goto_line_end";
       };
     };
     languages = [
