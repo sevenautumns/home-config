@@ -6,6 +6,7 @@
       theme = "autumn";
       # theme = "gruvbox";
       editor = {
+        true-color = true;
         idle-timeout = 0;
         #lsp.display-messages = true;
         cursor-shape = {

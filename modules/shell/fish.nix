@@ -27,9 +27,6 @@
       set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
       set -g fish_color_user brgreen
       set -g fish_color_valid_path --underline
-      
-      # Enable 24bit color
-      set -g fish_term24bit 1
 
       # Hooks.
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
