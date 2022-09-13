@@ -1,7 +1,7 @@
 { pkgs, config, lib, machine, inputs, ... }: {
   programs.helix = {
     enable = true;
-    # package = inputs.helix.packages."${pkgs.system}".default;
+    package = inputs.helix.packages."${pkgs.system}".default;
     settings = {
       theme = "autumn";
       # theme = "gruvbox";
@@ -16,14 +16,23 @@
         # shell = [ "fish" ];
       };
       keys.normal.space.u = ":format";
-      # keys.insert = {
-      #   up = "move_line_up";
-      #   down = "mode_line_down";
-      #   left = "move_char_left";
-      #   right = "move_char_right";
-      # };
+      keys.normal.space.n = ":new";
+      keys.insert = {
+        up = "move_line_up";
+        down = "move_line_down";
+        left = "move_char_left";
+        right = "move_char_right";
+      };
     };
     languages = [
+      # {
+      #   name = "rust";
+      #   config = {
+      #     checkOnSave.command = "clippy";
+      #     cargo.allFeatures = true;
+      #     procMacro.enable = true;
+      #   };
+      # }
       {
         name = "latex";
         language-server.command = "ltex-ls";

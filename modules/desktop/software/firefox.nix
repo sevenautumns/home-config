@@ -122,6 +122,12 @@ in {
                 "https://github.com/search?q=%s+language%3ANix&type=Code&ref=advsearch&l=Nix";
             }
             {
+              name = "Github Code";
+              keyword = ":gc";
+              url =
+                "https://github.com/search?q=%s+type=Code&ref=advsearch";
+            }
+            {
               name = "Github Rust";
               keyword = ":gr";
               url =
