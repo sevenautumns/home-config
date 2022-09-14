@@ -18,6 +18,7 @@
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11;
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.driSupport32Bit = true;
   hardware.opengl.enable = true;
 
   networking.hostName = "neesama";

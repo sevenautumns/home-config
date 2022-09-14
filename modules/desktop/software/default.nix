@@ -65,6 +65,9 @@ in {
       kcc
       gnome-network-displays
       calibre
+      
+      heroic
+      lutris
 
       #learning
       anki
