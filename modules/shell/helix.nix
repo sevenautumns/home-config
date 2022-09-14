@@ -46,6 +46,13 @@
         };
       }
       {
+        name = "toml";
+        language-server = {
+          command = "taplo";
+          args = [ "lsp" "stdio" ];
+        };
+      }
+      {
         name = "latex";
         language-server.command = "ltex-ls";
       }
@@ -86,6 +93,7 @@
 
     # Language servers
     clang-tools # C-Style
+    taplo # Toml
     cmake-language-server # Cmake
     texlab # LaTeX
     gopls # Go
