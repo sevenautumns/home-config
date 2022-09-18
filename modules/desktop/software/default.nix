@@ -10,6 +10,7 @@ in {
     ./ibus.nix
     ./kitty.nix
     ./mpv.nix
+    ./lutris.nix
     #./redshift.nix
     ./rust.nix
     ./vscode.nix
@@ -65,9 +66,8 @@ in {
       kcc
       gnome-network-displays
       calibre
-      
+
       heroic
-      lutris
 
       #learning
       anki

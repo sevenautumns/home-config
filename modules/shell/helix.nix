@@ -1,7 +1,10 @@
 { pkgs, config, lib, machine, inputs, ... }: {
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages."${pkgs.system}".default;
+    package = if (machine.arch == "x86_64-linux") then
+      inputs.helix.packages."${pkgs.system}".default
+    else
+      pkgs.stable.helix;
     settings = {
       theme = "autumn";
       editor = {
@@ -20,7 +23,7 @@
         space.space = "file_picker";
         space.w = ":write";
         space.q = ":quit";
-        # space.c = ":buffer-close";
+        # space.c = ":buffer-close
         space.o = ":reload";
         space.u = ":format";
         space.n = ":new";

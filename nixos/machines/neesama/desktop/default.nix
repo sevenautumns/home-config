@@ -1,5 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [ ./gnome.nix ./pipewire.nix ];
+  imports = [ ./gdm.nix ./pipewire.nix ];
 
   hardware.xone.enable = true;
   hardware.opentabletdriver.enable = true;

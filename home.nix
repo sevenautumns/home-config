@@ -6,6 +6,9 @@ let
   sw = pkgs.writeShellScriptBin "sw" ''
     home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}"
   '';
+  sw-sys = pkgs.writeShellScriptBin "sw-sys" ''
+    sudo nixos-rebuild switch --flake $HOME/.config/nixpkgs#"${host}"
+  '';
   hinted = {
 
   };
@@ -29,7 +32,7 @@ in {
     #pkgs.alacritty
     pkgs.unstable.xterm
     sw
-  ];
+  ] ++ lib.optionals (machine.managed-nixos) [ sw-sys ];
 
   home.sessionVariables = {
     LANGUAGE = "en_GB.UTF-8";

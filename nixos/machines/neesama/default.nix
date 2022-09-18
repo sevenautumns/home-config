@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
     ../../common.nix
+    ../../syncthing.nix
     ./desktop
     ./software/steam.nix
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -23,25 +24,39 @@
 
   networking.hostName = "neesama";
 
-  fileSystems."/" = {
+  ### 500GB nixos
+  fileSystems."/media/nixos_500" = {
     device = "/dev/disk/by-uuid/dad978f1-bcf2-431a-b482-80fff36b4b74";
     fsType = "btrfs";
   };
 
+  # fileSystems."/boot" = {
+  #   device = "/dev/disk/by-uuid/F5B3-D735";
+  #   fsType = "vfat";
+  # };
+  ### 500GB nixos
+
+  ### 1000GB nixos
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/36ac68d4-4473-4030-a30c-fabe8aee0c16";
+    fsType = "btrfs";
+  };
+
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/F5B3-D735";
+    device = "/dev/disk/by-uuid/332D-612D";
     fsType = "vfat";
   };
+  ### 1000GB nixos
 
   fileSystems."/media/ssddata" = {
     device = "/dev/disk/by-uuid/81c6fec5-b8e1-4d7a-b68e-39b16dcc2f86";
     fsType = "btrfs";
   };
 
-  fileSystems."/media/arch" = {
-    device = "/dev/disk/by-uuid/9e37651d-1ad9-4d3c-bdfc-90e4857f38ae";
-    fsType = "btrfs";
-  };
+  # fileSystems."/media/arch" = {
+  #   device = "/dev/disk/by-uuid/9e37651d-1ad9-4d3c-bdfc-90e4857f38ae";
+  #   fsType = "btrfs";
+  # };
 
   fileSystems."/net/index" = {
     device = "index:/export/media";

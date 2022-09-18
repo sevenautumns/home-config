@@ -4,9 +4,10 @@
     ./modules/docker.nix
     ./modules/plex.nix
     ./modules/rr.nix
-    #./modules/syncthing.nix
+    ./modules/paperless.nix
     ./modules/torrent.nix
     ../../common.nix
+    ../../syncthing.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -45,7 +46,12 @@
     #config.services.prometheus.port
     19999 # Netdata
     32400 # Plex
+
+    8384 # Syncthing
   ];
+
+  # Syncthing GUI only for my own network
+  services.syncthing.guiAddress = "192.168.178.2:8384";
 
   # Join share network
   services.zerotierone.joinNetworks = [

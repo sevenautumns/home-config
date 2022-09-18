@@ -46,7 +46,7 @@
   };
 
   # enable openssh
-  environment.systemPackages = [ pkgs.openssh ];
+  environment.systemPackages = with pkgs; [ openssh git ];
   services.openssh = {
     enable = true;
     passwordAuthentication = false;

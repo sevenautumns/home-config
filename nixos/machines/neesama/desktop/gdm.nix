@@ -10,7 +10,7 @@
 
     displayManager = {
       defaultSession = "user";
-      job.preStart = "sleep 2";
+      # job.preStart = "sleep 2";
       autoLogin = {
         enable = true;
         user = "autumnal";
@@ -21,7 +21,7 @@
         start = "exec $HOME/.xsession";
       }];
     };
-    desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
