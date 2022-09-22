@@ -3,6 +3,9 @@ let
   host = machine.host;
   #naersk = pkgs.callPackage inputs.naersk {};
   #rdf = naersk.buildPackage inputs.rdf;
+  hm-options = pkgs.writeShellScriptBin "hm-options" ''
+    xdg-open ${inputs.homeManager.packages.${machine.arch}.docs-html}/share/doc/home-manager/options.html
+  '';
 in {
   imports = [
     ./alacritty.nix
@@ -52,8 +55,6 @@ in {
 
       #dev
       nixfmt
-      jetbrains.idea-ultimate
-      jetbrains.pycharm-professional
 
       #misc
       bitwarden
@@ -66,9 +67,8 @@ in {
       kcc
       gnome-network-displays
       calibre
-
-      heroic
-
+      hm-options
+      
       #learning
       anki
     ] ++ lib.optionals (machine.nixos) [

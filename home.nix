@@ -1,4 +1,4 @@
-{ config, pkgs, lib, machine, ... }:
+{ config, pkgs, lib, machine, inputs, ... }:
 let
   host = machine.host;
   user = machine.user;
@@ -19,7 +19,7 @@ in {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  # xdg.configFile."test".text = "${config.scheme.base07}";
+  # xdg.configFile."test".text = "${inputs.homeManager.packages.${machine.arch}.docs-html}";
   xdg.enable = true;
 
   # scheme = (config.lib.base16.mkSchemeAttrs {

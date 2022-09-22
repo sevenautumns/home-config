@@ -18,7 +18,6 @@
     hyperfine
     calc
     neofetch
-    btop
   ];
 
   programs.direnv.enable = true;
@@ -54,9 +53,15 @@
   else
     "/run/user/1000/keyring/ssh";
 
+  programs.btop = {
+    enable = true;
+    settings = { color_theme = "monokai"; };
+  };
+
   programs.htop.enable = true;
   programs.bottom.enable = true;
   programs.bat.enable = true;
+  programs.broot.enable = true;
   home.sessionVariables.BAT_THEME = "base16";
   programs.nix-index = {
     enable = true;

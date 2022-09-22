@@ -21,6 +21,7 @@ in {
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;
+        # Autumn
         primary = {
           background = "#292929";
           foreground = "#F3F2CC";
@@ -49,6 +50,32 @@ in {
           cyan = "#7BB2AA";
           white = "#AAAAAA";
         };
+
+        # Monokai Pro
+        # primary = {
+        #   background = "0x2D2A2E";
+        #   foreground = "0xfff1f3";
+        # };
+        # normal = {
+        #   black = "0x2c2525";
+        #   red = "0xfd6883";
+        #   green = "0xadda78";
+        #   yellow = "0xf9cc6c";
+        #   blue = "0xf38d70";
+        #   magenta = "0xa8a9eb";
+        #   cyan = "0x85dacc";
+        #   white = "0xfff1f3";
+        # };
+        # bright = {
+        #   black = "0x72696a";
+        #   red = "0xfd6883";
+        #   green = "0xadda78";
+        #   yellow = "0xf9cc6c";
+        #   blue = "0xf38d70";
+        #   magenta = "0xa8a9eb";
+        #   cyan = "0x85dacc";
+        #   white = "0xfff1f3";
+        # };
 
         # primary = {
         #   background = "0x282828";

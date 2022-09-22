@@ -30,7 +30,13 @@
     kcc.flake = false;
 
     helix = {
-      url = "github:helix-editor/helix";
+      url = "github:pascalkuthe/helix/git-diff-sign";
+      # url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    nil = {
+      url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 

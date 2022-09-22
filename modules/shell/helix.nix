@@ -18,8 +18,16 @@
         };
       };
       keys.normal = {
-        "^" = "goto_first_nonwhitespace";
-        "$" = "goto_line_end";
+        "^" = [
+          "select_mode"        
+          "goto_first_nonwhitespace"
+          "normal_mode"
+        ];
+        "$" = [
+          "select_mode"        
+          "goto_line_end"
+          "normal_mode"
+        ];
         space.space = "file_picker";
         space.w = ":write";
         space.q = ":quit";
@@ -27,16 +35,52 @@
         space.o = ":reload";
         space.u = ":format";
         space.n = ":new";
+        "C-down" = [
+          "move_line_down"
+          "move_line_down"
+          "move_line_down"
+          "move_line_down"
+          "move_line_down"
+        ];
+        "C-up" = [
+          "move_line_up"
+          "move_line_up"
+          "move_line_up"
+          "move_line_up"
+          "move_line_up"
+        ];
       };
       keys.insert = {
         up = "move_line_up";
         down = "move_line_down";
         left = "move_char_left";
         right = "move_char_right";
+        "C-down" = [
+          "move_line_down"
+          "move_line_down"
+          "move_line_down"
+          "move_line_down"
+          "move_line_down"
+        ];
+        "C-up" = [
+          "move_line_up"
+          "move_line_up"
+          "move_line_up"
+          "move_line_up"
+          "move_line_up"
+        ];
       };
       keys.select = {
-        "^" = "goto_line_start";
-        "$" = "goto_line_end";
+        "^" = [
+          "select_mode"        
+          "goto_first_nonwhitespace"
+          "normal_mode"
+        ];
+        "$" = [
+          "select_mode"        
+          "goto_line_end"
+          "normal_mode"
+        ];
       };
     };
     languages = [
@@ -44,8 +88,8 @@
         name = "rust";
         config = {
           checkOnSave.command = "clippy";
-          cargo.allFeatures = true;
           procMacro.enable = true;
+          diagnostics.disabled = [ "unresolved-proc-macro" ];
         };
       }
       {
@@ -62,6 +106,7 @@
       {
         name = "nix";
         formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+        # language-server.command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";
       }
       {
         name = "git-commit";

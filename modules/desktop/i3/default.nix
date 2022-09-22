@@ -82,7 +82,7 @@ in {
         ws10 = "10";
       in {
         enable = true;
-        # package = with pkgs; i3-gaps;
+        package = with pkgs; i3-gaps;
         config = {
           terminal = "alacritty";
           menu = ''
@@ -132,6 +132,7 @@ in {
               };
             };
             fonts.names = [ font ];
+            # mode = "hide";
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
@@ -166,14 +167,14 @@ in {
                   --indicator \
                   --insidever-color="${green}" \
                   --insidewrong-color="${red}" \
-                  --inside-color="${gray0}" \
-                  --ringver-color="${green}" \
-                  --ringwrong-color="${red}" \
+                  --inside-color="${brown}" \
+                  --ringver-color="${brown}" \
+                  --ringwrong-color="${brown}" \
                   --ring-color="${brown}" \
                   --keyhl-color="${red}" \
                   --bshl-color="${red}" \
                   --separator-color="${gray0}" \
-                  --line-uses-inside \
+                  # --line-uses-inside \
                   --verif-color="${gray0}" \
                   --wrong-color="${gray0}" \
                   --modif-color="${gray0}" \
@@ -185,6 +186,10 @@ in {
                   # --layout-font="${font}" \
                   # --verif-font="${font}" \
                   # --wrong-font="${font}" 
+              '';
+              
+              "${modifier}+Shift+d" = ''
+                exec alacritty --class=launcher -e "${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop"
               '';
 
               "${modifier}+w" = "exec firefox";
@@ -277,6 +282,9 @@ in {
             };
           };
         };
+        extraConfig = ''
+          for_window [instance="^launcher$"] floating enable sticky enable resize set 30 ppt 60 ppt border normal 10
+        '';
       };
     };
   };
