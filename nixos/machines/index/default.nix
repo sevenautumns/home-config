@@ -74,10 +74,10 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      # Limit WeebWork upload to 30mbits with 8192kbit bursts. Drop packages with more than 1000ms latency
+      # Limit WeebWork upload to 30mbits with 8192kbit bursts. Drop packages with more than 5000ms latency
       # https://netbeez.net/blog/how-to-use-the-linux-traffic-control/
       # Use replace instead of add. This way id works whether its been added already or not
-      "*/5 * * * *   root   tc qdisc replace dev ztbtovjx4h root tbf rate 30mbit burst 8192kbit latency 1000ms"
+      "*/5 * * * *   root   tc qdisc replace dev ztbtovjx4h root tbf rate 30mbit burst 8192kbit latency 5000ms"
     ];
   };
 

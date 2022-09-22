@@ -1,8 +1,8 @@
 { pkgs, config, inputs, lib, ... }: {
   services.paperless = {
-    enable = true;
+    enable = false;
     user = "autumnal";
-    address = "index";
+    address = "10.4.0.0";
     dataDir = "/media/paperless";
   };
 }

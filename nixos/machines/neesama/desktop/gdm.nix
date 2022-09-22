@@ -10,7 +10,7 @@
 
     displayManager = {
       defaultSession = "user";
-      # job.preStart = "sleep 2";
+      job.preStart = "sleep 4";
       autoLogin = {
         enable = true;
         user = "autumnal";
