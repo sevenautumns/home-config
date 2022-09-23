@@ -18,16 +18,8 @@
         };
       };
       keys.normal = {
-        "^" = [
-          "select_mode"        
-          "goto_first_nonwhitespace"
-          "normal_mode"
-        ];
-        "$" = [
-          "select_mode"        
-          "goto_line_end"
-          "normal_mode"
-        ];
+        "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
+        "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
         space.space = "file_picker";
         space.w = ":write";
         space.q = ":quit";
@@ -71,16 +63,8 @@
         ];
       };
       keys.select = {
-        "^" = [
-          "select_mode"        
-          "goto_first_nonwhitespace"
-          "normal_mode"
-        ];
-        "$" = [
-          "select_mode"        
-          "goto_line_end"
-          "normal_mode"
-        ];
+        "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
+        "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
       };
     };
     languages = [
@@ -133,6 +117,15 @@
   home.sessionVariables.EDITOR = "${pkgs.helix}/bin/hx";
 
   home.packages = with pkgs; [
+    (makeDesktopItem {
+      name = "helix";
+      desktopName = "Helix";
+      exec =
+        "${config.programs.alacritty.package}/bin/alacritty --title Helix --class helix -e ${config.programs.helix.package}/bin/hx %F";
+      terminal = false;
+      type = "Application";
+    })
+
     # Debugging stuff
     lldb
 

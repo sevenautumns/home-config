@@ -7,10 +7,24 @@ in {
     enable = true;
     package = with pkgs; stable.firefox;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      vimium
       ublock-origin
       bitwarden
       videospeed
       sponsorblock
+      flagfox
+      i-dont-care-about-cookies
+      https-everywhere
+      enhanced-github
+      privacy-badger
+      languagetool
+      # linkhints # less vim more links
+      terms-of-service-didnt-read
+      rust-search-extension
+      augmented-steam
+      protondb-for-steam
+      copy-selection-as-markdown
+      behind-the-overlay-revival
     ];
     profiles.default = {
       id = 0;

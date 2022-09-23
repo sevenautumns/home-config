@@ -153,7 +153,7 @@ in {
               "${modifier}+s" = "layout stacking";
               "${modifier}+y" = "layout tabbed";
               "${modifier}+z" = "layout tabbed";
-              "${modifier}+e" = "layout toggle split";
+              "${modifier}+q" = "layout toggle split";
               "${modifier}+h" = "split h";
               "${modifier}+v" = "split v";
               "${modifier}+c" = "kill";
@@ -187,14 +187,21 @@ in {
                   # --verif-font="${font}" \
                   # --wrong-font="${font}" 
               '';
-              
+
               "${modifier}+Shift+d" = ''
                 exec alacritty --class=launcher -e "${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop"
               '';
 
+              "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+              "${modifier}+Shift+Return" = ''
+                exec ${pkgs.alacritty}/bin/alacritty --working-directory="$(${pkgs.xcwd}/bin/xcwd)"'';
+              "${modifier}+e" = "exec ${pkgs.xdg-utils}/bin/xdg-open ~";
+              "${modifier}+Shift+e" = ''
+                exec ${pkgs.xdg-utils}/bin/xdg-open "$(${pkgs.xcwd}/bin/xcwd)"'';
+
               "${modifier}+w" = "exec firefox";
-              "${modifier}+Shift+Return" =
-                "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+              # "${modifier}+Shift+Return" =
+              #   "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
 
               "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
               "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
