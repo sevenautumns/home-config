@@ -25,7 +25,7 @@
       navigate = true;
       line-numbers = true;
       diff-so-fancy = true;
-      side-by-side = true;
+      side-by-side = false;
     };
   };
 }

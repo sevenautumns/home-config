@@ -28,7 +28,7 @@ in {
         font = "Dina Medium 10";
         bg0 = mkLiteral gray0;
         bg1 = mkLiteral gray3;
-        fg0 = mkLiteral gray5;
+        fg0 = mkLiteral white;
 
         pad = mkLiteral "6px";
         spac = mkLiteral "4px";
@@ -113,7 +113,7 @@ in {
       extraConfig = ''
         # https://github.com/carnager/rofi-pass/issues/223
         help_color="#FF0000"
-        
+
         USERNAME_field='login'
       '';
     };

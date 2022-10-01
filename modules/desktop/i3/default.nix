@@ -83,7 +83,7 @@ in {
         ws10 = "10";
       in {
         enable = true;
-        package = with pkgs; i3-gaps;
+        package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
           menu = ''
