@@ -17,7 +17,7 @@ in {
         opacity = 1;
         gtk_theme_variant = "dark";
       };
-      font.size = 11;
+      font.size = 10;
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;

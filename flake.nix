@@ -46,10 +46,10 @@
     fcitx5-adwaita.url = "github:escape0707/fcitx5-adwaita-dark";
     fcitx5-adwaita.flake = false;
 
-    pop-shell.url = "github:pop-os/shell/master_jammy";
-    pop-shell.flake = false;
-    pop-launcher.url = "github:pop-os/launcher";
-    pop-launcher.flake = false;
+    # pop-shell.url = "github:pop-os/shell/master_jammy";
+    # pop-shell.flake = false;
+    # pop-launcher.url = "github:pop-os/launcher";
+    # pop-launcher.flake = false;
     syncplay.url = "github:Syncplay/syncplay";
     syncplay.flake = false;
 
@@ -177,6 +177,10 @@
                     config.allowUnfree = true;
                   };
                   stable = import "${inputs.nixpkgs-stable}" {
+                    system = machine.arch;
+                    config.allowUnfree = true;
+                  };
+                  master = import "${inputs.nixpkgs-master}" {
                     system = machine.arch;
                     config.allowUnfree = true;
                   };

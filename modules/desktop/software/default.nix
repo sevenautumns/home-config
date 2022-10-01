@@ -4,7 +4,9 @@ let
   #naersk = pkgs.callPackage inputs.naersk {};
   #rdf = naersk.buildPackage inputs.rdf;
   hm-options = pkgs.writeShellScriptBin "hm-options" ''
-    xdg-open ${inputs.homeManager.packages.${machine.arch}.docs-html}/share/doc/home-manager/options.html $@
+    xdg-open ${
+      inputs.homeManager.packages.${machine.arch}.docs-html
+    }/share/doc/home-manager/options.html $@
   '';
 in {
   imports = [
@@ -69,7 +71,7 @@ in {
       gnome-network-displays
       calibre
       hm-options
-      
+
       #learning
       anki
     ] ++ lib.optionals (machine.nixos) [
@@ -89,9 +91,4 @@ in {
 
   #services.syncthing.enable = true;
   #services.syncthing.tray.enable = true;
-
-  # Fix Nautilus gvfs
-  home.sessionVariables = {
-    GIO_EXTRA_MODULES = [ "${pkgs.gnome.gvfs}/lib/gio/modules" ];
-  };
 }

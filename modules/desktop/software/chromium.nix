@@ -5,7 +5,7 @@ let
 in {
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium.override { 
+    package = pkgs.chromium.override {
       enableWideVine = true;
       # ungoogled = true;
     };
@@ -19,7 +19,9 @@ in {
       { id = "nffaoalbilbmmfgbnbgppjihopabppdk"; } # video speed controller
       { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # sponsorblock
       { id = "mlpapfcfoakknnhkfpencomejbcecdfp"; } # ip domain country flag
-      { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # i dont care about cookies
+      {
+        id = "fihnjjcciajhdojfnbdddfaoknhalnja";
+      } # i dont care about cookies
       # { id = "oldceeleldhonbafppcapldpdifcinji"; } # languagetool
       { id = "hjdoplcnndgiblooccencgcggcoihigg"; } # terms of service didnt read
       { id = "ljipkdpcjbmhkdjjmbbaggebcednbbme"; } # behind the overlay

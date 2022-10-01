@@ -1,5 +1,11 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [ ./gdm.nix ./pipewire.nix ];
+  imports = [ ./greetd.nix ./pipewire.nix ];
+
+  programs.dconf.enable = true;
+
+  services.gvfs.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
 
   hardware.xone.enable = true;
   hardware.opentabletdriver.enable = true;

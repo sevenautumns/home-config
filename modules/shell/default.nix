@@ -44,20 +44,21 @@
       dialect = "uk";
     };
   };
-  
+
   programs.password-store = {
     enable = true;
-    package = pkgs.pass.withExtensions (exts: [
-      # exts.pass-import
-      exts.pass-audit
-    ]);
-    settings = {
-      PASSWORD_STORE_DIR = "$HOME/.password-store";
-    };
+    package = pkgs.pass.withExtensions (exts:
+      [
+        # exts.pass-import
+        # exts.pass-audit
+      ]);
+    settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
   };
 
   programs.tealdeer.enable = true;
 
+  programs.gpg.enable = true;
+  services.gpg-agent.enable = true;
   services.gnome-keyring.enable = true;
   home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then
     "/run/user/125030/keyring/ssh"

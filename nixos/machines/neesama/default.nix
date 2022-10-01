@@ -23,12 +23,10 @@
   hardware.opengl.enable = true;
 
   networking.hostName = "neesama";
-  
-  security.polkit.enable = true;
 
   # services.teamviewer.enable = true;
   # environment.systemPackages = with pkgs; [ teamviewer ];
-    
+
   ### 500GB nixos
   fileSystems."/media/nixos_500" = {
     device = "/dev/disk/by-uuid/dad978f1-bcf2-431a-b482-80fff36b4b74";

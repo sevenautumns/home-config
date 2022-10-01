@@ -22,6 +22,8 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  boot.enableContainers = false;
+
   # enable zerotier virtual switch
   services.zerotierone = {
     enable = true;

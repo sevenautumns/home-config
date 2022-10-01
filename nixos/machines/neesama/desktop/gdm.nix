@@ -1,7 +1,4 @@
 { config, lib, pkgs, modulesPath, ... }: {
-
-  programs.dconf.enable = true;
-
   services.xserver = {
     enable = true;
     dpi = 80;
@@ -26,7 +23,4 @@
     };
     desktopManager.gnome.enable = true;
   };
-
-  services.gnome.gnome-keyring.enable = true;
-
 }

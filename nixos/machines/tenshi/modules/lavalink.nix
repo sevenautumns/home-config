@@ -3,7 +3,7 @@ let
   lavalink = pkgs.fetchurl {
     url =
       "https://ci.fredboat.com/guestAuth/repository/download/Lavalink_Build/.lastSuccessful/Lavalink.jar?branch=refs/heads/dev";
-    sha256 = "sha256-p5qOFlnxssolS1gK5EJarkbuUvOdHeYV/UznjIqWHq8=";
+    sha256 = "sha256-1FFHBZPUEwR0ZO75mc3aet8TpAlY+Sv/CqBDJNR6OUs=";
   };
 in {
   systemd.services.lavalink = {

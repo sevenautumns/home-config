@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }:
 let font = "Dina";
 in {
+  imports = [ ./rofi.nix ];
 
   services.redshift = {
     enable = true;
@@ -137,11 +138,11 @@ in {
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
           window.border = 1;
-          # gaps = {
-          #   inner = 12;
-          #   outer = 0;
-          #   smartBorders = "no_gaps";
-          # };
+          gaps = {
+            inner = 5;
+            outer = 0;
+            smartBorders = "no_gaps";
+          };
           fonts = {
             # names = [ "Roboto" ];
             names = [ font "Sarasa UI J" ];
@@ -165,32 +166,32 @@ in {
                   --color '${gray0}' \
                   --clock \
                   --indicator \
-                  --insidever-color="${green}" \
-                  --insidewrong-color="${red}" \
-                  --inside-color="${brown}" \
-                  --ringver-color="${brown}" \
-                  --ringwrong-color="${brown}" \
+                  --inside-color="${gray0}" \
                   --ring-color="${brown}" \
+                  --insidever-color="${gray0}" \
+                  --ringver-color="${yellow1}" \
+                  --insidewrong-color="${gray0}" \
+                  --ringwrong-color="${red}" \
+                  --line-uses-inside \
                   --keyhl-color="${red}" \
                   --bshl-color="${red}" \
                   --separator-color="${gray0}" \
-                  # --line-uses-inside \
                   --verif-color="${gray0}" \
                   --wrong-color="${gray0}" \
                   --modif-color="${gray0}" \
+                  --verif-color="${white}" \
+                  --wrong-color="${white}" \
+                  --modif-color="${white}" \
                   --layout-color="${white}" \
                   --date-color="${white}" \
-                  --time-color="${white}"
-                  # --time-font="${font}" \
-                  # --date-font="${font}" \
-                  # --layout-font="${font}" \
-                  # --verif-font="${font}" \
-                  # --wrong-font="${font}" 
+                  --time-color="${white}" \
+                  --no-modkey-text \
+                  --layout-font="Roboto"
               '';
 
-              "${modifier}+Shift+d" = ''
-                exec alacritty --class=launcher -e "${pkgs.sway-launcher-desktop}/bin/sway-launcher-desktop"
-              '';
+              "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
+              "${modifier}+t" = "exec rofi -show window -modi window";
+              "${modifier}+p" = "exec rofi-pass";
 
               "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
               "${modifier}+Shift+Return" = ''
