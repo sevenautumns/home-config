@@ -23,6 +23,8 @@
   hardware.opengl.enable = true;
 
   networking.hostName = "neesama";
+  
+  security.polkit.enable = true;
 
   # services.teamviewer.enable = true;
   # environment.systemPackages = with pkgs; [ teamviewer ];
