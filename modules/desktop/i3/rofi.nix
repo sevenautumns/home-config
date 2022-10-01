@@ -8,6 +8,9 @@ in {
     # font = "Noto Sans Regular 11";
     # plugins = [ pkgs.rofi-calc ];
     extraConfig = {
+      sort = true;
+      sorting-method = "fzf";
+      matching = "fuzzy";
       icon-theme = "Yaru";
       display-ssh = " ";
       display-run = " ";
@@ -110,6 +113,8 @@ in {
       extraConfig = ''
         # https://github.com/carnager/rofi-pass/issues/223
         help_color="#FF0000"
+        
+        USERNAME_field='login'
       '';
     };
   };

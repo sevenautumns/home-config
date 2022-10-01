@@ -185,6 +185,7 @@ in {
                   --layout-color="${white}" \
                   --date-color="${white}" \
                   --time-color="${white}" \
+                  --blur=1 \
                   --no-modkey-text \
                   --layout-font="Roboto"
               '';
