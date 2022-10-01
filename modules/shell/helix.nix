@@ -86,6 +86,7 @@
       {
         name = "latex";
         language-server.command = "ltex-ls";
+        language.config.ltex.language = "en-GB";
       }
       {
         name = "nix";

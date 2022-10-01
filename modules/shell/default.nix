@@ -1,4 +1,4 @@
-{ pkgs, config, machine, ... }: {
+{ pkgs, lib, config, machine, ... }: {
   imports = [
     ./colors.nix
     ./git.nix
@@ -42,6 +42,17 @@
       auto_sync = false;
       search_mode = "fuzzy";
       dialect = "uk";
+    };
+  };
+  
+  programs.password-store = {
+    enable = true;
+    package = pkgs.pass.withExtensions (exts: [
+      # exts.pass-import
+      exts.pass-audit
+    ]);
+    settings = {
+      PASSWORD_STORE_DIR = "$HOME/.password-store";
     };
   };
 

@@ -3,6 +3,8 @@ let
   host = machine.host;
   theme = config.theme;
 in {
+  programs.browserpass.enable = true;
+
   programs.firefox = {
     enable = true;
     package = with pkgs; stable.firefox;
@@ -17,14 +19,13 @@ in {
       https-everywhere
       enhanced-github
       privacy-badger
-      languagetool
       # linkhints # less vim more links
       terms-of-service-didnt-read
-      rust-search-extension
       augmented-steam
       protondb-for-steam
       copy-selection-as-markdown
       behind-the-overlay-revival
+      browserpass
     ];
     profiles.default = {
       id = 0;

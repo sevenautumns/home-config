@@ -4,11 +4,12 @@ let
   #naersk = pkgs.callPackage inputs.naersk {};
   #rdf = naersk.buildPackage inputs.rdf;
   hm-options = pkgs.writeShellScriptBin "hm-options" ''
-    xdg-open ${inputs.homeManager.packages.${machine.arch}.docs-html}/share/doc/home-manager/options.html
+    xdg-open ${inputs.homeManager.packages.${machine.arch}.docs-html}/share/doc/home-manager/options.html $@
   '';
 in {
   imports = [
     ./alacritty.nix
+    ./chromium.nix
     ./firefox.nix
     ./ibus.nix
     ./kitty.nix
