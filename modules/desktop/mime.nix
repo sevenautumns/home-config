@@ -12,6 +12,8 @@
     mimeApps = {
       enable = true;
 
+      associations.added = config.xdg.mimeApps.defaultApplications;
+
       # Configure default applications for mimetypes
       defaultApplications = {
 
@@ -50,6 +52,25 @@
 
         # Email
         "x-scheme-handler/mailto" = [ "firefox.desktop" ];
+      };
+      associations.removed = {
+        "application/pdf" = "wine-extension-pdf.desktop";
+        "application/rtf" = "wine-extension-rtf.desktop";
+        "application/vnd.ms-htmlhelp" = "wine-extension-chm.desktop";
+        "application/winhlp" = "wine-extension-hlp.desktop";
+        "application/x-extension-htm" = "wine-extension-htm.desktop";
+        "application/x-extension-html" = "wine-extension-html.desktop";
+        "application/x-mswinurl" = "wine-extension-url.desktop";
+        "application/x-mswrite" = "wine-extension-wri.desktop";
+        "application/x-wine-extension-ini" = "wine-extension-ini.desktop";
+        "application/x-wine-extension-msp" = "wine-extension-msp.desktop";
+        "application/xml" = "wine-extension-xml.desktop";
+        "image/gif" = "wine-extension-gif.desktop";
+        "image/jpeg" =
+          [ "wine-extension-jfif.desktop" "wine-extension-jpe.desktop" ];
+        "image/png" = "wine-extension-png.desktop";
+        "text/plain" = "wine-extension-txt.desktop";
+        "text/vbscript" = "wine-extension-vbs.desktop";
       };
     };
 
