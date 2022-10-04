@@ -212,6 +212,8 @@ in {
                 "exec ${pkgs.playerctl}/bin/playerctl play-pause";
               "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
               "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+              "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
+              "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
             };
           keycodebindings = {
             # Workspace select numpad
