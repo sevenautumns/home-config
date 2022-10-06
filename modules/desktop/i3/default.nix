@@ -86,14 +86,14 @@ in {
         package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
-          menu = ''
-            ${pkgs.dmenu}/bin/dmenu_run \
-              -nb '${black}' \
-              -nf '${gray5}' \
-              -sb '${brown}' \
-              -sf '${gray0}' \
-              -fn ${font}
-          '';
+          # menu = ''
+          #   ${pkgs.dmenu}/bin/dmenu_run \
+          #     -nb '${black}' \
+          #     -nf '${gray5}' \
+          #     -sb '${brown}' \
+          #     -sf '${gray0}' \
+          #     -fn ${font}
+          # '';
           # startup = [{
           #   # Polybar sometimes starts faster than i3, 
           #   # resulting in the i3-module not activating
@@ -149,6 +149,7 @@ in {
             size = 9.0;
           };
           modifier = "Mod4";
+          focus.followMouse = false;
           keybindings = with config.theme-non_hex;
             pkgs.lib.mkOptionDefault {
               "${modifier}+s" = "layout stacking";

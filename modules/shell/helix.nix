@@ -87,7 +87,12 @@
         name = "latex";
         language-server.command = "ltex-ls";
         # Use correct english
-        config.ltex.language = "en-GB";
+        config.ltex = {
+          language = "en-GB";
+          latex.commands =  {
+            "\\\\lstinline{}" = "dummy";
+          }; 
+        };
       }
       {
         name = "nix";
