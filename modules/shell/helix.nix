@@ -27,6 +27,8 @@
         space.o = ":reload";
         space.u = ":format";
         space.n = ":new";
+        "C-left" =  "move_prev_long_word_start";
+        "C-right" =  "move_next_long_word_end";
         "C-down" = [
           "move_line_down"
           "move_line_down"
@@ -47,6 +49,8 @@
         down = "move_line_down";
         left = "move_char_left";
         right = "move_char_right";
+        "C-left" =  "move_prev_long_word_start";
+        "C-right" =  "move_next_long_word_end";
         "C-down" = [
           "move_line_down"
           "move_line_down"
@@ -91,7 +95,12 @@
           language = "en-GB";
           latex.commands =  {
             "\\\\lstinline{}" = "dummy";
-          }; 
+          };
+          # dictionary = {
+          #   "en-GB" = [
+          #     ":$PRJ_ROOT/.vscode/ltex.dictionary.en-GB.txt"
+          #   ];
+          # };
         };
       }
       {
