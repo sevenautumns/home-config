@@ -137,7 +137,7 @@ in {
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
-          window.border = 1;
+          window.border = 2;
           gaps = {
             inner = 5;
             outer = 0;
