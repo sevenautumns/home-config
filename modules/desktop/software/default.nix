@@ -72,18 +72,14 @@ in {
       calibre
       hm-options
 
-      #learning
-      anki
-
-      # Mango
-      hakuneko
-      (makeDesktopItem {
-        name = "hakuneko-desktop-no-sandbox";
-        desktopName = "HakuNeko Desktop No-Sandbox";
-        exec = "hakuneko --no-sandbox";
-        type = "Application";
-        icon = "hakuneko-desktop";
-      })
+      # hakuneko
+      # (makeDesktopItem {
+      #   name = "hakuneko-desktop-no-sandbox";
+      #   desktopName = "HakuNeko Desktop No-Sandbox";
+      #   exec = "hakuneko --no-sandbox";
+      #   type = "Application";
+      #   icon = "hakuneko-desktop";
+      # })
 
     ] ++ lib.optionals (machine.nixos) [
       discord
