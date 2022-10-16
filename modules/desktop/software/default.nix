@@ -69,8 +69,12 @@ in {
       deploy-rs.deploy-rs
       kcc
       gnome-network-displays
-      calibre
       hm-options
+
+      # https://github.com/NixOS/nixpkgs/pull/196224
+      # qt6.qtwebengine build broke on unstable.
+      # Use stable calibre for the time being
+      stable.calibre
 
       # hakuneko
       # (makeDesktopItem {
@@ -91,8 +95,8 @@ in {
     ] ++ lib.optionals (host == "neesama")
     [ inputs.knock.packages.x86_64-linux.knock ];
 
-  services.network-manager-applet.enable = false;
-  services.blueman-applet.enable = false;
+  services.network-manager-applet.enable = true;
+  services.blueman-applet.enable = true;
   xsession.numlock.enable = true;
   # services.sxhkd.enable = true;
 
