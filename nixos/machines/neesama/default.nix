@@ -22,6 +22,8 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.enable = true;
 
+  hardware.bluetooth.enable = true;
+
   networking.hostName = "neesama";
 
   # services.teamviewer.enable = true;
