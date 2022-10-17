@@ -1,6 +1,4 @@
-{ pkgs, config, lib, ... }:
-let font = "Dina";
-in {
+{ pkgs, config, lib, ... }: {
   imports = [ ./rofi.nix ];
 
   services.redshift = {
@@ -132,7 +130,7 @@ in {
                 text = gray0;
               };
             };
-            fonts.names = [ font ];
+            fonts.names = [ "Dina" ];
             # mode = "hide";
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
@@ -145,7 +143,7 @@ in {
           };
           fonts = {
             # names = [ "Roboto" ];
-            names = [ font "Sarasa UI J" ];
+            names = [ "Dina" "Sarasa UI J" ];
             size = 9.0;
           };
           modifier = "Mod4";

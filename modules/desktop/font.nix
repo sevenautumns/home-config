@@ -10,6 +10,7 @@
     #siji
     dina-font
     twitter-color-emoji
+    comic-mono
     #efont-unicode
   ];
 
