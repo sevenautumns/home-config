@@ -9,6 +9,7 @@ in {
     enable = true;
     package = with pkgs; if machine.nixos then unstable.alacritty else hello;
     settings = {
+      env = { WINIT_X11_SCALE_FACTOR = "1"; };
       window = {
         padding = {
           x = 5;
