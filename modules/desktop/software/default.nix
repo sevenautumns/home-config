@@ -62,13 +62,18 @@ in {
       #misc
       bitwarden
       arandr
-      gnome.nautilus
+      
+      # https://github.com/NixOS/nixpkgs/pull/195985
+      # gtk4 problem, use stable until fixed
+      stable.gnome.nautilus
+
       feh
       syncplay
       gnome-feeds
       deploy-rs.deploy-rs
       kcc
       gnome-network-displays
+      gthumb
       hm-options
 
       # https://github.com/NixOS/nixpkgs/pull/196224

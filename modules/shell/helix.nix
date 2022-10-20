@@ -20,6 +20,7 @@
       keys.normal = {
         "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
         "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
+        X = "extend_line_above";
         space.space = "file_picker";
         space.w = ":write";
         space.q = ":quit";

@@ -5,7 +5,6 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-pop-launcher.url = "github:samhug/nixpkgs/pop-launcher";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nur.url = "github:nix-community/NUR";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -65,7 +64,7 @@
   };
 
   outputs = { self, homeManager, nur, nixgl, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, nixpkgs-master, agenix, ... }@inputs:
+    , nixpkgs-stable, agenix, ... }@inputs:
     let
       lib = nixpkgs-unstable.lib;
       machines = {
@@ -139,10 +138,6 @@
                   system = machine.arch;
                   config.allowUnfree = true;
                 };
-                master = import "${inputs.nixpkgs-master}" {
-                  system = machine.arch;
-                  config.allowUnfree = true;
-                };
               })
               nur.overlay
             ];
@@ -177,10 +172,6 @@
                     config.allowUnfree = true;
                   };
                   stable = import "${inputs.nixpkgs-stable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                  master = import "${inputs.nixpkgs-master}" {
                     system = machine.arch;
                     config.allowUnfree = true;
                   };
