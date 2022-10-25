@@ -123,24 +123,7 @@
         (homeManager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
-            overlays = [
-              deploy-rs.overlay
-              (self: super: {
-                unstable = import "${inputs.nixpkgs-unstable}" {
-                  system = machine.arch;
-                  config.allowUnfree = true;
-                };
-                stable = import "${inputs.nixpkgs-stable}" {
-                  system = machine.arch;
-                  config.allowUnfree = true;
-                };
-                pop-launcher = import "${inputs.nixpkgs-pop-launcher}" {
-                  system = machine.arch;
-                  config.allowUnfree = true;
-                };
-              })
-              nur.overlay
-            ];
+            overlays = [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
           };
           modules = [
             ./home.nix
@@ -164,20 +147,8 @@
           system = machine.arch;
           modules = [
             {
-              nixpkgs.overlays = [
-                deploy-rs.overlay
-                (self: super: {
-                  unstable = import "${inputs.nixpkgs-unstable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                  stable = import "${inputs.nixpkgs-stable}" {
-                    system = machine.arch;
-                    config.allowUnfree = true;
-                  };
-                })
-                nur.overlay
-              ];
+              nixpkgs.overlays =
+                [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
             }
             agenix.nixosModule
             { networking.hostName = host; }
@@ -189,6 +160,17 @@
           };
 
         }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
+
+      overlays.matryoshka-pkgs = final: prev: {
+        unstable = import "${inputs.nixpkgs-unstable}" {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+        stable = import "${inputs.nixpkgs-stable}" {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+      };
 
       deploy.nodes = lib.mapAttrs (host: machine: {
         hostname = machine.address;
