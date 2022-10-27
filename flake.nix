@@ -123,7 +123,8 @@
         (homeManager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
-            overlays = [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
+            overlays =
+              [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
           };
           modules = [
             ./home.nix
@@ -147,11 +148,11 @@
           system = machine.arch;
           modules = [
             {
+              networking.hostName = host;
               nixpkgs.overlays =
                 [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
             }
             agenix.nixosModule
-            { networking.hostName = host; }
             (./nixos/machines + "/${host}")
           ];
           specialArgs = {
@@ -161,6 +162,7 @@
 
         }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
 
+      # Overlay for always having stable and unstable accessible
       overlays.matryoshka-pkgs = final: prev: {
         unstable = import "${inputs.nixpkgs-unstable}" {
           system = prev.system;

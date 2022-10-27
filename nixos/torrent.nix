@@ -48,6 +48,8 @@
     }
   ];
 
+  # TODO use automatically created namespace for transmission instead
+  # https://www.freedesktop.org/software/systemd/man/systemd.exec.html#PrivateNetwork=
   systemd.services.transmission = {
     bindsTo = [ "wireguard-wg0.service" ];
     requires = [ "network-online.target" ];

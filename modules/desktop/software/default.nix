@@ -62,7 +62,7 @@ in {
       #misc
       bitwarden
       arandr
-      
+
       # https://github.com/NixOS/nixpkgs/pull/195985
       # gtk4 problem, use stable until fixed
       stable.gnome.nautilus
