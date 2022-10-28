@@ -161,6 +161,9 @@
           };
 
         }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
+        
+      # https://github.com/LEXUGE/flake nixosModule example
+      # nixosModules.test = let pkgs = nixpkgs-stable; in (import ./modules/desktop/audio {inherit pkgs lib homeManager; });
 
       # Overlay for always having stable and unstable accessible
       overlays.matryoshka-pkgs = final: prev: {

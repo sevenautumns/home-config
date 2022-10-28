@@ -75,11 +75,7 @@ in {
       gnome-network-displays
       gthumb
       hm-options
-
-      # https://github.com/NixOS/nixpkgs/pull/196224
-      # qt6.qtwebengine build broke on unstable.
-      # Use stable calibre for the time being
-      stable.calibre
+      calibre
 
       # hakuneko
       # (makeDesktopItem {
