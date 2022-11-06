@@ -9,7 +9,8 @@
     config = {
       no-keepaspect-window = "";
       #vo = "gpu";
-      #hwdec = "auto";
+      volume = 70;
+      hwdec = "auto";
     };
     bindings = {
       "Ctrl+j" = "cycle secondary-sid";

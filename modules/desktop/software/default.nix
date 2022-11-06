@@ -3,11 +3,11 @@ let
   host = machine.host;
   #naersk = pkgs.callPackage inputs.naersk {};
   #rdf = naersk.buildPackage inputs.rdf;
-  hm-options = pkgs.writeShellScriptBin "hm-options" ''
-    xdg-open ${
-      inputs.homeManager.packages.${machine.arch}.docs-html
-    }/share/doc/home-manager/options.html $@
-  '';
+  # hm-options = pkgs.writeShellScriptBin "hm-options" ''
+  #   xdg-open ${
+  #     inputs.homeManager.packages.${machine.arch}.docs-html
+  #   }/share/doc/home-manager/options.html $@
+  # '';
 in {
   imports = [
     ./alacritty.nix
@@ -74,17 +74,17 @@ in {
       kcc
       gnome-network-displays
       gthumb
-      hm-options
+      # hm-options
       calibre
 
-      # hakuneko
-      # (makeDesktopItem {
-      #   name = "hakuneko-desktop-no-sandbox";
-      #   desktopName = "HakuNeko Desktop No-Sandbox";
-      #   exec = "hakuneko --no-sandbox";
-      #   type = "Application";
-      #   icon = "hakuneko-desktop";
-      # })
+      hakuneko
+      (makeDesktopItem {
+        name = "hakuneko-desktop-no-sandbox";
+        desktopName = "HakuNeko Desktop No-Sandbox";
+        exec = "hakuneko --no-sandbox";
+        type = "Application";
+        icon = "hakuneko-desktop";
+      })
 
     ] ++ lib.optionals (machine.nixos) [
       discord
@@ -96,9 +96,13 @@ in {
     ] ++ lib.optionals (host == "neesama")
     [ inputs.knock.packages.x86_64-linux.knock ];
 
+  xsession.numlock.enable = true;
   services.network-manager-applet.enable = true;
   services.blueman-applet.enable = true;
-  xsession.numlock.enable = true;
+  dconf.settings."org/blueman/general" = {
+    plugin-list = [ "!ConnectionNotifier" ];
+  };
+
   # services.sxhkd.enable = true;
 
   #services.syncthing.enable = true;

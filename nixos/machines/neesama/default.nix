@@ -23,6 +23,7 @@
   hardware.opengl.enable = true;
 
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   networking.hostName = "neesama";
 

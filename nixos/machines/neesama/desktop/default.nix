@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }: {
   imports = [ ./greetd.nix ./pipewire.nix ];
 
+  # Required for various programs
   programs.dconf.enable = true;
 
   services.gvfs.enable = true;

@@ -75,6 +75,13 @@
     };
   };
 
+  systemd.services.transmission = {
+    serviceConfig = {
+      MemoryHigh = "1000M";
+      MemoryMax = "1300M";
+    };
+  };
+
   systemd.services.transmission-forwarder = {
     enable = true;
     bindsTo = [ "transmission.service" ];

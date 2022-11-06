@@ -30,7 +30,7 @@
     # package = pkgs.zerotierone.overrideAttrs (orig: {
     #   buildInputs = orig.buildInputs ++ [ pkgs.miniupnpc pkgs.libnatpmp ];
     # });
-    package = pkgs.stable.zerotierone;
+    # package = pkgs.stable.zerotierone;
     joinNetworks = [
       "565799d8f6299e0c" # Network for my devices
     ];

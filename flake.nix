@@ -4,17 +4,17 @@
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-pop-launcher.url = "github:samhug/nixpkgs/pop-launcher";
+    # nixpkgs-pop-launcher.url = "github:samhug/nixpkgs/pop-launcher";
     nur.url = "github:nix-community/NUR";
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    nixgl = {
-      url = "github:guibou/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # nixgl = {
+    #   url = "github:guibou/nixGL";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
     agenix.url = "github:ryantm/agenix";
-    homeManager = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.utils.follows = "flake-utils";
@@ -63,7 +63,7 @@
     absolut-series-scanner.flake = false;
   };
 
-  outputs = { self, homeManager, nur, nixgl, deploy-rs, nixpkgs-unstable
+  outputs = { self, home-manager, nur, deploy-rs, nixpkgs-unstable
     , nixpkgs-stable, agenix, ... }@inputs:
     let
       lib = nixpkgs-unstable.lib;
@@ -98,29 +98,29 @@
           nixos = true;
           managed-nixos = true;
         };
-        "tenshi" = {
-          user = "autumnal";
-          address = "10.3.0.0";
-          arch = "x86_64-linux";
-          headless = true;
-          nixos = true;
-          managed-nixos = true;
-        };
-        "castle" = {
-          user = "autumnal";
-          #address = "10.2.0.0";
-          address = "192.168.2.250";
-          arch = "aarch64-linux";
-          headless = true;
-          nixos = true;
-          managed-nixos = true;
-        };
+        # "tenshi" = {
+        #   user = "autumnal";
+        #   address = "10.3.0.0";
+        #   arch = "x86_64-linux";
+        #   headless = true;
+        #   nixos = true;
+        #   managed-nixos = true;
+        # };
+        # "castle" = {
+        #   user = "autumnal";
+        #   #address = "10.2.0.0";
+        #   address = "192.168.2.250";
+        #   arch = "aarch64-linux";
+        #   headless = true;
+        #   nixos = true;
+        #   managed-nixos = true;
+        # };
       };
     in {
       homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:
         let machine = pre_machine // { inherit host; };
         in lib.attrsets.nameValuePair (machine.user + "@" + host)
-        (homeManager.lib.homeManagerConfiguration {
+        (home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
             overlays =
@@ -161,9 +161,9 @@
           };
 
         }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
-        
+
       # https://github.com/LEXUGE/flake nixosModule example
-      # nixosModules.test = let pkgs = nixpkgs-stable; in (import ./modules/desktop/audio {inherit pkgs lib homeManager; });
+      # nixosModules.test = let pkgs = nixpkgs-stable; in (import ./modules/desktop/audio {inherit pkgs lib home-manager; });
 
       # Overlay for always having stable and unstable accessible
       overlays.matryoshka-pkgs = final: prev: {

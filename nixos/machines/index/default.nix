@@ -6,6 +6,7 @@
     ./modules/rr.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
+    ./modules/syncplay.nix
     ../../common.nix
     ../../syncthing.nix
     (modulesPath + "/installer/scan/not-detected.nix")

@@ -11,6 +11,15 @@
   services.adguardhome = {
     enable = true;
     openFirewall = true;
+    settings = {
+      bind_port = 3000;
+      bind_host = "0.0.0.0";
+      dns = {
+        bind_port = 3000;
+        bind_host = "0.0.0.0";
+        bootstrap_dns = [ "1.1.1.1" ];
+      };
+    };
   };
 
   networking.firewall = {
