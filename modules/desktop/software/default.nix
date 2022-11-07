@@ -13,7 +13,8 @@ in {
     ./alacritty.nix
     ./chromium.nix
     ./firefox.nix
-    ./ibus.nix
+    ./fcitx.nix
+    # ./ibus.nix
     ./kitty.nix
     ./mpv.nix
     ./lutris.nix
