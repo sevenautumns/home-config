@@ -16,7 +16,7 @@ in {
           y = 5;
         };
         opacity = 1;
-        decorations_theme_variant = "dark";
+        # decorations_theme_variant = "dark";
       };
       font.size = 10;
       shell.program = "${pkgs.fish}/bin/fish";

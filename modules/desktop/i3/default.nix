@@ -195,6 +195,8 @@
               "${modifier}+t" = "exec rofi -show window -modi window";
               "${modifier}+p" = "exec rofi-pass";
 
+              "${modifier}+o" = "exec alacritty --option window.decorations=None --class=launcher -e pulsemixer";
+
               "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
               "${modifier}+Shift+Return" = ''
                 exec ${pkgs.alacritty}/bin/alacritty --working-directory="$(${pkgs.xcwd}/bin/xcwd)"'';

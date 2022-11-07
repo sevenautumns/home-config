@@ -19,6 +19,7 @@
     hyperfine
     calc
     neofetch
+    pulsemixer
   ];
 
   programs.direnv.enable = true;
