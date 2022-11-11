@@ -21,7 +21,7 @@ jobs:
           - frie_sv@ft-ssy-sfnb
           - frie_sv@ft-ssy-stonks
           - autumnal@index
-          - autumnal@castle
+          # - autumnal@castle
     steps:
       - uses: actions/checkout@v2
 
@@ -68,9 +68,10 @@ jobs:
       fail-fast: false
       matrix:
         target:
+          - neesama
           - index
-          - tenshi
-          - castle
+          # - tenshi
+          # - castle
     steps:
       - uses: actions/checkout@v2
 
