@@ -25,6 +25,11 @@
     "net.ipv4.conf.all.src_valid_mark" = 1;
   };
 
+  boot.kernelParams = [ # Activate CGroup Memory control
+    "cgroup_memory=1"
+    "cgroup_enable=memory"
+  ];
+
   environment.systemPackages = with pkgs; [ libraspberrypi ];
 
   services.netdata.enable = true;
