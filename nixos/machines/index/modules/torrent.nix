@@ -76,7 +76,11 @@
   };
 
   systemd.services.transmission = {
+    startLimitIntervalSec = 300;
+    startLimitBurst = 1;
     serviceConfig = {
+      Restart = "always";
+      memoryAccounting = true;
       MemoryHigh = "1000M";
       MemoryMax = "1300M";
     };
