@@ -72,26 +72,4 @@
     port = 3030;
     openFirewall = true;
   };
-
-  # systemd.services.flood = {
-  #   enable = true;
-  #   description = "Flood torrent UI";
-  #   after = [ "network.target" ];
-  #   wantedBy = [ "multi-user.target" ];
-
-  #   serviceConfig = {
-  #     ExecStart = lib.concatStringsSep " " [
-  #       "${pkgs.flood}/bin/flood"
-  #       "--port 3030"
-  #       "--host 0.0.0.0"
-  #       "--rundir /var/lib/flood"
-  #     ];
-  #     User = "autumnal";
-  #     Group = "transmission";
-  #   };
-  # };
-  # systemd.tmpfiles.rules =
-  #   [ "d '/var/lib/flood' 0700 autumnal transmission - -" ];
-
-  # networking.firewall.allowedTCPPorts = [ 3030 9091 ];
 }

@@ -5,26 +5,50 @@ in {
   options = {
     secure.transmission = {
       enable = mkEnableOption "tunneled transmission";
-      aggressive = mkOption {
-        default = true;
+      openRPClocal = mkOption {
         type = types.bool;
+        description = "Makes the RPC port accessible from 127.0.0.1";
       };
-      openRPClocal = mkOption { type = types.bool; };
-      dns = mkOption { type = types.str; };
-      ips = mkOption { type = with types; listOf str; };
-      privateKeyFile = mkOption { type = types.str; };
-      namespace = mkOption { type = types.str; };
+      dns = mkOption {
+        type = types.str;
+        description = "DNS Server to use";
+        example = "1.1.1.1";
+      };
+      ips = mkOption {
+        type = with types; listOf str;
+        description = "networking.wireguard.interfaces.<name>.ips";
+      };
+      privateKeyFile = mkOption {
+        type = types.str;
+        description = "networking.wireguard.interfaces.<name>.privateKeyFile";
+      };
+      namespace = mkOption {
+        type = types.str;
+        description = "The namespace to create and use with transmission";
+      };
       interfaceName = mkOption {
         type = types.str;
         default = "wgt";
+        description = "The wireguard network interface name inside the namespace";
       };
+      # We only need a single peer
       peer = {
-        publicKey = mkOption { type = types.str; };
-        allowedIPs = mkOption { type = with types; listOf str; };
-        endpoint = mkOption { type = types.str; };
+        publicKey = mkOption {
+          type = types.str;
+          description = "networking.wireguard.interfaces.<name>.peers.*.publicKey";
+        };
+        allowedIPs = mkOption {
+          type = with types; listOf str;
+          description = "networking.wireguard.interfaces.<name>.peers.*.allowedIPs";
+        };
+        endpoint = mkOption {
+          type = types.str;
+          description = "networking.wireguard.interfaces.<name>.peers.*.endpoint";
+        };
         keepalive = mkOption {
           type = types.int;
           default = 25;
+          description = "networking.wireguard.interfaces.<name>.peers.*.persistentKeepalive";
         };
       };
     };
@@ -32,13 +56,11 @@ in {
 
   config = mkMerge [
     (mkIf config.services.transmission.enable {
-      assertions = [
-        {
-          # This is for guaranteeing that the transmission service still exists and the name didn"t change
-          assertion = cfg.enable;
-          message = "Transmission is enabled but not `secure.transmission`!";
-        }
-      ];
+      assertions = [{
+        # Guarantee usage of this module if it is imported and transmission is enabled
+        assertion = cfg.enable;
+        message = "Transmission is enabled but not `secure.transmission`!";
+      }];
     })
     (mkIf cfg.enable {
       # Some assertions for assuring tunneling
