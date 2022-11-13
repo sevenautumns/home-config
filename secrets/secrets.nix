@@ -17,8 +17,8 @@ in {
   "gobot.age".publicKeys = users;
   "lavalink.age".publicKeys = users;
   "nextcloud_adminpass.age".publicKeys = users;
-  "nordvpn_private.age".publicKeys = [  index ] ++ users;
-  "mullvard_private.age".publicKeys = [  index ] ++ users;
+  "nordvpn_private.age".publicKeys = [ index ] ++ users;
+  "mullvard_private.age".publicKeys = [ index ] ++ users;
   "ror2.age".publicKeys = users;
   "transmission_auth.age".publicKeys = [ index ] ++ users;
   "wireguard-castle.age".publicKeys = [ castle ] ++ users;

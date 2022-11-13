@@ -1,9 +1,7 @@
 { config, pkgs, lib, ... }:
 with lib;
-let
-  cfg = config.services.flood;
-in
-{
+let cfg = config.services.flood;
+in {
   options = {
     services.flood = {
       enable = mkEnableOption (lib.mdDoc "Flood");
@@ -12,7 +10,7 @@ in
         type = types.str;
         default = "/var/lib/flood";
       };
-      
+
       port = mkOption {
         type = types.port;
         default = 3030;
@@ -53,9 +51,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    systemd.tmpfiles.rules = [
-      "d '${cfg.runDir}' 0700 ${cfg.user} ${cfg.group} - -"
-    ];
+    systemd.tmpfiles.rules =
+      [ "d '${cfg.runDir}' 0700 ${cfg.user} ${cfg.group} - -" ];
 
     systemd.services.flood = {
       enable = true;
@@ -77,10 +74,8 @@ in
       };
     };
 
-
-    networking.firewall = mkIf cfg.openFirewall {
-      allowedTCPPorts = [ cfg.port ];
-    };
+    networking.firewall =
+      mkIf cfg.openFirewall { allowedTCPPorts = [ cfg.port ]; };
 
     users.users = mkIf (cfg.user == "flood") {
       flood = {
@@ -90,8 +85,7 @@ in
       };
     };
 
-    users.groups = mkIf (cfg.group == "flood") {
-      flood.gid = config.ids.gids.flood;
-    };
+    users.groups =
+      mkIf (cfg.group == "flood") { flood.gid = config.ids.gids.flood; };
   };
 }

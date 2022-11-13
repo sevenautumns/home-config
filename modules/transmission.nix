@@ -29,26 +29,31 @@ in {
       interfaceName = mkOption {
         type = types.str;
         default = "wgt";
-        description = "The wireguard network interface name inside the namespace";
+        description =
+          "The wireguard network interface name inside the namespace";
       };
       # We only need a single peer
       peer = {
         publicKey = mkOption {
           type = types.str;
-          description = "networking.wireguard.interfaces.<name>.peers.*.publicKey";
+          description =
+            "networking.wireguard.interfaces.<name>.peers.*.publicKey";
         };
         allowedIPs = mkOption {
           type = with types; listOf str;
-          description = "networking.wireguard.interfaces.<name>.peers.*.allowedIPs";
+          description =
+            "networking.wireguard.interfaces.<name>.peers.*.allowedIPs";
         };
         endpoint = mkOption {
           type = types.str;
-          description = "networking.wireguard.interfaces.<name>.peers.*.endpoint";
+          description =
+            "networking.wireguard.interfaces.<name>.peers.*.endpoint";
         };
         keepalive = mkOption {
           type = types.int;
           default = 25;
-          description = "networking.wireguard.interfaces.<name>.peers.*.persistentKeepalive";
+          description =
+            "networking.wireguard.interfaces.<name>.peers.*.persistentKeepalive";
         };
       };
     };

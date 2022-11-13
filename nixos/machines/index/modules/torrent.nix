@@ -64,7 +64,7 @@
       MemoryMax = "1300M";
     };
   };
-  
+
   services.flood = {
     enable = true;
     user = "autumnal";
