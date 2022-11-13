@@ -127,7 +127,7 @@
               [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
           };
           modules = [
-            ./home.nix
+            ./home
             {
               home = {
                 username = machine.user;
@@ -153,6 +153,8 @@
                 [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
             }
             agenix.nixosModule
+            self.nixosModules.transmission
+            self.nixosModules.flood
             (./nixos/machines + "/${host}")
           ];
           specialArgs = {
@@ -176,6 +178,13 @@
           config.allowUnfree = true;
         };
       };
+
+      nixosModules.transmission = import modules/transmission.nix;
+      # nixosModules.gobot = let gobot = inputs.gobot;
+      # in import modules/gobot.nix;
+      # nixosModules.lavalink = import modules/lavalink.nix;
+      # nixosModules.syncplay = import modules/syncplay.nix;
+      nixosModules.flood = import modules/flood.nix;
 
       deploy.nodes = lib.mapAttrs (host: machine: {
         hostname = machine.address;

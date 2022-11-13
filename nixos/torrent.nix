@@ -3,19 +3,18 @@
   # Define resolv.conf for wireguard namespace
   environment.etc."netns/wg/resolv.conf" = {
     text = ''
-      nameserver 103.86.96.100
-      nameserver 103.86.99.100
+      nameserver 10.64.0.1
     '';
     mode = "0664";
   };
 
-  age.secrets.nordvpn_private = {
-    file = ../secrets/nordvpn_private.age;
-    path = "/var/lib/nordvpn/private";
+  age.secrets.mullvard_private = {
+    file = ../secrets/mullvard_private.age;
+    path = "/var/lib/mullvard/private";
   };
 
   networking.wireguard.interfaces.wg0 = {
-    ips = [ "10.5.0.2/32" ];
+    ips = [ "10.65.8.0/32" ];
     preSetup = ''
       set -x
       ip netns del wg || true
@@ -26,7 +25,7 @@
       ip netns del wg || true
     '';
     interfaceNamespace = "wg";
-    privateKeyFile = "/var/lib/nordvpn/private";
+    privateKeyFile = "/var/lib/mullvard/private";
   };
 
   # Assertions guaranteeing Wireguard usage

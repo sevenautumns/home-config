@@ -13,7 +13,7 @@ let
 
   };
 in {
-  imports = [ modules/shell ] ++ lib.optionals (!headless) [ modules/desktop ];
+  imports = [ ./shell ] ++ lib.optionals (!headless) [ ./desktop ];
 
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;

@@ -1,51 +1,29 @@
-{ pkgs, config, inputs, lib, ... }:
-#let
-#  transmission-exporter = pkgs.buildGoModule {
-#    name = "transmission-exporter";
-#    src = inputs.transmission-exporter;
-#    vendorSha256 = "sha256-YhmfrM5iAK0zWcUM7LmbgFnH+k2M/tE+f/QQIQmQlZs=";
-#  };
-#in 
-{
-  imports = [ ../../../torrent.nix ];
-
-  # Assertions guaranteeing Wireguard usage
-  assertions = [
-    {
-      # This is for guaranteeing that the transmission service still exists and the name didn"t change
-      assertion = config.systemd.services.transmission.enable;
-      message = ''
-        Transmission service changed!
-        Please verify Wireguard usage
-      '';
-    }
-    {
-      # This is for guaranteeing that we are using the wireguard namespace with the transmission service
-      assertion =
-        config.systemd.services.transmission.serviceConfig.NetworkNamespacePath
-        == "/var/run/netns/wg";
-      message = "Transmission Network namespace changed!";
-    }
-  ];
-
+{ pkgs, config, inputs, lib, ... }: {
   age.secrets = {
     transmission_auth = {
       file = ../../../../secrets/transmission_auth.age;
       path = "/var/lib/transmission/auth";
       owner = "autumnal";
     };
-    #transmission_exporter = {
-    #  file = ../../../../secrets/transmission_exporter.age;
-    #  path = "/var/lib/transmission-exporter/auth";
-    #};
+    mullvard_private = {
+      file = ../../../../secrets/mullvard_private.age;
+      path = "/var/lib/mullvard/private";
+    };
   };
 
-  networking.wireguard.interfaces.wg0.peers = [{
-    publicKey = "SqAWBSVdnUJ859Bz2Nyt82rlSebMwPgvwQxIb1DzyF8=";
-    allowedIPs = [ "0.0.0.0/0" ];
-    endpoint = "ch301.nordvpn.com:51820";
-    persistentKeepalive = 25;
-  }];
+  secure.transmission = {
+    enable = true;
+    ips = [ "10.65.8.0/32" ];
+    dns = "10.64.0.1";
+    namespace = "transmission_wg";
+    privateKeyFile = config.age.secrets.mullvard_private.path;
+    openRPClocal = true;
+    peer = {
+      publicKey = "KYqwrr7VPNXZ69XYRKP8QiQmMrlPMZj4j5BlvapZihY=";
+      allowedIPs = [ "0.0.0.0/0" ];
+      endpoint = "91.193.4.82:51820";
+    };
+  };
 
   services.transmission = {
     enable = true;
@@ -75,62 +53,45 @@
     };
   };
 
+  # Limit resource usage for transmission
   systemd.services.transmission = {
-    startLimitIntervalSec = 300;
+    startLimitIntervalSec = 3;
     startLimitBurst = 1;
     serviceConfig = {
-      Restart = "always";
+      Restart = "on-failure";
       memoryAccounting = true;
-      MemoryHigh = "1000M";
+      # MemoryHigh = "1000M";
       MemoryMax = "1300M";
     };
   };
-
-  systemd.services.transmission-forwarder = {
+  
+  services.flood = {
     enable = true;
-    bindsTo = [ "transmission.service" ];
-    wantedBy = [ "multi-user.target" ];
-    script = ''
-      ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr,bind=0.0.0.0 exec:'${pkgs.iproute2}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:9091"',nofork
-    '';
+    user = "autumnal";
+    group = "transmission";
+    port = 3030;
+    openFirewall = true;
   };
 
-  systemd.services.flood = {
-    enable = true;
-    description = "Flood torrent UI";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+  # systemd.services.flood = {
+  #   enable = true;
+  #   description = "Flood torrent UI";
+  #   after = [ "network.target" ];
+  #   wantedBy = [ "multi-user.target" ];
 
-    serviceConfig = {
-      ExecStart = lib.concatStringsSep " " [
-        "${pkgs.flood}/bin/flood"
-        "--port 3030"
-        "--host 0.0.0.0"
-        "--rundir /var/lib/flood"
-      ];
-      User = "autumnal";
-      Group = "transmission";
-    };
-  };
-  systemd.tmpfiles.rules =
-    [ "d '/var/lib/flood' 0700 autumnal transmission - -" ];
+  #   serviceConfig = {
+  #     ExecStart = lib.concatStringsSep " " [
+  #       "${pkgs.flood}/bin/flood"
+  #       "--port 3030"
+  #       "--host 0.0.0.0"
+  #       "--rundir /var/lib/flood"
+  #     ];
+  #     User = "autumnal";
+  #     Group = "transmission";
+  #   };
+  # };
+  # systemd.tmpfiles.rules =
+  #   [ "d '/var/lib/flood' 0700 autumnal transmission - -" ];
 
-  #systemd.services.transmission-exporter = {
-  #  enable = true;
-  #  bindsTo = [ "transmission.service" ];
-  #  wantedBy = [ "multi-user.target" ];
-  #  script = ''
-  #    WEB_ADDR=127.0.0.1:19091 \
-  #    TRANSMISSION_USERNAME=admin \
-  #    TRANSMISSION_PASSWORD=$(cat /var/lib/transmission-exporter/auth) \
-  #    ${transmission-exporter}/bin/transmission-exporter
-  #  '';
-  #};
-
-  networking.firewall.allowedTCPPorts = [ 3030 9091 ];
-
-  #services.prometheus.scrapeConfigs = [{
-  #  job_name = "transmission";
-  #  static_configs = [{ targets = [ "localhost:19091" ]; }];
-  #}];
+  # networking.firewall.allowedTCPPorts = [ 3030 9091 ];
 }
