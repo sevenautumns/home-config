@@ -61,6 +61,7 @@
 
   programs.gpg.enable = true;
   services.gpg-agent.enable = true;
+  services.gpg-agent.pinentryFlavor = "gnome3";
   services.gnome-keyring.enable = true;
   home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then
     "/run/user/125030/keyring/ssh"
