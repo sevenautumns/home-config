@@ -68,6 +68,10 @@
     '';
     windowManager = {
       i3 = let
+        fonts = {
+          names = [ "Ttyp0" "Sarasa UI J" ];
+          size = 9.0;
+        };
         modifier = config.xsession.windowManager.i3.config.modifier;
         ws1 = "1";
         ws2 = "2";
@@ -130,7 +134,7 @@
                 text = gray0;
               };
             };
-            fonts.names = [ "Ttyp0" ];
+            fonts = fonts;
             # mode = "hide";
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
@@ -141,11 +145,7 @@
             outer = 0;
             smartBorders = "no_gaps";
           };
-          fonts = {
-            # names = [ "Roboto" ];
-            names = [ "Ttyp0" "Sarasa UI J" ];
-            size = 9.0;
-          };
+          fonts = fonts;
           modifier = "Mod4";
           focus.followMouse = false;
           keybindings = with config.theme-non_hex;
