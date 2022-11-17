@@ -18,7 +18,7 @@ in {
         opacity = 1;
         # decorations_theme_variant = "dark";
       };
-      font.size = 10;
+      font.size = 14;
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;

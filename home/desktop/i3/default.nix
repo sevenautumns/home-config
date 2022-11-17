@@ -130,7 +130,7 @@
                 text = gray0;
               };
             };
-            fonts.names = [ "Dina" ];
+            fonts.names = [ "Ttyp0" ];
             # mode = "hide";
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
@@ -143,7 +143,7 @@
           };
           fonts = {
             # names = [ "Roboto" ];
-            names = [ "Dina" "Sarasa UI J" ];
+            names = [ "Ttyp0" "Sarasa UI J" ];
             size = 9.0;
           };
           modifier = "Mod4";
@@ -195,7 +195,7 @@
               "${modifier}+t" = "exec rofi -show window -modi window";
               "${modifier}+p" = "exec rofi-pass";
 
-              "${modifier}+o" = "exec alacritty --option window.decorations=None --class=launcher -e pulsemixer";
+              "${modifier}+o" = "exec alacritty --class=launcher -e pulsemixer";
 
               "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
               "${modifier}+Shift+Return" = ''

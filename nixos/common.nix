@@ -57,6 +57,30 @@
 
   fonts.fontDir.enable = true;
 
+  console = {
+    font = "Ttyp0";
+    colors = [
+      "292929" # black (color0)
+      "f05e48" # red (color1)
+      "8daf67" # green (color2)
+      "fad566" # yellow (color3)
+      "81a2be" # blue (color4)
+      "b294bb" # magenta (color5)
+      "86c1b9" # cyan (color6)
+      "f3f2cc" # white (color7)
+
+      "3a3a3a" # black (color8)
+      "f16b57" # red (color9)
+      "96b573" # green (color10)
+      "fad872" # yellow (color11)
+      "7aa6da" # blue (color12)
+      "c397d8" # magenta (color13)
+      "90c6bf" # cyan (color14)
+      "e8e8e8" # white (color15)
+    ];
+    packages = [ pkgs.uw-ttyp0 ];
+  };
+
   security.sudo.extraRules = [{
     users = [ "admin" ];
     commands = [{

@@ -11,6 +11,7 @@
     dina-font
     twitter-color-emoji
     comic-mono
+    uw-ttyp0
     #efont-unicode
   ];
 
@@ -41,7 +42,7 @@
       <alias binding="strong">
         <family>monospace</family>
         <prefer>
-          <family>Dina</family>
+          <family>Ttyp0</family>
           <family>FiraCode Nerd Font Mono</family>
           <family>Twitter Color Emoji</family>
           <family>Sarasa Mono J</family>

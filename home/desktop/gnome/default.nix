@@ -155,7 +155,7 @@ in {
       color-scheme = "prefer-dark";
       font-name = "${font-name} ${font-size}";
       document-font-name = "${font-name} ${font-size}";
-      monospace-font-name = "Dina 10";
+      monospace-font-name = "Ttyp0 12";
       cursor-theme = "Bibata-Original-Classic";
     };
     "org/gnome/settings-daemon/plugins/color" = {

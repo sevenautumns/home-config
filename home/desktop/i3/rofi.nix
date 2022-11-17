@@ -4,7 +4,7 @@ in {
   programs.rofi = with config.theme; {
     enable = true;
     # font = "FiraCode Nerd Font Medium 12";
-    font = "Dina Medium 10";
+    font = "Ttyp0 Medium 14";
     # font = "Noto Sans Regular 11";
     # plugins = [ pkgs.rofi-calc ];
     extraConfig = {
@@ -25,7 +25,7 @@ in {
     in {
       "*" = {
         # font = "FiraCode Nerd Font Medium 10";
-        font = "Dina Medium 10";
+        font = "Ttyp0 Medium 14";
         bg0 = mkLiteral gray0;
         bg1 = mkLiteral gray3;
         fg0 = mkLiteral white;
