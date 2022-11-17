@@ -58,7 +58,7 @@
   fonts.fontDir.enable = true;
 
   console = {
-    font = "Ttyp0";
+    font = "t0-16-uni.psf";
     colors = [
       "292929" # black (color0)
       "f05e48" # red (color1)
