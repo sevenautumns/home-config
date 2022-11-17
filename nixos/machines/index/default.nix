@@ -7,6 +7,7 @@
     ./modules/paperless.nix
     ./modules/torrent.nix
     ./modules/syncplay.nix
+    # ./modules/jellyfin.nix
     ../../common.nix
     ../../syncthing.nix
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -21,8 +22,8 @@
 
   boot.kernel.sysctl = {
     "net.ipv6.conf.all.disable_ipv6" = 1;
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv4.conf.all.src_valid_mark" = 1;
+    # "net.ipv4.ip_forward" = 1;
+    # "net.ipv4.conf.all.src_valid_mark" = 1;
   };
 
   boot.kernelParams = [ # Activate CGroup Memory control

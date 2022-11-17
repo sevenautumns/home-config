@@ -38,6 +38,7 @@
       rpc-username = "admin";
       rpc-host-whitelist-enabled = false;
       rpc-whitelist-enabled = false;
+      peer-port = 57298;
       speed-limit-down = 5000;
       speed-limit-down-enabled = true;
       speed-limit-up = 500;

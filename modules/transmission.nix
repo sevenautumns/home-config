@@ -140,6 +140,7 @@ in {
           transmission-forwarder = {
             enable = true;
             bindsTo = [ "transmission.service" ];
+            after = [ "transmission.service" ];
             wantedBy = [ "multi-user.target" ];
             script = let
               port = toString config.services.transmission.settings.rpc-port;
