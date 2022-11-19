@@ -139,8 +139,7 @@ in {
           # Optional forward RPC port to 127.0.0.1 of the machine
           transmission-forwarder = {
             enable = true;
-            bindsTo = [ "transmission.service" ];
-            after = [ "transmission.service" ];
+            partOf = [ "transmission.service" ];
             wantedBy = [ "multi-user.target" ];
             script = let
               port = toString config.services.transmission.settings.rpc-port;
