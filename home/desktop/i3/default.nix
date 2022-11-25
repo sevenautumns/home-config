@@ -5,6 +5,7 @@
     enable = true;
     latitude = 51.8;
     longitude = 10.3;
+    settings.redshift.transition = 0;
   };
 
   programs.i3status-rust.enable = true;
@@ -69,7 +70,8 @@
     windowManager = {
       i3 = let
         fonts = {
-          names = [ "Ttyp0" "Sarasa UI J" ];
+          # names = [ "Ttyp0" "Sarasa UI J" ];
+          names = [ "Ttyp0" "Fixed" ];
           size = 9.0;
         };
         modifier = config.xsession.windowManager.i3.config.modifier;
@@ -207,6 +209,15 @@
               "${modifier}+w" = "exec firefox";
               # "${modifier}+Shift+Return" =
               #   "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
+              
+              "${modifier}+Escape" = ''
+                exec i3-nagbar  \
+                  -t warning  \
+                  -m 'power menu' \
+                  -b 'reboot' 'reboot' \
+                  -b 'shutdown' 'poweroff' \
+                  -b 'logout' 'i3-msg exit' 
+              '';
 
               "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
               "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
@@ -264,6 +275,9 @@
             "${modifier}+Shift+Mod2+81" = "move container to workspace ${ws9}";
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
           };
+          # modes = {
+            
+          # };
           colors = {
             background = gray0;
             focused = {

@@ -7,7 +7,7 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = with pkgs; stable.firefox;
+    package = with pkgs; firefox;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       vimium
       ublock-origin

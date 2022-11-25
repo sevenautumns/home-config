@@ -23,9 +23,13 @@ in {
   };
 
   home.sessionVariables = {
+    INPUT_METHOD = "fcitx";
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "ibus";
     XMODIFIERS = "@im=fcitx";
+    XMODIFIER = "@im=fcitx";
   };
 
   home.file.".local/share/fcitx5/themes/".source = fcitx5-adwaita;
@@ -94,9 +98,10 @@ in {
           "Vertical Candidate List" = false;
           PerScreenDPI = true;
           WheelForPaging = true;
-          Font = ''"Sarasa Mono J ${builtins.toString config.gtk.font.size}"'';
-          MenuFont =
-            ''"Sarasa Mono J ${builtins.toString config.gtk.font.size}"'';
+          Font = ''"Fixed ${builtins.toString config.gtk.font.size}"'';
+          MenuFont = ''"Fixed ${builtins.toString config.gtk.font.size}"'';
+          # Font = ''"Sarasa Mono J ${builtins.toString config.gtk.font.size}"'';
+          # MenuFont = ''"Sarasa Mono J ${builtins.toString config.gtk.font.size}"'';
           UseInputMethodLangaugeToDisplayText = true;
           Theme = "Adwaita-dark";
         };
