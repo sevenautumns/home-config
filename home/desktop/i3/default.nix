@@ -3,8 +3,12 @@
 
   services.redshift = {
     enable = true;
+    # Germany
     latitude = 51.8;
     longitude = 10.3;
+    # Japan
+    # latitude = 35.6;
+    # longitude = 139.8;
     settings.redshift.transition = 0;
   };
 
@@ -87,7 +91,7 @@
         ws10 = "10";
       in {
         enable = true;
-        package = pkgs.i3-gaps;
+        # package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";
           # menu = ''

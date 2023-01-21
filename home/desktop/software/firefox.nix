@@ -16,7 +16,7 @@ in {
       sponsorblock
       flagfox
       i-dont-care-about-cookies
-      https-everywhere
+      # https-everywhere
       enhanced-github
       privacy-badger
       # linkhints # less vim more links

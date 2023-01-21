@@ -5,6 +5,20 @@ let
 in {
   # services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
 
+  # Fallback Terminal
+  home.packages = with pkgs;
+    [
+      (makeDesktopItem {
+        name = "Alacritty (Fallback)";
+        desktopName = "Alacritty (Fallback)";
+        icon = "Alacritty";
+        exec =
+          "${config.programs.alacritty.package}/bin/alacritty --command fish --no-config";
+        terminal = false;
+        type = "Application";
+      })
+    ];
+
   programs.alacritty = {
     enable = true;
     package = with pkgs; if machine.nixos then unstable.alacritty else hello;

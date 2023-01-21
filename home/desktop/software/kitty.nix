@@ -5,7 +5,7 @@ let
 in {
   programs.kitty = {
     enable = true;
-    package = with pkgs; unstable.kitty;
+    package = with pkgs; stable.kitty;
     theme = "Nord";
     #font.size = if host == "neesama" then 11 else 8;
 

@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
-    ./modules/adguard.nix
+    # ./modules/adguard.nix
     ./modules/docker.nix
     ./modules/wireguard.nix
     ../../common.nix

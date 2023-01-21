@@ -24,7 +24,7 @@
     gobot.url = "github:c0nvulsiv3/gobot";
     gobot.flake = false;
 
-    knock.url = "github:BentonEdmondson/knock";
+    # knock.url = "github:BentonEdmondson/knock";
     kcc.url = "github:ciromattia/kcc";
     kcc.flake = false;
 
@@ -106,15 +106,15 @@
         #   nixos = true;
         #   managed-nixos = true;
         # };
-        # "castle" = {
-        #   user = "autumnal";
-        #   #address = "10.2.0.0";
-        #   address = "192.168.2.250";
-        #   arch = "aarch64-linux";
-        #   headless = true;
-        #   nixos = true;
-        #   managed-nixos = true;
-        # };
+        "castle" = {
+          user = "autumnal";
+          #address = "10.2.0.0";
+          address = "192.168.2.250";
+          arch = "aarch64-linux";
+          headless = true;
+          nixos = true;
+          managed-nixos = true;
+        };
       };
     in {
       homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:

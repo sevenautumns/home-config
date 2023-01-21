@@ -11,6 +11,7 @@ let
 in {
   imports = [
     ./alacritty.nix
+    ./beets.nix
     ./chromium.nix
     ./firefox.nix
     ./fcitx.nix
@@ -36,7 +37,7 @@ in {
       version = "unstable-master";
     }));
     kcc = (pkgs.stable.kcc.overrideAttrs (old: {
-      src = inputs.kcc;
+      # src = inputs.kcc;
       postPatch = ''
         substituteInPlace kindlecomicconverter/startup.py \
           --replace 'dependencyCheck(' '#dependencyCheck('
@@ -63,6 +64,7 @@ in {
       #misc
       bitwarden
       arandr
+      monero-cli
 
       # https://github.com/NixOS/nixpkgs/pull/195985
       # gtk4 problem, use stable until fixed
@@ -95,7 +97,9 @@ in {
       spotify
       brave
     ] ++ lib.optionals (host == "neesama")
-    [ inputs.knock.packages.x86_64-linux.knock ];
+    [ 
+      # inputs.knock.packages.x86_64-linux.knock
+    ];
 
   xsession.numlock.enable = true;
   services.network-manager-applet.enable = true;
