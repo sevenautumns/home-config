@@ -177,12 +177,12 @@ in {
     twitter-color-emoji
     comic-mono
     uw-ttyp0
-    efont-unicode
     # mplus-outline-fonts.osdnRelease
     # mplus-bitmap
     # cozette
     # jisx0213
-    # efont-unicode
+    efont-unicode
+    mplus-outline-fonts.githubRelease
   ];
 
   #fonts

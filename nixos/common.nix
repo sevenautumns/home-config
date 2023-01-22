@@ -52,8 +52,11 @@
   environment.systemPackages = with pkgs; [ openssh git ];
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
+    settings.passwordAuthentication = false;
   };
+  
+  # networking.networkmanager.enable = true;
+  # services.wg-netmanager.enable = true;
 
   fonts.fontDir.enable = true;
 

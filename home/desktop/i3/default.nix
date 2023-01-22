@@ -148,7 +148,7 @@
           window.border = 2;
           gaps = {
             inner = 5;
-            outer = 0;
+            outer = 2;
             smartBorders = "no_gaps";
           };
           fonts = fonts;

@@ -5,6 +5,9 @@
     displayManager.startx.enable = true;
   };
 
+  systemd.tmpfiles.rules =
+    [ "d '/var/cache/tuigreet' 0700 0 0 - -" ];
+
   services.greetd = {
     enable = true;
     vt = 2;
