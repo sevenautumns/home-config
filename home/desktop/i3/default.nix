@@ -148,8 +148,9 @@
           window.border = 2;
           gaps = {
             inner = 5;
-            outer = 2;
-            smartBorders = "no_gaps";
+            outer = 0;
+            smartBorders = "off";
+            smartGaps = false;
           };
           fonts = fonts;
           modifier = "Mod4";
