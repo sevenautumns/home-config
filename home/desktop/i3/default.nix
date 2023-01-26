@@ -214,7 +214,7 @@
               "${modifier}+w" = "exec firefox";
               # "${modifier}+Shift+Return" =
               #   "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
-              
+
               "${modifier}+Escape" = ''
                 exec i3-nagbar  \
                   -t warning  \
@@ -281,7 +281,7 @@
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
           };
           # modes = {
-            
+
           # };
           colors = {
             background = gray0;

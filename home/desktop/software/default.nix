@@ -96,8 +96,7 @@ in {
       element-desktop
       spotify
       brave
-    ] ++ lib.optionals (host == "neesama")
-    [ 
+    ] ++ lib.optionals (host == "neesama") [
       # inputs.knock.packages.x86_64-linux.knock
     ];
 

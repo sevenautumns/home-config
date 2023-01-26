@@ -54,7 +54,7 @@
     enable = true;
     settings.passwordAuthentication = false;
   };
-  
+
   # networking.networkmanager.enable = true;
   # services.wg-netmanager.enable = true;
 

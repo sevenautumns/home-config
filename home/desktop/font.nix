@@ -30,7 +30,7 @@ let
       #     sha256 = "sha256-aSOdUwlPtoc2ULOBHIfBoVnecauUC3t2nOqfdZG+Bdc=";
       #   })
       # ];
-      
+
       # dontUnpack = true;
       # unpackPhase = ''
       #   ls -lha
@@ -59,16 +59,16 @@ let
       #   COPYTO Digit0Slashed Digit0
       #   EOF
       # '';
-      
+
       buildPhase = ''
         runHook preBuild
-      
+
         fontDir="$(pwd)/build"
         mkdir $fontDir
         DESTDIR=$fontDir MKBOLD=NO ./install_mplus_fonts
         cp fonts_e/*.bdf build/
         cp fonts_j/*.bdf build/
-        
+
         for f in $fontDir/*.bdf; do
             local file_name="''${f%.bdf}" 
             faketime -f "1970-01-01 00:00:01" \
@@ -77,7 +77,7 @@ let
 
         runHook postBuild
       '';
-      
+
       installPhase = ''
         runHook preInstall
 
@@ -123,7 +123,7 @@ let
       #   make install-bdf
 
       #   fontDir="$out/share/fonts/X11/japanese"
-        
+
       #   # convert bdf fonts to psf
       #   build=$(pwd)
       #   mkdir {psf,otb}
@@ -141,7 +141,7 @@ let
       #     name="$(basename $i .bdf)"
       #     fonttosfnt -v -o "$build/otb/$name.otb" "$i"
       #   done
-        
+
       #   # install psf fonts
       #   fontDir="$out/share/consolefonts"
       #   install -m 644 -D psf/*.psf -t "$fontDir"
