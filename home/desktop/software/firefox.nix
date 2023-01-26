@@ -199,6 +199,8 @@ in {
         # Disable legacy webrtc sharing icon
         "privacy.webrtc.legacyGlobalIndicator" = false;
         "privacy.webrtc.hideGlobalIndicator" = true;
+        "dom.security.https_only_mode" = true;
+        "dom.security.https_only_mode_ever_enabled" = true;
 
         # Font config
         "font.name.monospace.ja" = "Sarasa Mono J";

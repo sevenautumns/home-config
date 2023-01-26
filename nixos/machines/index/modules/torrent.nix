@@ -11,17 +11,18 @@
     };
   };
 
+  # smart cricket
   secure.transmission = {
     enable = true;
-    ips = [ "10.65.8.0/32" ];
+    ips = [ "10.64.141.29/32" ];
     dns = "10.64.0.1";
     namespace = "transmission_wg";
     privateKeyFile = config.age.secrets.mullvard_private.path;
     openRPClocal = true;
     peer = {
-      publicKey = "KYqwrr7VPNXZ69XYRKP8QiQmMrlPMZj4j5BlvapZihY=";
+      publicKey = "qcvI02LwBnTb7aFrOyZSWvg4kb7zNW9/+rS6alnWyFE=";
       allowedIPs = [ "0.0.0.0/0" ];
-      endpoint = "91.193.4.82:51820";
+      endpoint = "193.32.127.67:51820";
     };
   };
 
@@ -38,7 +39,7 @@
       rpc-username = "admin";
       rpc-host-whitelist-enabled = false;
       rpc-whitelist-enabled = false;
-      peer-port = 57298;
+      peer-port = 57342;
       speed-limit-down = 5000;
       speed-limit-down-enabled = true;
       speed-limit-up = 500;

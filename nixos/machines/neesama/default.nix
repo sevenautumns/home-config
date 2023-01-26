@@ -22,7 +22,16 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.enable = true;
 
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General.FastConnectable = "true";
+      Policy = {
+        ReconnectAttempts = 7;
+        ReconnectIntervals = "1,2,4,8,16,32,64";
+      };
+    };
+  };
   services.blueman.enable = true;
 
   networking.hostName = "neesama";

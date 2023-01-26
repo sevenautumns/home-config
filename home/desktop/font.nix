@@ -182,7 +182,7 @@ in {
     # cozette
     # jisx0213
     efont-unicode
-    mplus-outline-fonts.githubRelease
+    # mplus-outline-fonts.githubRelease
   ];
 
   #fonts

@@ -52,7 +52,11 @@
 
     #config.services.prometheus.port
     19999 # Netdata
-    32400 # Plex
+
+    # Plex
+    32400 # Media Server
+    1900 # DLNA
+    32469 # DLNA
 
     8384 # Syncthing
   ];
