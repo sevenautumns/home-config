@@ -152,7 +152,7 @@
               nixpkgs.overlays =
                 [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
             }
-            agenix.nixosModule
+            agenix.nixosModules.default
             self.nixosModules.transmission
             self.nixosModules.flood
             (./nixos/machines + "/${host}")
