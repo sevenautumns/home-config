@@ -16,6 +16,7 @@ in {
     ./firefox.nix
     ./fcitx.nix
     # ./ibus.nix
+    ./keynav.nix
     ./kitty.nix
     ./mpv.nix
     ./lutris.nix

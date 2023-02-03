@@ -44,11 +44,24 @@
         body = ''
           bind \cy pazi_skim_binding
           bind \cz pazi_skim_binding
+          bind \ct broot_binding
         '';
       };
-      # Use pazi as a keybind
+      broot_binding = {
+        description = "Broot binding with query and repaint";
+        body = ''
+          set -l commandline (__skim_parse_commandline)
+          set -l query $commandline[2]
+          commandline (commandline --cut-at-cursor)
+          br --cmd $query
+          cancel
+
+          commandline -t ""
+          commandline -f repaint
+        '';
+      };
       pazi_skim_binding = {
-        description = "Set custom key bindings";
+        description = "Pazi binding with query and repaint";
         body = ''
           set -l commandline (__skim_parse_commandline)
           set -l query $commandline[2]

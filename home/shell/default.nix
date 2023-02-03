@@ -70,7 +70,10 @@
 
   programs.btop = {
     enable = true;
-    settings = { color_theme = "monokai"; };
+    settings = {
+      color_theme = "monokai";
+      theme_background = false;
+    };
   };
 
   programs.htop.enable = true;
