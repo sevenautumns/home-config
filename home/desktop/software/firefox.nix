@@ -8,165 +8,226 @@ in {
   programs.firefox = {
     enable = true;
     package = with pkgs; firefox;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      vimium
-      ublock-origin
-      bitwarden
-      videospeed
-      sponsorblock
-      flagfox
-      i-dont-care-about-cookies
-      # https-everywhere
-      enhanced-github
-      privacy-badger
-      # linkhints # less vim more links
-      terms-of-service-didnt-read
-      augmented-steam
-      protondb-for-steam
-      copy-selection-as-markdown
-      behind-the-overlay-revival
-      browserpass
-    ];
     profiles.default = {
       id = 0;
-
-      #search = {
-      #  force = true;
-      #  default = "DuckDuckGo";
-      #  order = [ "DuckDuckGo" "Google" ];
-      #  engines = {
-      #    "Bing".metaData.hidden = true;
-      #    "eBay".metaData.hidden = true;
-      #    "Google".metaData.alias = "@g";
-      #    "DuckDuckGo".metaData.alias = "@d";
-      #    "GitHub Nix" = {
-      #      urls = [{
-      #        template = "https://github.com/search";
-      #        params = [
-      #          { name = "q"; value = "{searchTerms}+language%3ANix"; }
-      #          { name = "type"; value = "Code"; }
-      #          { name = "ref"; value = "advsearch"; }
-      #          { name = "l"; value = "Nix"; }
-      #        ];
-      #      }];
-      #      icon = "${pkgs.fetchurl {
-      #        url = "https://github.githubassets.com/favicons/favicon.svg";
-      #        sha256 = "sha256-apV3zU9/prdb3hAlr4W5ROndE4g3O1XMum6fgKwurmA=";
-      #      }}";
-      #      definedAliases = [ "@gn" ];
-      #    };
-      #  };
-      #};
-
-      bookmarks = [
-        {
-          toolbar = true;
-          bookmarks = [
-            {
-              name = "YouTube";
-              url = "https://www.youtube.com/?gl=DE&hl=de";
-            }
-            {
-              name = "WaniKani";
-              url = "https://www.wanikani.com/";
-            }
-            {
-              name = "Bunpro";
-              url = "https://bunpro.jp/";
-            }
-            {
-              name = "DLR";
-              bookmarks = [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        vimium
+        ublock-origin
+        bitwarden
+        videospeed
+        sponsorblock
+        flagfox
+        i-dont-care-about-cookies
+        # https-everywhere
+        enhanced-github
+        privacy-badger
+        # linkhints # less vim more links
+        terms-of-service-didnt-read
+        augmented-steam
+        protondb-for-steam
+        copy-selection-as-markdown
+        behind-the-overlay-revival
+        browserpass
+      ];
+      search = {
+        force = true;
+        default = "DuckDuckGo";
+        order = [ "DuckDuckGo" "Google" ];
+        engines = {
+          "Bing".metaData.hidden = true;
+          "eBay".metaData.hidden = true;
+          "Google".metaData.alias = ":g";
+          "DuckDuckGo".metaData.alias = ":d";
+          "GitHub Nix" = {
+            urls = [{
+              template = "https://github.com/search";
+              params = [
                 {
-                  name = "Mail";
-                  url = "https://mail.dlr.de/owa/#path=/mail";
+                  name = "q";
+                  value = "{searchTerms}+language%3ANix";
                 }
                 {
-                  name = "Gleitzeit";
-                  url = "https://gleitzeit.bs.dlr.de/primeweb/index.jsp";
+                  name = "type";
+                  value = "Code";
                 }
                 {
-                  name = "WebPostkorb";
-                  url = "https://webpostkorb.dlr.de/";
+                  name = "ref";
+                  value = "advsearch";
                 }
                 {
-                  name = "Intra";
-                  url = "https://intranet.dlr.de/Seiten/start.aspx";
+                  name = "l";
+                  value = "Nix";
                 }
               ];
-            }
-          ];
-        }
-        {
-          name = "Searches";
-          bookmarks = [
-            {
-              name = "Duck Duck Go";
-              keyword = ":d";
-              url = "https://duckduckgo.com/?q=%s";
-            }
-            {
-              name = "Google";
-              keyword = ":g";
-              url = "https://www.google.com/search?q=%s";
-            }
-            {
-              name = "AUR";
-              keyword = ":a";
-              url = "https://aur.archlinux.org/packages/?K=%s";
-            }
-            {
-              name = "Crates.io";
-              keyword = ":c";
-              url = "https://crates.io/search?q=%s";
-            }
-            {
-              name = "Dict.cc English";
-              keyword = ":e";
-              url = "https://www.dict.cc/?s=%s";
-            }
-            {
-              name = "Github";
-              keyword = ":git";
-              url = "https://github.com/search?q=%s";
-            }
-            {
-              name = "Github Nix";
-              keyword = ":gn";
-              url =
-                "https://github.com/search?q=%s+language%3ANix&type=Code&ref=advsearch&l=Nix";
-            }
-            {
-              name = "Github Code";
-              keyword = ":gc";
-              url = "https://github.com/search?q=%s&type=Code&ref=advsearch";
-            }
-            {
-              name = "Github Rust";
-              keyword = ":gr";
-              url =
-                "https://github.com/search?q=%s+language%3ARust&type=Code&ref=advsearch&l=Rust";
-            }
-            {
-              name = "Nixpkgs";
-              keyword = ":np";
-              url =
-                "https://search.nixos.org/packages?channel=unstable&query=%s";
-            }
-            {
-              name = "Nix Options";
-              keyword = ":no";
-              url =
-                "https://search.nixos.org/options?channel=unstable&query=%s";
-            }
-            {
-              name = "Nyaa";
-              keyword = ":nyaa";
-              url = "https://nyaa.si/?q=%s";
-            }
-          ];
-        }
-      ];
+            }];
+            iconUpdateURL =
+              "https://github.githubassets.com/favicons/favicon.svg";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":gn" ];
+          };
+          "GitHub Code" = {
+            urls = [{
+              template = "https://github.com/search";
+              params = [
+                {
+                  name = "q";
+                  value = "{searchTerms}";
+                }
+                {
+                  name = "type";
+                  value = "Code";
+                }
+                {
+                  name = "ref";
+                  value = "advsearch";
+                }
+              ];
+            }];
+            iconUpdateURL =
+              "https://github.githubassets.com/favicons/favicon.svg";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":gc" ];
+          };
+          "GitHub Rust" = {
+            urls = [{
+              template = "https://github.com/search";
+              params = [
+                {
+                  name = "q";
+                  value = "{searchTerms}+language%3ARust";
+                }
+                {
+                  name = "type";
+                  value = "Code";
+                }
+                {
+                  name = "ref";
+                  value = "advsearch";
+                }
+                {
+                  name = "l";
+                  value = "Rust";
+                }
+              ];
+            }];
+            iconUpdateURL =
+              "https://github.githubassets.com/favicons/favicon.svg";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":gr" ];
+          };
+          "Nixpkgs" = {
+            urls = [{
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }];
+            iconUpdateURL = "https://nixos.org/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":np" ];
+          };
+          "Nix Options" = {
+            urls = [{
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "channel";
+                  value = "unstable";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }];
+            iconUpdateURL = "https://nixos.org/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":no" ];
+          };
+          "Crates" = {
+            urls = [{
+              template = "https://crates.io/search";
+              params = [{
+                name = "q";
+                value = "{searchTerms}";
+              }];
+            }];
+            iconUpdateURL = "https://crates.io/favicon.ico";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":c" ];
+          };
+          "Dict.cc English" = {
+            urls = [{
+              template = "https://www.dict.cc/";
+              params = [{
+                name = "s";
+                value = "{searchTerms}";
+              }];
+            }];
+            iconUpdateURL = "https://www4.dict.cc/img/favicons/favicon4.png";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":e" ];
+          };
+          "Nyaa" = {
+            urls = [{
+              template = "https://nyaa.si/";
+              params = [{
+                name = "q";
+                value = "{searchTerms}";
+              }];
+            }];
+            iconUpdateURL = "https://nyaa.si/static/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ ":nyaa" ];
+          };
+        };
+      };
+
+      bookmarks = [{
+        toolbar = true;
+        bookmarks = [
+          {
+            name = "YouTube";
+            url = "https://www.youtube.com/?gl=DE&hl=de";
+          }
+          {
+            name = "WaniKani";
+            url = "https://www.wanikani.com/";
+          }
+          {
+            name = "Bunpro";
+            url = "https://bunpro.jp/";
+          }
+          {
+            name = "DLR";
+            bookmarks = [
+              {
+                name = "Mail";
+                url = "https://mail.dlr.de/owa/#path=/mail";
+              }
+              {
+                name = "Gleitzeit";
+                url = "https://gleitzeit.bs.dlr.de/primeweb/index.jsp";
+              }
+              {
+                name = "WebPostkorb";
+                url = "https://webpostkorb.dlr.de/";
+              }
+              {
+                name = "Intra";
+                url = "https://intranet.dlr.de/Seiten/start.aspx";
+              }
+            ];
+          }
+        ];
+      }];
 
       settings = {
         "extensions.pocket.enabled" = false;
