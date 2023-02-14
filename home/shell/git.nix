@@ -2,7 +2,7 @@
   # TODO Use more professional email/name ?
   programs.git = {
     enable = true;
-    userName = "autumnal";
+    userName = "sevenautumns";
     userEmail = "sven@autumnal.de";
     aliases = {
       st = "status";
