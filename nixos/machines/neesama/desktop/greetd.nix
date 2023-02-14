@@ -5,7 +5,12 @@
     displayManager.startx.enable = true;
   };
 
-  systemd.tmpfiles.rules = [ "d '/var/cache/tuigreet' 0700 0 0 - -" ];
+  # Creates tuigreet folder for the '--remember' option
+  systemd.tmpfiles.rules =
+    [ "d '/var/cache/tuigreet' 0700 greeter greeter - -" ];
+  
+  # Automatically unlocks login-keyring
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   services.greetd = {
     enable = true;
