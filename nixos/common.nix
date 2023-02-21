@@ -3,6 +3,7 @@
   boot.loader.systemd-boot.configurationLimit = 10;
 
   services.journald.extraConfig = "SystemMaxUse=250M";
+  services.udev.packages = [ pkgs.yubikey-personalization ];
   #boot.kernel.sysctl = {
   #  "vm.oom-kill" = 0;
   #  "vm.overcommit_memory" = 2;
@@ -53,6 +54,23 @@
   services.openssh = {
     enable = true;
     settings.passwordAuthentication = false;
+  };
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  security.pam = {
+    services = {
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
+    };
+    yubico = {
+      enable = true;
+      debug = true;
+      mode = "challenge-response";
+    };
   };
 
   # networking.networkmanager.enable = true;

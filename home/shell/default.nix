@@ -22,6 +22,8 @@
     pulsemixer
   ];
 
+  pam.yubico.authorizedYubiKeys.ids = [];
+
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
@@ -51,6 +53,7 @@
     enable = true;
     package = pkgs.pass.withExtensions (exts:
       [
+        exts.pass-otp
         # exts.pass-import
         # exts.pass-audit
       ]);
