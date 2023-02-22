@@ -22,11 +22,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1676153903,
-        "narHash": "sha256-uetRyjgMiZCs6srmZ10M764Vn7F53M9mVuqnzHmyBqU=",
+        "lastModified": 1677021463,
+        "narHash": "sha256-K6mqm0VP9eOxNxKpFVI3MEiwZPOlN2TWtscsnLOWox0=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "ea17cc71b4e1bc5b2601f210a1c85db9453ad723",
+        "rev": "0c50bbe60e907c9a3a7512c591adc8e66f0393a0",
         "type": "github"
       },
       "original": {
@@ -326,11 +326,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1676334501,
-        "narHash": "sha256-DK83UmHL/Z84Ewjfj05hISYr+dsVl8C3V4d0mYyIJWA=",
+        "lastModified": 1676938964,
+        "narHash": "sha256-MgHBzvniNbX3nbLu2jjsNaMTHIR+ZqEsoGWyBZTK5B4=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "0a7c697dd785111626c8f47a36e07381f55c2e83",
+        "rev": "1a87d14439bc940d9bf3e66359a612b345aa363f",
         "type": "github"
       },
       "original": {
@@ -349,11 +349,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1675935446,
-        "narHash": "sha256-WajulTn7QdwC7QuXRBavrANuIXE5z+08EdxdRw1qsNs=",
+        "lastModified": 1677013990,
+        "narHash": "sha256-HwAnE5MHsyLiRJp50KfDFPiiOZXI0Ts8hXpIh6yBilE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2dce7f1a55e785a22d61668516df62899278c9e4",
+        "rev": "564b82b3542026e7fb5d0da16c56ae3e40e5c9dd",
         "type": "github"
       },
       "original": {
@@ -365,11 +365,11 @@
     "kcc": {
       "flake": false,
       "locked": {
-        "lastModified": 1674408470,
-        "narHash": "sha256-S3T8OuRoAdAX3lfSmHa35frZqbIaIthi0/DZEEmJQIg=",
+        "lastModified": 1676489905,
+        "narHash": "sha256-wHAZyQaZ738+h0XoGVpXRTJ0UACmWZTGVpelW6wPNdY=",
         "owner": "ciromattia",
         "repo": "kcc",
-        "rev": "3a1737e8d0052bc993a5767a8033c8ff12ff1007",
+        "rev": "fe8195cfedbe9e3582b7b66f86c66ccccad9ed6b",
         "type": "github"
       },
       "original": {
@@ -430,11 +430,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1676302284,
-        "narHash": "sha256-XftOncGcrp7EOkyjvhvQtTjw004U9oH/w2E2x4iXryI=",
+        "lastModified": 1676390054,
+        "narHash": "sha256-w0KvrM+9WIEYr0juDh4Vs39ed2IaT0T696fp9pZ7i1I=",
         "owner": "oxalica",
         "repo": "nil",
-        "rev": "f65284b9999fcde6e2c3501d7b18dbbb0df6e50f",
+        "rev": "944d5c335531778a1d7b54a97bf7fb5ec0c3e976",
         "type": "github"
       },
       "original": {
@@ -495,11 +495,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1676202775,
-        "narHash": "sha256-gV/RnfVZkGLHn+5rmX2GSh5aquVHpWOJw1cnpEV03tQ=",
+        "lastModified": 1676973346,
+        "narHash": "sha256-rft8oGMocTAhUVqG3LW6I8K/Fo9ICGmNjRqaWTJwav0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d917136f550a8c36efb1724390c7245105f79023",
+        "rev": "d0d55259081f0b97c828f38559cad899d351cad1",
         "type": "github"
       },
       "original": {
@@ -527,11 +527,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1676360078,
-        "narHash": "sha256-p08jYnaYZKNcmRz4g8d2g7Xjx/jGDc8e97AAoMQuiK4=",
+        "lastModified": 1677040854,
+        "narHash": "sha256-2GU5/lCLPyhbqoEwqMMNOoYe8gaBFKwHbjK8OygMXnA=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "72677d48bca8c0c736f6bfad66cc2cab0b77b249",
+        "rev": "5d3891a02e3812510cfa975833a7e7138c63dcf0",
         "type": "github"
       },
       "original": {
@@ -628,11 +628,11 @@
     "syncplay": {
       "flake": false,
       "locked": {
-        "lastModified": 1675801321,
-        "narHash": "sha256-hEzgAK7fNelz0gVSbDlLukxckT6YKqvwWuVzqbtJQI0=",
+        "lastModified": 1676828084,
+        "narHash": "sha256-7NlJjD5x1nC8/wfEj2oHZ8PAFrSpYdmDLnZxIDo0iGM=",
         "owner": "Syncplay",
         "repo": "syncplay",
-        "rev": "0307cda8506935d1ea346ccad4a668bec1e13e97",
+        "rev": "e1bcf12a1ac919290b01985362544324c9f01978",
         "type": "github"
       },
       "original": {

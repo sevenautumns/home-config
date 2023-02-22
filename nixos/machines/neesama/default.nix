@@ -16,6 +16,7 @@
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
   boot.extraModulePackages = [ ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  services.udev.packages = [ pkgs.yubikey-personalization ];
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11;
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -32,7 +33,21 @@
       };
     };
   };
+
   services.blueman.enable = true;
+
+  security.pam = {
+    services = {
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
+    };
+    yubico = {
+      enable = true;
+      debug = true;
+      mode = "challenge-response";
+    };
+  };
+
 
   networking.hostName = "neesama";
 
