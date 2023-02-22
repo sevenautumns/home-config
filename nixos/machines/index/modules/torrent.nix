@@ -22,7 +22,7 @@
     peer = {
       publicKey = "qcvI02LwBnTb7aFrOyZSWvg4kb7zNW9/+rS6alnWyFE=";
       allowedIPs = [ "0.0.0.0/0" ];
-      endpoint = "193.32.127.67:53";
+      endpoint = "193.32.127.67:443";
     };
   };
 
