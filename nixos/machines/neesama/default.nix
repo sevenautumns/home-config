@@ -48,6 +48,8 @@
     };
   };
 
+  # Required for wireguard
+  networking.firewall.checkReversePath = false;
 
   networking.hostName = "neesama";
 

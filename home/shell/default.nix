@@ -20,9 +20,10 @@
     calc
     neofetch
     pulsemixer
+      yubikey-manager
   ];
 
-  pam.yubico.authorizedYubiKeys.ids = [];
+  pam.yubico.authorizedYubiKeys.ids = [ ];
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -63,13 +64,29 @@
   programs.tealdeer.enable = true;
 
   programs.gpg.enable = true;
-  services.gpg-agent.enable = true;
-  services.gpg-agent.pinentryFlavor = "gnome3";
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = false;
+    pinentryFlavor = "gnome3";
+  };
   services.gnome-keyring.enable = true;
-  home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then
-    "/run/user/125030/keyring/ssh"
-  else
-    "/run/user/1000/keyring/ssh";
+  # home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then
+  #   "/run/user/125030/keyring/ssh"
+  # else
+  #   "/run/user/1000/keyring/ssh";
+  programs.ssh = {
+    enable = true;
+    compression = true;
+    controlMaster = "auto";
+    controlPersist = "1m";
+    extraConfig = ''
+      AddKeysToAgent yes
+      IdentityFile ~/.ssh/id_ed25519_sk_1
+      IdentityFile ~/.ssh/id_ed25519_sk_2
+      # TODO to be removed
+      # IdentityFile ~/.ssh/id_ed25519_old
+    '';
+  };
 
   programs.btop = {
     enable = true;
