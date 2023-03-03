@@ -36,15 +36,25 @@
 
   services.blueman.enable = true;
 
+  environment.etc.u2f_keys = {
+    text =
+      "autumnal:5eAaIrIDqpqg4l1LFx0NfMI/PFJX87eaAZWuLV6b4jHMo140i45lUgRjd/GhGfu6FX0o5dBAroSs9GMArcip9Q==,1nlOcyHeDURYiDZUeKKTcEGXIybFwv9Bkxg6+4Tyv1Iq4SaX7s8R6IJfzyKK3QDJ30bpHnDzCwtsJwyeelq6gQ==,es256,+presence:sv3VtdnNk3n/gWG8DWOa/sJpYtcUY5v+TeVXCZXPuRy+R68u0xhfmBJAe3PUU4P6+fxho+ynaLqRjXPHuoKetw==,K7hDKUYhq+bM/+XEY6rQVBLxTfDYhGN6K8Miu1inIxv7g3MRrkzrPrbw3HFNuPFC9D6tyHAQur0cAvHy842Tfw==,es256,+presence";
+    mode = "0644";
+  };
   security.pam = {
+    u2f = {
+      enable = true;
+      cue = true;
+      # Utilize appId key for injecting pin requirement
+      appId = "pam://$HOSTNAME pinverification=1";
+      authFile = "/etc/u2f_keys";
+    };
     services = {
       login.u2fAuth = true;
       sudo.u2fAuth = true;
-    };
-    yubico = {
-      enable = true;
-      debug = true;
-      mode = "challenge-response";
+      i3lock.u2fAuth = true;
+      i3lock-color.u2fAuth = true;
+      greetd.u2fAuth = true;
     };
   };
 

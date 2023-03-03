@@ -70,10 +70,7 @@
     pinentryFlavor = "gnome3";
   };
   services.gnome-keyring.enable = true;
-  # home.sessionVariables.SSH_AUTH_SOCK = if (machine.user == "frie_sv") then
-  #   "/run/user/125030/keyring/ssh"
-  # else
-  #   "/run/user/1000/keyring/ssh";
+  # home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/keyring/ssh";
   programs.ssh = {
     enable = true;
     compression = true;
@@ -81,10 +78,9 @@
     controlPersist = "1m";
     extraConfig = ''
       AddKeysToAgent yes
-      IdentityFile ~/.ssh/id_ed25519_sk_1
-      IdentityFile ~/.ssh/id_ed25519_sk_2
+      IdentityFile ~/.ssh/id_ed25519_sk
       # TODO to be removed
-      # IdentityFile ~/.ssh/id_ed25519_old
+      # IdentityFile ~/.ssh/id_ed25519
     '';
   };
 
