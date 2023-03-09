@@ -63,7 +63,6 @@ in {
       nixfmt
 
       #misc
-      bitwarden
       arandr
       monero-cli
 

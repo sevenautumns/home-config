@@ -13,7 +13,6 @@ in {
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         vimium
         ublock-origin
-        bitwarden
         videospeed
         sponsorblock
         flagfox
