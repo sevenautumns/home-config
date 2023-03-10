@@ -5,12 +5,12 @@
     userName = "Sven Friedrich";
     userEmail = "sven@autumnal.de";
     signing.key = "2FCAB71B";
-    commit.gpgSign = true;
     aliases = {
       st = "status";
       it = "commit";
     };
     extraConfig = {
+      commit.gpgsign = true;
       core.editor = config.home.sessionVariables.EDITOR;
       core.pager = "${pkgs.delta}/bin/delta";
       merge.conflictstyle = "diff3";
