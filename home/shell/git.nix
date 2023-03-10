@@ -2,8 +2,9 @@
   # TODO Use more professional email/name ?
   programs.git = {
     enable = true;
-    userName = "sevenautumns";
+    userName = "Sven Friedrich";
     userEmail = "sven@autumnal.de";
+    signing.key = "2FCAB71B";
     aliases = {
       st = "status";
       it = "commit";

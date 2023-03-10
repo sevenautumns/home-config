@@ -2,6 +2,7 @@
   imports = [
     ./colors.nix
     ./git.nix
+    ./gpg
     ./helix.nix
     ./fish.nix
     ./starship.nix
@@ -20,7 +21,8 @@
     calc
     neofetch
     pulsemixer
-      yubikey-manager
+    yubikey-manager
+    diceware
   ];
 
   pam.yubico.authorizedYubiKeys.ids = [ ];
@@ -56,19 +58,13 @@
       [
         exts.pass-otp
         # exts.pass-import
-        # exts.pass-audit
+        exts.pass-audit
       ]);
     settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
   };
 
   programs.tealdeer.enable = true;
 
-  programs.gpg.enable = true;
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = false;
-    pinentryFlavor = "gnome3";
-  };
   services.gnome-keyring.enable = true;
   # home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/keyring/ssh";
   programs.ssh = {
