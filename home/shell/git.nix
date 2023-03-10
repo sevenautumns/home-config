@@ -5,6 +5,7 @@
     userName = "Sven Friedrich";
     userEmail = "sven@autumnal.de";
     signing.key = "2FCAB71B";
+    commit.gpgSign = true;
     aliases = {
       st = "status";
       it = "commit";
