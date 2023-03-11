@@ -65,7 +65,7 @@
   programs.tealdeer.enable = true;
 
   services.gnome-keyring.enable = true;
-  # home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/keyring/ssh";
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/keyring/ssh";
   programs.ssh = {
     enable = true;
     compression = true;
@@ -74,8 +74,9 @@
     extraConfig = ''
       AddKeysToAgent yes
       IdentityFile ~/.ssh/id_ed25519_sk
-      # TODO to be removed
-      # IdentityFile ~/.ssh/id_ed25519
+      # Fix resident Yubikey
+      # https://bbs.archlinux.org/viewtopic.php?id=274571
+      KexAlgorithms -sntrup761x25519-sha512@openssh.com
     '';
   };
 

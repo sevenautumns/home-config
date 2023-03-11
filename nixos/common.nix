@@ -55,10 +55,9 @@
     settings.passwordAuthentication = false;
   };
 
-  programs.ssh.startAgent = false;
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
+    enableSSHSupport = false;
   };
 
   networking.networkmanager.enable = true;
@@ -105,6 +104,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@neesama"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBS1P0v8LyDWFjm4ruh97R+ypG3iHBTGCnqq89lcK+KCAAAAD3NzaDplZDI1NTE5WVNDMQ== ssh:ed25519YSC1"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIHskUPHKxGliS54G1kW3TFsXK27EJv2Vhn8lxhqIr5EYAAAAD3NzaDplZDI1NTE5WVNDMg== ssh:ed25519YSC2"
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAID6cRpwV5pivNp8GWF3uAw4yOEJIYGkfMchIUeL+3f3hAAAACXNzaDp5azUuMQ== ssh:yk5.1"
       # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXeNbEgdMSjXN7C22LuaEgj9ppT+zhvyAzYKqiCpn/6 frie_sv@ft-ssy-sfnb"
       # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEkjuSM9mpcCFonZWaW+onrYr+mBjKzykeUWexTjImw0 autumnal@tenshi"
     ];
@@ -124,6 +124,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@neesama"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBS1P0v8LyDWFjm4ruh97R+ypG3iHBTGCnqq89lcK+KCAAAAD3NzaDplZDI1NTE5WVNDMQ== ssh:ed25519YSC1"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIHskUPHKxGliS54G1kW3TFsXK27EJv2Vhn8lxhqIr5EYAAAAD3NzaDplZDI1NTE5WVNDMg== ssh:ed25519YSC2"
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAID6cRpwV5pivNp8GWF3uAw4yOEJIYGkfMchIUeL+3f3hAAAACXNzaDp5azUuMQ== ssh:yk5.1"
       # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXeNbEgdMSjXN7C22LuaEgj9ppT+zhvyAzYKqiCpn/6 frie_sv@ft-ssy-sfnb"
       # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEkjuSM9mpcCFonZWaW+onrYr+mBjKzykeUWexTjImw0 autumnal@tenshi"
     ];

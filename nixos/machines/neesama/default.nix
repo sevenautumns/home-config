@@ -34,13 +34,20 @@
     };
   };
 
+  # Printing
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [ brlaser ];
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+
   services.blueman.enable = true;
 
   environment.etc.u2f_keys = {
     text =
-      "autumnal:5eAaIrIDqpqg4l1LFx0NfMI/PFJX87eaAZWuLV6b4jHMo140i45lUgRjd/GhGfu6FX0o5dBAroSs9GMArcip9Q==,1nlOcyHeDURYiDZUeKKTcEGXIybFwv9Bkxg6+4Tyv1Iq4SaX7s8R6IJfzyKK3QDJ30bpHnDzCwtsJwyeelq6gQ==,es256,+presence:sv3VtdnNk3n/gWG8DWOa/sJpYtcUY5v+TeVXCZXPuRy+R68u0xhfmBJAe3PUU4P6+fxho+ynaLqRjXPHuoKetw==,K7hDKUYhq+bM/+XEY6rQVBLxTfDYhGN6K8Miu1inIxv7g3MRrkzrPrbw3HFNuPFC9D6tyHAQur0cAvHy842Tfw==,es256,+presence";
+      "autumnal:p9rGHlS4Y3nKZmLcsQHZH7m53MKA9ZDqdyvf+IpXfZBR0eLleOwWXOAeoeiG/oX73qYGg4rT+cekiMNlRmp8EA==,wC3Hac/a9VU5/QLC7wXNcSB5Xtp5mn46bIU+FPcI+o1apcvmb81oSUVse8NhRDieibsLkF5rf1RCgfP06+g3oA==,es256,+presence:FLspmqImrEqgYb+F4f0pcHSoaNsljwBgl07v1CqKGfayHzhlztBCYUHbZmnODJeAlJ7NwA8QwliBLa2rwCs5ZQ==,1DEa/B12f3itdL7R6YNDR89zzYdpmQnxjZA7UslizsP6cedkYxxW+QhJKBh+Nl+Q22omSp4y2weP5MFjrsA1Gg==,es256,+presence";
     mode = "0644";
   };
+  # services.pcscd.enable = true;
   security.pam = {
     u2f = {
       enable = true;

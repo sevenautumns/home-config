@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, machine, lib, ... }: {
   imports = [ ./rofi.nix ];
 
   services.redshift = {
@@ -314,6 +314,7 @@
               indicator = white2;
             };
           };
+        } // lib.attrsets.optionalAttrs (machine.user == "autumnal") {
           startup = [{
             command =
               "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
