@@ -8,7 +8,7 @@
   # Creates tuigreet folder for the '--remember' option
   systemd.tmpfiles.rules =
     [ "d '/var/cache/tuigreet' 0700 greeter greeter - -" ];
-  
+
   # Automatically unlocks login-keyring
   security.pam.services.greetd.enableGnomeKeyring = true;
 

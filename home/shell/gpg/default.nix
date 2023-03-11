@@ -8,9 +8,10 @@
     settings = { keyserver = "hkps://keys.openpgp.org"; };
   };
 
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/gnupg/S.gpg-agent";
   services.gpg-agent = {
     enable = true;
-    enableSshSupport = false;
+    enableSshSupport = true;
     pinentryFlavor = "gnome3";
   };
 }

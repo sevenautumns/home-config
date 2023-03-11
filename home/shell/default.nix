@@ -54,12 +54,11 @@
 
   programs.password-store = {
     enable = true;
-    package = pkgs.pass.withExtensions (exts:
-      [
-        exts.pass-otp
-        # exts.pass-import
-        exts.pass-audit
-      ]);
+    package = pkgs.pass.withExtensions (exts: [
+      exts.pass-otp
+      # exts.pass-import
+      exts.pass-audit
+    ]);
     settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
   };
 
