@@ -314,6 +314,11 @@
               indicator = white2;
             };
           };
+          startup = [{
+            command =
+              "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
+            always = false;
+          }];
         };
         extraConfig = ''
           for_window [instance="^launcher$"] floating enable sticky enable resize set 30 ppt 60 ppt border normal 10
