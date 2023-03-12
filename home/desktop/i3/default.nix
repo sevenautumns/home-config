@@ -314,11 +314,11 @@
               indicator = white2;
             };
           };
-        } // lib.attrsets.optionalAttrs (machine.user == "autumnal") {
-          startup = [{
+          startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
             command =
               "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
-            always = false;
+          }] ++ lib.optionals (machine.host == "neesama") [{
+            command = "~/.screenlayout/normal.sh";
           }];
         };
         extraConfig = ''

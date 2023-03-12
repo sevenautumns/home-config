@@ -48,10 +48,8 @@ in {
       package = pkgs.roboto;
     };
     gtk3 = {
-      bookmarks = [
-        #"ssh://autumnal@clz.autumnal.de/media/torrent_storage Index (SSH)"
-        "file:///home/${user}/GitRepos GitRepos"
-      ] ++ lib.optionals (host == "neesama")
+      bookmarks = [ "file:///home/${user}/GitRepos GitRepos" ]
+        ++ lib.optionals (host == "neesama")
         [ "file:///net/index Index (NFS)" ];
       extraConfig = {
         gtk-application-prefer-dark-theme = 1;
