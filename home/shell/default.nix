@@ -6,6 +6,7 @@
     ./helix.nix
     ./fish.nix
     ./starship.nix
+    ./posh.nix
     ./neovim.nix
     ./nu.nix
     ./keyboard.nix

@@ -1,17 +1,6 @@
 { pkgs, config, machine, lib, ... }: {
   imports = [ ./rofi.nix ];
 
-  services.redshift = {
-    enable = true;
-    # Germany
-    latitude = 51.8;
-    longitude = 10.3;
-    # Japan
-    # latitude = 35.6;
-    # longitude = 139.8;
-    settings.redshift.transition = 0;
-  };
-
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default.settings = {
     theme = {
@@ -90,7 +79,7 @@
         ws9 = "9";
         ws10 = "10";
       in {
-        enable = true;
+        # enable = true;
         # package = pkgs.i3-gaps;
         config = {
           terminal = "alacritty";

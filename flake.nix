@@ -28,6 +28,9 @@
     kcc.url = "github:ciromattia/kcc";
     kcc.flake = false;
 
+    herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
+    herbstluftwm.flake = false;
+
     helix = {
       # url = "github:pascalkuthe/helix/git-diff-sign";
       url = "github:helix-editor/helix";
@@ -44,6 +47,7 @@
     cmus-notify.flake = false;
     fcitx5-adwaita.url = "github:escape0707/fcitx5-adwaita-dark";
     fcitx5-adwaita.flake = false;
+    herbst3.url = "github:sevenautumns/herbst3";
 
     # pop-shell.url = "github:pop-os/shell/master_jammy";
     # pop-shell.flake = false;

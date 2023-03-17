@@ -78,7 +78,7 @@ in {
       gnome-network-displays
       gthumb
       # hm-options
-      calibre
+      stable.calibre
 
       hakuneko
       (makeDesktopItem {

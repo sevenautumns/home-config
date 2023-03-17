@@ -29,7 +29,7 @@ in {
           x = 5;
           y = 5;
         };
-        opacity = 1;
+        opacity = 0.95;
         # decorations_theme_variant = "dark";
       };
       font.size = 14;
