@@ -5,6 +5,15 @@
     displayManager.startx.enable = true;
   };
 
+  environment.etc.issue.source =
+    let os = (builtins.substring 0 5 config.system.nixos.release);
+    in pkgs.writeText "issue" (builtins.concatStringsSep "\n" [
+      "   /]  German Aerospace"
+      "/_Z_Z_7    Center (DLR)"
+      "  [/       NixOS ${os} "
+      ""
+    ]);
+
   # Creates tuigreet folder for the '--remember' option
   systemd.tmpfiles.rules =
     [ "d '/var/cache/tuigreet' 0700 greeter greeter - -" ];
@@ -20,7 +29,8 @@
         command = ''
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
             --time --remember --asterisks \
-            --cmd "startx ~/.xsession"
+            --cmd "startx ~/.xsession" \
+            --user-menu --issue
         '';
       };
     };
