@@ -124,7 +124,7 @@ in {
           Name = "mozc";
           Layout = "";
         };
-        GroupOrder."0" = "Default";
+        GroupOrder."0" = "Group 1";
       };
     };
   };
