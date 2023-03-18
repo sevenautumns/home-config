@@ -26,6 +26,7 @@
       tags = [ "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
       keybinds = {
         Mod4-c = "close_and_remove";
+        Mod4-Alt-c = "close";
         Mod4-q = "quit";
         Mod4-Shift-r = "reload";
         Mod4-v = "split right 0.5";
@@ -65,6 +66,16 @@
         Mod4-KP_Up = "use 8";
         Mod4-KP_Prior = "use 9";
         Mod4-KP_Insert = "use 0";
+        Mod4-1 = "use 1";
+        Mod4-2 = "use 2";
+        Mod4-3 = "use 3";
+        Mod4-4 = "use 4";
+        Mod4-5 = "use 5";
+        Mod4-6 = "use 6";
+        Mod4-7 = "use 7";
+        Mod4-8 = "use 8";
+        Mod4-9 = "use 9";
+        Mod4-0 = "use 0";
 
         Mod4-Shift-KP_End = "move_index 1";
         Mod4-Shift-KP_Down = "move_index 2";
@@ -76,10 +87,54 @@
         Mod4-Shift-KP_Up = "move_index 8";
         Mod4-Shift-KP_Prior = "move_index 9";
         Mod4-Shift-KP_Insert = "move_index 0";
+        Mod4-Shift-1 = "move_index 1";
+        Mod4-Shift-2 = "move_index 2";
+        Mod4-Shift-3 = "move_index 3";
+        Mod4-Shift-4 = "move_index 4";
+        Mod4-Shift-5 = "move_index 5";
+        Mod4-Shift-6 = "move_index 6";
+        Mod4-Shift-7 = "move_index 7";
+        Mod4-Shift-8 = "move_index 8";
+        Mod4-Shift-9 = "move_index 9";
+        Mod4-Shift-0 = "move_index 0";
+
+        Mod4-l = ''
+          spawn ${pkgs.i3lock-color}/bin/i3lock-color \
+            --nofork \
+            --color '${gray0}' \
+            --clock \
+            --indicator \
+            --inside-color="${gray0}" \
+            --ring-color="${brown}" \
+            --insidever-color="${gray0}" \
+            --ringver-color="${yellow1}" \
+            --insidewrong-color="${gray0}" \
+            --ringwrong-color="${red}" \
+            --line-uses-inside \
+            --keyhl-color="${red}" \
+            --bshl-color="${red}" \
+            --separator-color="${gray0}" \
+            --verif-color="${gray0}" \
+            --wrong-color="${gray0}" \
+            --modif-color="${gray0}" \
+            --verif-color="${white}" \
+            --wrong-color="${white}" \
+            --modif-color="${white}" \
+            --layout-color="${white}" \
+            --date-color="${white}" \
+            --time-color="${white}" \
+            --pass-media-keys \
+            --pass-volume-keys \
+            --blur=1 \
+            --no-modkey-text \
+            --layout-font="Roboto"
+        '';
 
         Mod4-d = "spawn rofi -no-lazy-grab -show drun -modi drun";
         Mod4-t = "spawn rofi -show window -modi window";
         Mod4-p = "spawn rofi-pass";
+
+        Mod4-o = "spawn alacritty --class=launcher -e pulsemixer";
 
         Mod4-Return = "spawn ${pkgs.alacritty}/bin/alacritty";
         Mod4-Shift-Return = ''
