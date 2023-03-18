@@ -379,11 +379,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1679076316,
-        "narHash": "sha256-kMp45Kyy2rgQ9n57xynu23YcP/spDafovKRpWjlz/n8=",
+        "lastModified": 1679146153,
+        "narHash": "sha256-MPRxI7bxnClslgwhWPmK+DufG+wSsJri2gm23wFf4lo=",
         "owner": "sevenautumns",
         "repo": "herbst3",
-        "rev": "53d734f4cc35a5fd64a67c0d0dea29770c00aafa",
+        "rev": "c3b25a8b94cacd91688c99fb7f64e98e8486df82",
         "type": "github"
       },
       "original": {

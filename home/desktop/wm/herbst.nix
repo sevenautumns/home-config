@@ -6,7 +6,11 @@
   xsession = with config.theme; {
     enable = true;
     initExtra = ''
-      ${pkgs.xorg.xsetroot}/bin/xsetroot -solid '${config.theme.black}'
+      ${pkgs.hsetroot}/bin/hsetroot -solid '${config.theme.black}'
+      ~/.screenlayout/normal.sh &
+      feh --bg-scale ~/Pictures/Wallpaper/Autumn.png &
+    '' + lib.strings.optionalString (machine.user == "autumnal") ''
+      pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace &
     '';
     windowManager.herbstluftwm = {
       enable = true;
@@ -46,6 +50,10 @@
         Mod4-Shift-Ctrl-Down = "spawn herbst3 shift down --frame";
         Mod4-Shift-Ctrl-Up = "spawn herbst3 shift up --frame";
         Mod4-Shift-Ctrl-Right = "spawn herbst3 shift right --frame";
+        Mod4-Alt-Left = "shift left --level=all";
+        Mod4-Alt-Down = "shift down --level=all";
+        Mod4-Alt-Up = " shift up --level=all";
+        Mod4-Alt-Right = "shift right --level=all";
 
         Mod4-KP_End = "use 1";
         Mod4-KP_Down = "use 2";
@@ -58,16 +66,16 @@
         Mod4-KP_Prior = "use 9";
         Mod4-KP_Insert = "use 0";
 
-        Mod4-Shift-KP_1 = ''move_index "1"'';
-        Mod4-Shift-KP_2 = ''move_index "2"'';
-        Mod4-Shift-KP_3 = ''move_index "3"'';
-        Mod4-Shift-KP_4 = ''move_index "4"'';
-        Mod4-Shift-KP_5 = ''move_index "5"'';
-        Mod4-Shift-KP_6 = ''move_index "6"'';
-        Mod4-Shift-KP_7 = ''move_index "7"'';
-        Mod4-Shift-KP_8 = ''move_index "8"'';
-        Mod4-Shift-KP_9 = ''move_index "9"'';
-        Mod4-Shift-KP_0 = ''move_index "0"'';
+        Mod4-Shift-KP_End = "move_index 1";
+        Mod4-Shift-KP_Down = "move_index 2";
+        Mod4-Shift-KP_Next = "move_index 3";
+        Mod4-Shift-KP_Left = "move_index 4";
+        Mod4-Shift-KP_Begin = "move_index 5";
+        Mod4-Shift-KP_Right = "move_index 6";
+        Mod4-Shift-KP_Home = "move_index 7";
+        Mod4-Shift-KP_Up = "move_index 8";
+        Mod4-Shift-KP_Prior = "move_index 9";
+        Mod4-Shift-KP_Insert = "move_index 0";
 
         Mod4-d = "spawn rofi -no-lazy-grab -show drun -modi drun";
         Mod4-t = "spawn rofi -show window -modi window";
@@ -108,6 +116,10 @@
         frame_transparent_width = 5;
         frame_gap = 4;
         hide_covered_windows = true;
+        swap_monitors_to_get_tag = false;
+        auto_detect_monitors = true;
+        frame_active_opacity = 95;
+        update_dragged_clients = true;
       };
       rules = [
         "focus=on"
@@ -146,12 +158,7 @@
         herbstclient attr theme.tiling.outer_width 1
         herbstclient attr theme.background_color '${gray0}'
 
-        ${pkgs.hsetroot}/bin/hsetroot -solid '${black}'
-        ~/.screenlayout/normal.sh || true
-        herbstclient detect_monitors || true
         herbstclient chain - use 1 - merge_tag default 1 || true
-        herbstclient spawn pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace
-        feh --bg-scale ~/Pictures/Wallpaper/Autumn.png
       '';
     };
   };
