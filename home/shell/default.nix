@@ -66,7 +66,7 @@
   programs.tealdeer.enable = true;
 
   services.gnome-keyring.enable = true;
-  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/keyring/ssh";
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/ssh-agent";
   programs.ssh = {
     enable = true;
     compression = true;
