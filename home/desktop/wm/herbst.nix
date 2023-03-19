@@ -7,7 +7,7 @@
     enable = true;
     initExtra = ''
       ${pkgs.hsetroot}/bin/hsetroot -solid '${config.theme.black}'
-      ~/.screenlayout/normal.sh &
+      ~/.screenlayout/normal.sh || true
       feh --bg-scale ~/Pictures/Wallpaper/Autumn.png &
     '' + lib.strings.optionalString (machine.user == "autumnal") ''
       pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace &
@@ -183,7 +183,7 @@
         "windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off"
       ];
       extraConfig = with config.theme; ''
-        herbstclient attr theme.title_height 15
+        herbstclient attr theme.title_height 12
         herbstclient attr theme.title_when always
         herbstclient attr theme.title_font 'Ttyp0:pixelsize=9'
         herbstclient attr theme.title_depth 3  # space below the title's baseline
@@ -197,20 +197,20 @@
         herbstclient attr theme.active.tab_title_color '${gray5}'
         herbstclient attr theme.normal.title_color '${gray5}'
         herbstclient attr theme.inner_width 1
-        herbstclient attr theme.inner_color black
-        herbstclient attr theme.border_width 3
-        herbstclient attr theme.floating.border_width 4
+        herbstclient attr theme.inner_color '${gray0}'
+        herbstclient attr theme.border_width 4
+        herbstclient attr theme.floating.border_width 1
         herbstclient attr theme.floating.outer_width 1
-        herbstclient attr theme.floating.outer_color black
-        herbstclient attr theme.active.inner_color '${gray3}'
-        herbstclient attr theme.urgent.inner_color '${gray3}'
+        herbstclient attr theme.floating.outer_color '${gray0}'
+        herbstclient attr theme.active.inner_color '${gray0}'
+        herbstclient attr theme.urgent.inner_color '${gray0}'
         herbstclient attr theme.normal.inner_color '${gray0}'
         # copy inner color to outer_color
         for state in active urgent normal ; do
             herbstclient substitute C theme.''${state}.inner_color \
                 attr theme.''${state}.outer_color C
         done
-        herbstclient attr theme.tiling.outer_width 1
+        herbstclient attr theme.tiling.outer_width 2
         herbstclient attr theme.background_color '${gray0}'
 
         herbstclient chain - use 1 - merge_tag default 1 || true
