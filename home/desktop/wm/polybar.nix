@@ -41,9 +41,11 @@
         label-urgent = "%name%";
         label-urgent-background = red;
         label-urgent-padding = "1";
-        label-empty = "%name%";
-        label-empty-foreground = foreground-dark;
-        label-empty-padding = "1";
+        label-empty = "";
+        label-empty-padding = 0;
+        # label-empty = "%name%";
+        # label-empty-foreground = foreground-dark;
+        # label-empty-padding = "1";
       };
       "module/xwindow" = {
         type = "internal/xwindow";
