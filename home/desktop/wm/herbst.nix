@@ -181,10 +181,11 @@
         "windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on"
         "windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on"
         "windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off"
+        "instance~'^launcher$' floating=on focus=on floatplacement=center"
       ];
       extraConfig = with config.theme; ''
         herbstclient attr theme.title_height 12
-        herbstclient attr theme.title_when always
+        herbstclient attr theme.title_when one_tab
         herbstclient attr theme.title_font 'Ttyp0:pixelsize=9'
         herbstclient attr theme.title_depth 3  # space below the title's baseline
         herbstclient attr theme.active.color '${brown}'
@@ -199,7 +200,7 @@
         herbstclient attr theme.inner_width 1
         herbstclient attr theme.inner_color '${gray0}'
         herbstclient attr theme.border_width 4
-        herbstclient attr theme.floating.border_width 1
+        herbstclient attr theme.floating.border_width 4
         herbstclient attr theme.floating.outer_width 1
         herbstclient attr theme.floating.outer_color '${gray0}'
         herbstclient attr theme.active.inner_color '${gray0}'

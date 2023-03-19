@@ -56,10 +56,10 @@
   };
 
   programs.ssh.startAgent = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = false;
-  };
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = false;
+  # };
 
   networking.networkmanager.enable = true;
 
