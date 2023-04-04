@@ -76,7 +76,7 @@
       {
         name = "rust";
         config = {
-          checkOnSave.command = "clippy";
+          # checkOnSave.command = "clippy";
           procMacro.enable = true;
           diagnostics.disabled = [ "unresolved-proc-macro" ];
         };

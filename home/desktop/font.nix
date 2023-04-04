@@ -6,73 +6,49 @@ let
       version = "2.2.4";
 
       src = fetchzip {
-        # http://jikasei.me/font/jf-dotfont/
-        # https://packages.debian.org/buster/fonts/xfonts-jisx0213
         url =
           "https://web.archive.org/web/20221124094022if_/https://ftp.halifax.rwth-aachen.de/osdn/mplus-fonts/5030/mplus_bitmap_fonts-2.2.4.tar.gz";
         sha256 = "sha256-AtXoVb/HoI8FdsgMwLyearg7kN8HTJ0SjqH5xyZ+SBY=";
       };
-      # srcs = [
-      #   (fetchurl {
-      #     url = "https://web.archive.org/web/20140915160202if_/http://www12.ocn.ne.jp/~imamura/jiskan16-2004-1.bdf.gz";
-      #     sha256 = "sha256-bxBxW2OzgHqYap27f5rV5mBeiYEbG1oFy1pjlte1rnw=";
-      #   })
-      #   (fetchurl {
-      #     url = "https://web.archive.org/web/20140915160204if_/http://www12.ocn.ne.jp/~imamura/K14-2004-1.bdf.gz";
-      #     sha256 = "sha256-q3tSykttJLjxrI7BLStgDdlCSRpyvFEtn79ZZFHn3kU=";
-      #   })
-      #   (fetchurl {
-      #     url = "https://web.archive.org/web/20140915160215if_/http://www12.ocn.ne.jp/~imamura/K12-1.bdf.gz";
-      #     sha256 = "sha256-Dq7yl4UTT6poYH3fC1oVsw+02qOIz8M3bx7asH+UMEM=";
-      #   })
-      #   (fetchurl {
-      #     url = "https://web.archive.org/web/20140915160216if_/http://www12.ocn.ne.jp/~imamura/K12-2.bdf.gz";
-      #     sha256 = "sha256-aSOdUwlPtoc2ULOBHIfBoVnecauUC3t2nOqfdZG+Bdc=";
-      #   })
-      # ];
 
-      # dontUnpack = true;
-      # unpackPhase = ''
-      #   ls -lha
-      #   tar -xvf $src
-      # '';
+      nativeBuildInputs = [ perl libfaketime bdf2psf xorg.xset xorg.bdftopcf xorg.fonttosfnt xorg.mkfontscale ];
 
-      nativeBuildInputs = [ perl libfaketime xorg.fonttosfnt xorg.mkfontscale ];
-
-      # prePatch = ''
-      #   # for i in $(grep -Rl "FAMILY_NAME \"Fixed\""); do
-      #   for i in $srcs; do
-      #     cp "$i" "./$(stripHash "''${i%.gz}")" 
-      #   done
-      #   ls -lha
-      #   substituteInPlace *.bdf \
-      #     --replace 'FAMILY_NAME "Fixed"' \
-      #               'FAMILY_NAME "Ttyp0"'
-      #   # done
-      # '';
-
-      # dontConfigure = true;
-      # preConfigure = ''
-      #   cat << EOF > VARIANTS.dat
-      #   COPYTO AccStress PApostropheAscii
-      #   COPYTO PAmComma AccGraveAscii
-      #   COPYTO Digit0Slashed Digit0
-      #   EOF
-      # '';
+      postPatch = ''
+        patchShebangs install_mplus_fonts
+      '';
 
       buildPhase = ''
         runHook preBuild
+        
+        DESTDIR=. ./install_mplus_fonts
+      	rm fonts_j/mplus_j1*b.bdf
 
-        fontDir="$(pwd)/build"
-        mkdir $fontDir
-        DESTDIR=$fontDir MKBOLD=NO ./install_mplus_fonts
-        cp fonts_e/*.bdf build/
-        cp fonts_j/*.bdf build/
+        build=$(pwd)
+        # mkdir {psf,otb}
+        # cd ${bdf2psf}/share/bdf2psf
+        # for f in $build/fonts_e/*.bdf; do
+        #   name="$(basename $f .bdf)"
+        #   bdf2psf \
+        #     --fb "$f" standard.equivalents \
+        #     ascii.set+useful.set+linux.set 512 \
+        #     "$build/fonts_e/$name.psf"
+        # done
+        # for f in $build/fonts_j/*.bdf; do
+        #   name="$(basename $f .bdf)"
+        #   bdf2psf \
+        #     --fb "$f" standard.equivalents \
+        #     ascii.set+useful.set+linux.set 512 \
+        #     "$build/fonts_j/$name.psf"
+        # done
+        # cd -
 
-        for f in $fontDir/*.bdf; do
-            local file_name="''${f%.bdf}" 
-            faketime -f "1970-01-01 00:00:01" \
-            fonttosfnt -v -o "$file_name.otb" "$f"
+        for f in $build/fonts_e/*.bdf; do
+          name="$(basename $f .bdf)"
+          fonttosfnt -v -o "$build/fonts_e/$name.otb" "$f"
+        done
+        for f in $build/fonts_j/*.bdf; do
+          name="$(basename $f .bdf)"
+          fonttosfnt -v -m 2 -o "$build/fonts_j/$name.otb" "$f"
         done
 
         runHook postBuild
@@ -81,15 +57,24 @@ let
       installPhase = ''
         runHook preInstall
 
-        fontDir="share/fonts/misc"
-        # cd $fontDir
-        # ls -lha
-        # install -m 644 -D -t "$out/$fontDir" build/*.pcf.gz 
-        install -m 644 -D -t "$out/$fontDir" build/*.otb
-        # install -m 644 -D -t "$bdf/$fontDir" build/*.bdf
-        mkfontdir "$bdf/$fontDir"
-        mkfontdir "$out/$fontDir"
+        # install psf fonts
+        # fontDir="$out/share/consolefonts"
+        # install -m 644 -D fonts_{e,j}/*.psf -t "$fontDir"
 
+        # # install otb fonts
+        find 
+        fontDir="$out/share/fonts/misc"
+        # fontDirE="$fontDir/fonts_e"
+        fontDirJ="$fontDir/fonts_j"
+        # install -m 644 -D fonts_e/*.{otb,pcf.gz,bdf} -t "$fontDirE"
+        # install -m 644 -D fonts_e/fonts.alias -t "$fontDirE"
+        # install -m 644 -D fonts_j/*{otb,pcf.gz,bdf} -t "$fontDirJ"
+        # install -m 644 -D fonts_j/fonts.alias -t "$fontDirJ"
+        install -m 644 -D fonts_j/*.{otb,bdf,pcf.gz} -t "$fontDirJ"
+        # install -m 644 -D fonts_j/fonts.alias -t "$fontDirJ"
+        # mkfontdir "$fontDirE"
+        mkfontdir "$fontDirJ"
+        
         runHook postInstall
       '';
 

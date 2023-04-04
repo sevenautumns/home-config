@@ -21,12 +21,12 @@
     };
     deploy-rs.url = "github:serokell/deploy-rs";
 
-    gobot.url = "github:c0nvulsiv3/gobot";
-    gobot.flake = false;
+    # gobot.url = "github:c0nvulsiv3/gobot";
+    # gobot.flake = false;
 
     # knock.url = "github:BentonEdmondson/knock";
-    kcc.url = "github:ciromattia/kcc";
-    kcc.flake = false;
+    # kcc.url = "github:ciromattia/kcc";
+    # kcc.flake = false;
 
     herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
     herbstluftwm.flake = false;
@@ -37,10 +37,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # nil = {
+    #   url = "github:oxalica/nil";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
     # Home manager used repos
     cmus-notify.url = "github:dcx86r/cmus-notify";
