@@ -94,6 +94,7 @@
         # Use correct english
         config.ltex = {
           language = "en-GB";
+          # language = "de-DE";
           latex.commands = { "\\\\lstinline{}" = "dummy"; };
           # dictionary = {
           #   "en-GB" = [

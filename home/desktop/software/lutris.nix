@@ -2,11 +2,9 @@
 
   home.packages = with pkgs; [
     lutris
-
-    #Genshin requirements
-    xdelta
-    xterm
-    zenith
+    winetricks
+    stable.wine
+    kdialog
   ];
 }
 

@@ -1,6 +1,7 @@
 { pkgs, config, lib, inputs, machine, ... }:
 let
   host = machine.host;
+  arch = machine.arch;
   #naersk = pkgs.callPackage inputs.naersk {};
   #rdf = naersk.buildPackage inputs.rdf;
   # hm-options = pkgs.writeShellScriptBin "hm-options" ''
@@ -79,6 +80,8 @@ in {
       gthumb
       # hm-options
       stable.calibre
+
+      libgourou
 
       hakuneko
       (makeDesktopItem {

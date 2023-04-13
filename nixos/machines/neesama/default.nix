@@ -40,6 +40,8 @@
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
 
+  virtualisation.podman.enable = true;
+
   services.blueman.enable = true;
 
   environment.etc.u2f_keys = {
