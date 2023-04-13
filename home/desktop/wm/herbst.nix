@@ -27,10 +27,14 @@
       keybinds = {
         Mod4-c = "close_and_remove";
         Mod4-Alt-c = "close";
-        Mod4-q = "quit";
+        Mod4-Shift-q = "quit";
         Mod4-Shift-r = "reload";
-        Mod4-v = "split right 0.5";
-        Mod4-h = "split bottom 0.5";
+        # Mod4-v = "split right 0.5";
+        # Mod4-h = "split bottom 0.5";
+        Mod4-v = "set_attr clients.focus.parent_frame.algorithm vertical";
+        Mod4-h = "set_attr clients.focus.parent_frame.algorithm horizontal";
+        Mod4-z = "set_attr clients.focus.parent_frame.algorithm max";
+        Mod4-q = "set_attr clients.focus.parent_frame.algorithm grid";
         Mod4-f = "fullscreen";
         Mod4-x = "cycle_monitor";
         Mod4-Shift-space = "set_attr clients.focus.floating toggle";
@@ -159,7 +163,7 @@
         Mod4-Button3 = "resize";
       };
       settings = with config.theme; {
-        default_frame_layout = "max";
+        default_frame_layout = "grid";
         tabbed_max = true;
         frame_border_active_color = brown;
         frame_border_normal_color = gray3;
