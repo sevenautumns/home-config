@@ -46,7 +46,7 @@
 
   environment.etc.u2f_keys = {
     text =
-      "autumnal:p9rGHlS4Y3nKZmLcsQHZH7m53MKA9ZDqdyvf+IpXfZBR0eLleOwWXOAeoeiG/oX73qYGg4rT+cekiMNlRmp8EA==,wC3Hac/a9VU5/QLC7wXNcSB5Xtp5mn46bIU+FPcI+o1apcvmb81oSUVse8NhRDieibsLkF5rf1RCgfP06+g3oA==,es256,+presence:FLspmqImrEqgYb+F4f0pcHSoaNsljwBgl07v1CqKGfayHzhlztBCYUHbZmnODJeAlJ7NwA8QwliBLa2rwCs5ZQ==,1DEa/B12f3itdL7R6YNDR89zzYdpmQnxjZA7UslizsP6cedkYxxW+QhJKBh+Nl+Q22omSp4y2weP5MFjrsA1Gg==,es256,+presence";
+      "autumnal:*,o65pPMQU2m31y+DIpa5nPQ/Xc5CXwiSq98n8lIFQzTM=,eddsa,";
     mode = "0644";
   };
   # services.pcscd.enable = true;
@@ -55,7 +55,7 @@
       enable = true;
       cue = true;
       # Utilize appId key for injecting pin requirement
-      appId = "pam://$HOSTNAME pinverification=1";
+      appId = "pam://$HOSTNAME pinverification=1 userpresence=0";
       authFile = "/etc/u2f_keys";
     };
     services = {

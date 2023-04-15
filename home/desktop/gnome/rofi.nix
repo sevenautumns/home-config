@@ -7,11 +7,19 @@ in {
   #  #"XF86Calculator" = "rofi -show calc -mode calc";
   #};
 
+  dconf.settings = {
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" =
+      {
+        binding = "<Super>p";
+        command = "rofi-pass";
+        name = "Rofi Pass";
+      };
+  };
+
   programs.rofi = {
     enable = true;
     #font = "FiraCode Nerd Font 11";
     font = "Noto Sans Regular 11";
-    plugins = [ pkgs.rofi-calc ];
     extraConfig = {
       icon-theme = "Yaru";
       display-ssh = "";
@@ -21,7 +29,7 @@ in {
       display-combi = "";
       drun-display-format = "{name}";
       show-icons = true;
-      modi = "drun,window,run,ssh,calc";
+      modi = "drun,window,run,ssh";
     };
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {
@@ -138,6 +146,15 @@ in {
         border-radius = mkLiteral "12px";
         border-color = mkLiteral "@accent";
       };
+    };
+    pass = {
+      enable = true;
+      extraConfig = ''
+        # https://github.com/carnager/rofi-pass/issues/223
+        help_color="#FF0000"
+
+        USERNAME_field='login'
+      '';
     };
   };
 }

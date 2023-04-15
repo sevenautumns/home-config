@@ -30,6 +30,11 @@
     herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
     herbstluftwm.flake = false;
 
+    pop-shell.url = "github:pop-os/shell";
+    pop-shell.flake = false;
+    pop-launcher.url = "github:pop-os/launcher";
+    pop-launcher.flake = false;
+
     herbst3 = {
       url = "github:sevenautumns/herbst3";
       inputs.herbstluftwm.follows = "herbstluftwm";

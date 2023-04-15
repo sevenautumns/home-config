@@ -104,8 +104,8 @@ in {
     ];
 
   xsession.numlock.enable = true;
-  services.network-manager-applet.enable = true;
-  services.blueman-applet.enable = true;
+  # services.network-manager-applet.enable = true;
+  # services.blueman-applet.enable = true;
   dconf.settings."org/blueman/general" = {
     plugin-list = [ "!ConnectionNotifier" ];
   };

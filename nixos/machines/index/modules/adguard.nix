@@ -9,7 +9,7 @@
 {
 
   services.adguardhome = {
-    enable = true;
+    enable = false;
     openFirewall = true;
     settings = {
       bind_port = 3000;

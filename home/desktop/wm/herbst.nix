@@ -13,7 +13,7 @@
       pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace &
     '';
     windowManager.herbstluftwm = {
-      enable = true;
+      enable = false;
       package = pkgs.herbstluftwm.overrideAttrs (orig: {
         # version = "git";
         src = inputs.herbstluftwm;

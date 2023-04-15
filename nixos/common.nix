@@ -111,6 +111,8 @@
     ];
   };
 
+  programs.fish.enable = true;
+
   users.users.autumnal = {
     uid = 1000;
     isNormalUser = true;

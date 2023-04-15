@@ -11,14 +11,14 @@ let
     '' + old.postPatch;
     version = "unstable-master_jammy";
   }));
-  pop-launcher = (pkgs.pop-launcher.pop-launcher.overrideAttrs (old: {
-    src = inputs.pop-launcher;
-    version = "unstable-master";
-    cargoSha256 = null;
-    cargoDeps = pkgs.rustPlatform.importCargoLock {
-      lockFile = "${inputs.pop-launcher}/Cargo.lock";
-    };
-  }));
+  # pop-launcher = (pkgs.pop-launcher.overrideAttrs (old: {
+  #   src = inputs.pop-launcher;
+  #   version = "unstable-master";
+  #   cargoSha256 = null;
+  #   cargoDeps = pkgs.rustPlatform.importCargoLock {
+  #     lockFile = "${inputs.pop-launcher}/Cargo.lock";
+  #   };
+  # }));
 in {
   home.packages = with pkgs; [ pop-shell pop-launcher ];
 
@@ -113,8 +113,8 @@ in {
       hint-color-rgba = "rgba(216, 222, 233, 1)";
       snap-to-grid = false;
       smart-gaps = true;
-      gap-inner = lib.hm.gvariant.mkUint32 0;
-      gap-outer = lib.hm.gvariant.mkUint32 0;
+      gap-inner = lib.hm.gvariant.mkUint32 1;
+      gap-outer = lib.hm.gvariant.mkUint32 1;
 
       # Focus Shifting
       focus-left = [ "<Super>Left" ];

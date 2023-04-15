@@ -1,11 +1,11 @@
 { pkgs, config, inputs, lib, machine, ... }:
 let
   host = machine.host;
-  disable-nmapplet = pkgs.runCommand "disable-nmapplet" { } ''
-    touch $out
-    cp ${pkgs.networkmanagerapplet}/etc/xdg/autostart/nm-applet.desktop $out
-    echo 'X-GNOME-Autostart-enabled=false' >> $out
-  '';
+  # disable-nmapplet = pkgs.runCommand "disable-nmapplet" { } ''
+  #   touch $out
+  #   cp ${pkgs.networkmanagerapplet}/etc/xdg/autostart/nm-applet.desktop $out
+  #   echo 'X-GNOME-Autostart-enabled=false' >> $out
+  # '';
 in {
   imports = [ ./rofi.nix ./popshell.nix ];
 
@@ -16,13 +16,17 @@ in {
   '';
   xsession.windowManager.command = "gnome-session";
 
-  xdg.configFile."autostart/nm-applet.desktop".source = disable-nmapplet;
+  # xdg.configFile."autostart/nm-applet.desktop".source = disable-nmapplet;
   home.packages = with pkgs;
     [
-      gnomeExtensions.audio-output-switcher
+      # gnomeExtensions.audio-output-switcher
       gnomeExtensions.tray-icons-reloaded
+      gnomeExtensions.space-bar
       gnomeExtensions.user-themes
       pop-gtk-theme
+      gnome-extension-manager
+      gnome.dconf-editor
+      gnome.gnome-tweaks
     ] ++ lib.optionals machine.nixos [ gnome.gnome-session ];
   dconf.settings = let mkTuple = lib.hm.gvariant.mkTuple;
   in {
@@ -32,12 +36,11 @@ in {
         command = "firefox";
         name = "Firefox";
       };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
-      {
-        binding = "<Super><Shift>w";
-        command = "brave";
-        name = "Brave";
-      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Super><Shift>w";
+      command = "brave";
+      name = "Brave";
+    };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
       {
         binding = "<Super><Shift>Return";
@@ -56,6 +59,7 @@ in {
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
       ];
     };
     "org/gnome/shell" = {
@@ -67,6 +71,7 @@ in {
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
         "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "space-bar@luchrioh"
       ];
       disabled-extensions = [
         "material-shell@papyelgringo"
@@ -87,6 +92,13 @@ in {
       exec = "${config.programs.alacritty.package}/bin/alacritty";
     };
     "org/gnome/shell/extensions/user-theme".name = config.gtk.theme.name;
+    "org/gnome/shell/extensions/space-bar/shortcuts" = {
+      enable-activate-workspace-shortcuts = true;
+      enable-move-to-workspace-shortcuts = true;
+      open-menu = [ ];
+      activate-previous-key = [ ];
+      activate-empty-key = [ ];
+    };
     "org/gnome/desktop/wm/keybindings" = {
       toggle-maximized = [ ];
       toggle-fullscreen = [ "<Super>F" ];
@@ -146,6 +158,7 @@ in {
     "org/gnome/mutter/keybindings" = {
       toggle-tiled-left = [ ];
       toggle-tiled-right = [ ];
+      switch-monitor = [ ];
     };
     "org/gnome/desktop/interface" = let
       font-name = config.gtk.font.name;
@@ -157,6 +170,10 @@ in {
       document-font-name = "${font-name} ${font-size}";
       monospace-font-name = "Ttyp0 12";
       cursor-theme = "Bibata-Original-Classic";
+    };
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+      power-button-action = "interactive";
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-temperature = lib.hm.gvariant.mkUint32 3600;
