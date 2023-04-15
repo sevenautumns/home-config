@@ -36,11 +36,12 @@ in {
         command = "firefox";
         name = "Firefox";
       };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-      binding = "<Super><Shift>w";
-      command = "brave";
-      name = "Brave";
-    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
+      {
+        binding = "<Super><Shift>w";
+        command = "brave";
+        name = "Brave";
+      };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
       {
         binding = "<Super><Shift>Return";

@@ -145,10 +145,10 @@ in {
       # Workspace Management -->
       pop-workspace-down = [ ];
       pop-workspace-up = [ ];
-      pop-monitor-down = [ "<Super><Alt>Down" ];
-      pop-monitor-up = [ "<Super><Alt>Up" ];
-      pop-monitor-left = [ "<Super><Alt>Left" ];
-      pop-monitor-right = [ "<Super><Alt>Right" ];
+      pop-monitor-down = [ "<Super><Shift><Alt>Down" ];
+      pop-monitor-up = [ "<Super><Shift><Alt>Up" ];
+      pop-monitor-left = [ "<Super><Shift><Alt>Left" ];
+      pop-monitor-right = [ "<Super><Shift><Alt>Right" ];
     };
   };
 }

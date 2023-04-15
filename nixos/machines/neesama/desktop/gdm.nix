@@ -5,14 +5,13 @@
     displayManager.gdm = {
       enable = true;
       wayland = false;
-      #autoLogin.delay = 1;
     };
 
     displayManager = {
       defaultSession = "user";
       job.preStart = "sleep 4";
       autoLogin = {
-        enable = true;
+        enable = false;
         user = "autumnal";
       };
       session = [{

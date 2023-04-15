@@ -19,11 +19,10 @@
         src = inputs.herbstluftwm;
         doCheck = false;
         patches = [ ];
-        buildInputs = orig.buildInputs
-          ++ [ 
-            # (pkgs.python3.withPackages (ps: with ps; [ libxslt ])) 
-            # pkgs.libxslt 
-          ];
+        buildInputs = orig.buildInputs ++ [
+          # (pkgs.python3.withPackages (ps: with ps; [ libxslt ])) 
+          # pkgs.libxslt 
+        ];
         postPatch = orig.postPatch + ''
           patchShebangs doc/format-doc.py
           patchShebangs doc/patch-manpage-xml.py

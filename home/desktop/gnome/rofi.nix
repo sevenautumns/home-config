@@ -22,6 +22,8 @@ in {
     font = "Noto Sans Regular 11";
     extraConfig = {
       icon-theme = "Yaru";
+      sorting-method = "fzf";
+      matching = "fuzzy";
       display-ssh = "";
       display-run = "";
       display-drun = "";
@@ -91,7 +93,7 @@ in {
         lines = 10;
         #lines = 4;
         spacing = mkLiteral "0%";
-        fixed-height = true;
+        fixed-height = false;
         fixed-columns = true;
         cycle = false;
         dynamic = true;

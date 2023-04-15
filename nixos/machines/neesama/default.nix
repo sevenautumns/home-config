@@ -45,8 +45,7 @@
   services.blueman.enable = true;
 
   environment.etc.u2f_keys = {
-    text =
-      "autumnal:*,o65pPMQU2m31y+DIpa5nPQ/Xc5CXwiSq98n8lIFQzTM=,eddsa,";
+    text = "autumnal:*,o65pPMQU2m31y+DIpa5nPQ/Xc5CXwiSq98n8lIFQzTM=,eddsa,";
     mode = "0644";
   };
   # services.pcscd.enable = true;

@@ -11,47 +11,55 @@ let
         sha256 = "sha256-AtXoVb/HoI8FdsgMwLyearg7kN8HTJ0SjqH5xyZ+SBY=";
       };
 
-      nativeBuildInputs = [ perl libfaketime bdf2psf xorg.xset xorg.bdftopcf xorg.fonttosfnt xorg.mkfontscale ];
+      nativeBuildInputs = [
+        perl
+        libfaketime
+        bdf2psf
+        xorg.xset
+        xorg.bdftopcf
+        xorg.fonttosfnt
+        xorg.mkfontscale
+      ];
 
       postPatch = ''
         patchShebangs install_mplus_fonts
       '';
 
       buildPhase = ''
-        runHook preBuild
-        
-        DESTDIR=. ./install_mplus_fonts
-      	rm fonts_j/mplus_j1*b.bdf
+          runHook preBuild
+          
+          DESTDIR=. ./install_mplus_fonts
+        	rm fonts_j/mplus_j1*b.bdf
 
-        build=$(pwd)
-        # mkdir {psf,otb}
-        # cd ${bdf2psf}/share/bdf2psf
-        # for f in $build/fonts_e/*.bdf; do
-        #   name="$(basename $f .bdf)"
-        #   bdf2psf \
-        #     --fb "$f" standard.equivalents \
-        #     ascii.set+useful.set+linux.set 512 \
-        #     "$build/fonts_e/$name.psf"
-        # done
-        # for f in $build/fonts_j/*.bdf; do
-        #   name="$(basename $f .bdf)"
-        #   bdf2psf \
-        #     --fb "$f" standard.equivalents \
-        #     ascii.set+useful.set+linux.set 512 \
-        #     "$build/fonts_j/$name.psf"
-        # done
-        # cd -
+          build=$(pwd)
+          # mkdir {psf,otb}
+          # cd ${bdf2psf}/share/bdf2psf
+          # for f in $build/fonts_e/*.bdf; do
+          #   name="$(basename $f .bdf)"
+          #   bdf2psf \
+          #     --fb "$f" standard.equivalents \
+          #     ascii.set+useful.set+linux.set 512 \
+          #     "$build/fonts_e/$name.psf"
+          # done
+          # for f in $build/fonts_j/*.bdf; do
+          #   name="$(basename $f .bdf)"
+          #   bdf2psf \
+          #     --fb "$f" standard.equivalents \
+          #     ascii.set+useful.set+linux.set 512 \
+          #     "$build/fonts_j/$name.psf"
+          # done
+          # cd -
 
-        for f in $build/fonts_e/*.bdf; do
-          name="$(basename $f .bdf)"
-          fonttosfnt -v -o "$build/fonts_e/$name.otb" "$f"
-        done
-        for f in $build/fonts_j/*.bdf; do
-          name="$(basename $f .bdf)"
-          fonttosfnt -v -m 2 -o "$build/fonts_j/$name.otb" "$f"
-        done
+          for f in $build/fonts_e/*.bdf; do
+            name="$(basename $f .bdf)"
+            fonttosfnt -v -o "$build/fonts_e/$name.otb" "$f"
+          done
+          for f in $build/fonts_j/*.bdf; do
+            name="$(basename $f .bdf)"
+            fonttosfnt -v -m 2 -o "$build/fonts_j/$name.otb" "$f"
+          done
 
-        runHook postBuild
+          runHook postBuild
       '';
 
       installPhase = ''
@@ -74,7 +82,7 @@ let
         # install -m 644 -D fonts_j/fonts.alias -t "$fontDirJ"
         # mkfontdir "$fontDirE"
         mkfontdir "$fontDirJ"
-        
+
         runHook postInstall
       '';
 
