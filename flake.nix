@@ -16,7 +16,7 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.utils.follows = "flake-utils";
+      # inputs.utils.follows = "flake-utils";
     };
 
     deploy-rs = {
@@ -34,6 +34,8 @@
     pop-shell.flake = false;
     pop-launcher.url = "github:pop-os/launcher";
     pop-launcher.flake = false;
+
+    niketsu.url = "github:sevenautumns/niketsu";
 
     herbst3 = {
       url = "github:sevenautumns/herbst3";
@@ -118,7 +120,8 @@
         "castle" = {
           user = "autumnal";
           #address = "10.2.0.0";
-          address = "192.168.2.250";
+          # address = "192.168.2.250";
+          address = "192.168.178.64";
           arch = "aarch64-linux";
           headless = true;
           nixos = true;
@@ -207,7 +210,7 @@
           };
         } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
           system = {
-            sshUser = "admin";
+            sshUser = "nixos";
             path = deploy-rs.lib.${machine.arch}.activate.nixos
               self.nixosConfigurations."${host}";
             user = "root";

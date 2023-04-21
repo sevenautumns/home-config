@@ -10,10 +10,10 @@ in {
   imports = [ ./rofi.nix ./popshell.nix ];
 
   xsession.enable = true;
-  xsession.initExtra = ''
-    export XDG_SESSION_TYPE=x11
-    export GDK_BACKEND=x11
-  '';
+  # xsession.initExtra = ''
+  #   export XDG_SESSION_TYPE=x11
+  #   export GDK_BACKEND=x11
+  # '';
   xsession.windowManager.command = "gnome-session";
 
   # xdg.configFile."autostart/nm-applet.desktop".source = disable-nmapplet;

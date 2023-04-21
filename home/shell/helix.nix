@@ -3,6 +3,7 @@
     enable = true;
     package = if (machine.arch == "x86_64-linux") then
       inputs.helix.packages."${pkgs.system}".default
+      # pkgs.stable.helix
     else
       pkgs.stable.helix;
     settings = {

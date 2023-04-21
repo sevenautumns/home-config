@@ -4,12 +4,12 @@
     dpi = 80;
     displayManager.gdm = {
       enable = true;
-      wayland = false;
+      wayland = true;
     };
 
     displayManager = {
       defaultSession = "user";
-      job.preStart = "sleep 4";
+      # job.preStart = "sleep 4";
       autoLogin = {
         enable = false;
         user = "autumnal";
