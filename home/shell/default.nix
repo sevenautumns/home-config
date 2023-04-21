@@ -3,6 +3,7 @@
     ./colors.nix
     ./git.nix
     ./gpg
+    ./mail
     ./helix.nix
     ./fish.nix
     ./starship.nix

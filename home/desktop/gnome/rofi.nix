@@ -33,6 +33,7 @@ in {
       show-icons = true;
       modi = "drun,window,run,ssh";
     };
+    # package = pkgs.rofi-wayland;
     theme = let inherit (config.lib.formats.rasi) mkLiteral;
     in {
       "*" = {

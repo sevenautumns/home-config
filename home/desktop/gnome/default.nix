@@ -23,6 +23,7 @@ in {
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.space-bar
       gnomeExtensions.user-themes
+      gnomeExtensions.resource-monitor
       pop-gtk-theme
       gnome-extension-manager
       gnome.dconf-editor
