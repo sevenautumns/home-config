@@ -6,6 +6,7 @@ in {
     # font = "FiraCode Nerd Font Medium 12";
     font = "Ttyp0 Medium 14";
     # font = "Noto Sans Regular 11";
+    package = pkgs.rofi-wayland;
     # plugins = [ pkgs.rofi-calc ];
     extraConfig = {
       sort = true;

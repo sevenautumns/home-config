@@ -18,8 +18,8 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
-  # hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.enable = true;
 

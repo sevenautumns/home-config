@@ -2,10 +2,10 @@
   programs.helix = {
     enable = true;
     package = if (machine.arch == "x86_64-linux") then
-      inputs.helix.packages."${pkgs.system}".default
-      # pkgs.stable.helix
+    # inputs.helix.packages."${pkgs.system}".default
+    pkgs.unstable.helix
     else
-      pkgs.stable.helix;
+    pkgs.stable.helix;
     settings = {
       theme = "autumn";
       editor = {

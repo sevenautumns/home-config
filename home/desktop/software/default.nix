@@ -15,9 +15,9 @@ in {
     ./beets.nix
     ./chromium.nix
     ./firefox.nix
-    ./fcitx.nix
+    # ./fcitx.nix
     # ./ibus.nix
-    ./keynav.nix
+    # ./keynav.nix
     ./kitty.nix
     ./mpv.nix
     ./lutris.nix
@@ -103,8 +103,8 @@ in {
       # inputs.knock.packages.x86_64-linux.knock
     ];
 
-  xsession.numlock.enable = true;
-  # services.network-manager-applet.enable = true;
+  # xsession.numlock.enable = true;
+  services.network-manager-applet.enable = true;
   # services.blueman-applet.enable = true;
   dconf.settings."org/blueman/general" = {
     plugin-list = [ "!ConnectionNotifier" ];

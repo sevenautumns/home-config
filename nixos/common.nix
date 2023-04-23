@@ -1,6 +1,6 @@
 { lib, pkgs, info, ... }: {
-  # boot.tmp.cleanOnBoot = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
+  # boot.cleanTmpDir = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
   services.journald.extraConfig = "SystemMaxUse=250M";

@@ -1,5 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [ ./gdm.nix ./pipewire.nix ./virtualbox.nix ];
+  imports = [ ./greetd.nix ./pipewire.nix ./virtualbox.nix ];
 
   # Required for various programs
   programs.dconf.enable = true;

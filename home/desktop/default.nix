@@ -1,9 +1,9 @@
 { pkgs, config, lib, ... }: {
   imports = [
-    ./gnome
+    # ./gnome
     ./software
     ./audio
-    # ./wm
+    ./wm
 
     ./mime.nix
     ./font.nix

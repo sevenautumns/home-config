@@ -29,7 +29,7 @@
         command = ''
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
             --time --remember --asterisks \
-            --cmd "startx ~/.xsession" \
+            --cmd "Hyprland" \
             --user-menu --issue
         '';
       };

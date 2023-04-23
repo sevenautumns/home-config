@@ -2,7 +2,8 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
+    nixpkgs-stable-05.url = "github:nixos/nixpkgs/nixos-22.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
@@ -27,22 +28,23 @@
     # gobot.url = "github:c0nvulsiv3/gobot";
     # gobot.flake = false;
 
-    herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
-    herbstluftwm.flake = false;
+    # herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
+    # herbstluftwm.flake = false;
+    hyprland.url = "github:hyprwm/Hyprland/2df0d034bc4a18fafb3524401eeeceaa6b23e753";
 
-    pop-shell.url = "github:pop-os/shell";
-    pop-shell.flake = false;
-    pop-launcher.url = "github:pop-os/launcher";
-    pop-launcher.flake = false;
+    # pop-shell.url = "github:pop-os/shell";
+    # pop-shell.flake = false;
+    # pop-launcher.url = "github:pop-os/launcher";
+    # pop-launcher.flake = false;
 
     niketsu.url = "github:sevenautumns/niketsu";
 
-    herbst3 = {
-      url = "github:sevenautumns/herbst3";
-      inputs.herbstluftwm.follows = "herbstluftwm";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.utils.follows = "flake-utils";
-    };
+    # herbst3 = {
+    #   url = "github:sevenautumns/herbst3";
+    #   inputs.herbstluftwm.follows = "herbstluftwm";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #   inputs.utils.follows = "flake-utils";
+    # };
 
     helix = {
       url = "github:helix-editor/helix";
@@ -75,7 +77,7 @@
   };
 
   outputs = { self, home-manager, nur, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, agenix, ... }@inputs:
+    , nixpkgs-stable, agenix, hyprland, ... }@inputs:
     let
       lib = nixpkgs-unstable.lib;
       machines = {
@@ -135,11 +137,16 @@
         (home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
-            overlays =
-              [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
+            overlays = [
+              deploy-rs.overlay
+              self.overlays.matryoshka-pkgs
+              nur.overlay
+              hyprland.overlays.default
+            ];
           };
           modules = [
             ./home
+            hyprland.homeManagerModules.default
             {
               home = {
                 username = machine.user;
@@ -161,8 +168,12 @@
           modules = [
             {
               networking.hostName = host;
-              nixpkgs.overlays =
-                [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
+              nixpkgs.overlays = [
+                deploy-rs.overlay
+                self.overlays.matryoshka-pkgs
+                nur.overlay
+                hyprland.overlays.default
+              ];
             }
             agenix.nixosModules.default
             self.nixosModules.transmission
@@ -189,6 +200,10 @@
           system = prev.system;
           config.allowUnfree = true;
         };
+        stable-05 = import "${inputs.nixpkgs-stable-05}" {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
       };
 
       nixosModules.transmission = import modules/transmission.nix;
@@ -210,7 +225,7 @@
           };
         } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
           system = {
-            sshUser = "nixos";
+            sshUser = "admin";
             path = deploy-rs.lib.${machine.arch}.activate.nixos
               self.nixosConfigurations."${host}";
             user = "root";
@@ -221,4 +236,9 @@
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
+  nixConfig = {
+    extra-substituters = [ "https://hyprland.cachix.org" ];
+    extra-trusted-public-keys =
+      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+  };
 }
