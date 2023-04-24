@@ -5,8 +5,8 @@
     # ./rofi.nix
     # ./redshift.nix
     # ./picom.nix
-    ./hyprland.nix
-    # ./sway.nix
-    
+    # ./hyprland.nix
+    ./sway.nix
+
   ];
 }

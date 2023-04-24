@@ -3,9 +3,9 @@
     enable = true;
     package = if (machine.arch == "x86_64-linux") then
     # inputs.helix.packages."${pkgs.system}".default
-    pkgs.unstable.helix
+      pkgs.unstable.helix
     else
-    pkgs.stable.helix;
+      pkgs.stable.helix;
     settings = {
       theme = "autumn";
       editor = {

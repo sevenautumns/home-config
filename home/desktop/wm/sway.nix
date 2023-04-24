@@ -1,73 +1,74 @@
 { pkgs, config, machine, lib, ... }: {
   imports = [ ./rofi.nix ];
 
-  # programs.i3status-rust.enable = true;
-  # programs.i3status-rust.bars.default.settings = {
-  #   theme = {
-  #     # name = "plain";
-  #     overrides = with config.theme; {
-  #       idle_bg = gray0;
-  #       idle_fg = gray5;
-  #       info_bg = gray0;
-  #       info_fg = gray5;
-  #       good_bg = gray0;
-  #       good_fg = green;
-  #       warning_bg = gray0;
-  #       warning_fg = yellow1;
-  #       critical_bg = gray0;
-  #       critical_fg = red;
-  #       separator_bg = gray0;
-  #       separator_fg = gray5;
-  #     };
-  #   };
-  #   blocks = [
-  #     {
-  #       block = "disk_space";
-  #       path = "/";
-  #       alias = "/";
-  #       info_type = "available";
-  #       unit = "GB";
-  #       interval = 60;
-  #       warning = 20.0;
-  #       alert = 10.0;
-  #     }
-  #     {
-  #       block = "memory";
-  #       display_type = "memory";
-  #       format_mem = "{mem_used_percents}";
-  #       format_swap = "{swap_used_percents}";
-  #     }
-  #     {
-  #       block = "cpu";
-  #       interval = 1;
-  #     }
-  #     {
-  #       block = "load";
-  #       interval = 1;
-  #       format = "{1m}";
-  #     }
-  #     { block = "sound"; }
-  #     {
-  #       block = "time";
-  #       interval = 60;
-  #       format = "%a %d/%m %r";
-  #     }
-  #   ];
-  # };
+  services.clipman.enable = true;
+  programs.i3status-rust.enable = true;
+  programs.i3status-rust.bars.default.settings = {
+    theme = {
+      # name = "plain";
+      overrides = with config.theme; {
+        idle_bg = gray0;
+        idle_fg = gray5;
+        info_bg = gray0;
+        info_fg = gray5;
+        good_bg = gray0;
+        good_fg = green;
+        warning_bg = gray0;
+        warning_fg = yellow1;
+        critical_bg = gray0;
+        critical_fg = red;
+        separator_bg = gray0;
+        separator_fg = gray5;
+      };
+    };
+    blocks = [
+      {
+        block = "disk_space";
+        path = "/";
+        alias = "/";
+        info_type = "available";
+        unit = "GB";
+        interval = 60;
+        warning = 20.0;
+        alert = 10.0;
+      }
+      {
+        block = "memory";
+        display_type = "memory";
+        format_mem = "{mem_used_percents}";
+        format_swap = "{swap_used_percents}";
+      }
+      {
+        block = "cpu";
+        interval = 1;
+      }
+      {
+        block = "load";
+        interval = 1;
+        format = "{1m}";
+      }
+      { block = "sound"; }
+      {
+        block = "time";
+        interval = 60;
+        format = "%a %d/%m %r";
+      }
+    ];
+  };
 
-  xsession = with config.theme; {
-    enable = true;
+  wayland = with config.theme; {
+    # enable = true;
     # initExtra = ''
     #   # ${pkgs.xorg.xsetroot}/bin/xsetroot -solid '${config.theme.black}'
     # '';
     windowManager = {
       sway = let
         fonts = {
-          # names = [ "Ttyp0" "Sarasa UI J" ];
-          names = [ "Ttyp0" "Fixed" ];
+          names = [ "Ttyp0" "Sarasa UI J" ];
+          # names = [ "Ttyp0" "Fixed" ];
           size = 9.0;
         };
-        modifier = config.xsession.windowManager.sway.config.modifier;
+        modifier = config.wayland.windowManager.sway.config.modifier;
         ws1 = "1";
         ws2 = "2";
         ws3 = "3";
@@ -78,26 +79,14 @@
         ws8 = "8";
         ws9 = "9";
         ws10 = "10";
+        tuf = "ASUSTek COMPUTER INC VG279QM L9LMQS257534";
+        fourk = "Samsung Electric Company U28E590 HTPH204116";
+        tv = "Samsung Electric Company SAMSUNG 0x00000F00";
       in {
-        # enable = true;
-        # package = pkgs.i3-gaps;
+        enable = true;
+        systemdIntegration = true;
         config = {
           terminal = "alacritty";
-          # menu = ''
-          #   ${pkgs.dmenu}/bin/dmenu_run \
-          #     -nb '${black}' \
-          #     -nf '${gray5}' \
-          #     -sb '${brown}' \
-          #     -sf '${gray0}' \
-          #     -fn ${font}
-          # '';
-          # startup = [{
-          #   # Polybar sometimes starts faster than i3, 
-          #   # resulting in the i3-module not activating
-          #   command = "systemctl --user restart polybar.service";
-          #   always = true;
-          #   notification = false;
-          # }];
           bars = [{
             colors = {
               activeWorkspace = {
@@ -131,8 +120,8 @@
             };
             fonts = fonts;
             # mode = "hide";
-            # statusCommand =
-            #   "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+            statusCommand =
+              "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
           window.border = 2;
           gaps = {
@@ -144,6 +133,77 @@
           fonts = fonts;
           modifier = "Mod4";
           focus.followMouse = false;
+          input = {
+            "*" = {
+              xkb_variant = "us";
+              xkb_layout = "de";
+              xkb_model = "pc105";
+              xkb_options = "caps:escape";
+              xkb_numlock = "enabled";
+            };
+          };
+          output = {
+            "${tv}" = {
+              bg = "~/Pictures/Wallpaper/Autumn.png fill";
+              mode = "3840x2160@120Hz";
+              scale = "1";
+              pos = "0 0";
+            };
+            "${fourk}" = {
+              bg = "~/Pictures/Wallpaper/Autumn.png fill";
+              mode = "3840x2160@60Hz";
+              scale = "2";
+              pos = "3840 540";
+            };
+            "${tuf}" = {
+              bg = "~/Pictures/Wallpaper/Autumn.png fill";
+              mode = "1920x1080@240Hz";
+              scale = "1";
+              pos = "5760 540";
+            };
+          };
+          workspaceOutputAssign = [
+            {
+              output = tuf;
+              workspace = ws10;
+            }
+            {
+              output = tuf;
+              workspace = ws1;
+            }
+            {
+              output = tuf;
+              workspace = ws2;
+            }
+            {
+              output = tuf;
+              workspace = ws3;
+            }
+            {
+              output = tuf;
+              workspace = ws4;
+            }
+            {
+              output = tuf;
+              workspace = ws5;
+            }
+            {
+              output = fourk;
+              workspace = ws6;
+            }
+            {
+              output = fourk;
+              workspace = ws7;
+            }
+            {
+              output = tv;
+              workspace = ws8;
+            }
+            {
+              output = tv;
+              workspace = ws9;
+            }
+          ];
           keybindings = with config.theme-non_hex;
             pkgs.lib.mkOptionDefault {
               "${modifier}+s" = "layout stacking";
@@ -155,6 +215,7 @@
               "${modifier}+c" = "kill";
               "${modifier}+x" = "move workspace to output next";
 
+              "${modifier}+l" = "exec swaylock";
               # "${modifier}+l" = ''
               #   exec ${pkgs.i3lock-color}/bin/i3lock-color \
               #     --nofork \
@@ -201,8 +262,6 @@
                 exec ${pkgs.xdg-utils}/bin/xdg-open "$(${pkgs.xcwd}/bin/xcwd)"'';
 
               "${modifier}+w" = "exec firefox";
-              # "${modifier}+Shift+Return" =
-              #   "exec ${pkgs.gnome.nautilus}/bin/nautilus --new-window";
 
               # "${modifier}+Escape" = ''
               #   exec i3-nagbar  \
@@ -269,9 +328,6 @@
             "${modifier}+Shift+Mod2+81" = "move container to workspace ${ws9}";
             "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
           };
-          # modes = {
-
-          # };
           colors = {
             background = gray0;
             focused = {
@@ -303,17 +359,39 @@
               indicator = white2;
             };
           };
-          # startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
-          #   command =
-          #     "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
-          # }] ++ lib.optionals (machine.host == "neesama") [{
-          #   command = "~/.screenlayout/normal.sh";
-          # }];
+          startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
+            command =
+              "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
+          }];
         };
         extraConfig = ''
           for_window [instance="^launcher$"] floating enable sticky enable resize set 30 ppt 60 ppt border normal 10
         '';
       };
+    };
+  };
+
+  programs.swaylock = {
+    enable = true;
+    settings = with config.theme-non_hex; {
+      indicator-idle-visible = true;
+      indicator-radius = 100;
+      show-keyboard-layout = true;
+      image = "~/Pictures/Wallpaper/Autumn.png";
+      color = gray0;
+      inside-color = gray0;
+      ring-color = brown;
+      inside-ver-color = gray0;
+      ring-ver-color = gray0;
+      inside-wrong-color = gray0;
+      ring-wrong-color = red;
+      line-uses-inside = true;
+      key-hl-color = red;
+      bs-hl-color = red;
+      text-color = brown;
+      separator-color = gray0;
+      text-ver-color = gray0;
+      text-wrong-color = gray0;
     };
   };
 }

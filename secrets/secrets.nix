@@ -9,7 +9,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKd6aKgl2xDyW3/yoWYQa+/sFbiRxXfeXZfOY9vEwTLR";
   castle =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2tYyAHOAZQs2ME6B6aX5iAxxd9I7jqi1UJW/spYXZK";
-  neesama = 
+  neesama =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE/y3P7h6fiwG95EHTkVFu9rNjr+2J9IIyWlIhFzMPS/";
   systems = [ index castle ];
 in {

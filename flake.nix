@@ -30,7 +30,7 @@
 
     # herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
     # herbstluftwm.flake = false;
-    hyprland.url = "github:hyprwm/Hyprland/2df0d034bc4a18fafb3524401eeeceaa6b23e753";
+    # hyprland.url = "github:hyprwm/Hyprland/2df0d034bc4a18fafb3524401eeeceaa6b23e753";
 
     # pop-shell.url = "github:pop-os/shell";
     # pop-shell.flake = false;
@@ -77,7 +77,7 @@
   };
 
   outputs = { self, home-manager, nur, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, agenix, hyprland, ... }@inputs:
+    , nixpkgs-stable, agenix, ... }@inputs:
     let
       lib = nixpkgs-unstable.lib;
       machines = {
@@ -137,16 +137,11 @@
         (home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
-            overlays = [
-              deploy-rs.overlay
-              self.overlays.matryoshka-pkgs
-              nur.overlay
-              hyprland.overlays.default
-            ];
+            overlays =
+              [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
           };
           modules = [
             ./home
-            hyprland.homeManagerModules.default
             {
               home = {
                 username = machine.user;
@@ -168,12 +163,8 @@
           modules = [
             {
               networking.hostName = host;
-              nixpkgs.overlays = [
-                deploy-rs.overlay
-                self.overlays.matryoshka-pkgs
-                nur.overlay
-                hyprland.overlays.default
-              ];
+              nixpkgs.overlays =
+                [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
             }
             agenix.nixosModules.default
             self.nixosModules.transmission
@@ -236,9 +227,4 @@
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
-  nixConfig = {
-    extra-substituters = [ "https://hyprland.cachix.org" ];
-    extra-trusted-public-keys =
-      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-  };
 }

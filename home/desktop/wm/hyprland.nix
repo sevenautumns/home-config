@@ -1,9 +1,10 @@
 { pkgs, config, machine, lib, inputs, ... }: {
   imports = [ ./rofi.nix ];
 
-  home.packages = with pkgs; [
-    # pkgs.swaybg
-  ];
+  home.packages = with pkgs;
+    [
+      # pkgs.swaybg
+    ];
 
   wayland.windowManager.hyprland = {
 
@@ -44,7 +45,7 @@
       bind = SUPER, d, exec, rofi -no-lazy-grab -show drun -modi drun
       # bind = SUPER, t, exec, rofi -show window -modi window
       bind = SUPER, p, exec, rofi-pass
-      
+
       bindm = SUPER,mouse:272,movewindow
       bindm = SUPER,mouse:273,resizewindow
 
@@ -60,7 +61,7 @@
       bind = SUPER SHIFT ALT, UP, moveintogroup, u
       bind = SUPER SHIFT ALT, DOWN, moveintogroup, d
       bind = SUPER, x, moveoutofgroup
-      
+
       bind = SUPER SHIFT, LEFT, movewindow, l
       bind = SUPER SHIFT, RIGHT, movewindow, r
       bind = SUPER SHIFT, UP, movewindow, u
@@ -114,29 +115,26 @@
     '';
   };
 
-  services.clipman.enable = true;
   # programs.waybar
+  services.clipman.enable = true;
 
   programs.waybar = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
-    package = pkgs.waybar-hyprland;
+    package = pkgs.waybar;
 
     settings = {
       mainBar = {
-        modules-left = [ "wlr/workspaces" ];
-        modules-center = [ "hyprland/window" ];
-        modules-right = [  "pulseuadio" "cpu" "memory" "network" "tray" "clock" ];
+        modules-left = [ "sway/workspaces" ];
+        modules-center = [ ];
+        modules-right =
+          [ "pulseuadio" "cpu" "memory" "network" "tray" "clock" ];
 
-        "wlr/workspaces" = {
-          on-click = "activate";
-        };
+        "wlr/workspaces" = { on-click = "activate"; };
       };
     };
 
   };
 
-  programs.wofi = {
-    enable = true;
-  };
+  programs.wofi = { enable = true; };
 }

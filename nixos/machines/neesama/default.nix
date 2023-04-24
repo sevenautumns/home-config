@@ -18,7 +18,12 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.enable = true;
+  };
+
+  services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.enable = true;
@@ -62,6 +67,7 @@
       sudo.u2fAuth = true;
       i3lock.u2fAuth = true;
       i3lock-color.u2fAuth = true;
+      swaylock.u2fAuth = true;
       greetd.u2fAuth = true;
     };
   };

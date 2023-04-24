@@ -57,7 +57,7 @@
   };
   programs.ssh.kexAlgorithms = [ "sntrup761x25519-sha512@openssh.com" ];
 
-  # programs.ssh.startAgent = true;
+  programs.ssh.startAgent = true;
   # programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = false;

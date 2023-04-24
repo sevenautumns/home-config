@@ -6,11 +6,7 @@
     mbsync = {
       enable = true;
       create = "both";
-      patterns = [
-        "INBOX"
-        "*"
-        "!Entwürfe"
-      ];
+      patterns = [ "INBOX" "*" "!Entwürfe" ];
     };
     primary = true;
     msmtp.enable = true;
