@@ -1,7 +1,8 @@
 { pkgs, config, machine, lib, ... }: {
   imports = [ ./rofi.nix ];
 
-  services.clipman.enable = true;
+  home.packages = with pkgs; [ pkgs.wl-clipboard ];
+  # services.clipman.enable = true;
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default.settings = {
     theme = {
@@ -57,10 +58,6 @@
   };
 
   wayland = with config.theme; {
-    # enable = true;
-    # initExtra = ''
-    #   # ${pkgs.xorg.xsetroot}/bin/xsetroot -solid '${config.theme.black}'
-    # '';
     windowManager = {
       sway = let
         fonts = {
@@ -82,6 +79,8 @@
         tuf = "ASUSTek COMPUTER INC VG279QM L9LMQS257534";
         fourk = "Samsung Electric Company U28E590 HTPH204116";
         tv = "Samsung Electric Company SAMSUNG 0x00000F00";
+        laptop = "Chimei Innolux Corporation 0x1529 Unknown";
+        wide = "Dell Inc. DELL U3421WE 6B17753";
       in {
         enable = true;
         systemdIntegration = true;
@@ -119,7 +118,6 @@
               };
             };
             fonts = fonts;
-            # mode = "hide";
             statusCommand =
               "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
           }];
@@ -141,67 +139,75 @@
               xkb_options = "caps:escape";
               xkb_numlock = "enabled";
             };
+            "type:touchpad" = {
+              natural_scroll = "enabled";
+              tap = "enabled";
+            };
           };
           output = {
-            "${tv}" = {
-              bg = "~/Pictures/Wallpaper/Autumn.png fill";
+            "*".bg = "~/Pictures/Wallpaper/Autumn.png fill";
+            ${tv} = {
               mode = "3840x2160@120Hz";
-              scale = "1";
               pos = "0 0";
             };
-            "${fourk}" = {
-              bg = "~/Pictures/Wallpaper/Autumn.png fill";
+            ${fourk} = {
               mode = "3840x2160@60Hz";
               scale = "2";
               pos = "3840 540";
             };
-            "${tuf}" = {
-              bg = "~/Pictures/Wallpaper/Autumn.png fill";
+            ${tuf} = {
               mode = "1920x1080@240Hz";
-              scale = "1";
               pos = "5760 540";
+            };
+            ${wide} = {
+              mode = "3440x1440@60Hz";
+              pos = "4240 0";
+            };
+            ${laptop} = {
+              mode = "1920x1080@60Hz";
+              pos = "7680 540";
             };
           };
           workspaceOutputAssign = [
             {
-              output = tuf;
-              workspace = ws10;
-            }
-            {
-              output = tuf;
+              output = "'${tuf}' '${wide}'";
               workspace = ws1;
             }
             {
-              output = tuf;
+              output = "'${tuf}' '${wide}'";
               workspace = ws2;
             }
             {
-              output = tuf;
+              output = "'${tuf}' '${wide}'";
               workspace = ws3;
             }
             {
-              output = tuf;
+              output = "'${tuf}' '${wide}'";
               workspace = ws4;
             }
             {
-              output = tuf;
+              output = "'${tuf}' '${wide}'";
               workspace = ws5;
             }
             {
-              output = fourk;
+              output = "'${fourk}' '${laptop}'";
               workspace = ws6;
             }
             {
-              output = fourk;
+              output = "'${fourk}' '${laptop}'";
               workspace = ws7;
             }
             {
-              output = tv;
+              output = "'${tv}' '${fourk}' '${laptop}'";
               workspace = ws8;
             }
             {
-              output = tv;
+              output = "'${tv}' '${fourk}' '${laptop}'";
               workspace = ws9;
+            }
+            {
+              output = "'${tuf}' '${wide}'";
+              workspace = ws10;
             }
           ];
           keybindings = with config.theme-non_hex;
@@ -215,6 +221,7 @@
               "${modifier}+c" = "kill";
               "${modifier}+x" = "move workspace to output next";
 
+              "${modifier}+m" = "exec ${pkgs.warpd}/bin/warpd --grid";
               "${modifier}+l" = "exec swaylock";
               # "${modifier}+l" = ''
               #   exec ${pkgs.i3lock-color}/bin/i3lock-color \
@@ -250,6 +257,7 @@
 
               "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
               # "${modifier}+t" = "exec rofi -show window -modi window";
+              # "${modifier}+t" = "exec ${pkgs.swayr}/bin/swayr switch-workspace-or-window";
               "${modifier}+p" = "exec rofi-pass";
 
               "${modifier}+o" = "exec alacritty --class=launcher -e pulsemixer";
@@ -376,22 +384,24 @@
     settings = with config.theme-non_hex; {
       indicator-idle-visible = true;
       indicator-radius = 100;
-      show-keyboard-layout = true;
+      show-keyboard-layout = false;
       image = "~/Pictures/Wallpaper/Autumn.png";
       color = gray0;
-      inside-color = gray0;
       ring-color = brown;
-      inside-ver-color = gray0;
-      ring-ver-color = gray0;
-      inside-wrong-color = gray0;
+      ring-ver-color = brown;
       ring-wrong-color = red;
+      inside-color = "${gray0}C0";
+      inside-clear-color = "${gray0}C0";
+      inside-ver-color = "${gray0}C0";
+      inside-wrong-color = "${gray0}C0";
       line-uses-inside = true;
       key-hl-color = red;
       bs-hl-color = red;
-      text-color = brown;
       separator-color = gray0;
-      text-ver-color = gray0;
-      text-wrong-color = gray0;
+      text-color = brown;
+      text-ver-color = brown;
+      text-wrong-color = brown;
+      text-clear-color = brown;
     };
   };
 }

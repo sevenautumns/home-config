@@ -7,6 +7,7 @@
     # ./picom.nix
     # ./hyprland.nix
     ./sway.nix
+    ./mako.nix
 
   ];
 }

@@ -17,7 +17,7 @@ in {
     ./firefox.nix
     # ./fcitx.nix
     # ./ibus.nix
-    # ./keynav.nix
+    ./warpd.nix
     ./kitty.nix
     ./mpv.nix
     ./lutris.nix
@@ -95,6 +95,7 @@ in {
     ] ++ lib.optionals (machine.nixos) [
       discord
       discord-canary
+      webcord
       tdesktop
       element-desktop
       spotify
