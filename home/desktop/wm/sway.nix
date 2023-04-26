@@ -1,8 +1,16 @@
-{ pkgs, config, machine, lib, ... }: {
+{ pkgs, config, machine, lib, ... }: let
+  window-switcher = pkgs.writeShellScriptBin "window-switcher" ''
+    swaymsg -t get_tree --raw | \
+      ${pkgs.jq}/bin/jq -r '.. | select(.nodes?) | 
+        select((.name | length > 0 ) and ((.type == "con") or (.type == "floating_con"))) | 
+        "#" + (.id|tostring) + " " + (if (.app_id | length > 0) then .app_id + ": " else "" end) + .name' | \
+      ${pkgs.skim}/bin/sk --header="Sway Window Switcher" | \
+      awk '/^#[0-9]+/ { system("swaymsg \"[con_id=" substr($1, 2) "] focus\""); exit(0) }' \
+  '';
+in {
   imports = [ ./rofi.nix ];
 
-  home.packages = with pkgs; [ pkgs.wl-clipboard ];
-  # services.clipman.enable = true;
+  home.packages = with pkgs; [ wl-clipboard sway-launcher-desktop ];
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default.settings = {
     theme = {
@@ -255,7 +263,11 @@
               #     --layout-font="Roboto"
               # '';
 
-              "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
+              # "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
+              "${modifier}+d" =
+                "exec alacritty --class=launcher -e sway-launcher-desktop";
+              "${modifier}+t" =
+                "exec alacritty --class=launcher -e ${window-switcher}/bin/window-switcher";
               # "${modifier}+t" = "exec rofi -show window -modi window";
               # "${modifier}+t" = "exec ${pkgs.swayr}/bin/swayr switch-workspace-or-window";
               "${modifier}+p" = "exec rofi-pass";
@@ -367,6 +379,11 @@
               indicator = white2;
             };
           };
+          window.commands = [{
+            criteria = { app_id = "^launcher$"; };
+            command =
+              "floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 5";
+          }];
           startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
             command =
               "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
