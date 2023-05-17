@@ -79,7 +79,7 @@ in {
       gnome-network-displays
       gthumb
       # hm-options
-      stable.calibre
+      calibre
 
       libgourou
 
