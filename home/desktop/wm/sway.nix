@@ -231,37 +231,6 @@ in {
 
               "${modifier}+m" = "exec ${pkgs.warpd}/bin/warpd --grid";
               "${modifier}+l" = "exec swaylock";
-              # "${modifier}+l" = ''
-              #   exec ${pkgs.i3lock-color}/bin/i3lock-color \
-              #     --nofork \
-              #     --color '${gray0}' \
-              #     --clock \
-              #     --indicator \
-              #     --inside-color="${gray0}" \
-              #     --ring-color="${brown}" \
-              #     --insidever-color="${gray0}" \
-              #     --ringver-color="${yellow1}" \
-              #     --insidewrong-color="${gray0}" \
-              #     --ringwrong-color="${red}" \
-              #     --line-uses-inside \
-              #     --keyhl-color="${red}" \
-              #     --bshl-color="${red}" \
-              #     --separator-color="${gray0}" \
-              #     --verif-color="${gray0}" \
-              #     --wrong-color="${gray0}" \
-              #     --modif-color="${gray0}" \
-              #     --verif-color="${white}" \
-              #     --wrong-color="${white}" \
-              #     --modif-color="${white}" \
-              #     --layout-color="${white}" \
-              #     --date-color="${white}" \
-              #     --time-color="${white}" \
-              #     --pass-media-keys \
-              #     --pass-volume-keys \
-              #     --blur=1 \
-              #     --no-modkey-text \
-              #     --layout-font="Roboto"
-              # '';
 
               # "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
               "${modifier}+d" =

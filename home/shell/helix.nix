@@ -17,6 +17,8 @@
           normal = "block";
           select = "block";
         };
+        auto-format = false;
+        soft-wrap.enable = true;
       };
       keys.normal = {
         "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
@@ -73,11 +75,11 @@
         "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
       };
     };
-    languages = [
+      languages.language = [
       {
         name = "rust";
         config = {
-          # checkOnSave.command = "clippy";
+          checkOnSave.command = "clippy";
           procMacro.enable = true;
           diagnostics.disabled = [ "unresolved-proc-macro" ];
         };
@@ -128,6 +130,29 @@
         scope = "source.markdown";
         roots = [ ];
       }
+      {
+        name = "email-en";
+        language-server.command = "ltex-ls";
+        file-types = [ "eml" "email" ];
+        scope = "text.email";
+        config.ltex = {
+          enabled = true;
+          language = "en-GB";
+          additionalRules.motherTongue = "de-DE";
+        };
+        roots = [ ];
+      }
+      {
+        name = "email-de";
+        language-server.command = "ltex-ls";
+        file-types = [ "eml" "email" ];
+        scope = "text.email";
+        config.ltex = {
+          enabled = true;
+          language = "de-DE";
+        };
+        roots = [ ];
+      }
     ];
   };
 
@@ -156,7 +181,7 @@
     texlab # LaTeX
     gopls # Go
     rnix-lsp # Nix
-    rust-analyzer # Rust
+    # rust-analyzer # Rust
     sumneko-lua-language-server # Lua
     nodePackages.vim-language-server # Vim
     nodePackages.typescript-language-server # Typescript

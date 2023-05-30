@@ -15,7 +15,7 @@ in {
     ./beets.nix
     ./chromium.nix
     ./firefox.nix
-    # ./fcitx.nix
+    ./fcitx.nix
     # ./ibus.nix
     ./warpd.nix
     ./kitty.nix

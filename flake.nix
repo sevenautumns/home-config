@@ -146,7 +146,7 @@
               home = {
                 username = machine.user;
                 homeDirectory = "/home/${machine.user}";
-                stateVersion = "21.05";
+                stateVersion = "23.05";
                 packages = [ agenix.packages."${machine.arch}".agenix ];
               };
             }

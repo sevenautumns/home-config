@@ -20,6 +20,7 @@
     any-nix-shell
     lfs
     hyperfine
+    bluetuith
     calc
     neofetch
     pulsemixer
@@ -76,10 +77,12 @@
     extraConfig = ''
       AddKeysToAgent yes
       IdentityFile ~/.ssh/id_ed25519_sk
+      IdentityFile ~/.ssh/id_ed25519
       # Fix resident Yubikey
       # https://bbs.archlinux.org/viewtopic.php?id=274571
       KexAlgorithms -sntrup761x25519-sha512@openssh.com
     '';
+    matchBlocks."ft-ssy-stonks.intra.dlr.de".forwardAgent = true;
   };
 
   programs.btop = {
