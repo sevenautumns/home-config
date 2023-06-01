@@ -44,16 +44,16 @@
     historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
   };
 
-  programs.atuin = {
-    enable = true;
-    package = pkgs.unstable.atuin;
-    enableFishIntegration = true;
-    settings = {
-      auto_sync = false;
-      search_mode = "fuzzy";
-      dialect = "uk";
-    };
-  };
+  # programs.atuin = {
+  #   enable = true;
+  #   package = pkgs.unstable.atuin;
+  #   enableFishIntegration = true;
+  #   settings = {
+  #     auto_sync = false;
+  #     search_mode = "fuzzy";
+  #     dialect = "uk";
+  #   };
+  # };
 
   programs.password-store = {
     enable = true;
