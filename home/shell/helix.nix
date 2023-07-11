@@ -75,7 +75,7 @@
         "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
       };
     };
-      languages.language = [
+    languages.language = [
       {
         name = "rust";
         config = {
@@ -109,7 +109,10 @@
       {
         name = "nix";
         formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-        # language-server.command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";
+        language-server.command = "nixd";
+        file-types = [ "nix" ];
+        scope = "source.nix";
+        auto-format = true;
       }
       {
         name = "git-commit";
@@ -186,5 +189,6 @@
     nodePackages.vim-language-server # Vim
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
+    nixd
   ];
 }

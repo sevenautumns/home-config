@@ -91,7 +91,6 @@ in {
         type = "Application";
         icon = "hakuneko-desktop";
       })
-
     ] ++ lib.optionals (machine.nixos) [
       discord
       discord-canary

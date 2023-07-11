@@ -91,7 +91,7 @@ in {
         wide = "Dell Inc. DELL U3421WE 6B17753";
       in {
         enable = true;
-        systemdIntegration = true;
+        systemd.enable = true;
         config = {
           terminal = "alacritty";
           bars = [{
@@ -178,43 +178,43 @@ in {
           };
           workspaceOutputAssign = [
             {
-              output = "'${tuf}' '${wide}'";
+              output = "${tuf}\" \"${wide}";
               workspace = ws1;
             }
             {
-              output = "'${tuf}' '${wide}'";
+              output = "${tuf}\" \"${wide}";
               workspace = ws2;
             }
             {
-              output = "'${tuf}' '${wide}'";
+              output = "${tuf}\" \"${wide}";
               workspace = ws3;
             }
             {
-              output = "'${tuf}' '${wide}'";
+              output = "${tuf}\" \"${wide}";
               workspace = ws4;
             }
             {
-              output = "'${tuf}' '${wide}'";
+              output = "${tuf}\" \"${wide}";
               workspace = ws5;
             }
             {
-              output = "'${fourk}' '${laptop}'";
+              output = "${fourk}\" \"${laptop}";
               workspace = ws6;
             }
             {
-              output = "'${fourk}' '${laptop}'";
+              output = "${fourk}\" \"${laptop}";
               workspace = ws7;
             }
             {
-              output = "'${tv}' '${fourk}' '${laptop}'";
+              output = "${tv}\" \"${fourk}\" \"${laptop}";
               workspace = ws8;
             }
             {
-              output = "'${tv}' '${fourk}' '${laptop}'";
+              output = "${tv}\" \"${fourk}\" \"${laptop}";
               workspace = ws9;
             }
             {
-              output = "'${tuf}' '${wide}'";
+              output = "${tuf}\" \"${wide}";
               workspace = ws10;
             }
           ];
@@ -224,6 +224,7 @@ in {
               "${modifier}+y" = "layout tabbed";
               "${modifier}+z" = "layout tabbed";
               "${modifier}+q" = "layout toggle split";
+              "${modifier}+Shift+f" = "fullscreen toggle global";
               "${modifier}+h" = "split h";
               "${modifier}+v" = "split v";
               "${modifier}+c" = "kill";

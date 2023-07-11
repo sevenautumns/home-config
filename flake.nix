@@ -51,10 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # nil = {
-    #   url = "github:oxalica/nil";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    nixd.url = "github:nix-community/nixd";
 
     # Home manager used repos
     cmus-notify.url = "github:dcx86r/cmus-notify";
@@ -138,7 +135,7 @@
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
             overlays =
-              [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
+              [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay inputs.nixd.overlays.default ];
           };
           modules = [
             ./home
