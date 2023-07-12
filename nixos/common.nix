@@ -53,7 +53,7 @@
   environment.systemPackages = with pkgs; [ openssh git ];
   services.openssh = {
     enable = true;
-    settings.passwordAuthentication = false;
+    settings.PasswordAuthentication = false;
   };
   programs.ssh.kexAlgorithms = [ "sntrup761x25519-sha512@openssh.com" ];
 

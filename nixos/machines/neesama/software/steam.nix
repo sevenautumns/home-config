@@ -1,5 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }: {
   programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
     steam-fhsenv = pkgs.steam-fhsenv.overrideAttr (orig: {
@@ -9,10 +10,10 @@
     });
   };
 
-  # services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
-  #  environment.systemPackages = with pkgs; [
-  #  steam
-  #];
+    environment.systemPackages = with pkgs; [
+    gamescope
+  ];
 }
 

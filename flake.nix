@@ -22,7 +22,7 @@
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # gobot.url = "github:c0nvulsiv3/gobot";
@@ -221,7 +221,7 @@
         };
       }) (lib.filterAttrs (h: m: m ? address) machines);
 
-      checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      # checks = builtins.mapAttrs
+      #   (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

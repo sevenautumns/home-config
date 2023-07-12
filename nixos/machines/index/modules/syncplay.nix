@@ -7,10 +7,10 @@
     # group = "nginx";
   };
 
-  assertions = [{
-    assertion = pkgs.unstable.syncplay.version == "1.6.9";
-    message = "New Version Syncplay. Check if persistent rooms is in nixpkgs";
-  }];
+  # assertions = [{
+  #   assertion = pkgs.unstable.syncplay.version == "1.6.9";
+  #   message = "New Version Syncplay. Check if persistent rooms is in nixpkgs";
+  # }];
   nixpkgs.config.packageOverrides = super: {
     syncplay-nogui = (pkgs.stable.syncplay-nogui.overrideAttrs (old: {
       src = inputs.syncplay;

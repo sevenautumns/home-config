@@ -17,7 +17,7 @@
           normal = "block";
           select = "block";
         };
-        auto-format = false;
+        # auto-format = false;
         soft-wrap.enable = true;
       };
       keys.normal = {
