@@ -169,7 +169,7 @@ in
               ${laptop} = {
                 mode = "1920x1080@60Hz";
                 pos = "7680 540";
-                scale = "2";
+                # scale = "2";
               };
             };
             workspaceOutputAssign = [

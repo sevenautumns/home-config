@@ -156,7 +156,8 @@ let
       # '';
     };
 
-in {
+in
+{
   home.packages = with pkgs; [
     (nerdfonts.override {
       fonts = [ "FiraMono" "FiraCode" "RobotoMono" "SourceCodePro" ];
@@ -170,6 +171,8 @@ in {
     twitter-color-emoji
     comic-mono
     uw-ttyp0
+    monoid
+    victor-mono
     # mplus-outline-fonts.osdnRelease
     # mplus-bitmap
     # cozette
@@ -205,7 +208,7 @@ in {
       <alias binding="strong">
         <family>monospace</family>
         <prefer>
-          <family>Ttyp0</family>
+          <family>VictorMono</family>
           <family>FiraCode Nerd Font Mono</family>
           <family>Twitter Color Emoji</family>
           <family>Fixed</family>
