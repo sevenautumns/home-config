@@ -9,7 +9,8 @@ let
   #     inputs.homeManager.packages.${machine.arch}.docs-html
   #   }/share/doc/home-manager/options.html $@
   # '';
-in {
+in
+{
   imports = [
     ./alacritty.nix
     ./beets.nix
@@ -80,6 +81,8 @@ in {
       gthumb
       # hm-options
       calibre
+
+      gamescope
 
       libgourou
 

@@ -1,11 +1,12 @@
 { pkgs, config, lib, machine, inputs, ... }: {
   programs.helix = {
     enable = true;
-    package = if (machine.arch == "x86_64-linux") then
-    # inputs.helix.packages."${pkgs.system}".default
-      pkgs.unstable.helix
-    else
-      pkgs.stable.helix;
+    package =
+      if (machine.arch == "x86_64-linux") then
+      # inputs.helix.packages."${pkgs.system}".default
+        pkgs.unstable.helix
+      else
+        pkgs.stable.helix;
     settings = {
       theme = "autumn";
       editor = {
@@ -108,7 +109,7 @@
       }
       {
         name = "nix";
-        formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+        formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
         language-server.command = "nixd";
         file-types = [ "nix" ];
         scope = "source.nix";
