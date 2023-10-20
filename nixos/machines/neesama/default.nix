@@ -13,41 +13,10 @@
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelPatches = [
-    {
-      name = "update-smu13";
-      patch = pkgs.fetchpatch {
-        name = "update-smu13";
-        url = "https://patchwork.freedesktop.org/patch/540521/raw/";
-        sha256 = "sha256-g4j0J57CIVDNRmVgxkGET7Xk6xBF3eLHJP/VgnRZRuQ=";
-      };
-    }
-    {
-      name = "fulfill-smu13";
-      patch = pkgs.fetchpatch {
-        name = "fulfill-smu13";
-        url =
-          "https://github.com/torvalds/linux/commit/8f4f5f0b901a444c2317ef0fb29f35bc296daa55.diff";
-        sha256 = "sha256-de4RUTB1/ENaPi14QrTX/R/fUmrsrM3/6YJ32Yi3JMI=";
-      };
-    }
-    {
-      name = "fulfill-od";
-      patch = pkgs.fetchpatch {
-        name = "fulfill-od";
-        url = "https://patchwork.freedesktop.org/patch/540523/raw/";
-        sha256 = "sha256-CZ/E+e1aKfobs2s6FxB8KOptpbCNSrCXljeuIynwPsI=";
-      };
-    }
-    {
-      name = "fulfill-od-07";
-      patch = pkgs.fetchpatch {
-        name = "fulfill-od-07";
-        url = "https://patchwork.freedesktop.org/patch/540524/raw/";
-        sha256 = "sha256-l+d4elh540K1FxStEORFtvq386v/S1wnUmIub23NBfQ=";
-      };
-    }
-  ];
+  boot.kernelPatches = [{
+    name = "enable-smu13-undervolting";
+    patch = ./0001-enable-smu13-undervolting.patch;
+  }];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
