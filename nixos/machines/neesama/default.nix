@@ -13,9 +13,59 @@
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
+  boot.kernelPatches = [
+    {
+      name = "update-smu13";
+      patch = pkgs.fetchpatch {
+        name = "update-smu13";
+        url = "https://patchwork.freedesktop.org/patch/540521/raw/";
+        sha256 = "sha256-g4j0J57CIVDNRmVgxkGET7Xk6xBF3eLHJP/VgnRZRuQ=";
+      };
+    }
+    {
+      name = "fulfill-smu13";
+      patch = pkgs.fetchpatch {
+        name = "fulfill-smu13";
+        url =
+          "https://github.com/torvalds/linux/commit/8f4f5f0b901a444c2317ef0fb29f35bc296daa55.diff";
+        sha256 = "sha256-de4RUTB1/ENaPi14QrTX/R/fUmrsrM3/6YJ32Yi3JMI=";
+      };
+    }
+    {
+      name = "fulfill-od";
+      patch = pkgs.fetchpatch {
+        name = "fulfill-od";
+        url = "https://patchwork.freedesktop.org/patch/540523/raw/";
+        sha256 = "sha256-CZ/E+e1aKfobs2s6FxB8KOptpbCNSrCXljeuIynwPsI=";
+      };
+    }
+    {
+      name = "fulfill-od-07";
+      patch = pkgs.fetchpatch {
+        name = "fulfill-od-07";
+        url = "https://patchwork.freedesktop.org/patch/540524/raw/";
+        sha256 = "sha256-l+d4elh540K1FxStEORFtvq386v/S1wnUmIub23NBfQ=";
+      };
+    }
+  ];
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   services.udev.packages = [ pkgs.yubikey-personalization ];
+
+  hardware.xpadneo.enable = true;
+
+  # 8bitdo ultimate keep alive
+  services.udev.extraRules = ''
+    # 8bitdo ultimate 2.4ghz
+    ACTION=="add", SUBSYSTEM=="input", KERNEL=="event*", ATTRS{id/vendor}=="2dc8", ATTRS{id/product}=="3106", TAG+="systemd", ENV{SYSTEMD_WANTS}="controller-keep-alive@%k"
+  '';
+  systemd.services."controller-keep-alive@".serviceConfig = {
+    StandardOutput = "null";
+    Type = "simple";
+    User = "1000";
+    ExecStart = "${pkgs.coreutils}/bin/cat /dev/input/%i";
+  };
 
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;
@@ -28,6 +78,7 @@
     };
   };
 
+  services.fwupd.enable = true;
   programs.corectrl = {
     enable = true;
     gpuOverclock.enable = true;
@@ -36,7 +87,10 @@
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
+  };
 
   hardware.bluetooth = {
     enable = true;

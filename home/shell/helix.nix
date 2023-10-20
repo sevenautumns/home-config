@@ -11,13 +11,11 @@
       editor = {
         true-color = true;
         idle-timeout = 0;
-        #lsp.display-messages = true;
         cursor-shape = {
           insert = "bar";
           normal = "block";
           select = "block";
         };
-        # auto-format = false;
         soft-wrap.enable = true;
       };
       keys.normal = {
@@ -27,7 +25,6 @@
         space.space = "file_picker";
         space.w = ":write";
         space.q = ":quit";
-        # space.c = ":buffer-close
         space.o = ":reload";
         space.u = ":format";
         space.n = ":new";
@@ -94,16 +91,9 @@
       {
         name = "latex";
         language-server.command = "ltex-ls";
-        # Use correct english
         config.ltex = {
           language = "en-GB";
-          # language = "de-DE";
           latex.commands = { "\\\\lstinline{}" = "dummy"; };
-          # dictionary = {
-          #   "en-GB" = [
-          #     ":$PRJ_ROOT/.vscode/ltex.dictionary.en-GB.txt"
-          #   ];
-          # };
         };
       }
       {
@@ -131,29 +121,6 @@
         language-server.command = "ltex-ls";
         file-types = [ "md" ];
         scope = "source.markdown";
-        roots = [ ];
-      }
-      {
-        name = "email-en";
-        language-server.command = "ltex-ls";
-        file-types = [ "eml" "email" ];
-        scope = "text.email";
-        config.ltex = {
-          enabled = true;
-          language = "en-GB";
-          additionalRules.motherTongue = "de-DE";
-        };
-        roots = [ ];
-      }
-      {
-        name = "email-de";
-        language-server.command = "ltex-ls";
-        file-types = [ "eml" "email" ];
-        scope = "text.email";
-        config.ltex = {
-          enabled = true;
-          language = "de-DE";
-        };
         roots = [ ];
       }
     ];
@@ -189,6 +156,6 @@
     nodePackages.vim-language-server # Vim
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
-    nixd
+    (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
   ];
 }

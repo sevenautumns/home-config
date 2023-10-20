@@ -1,5 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }: {
   programs.steam.enable = true;
+  hardware.steam-hardware.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
@@ -12,8 +13,6 @@
 
   services.flatpak.enable = true;
 
-    environment.systemPackages = with pkgs; [
-    gamescope
-  ];
+  environment.systemPackages = with pkgs; [ gamescope ];
 }
 

@@ -1,4 +1,5 @@
-{ pkgs, config, machine, lib, ... }: let
+{ pkgs, config, machine, lib, ... }:
+let
   window-switcher = pkgs.writeShellScriptBin "window-switcher" ''
     swaymsg -t get_tree --raw | \
       ${pkgs.jq}/bin/jq -r '.. | select(.nodes?) | 
@@ -7,10 +8,22 @@
       ${pkgs.skim}/bin/sk --header="Sway Window Switcher" | \
       awk '/^#[0-9]+/ { system("swaymsg \"[con_id=" substr($1, 2) "] focus\""); exit(0) }' \
   '';
+  desktop-mode = pkgs.writeShellScriptBin "desktop-mode" ''
+    ${pkgs.sway}/bin/swaymsg output HDMI-A-1 disable
+    ${pkgs.sway}/bin/swaymsg output DP-1 enable
+    ${pkgs.sway}/bin/swaymsg output DP-3 enable
+  '';
+  couch-mode = pkgs.writeShellScriptBin "couch-mode" ''
+    ${pkgs.sway}/bin/swaymsg output HDMI-A-1 enable
+    ${pkgs.sway}/bin/swaymsg output DP-1 disable
+    ${pkgs.sway}/bin/swaymsg output DP-3 disable
+  '';
 in {
   imports = [ ./rofi.nix ];
 
-  home.packages = with pkgs; [ wl-clipboard sway-launcher-desktop ];
+  home.packages = with pkgs;
+    [ wl-clipboard sway-launcher-desktop ]
+    ++ lib.optionals (machine.host == "neesama") [ desktop-mode couch-mode ];
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default.settings = {
     theme = {
@@ -178,43 +191,43 @@ in {
           };
           workspaceOutputAssign = [
             {
-              output = "${tuf}\" \"${wide}";
+              output = ''${tuf}" "${wide}'';
               workspace = ws1;
             }
             {
-              output = "${tuf}\" \"${wide}";
+              output = ''${tuf}" "${wide}'';
               workspace = ws2;
             }
             {
-              output = "${tuf}\" \"${wide}";
+              output = ''${tuf}" "${wide}'';
               workspace = ws3;
             }
             {
-              output = "${tuf}\" \"${wide}";
+              output = ''${tuf}" "${wide}'';
               workspace = ws4;
             }
             {
-              output = "${tuf}\" \"${wide}";
+              output = ''${tuf}" "${wide}'';
               workspace = ws5;
             }
             {
-              output = "${fourk}\" \"${laptop}";
+              output = ''${fourk}" "${laptop}'';
               workspace = ws6;
             }
             {
-              output = "${fourk}\" \"${laptop}";
+              output = ''${fourk}" "${laptop}'';
               workspace = ws7;
             }
             {
-              output = "${tv}\" \"${fourk}\" \"${laptop}";
+              output = ''${tv}" "${fourk}" "${laptop}'';
               workspace = ws8;
             }
             {
-              output = "${tv}\" \"${fourk}\" \"${laptop}";
+              output = ''${tv}" "${fourk}" "${laptop}'';
               workspace = ws9;
             }
             {
-              output = "${tuf}\" \"${wide}";
+              output = ''${tuf}" "${wide}'';
               workspace = ws10;
             }
           ];

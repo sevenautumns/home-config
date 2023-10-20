@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-stable-05.url = "github:nixos/nixpkgs/nixos-22.05";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
@@ -37,7 +37,7 @@
     # pop-launcher.url = "github:pop-os/launcher";
     # pop-launcher.flake = false;
 
-    niketsu.url = "github:sevenautumns/niketsu";
+    niketsu.url = "github:sevenautumns/niketsu/main";
 
     # herbst3 = {
     #   url = "github:sevenautumns/herbst3";
@@ -134,8 +134,12 @@
         (home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable {
             system = machine.arch;
-            overlays =
-              [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay inputs.nixd.overlays.default ];
+            overlays = [
+              deploy-rs.overlay
+              self.overlays.matryoshka-pkgs
+              nur.overlay
+              inputs.nixd.overlays.default
+            ];
           };
           modules = [
             ./home

@@ -1,0 +1,57 @@
+From 807f6773a5eb75079d6cd406a00e11019bf81423 Mon Sep 17 00:00:00 2001
+From: Sven Friedrich <sven@autumnal.de>
+Date: Fri, 20 Oct 2023 11:32:33 +0200
+Subject: [PATCH] enable smu13 undervolting
+
+---
+ drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c | 4 ++--
+ drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
+index 3903a47669e4..e6400c58f3d4 100644
+--- a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
++++ b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
+@@ -341,7 +341,7 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
+ 		table_context->power_play_table;
+ 	struct smu_baco_context *smu_baco = &smu->smu_baco;
+ 	PPTable_t *pptable = smu->smu_table.driver_pptable;
+-#if 0
++#if 1
+ 	PPTable_t *pptable = smu->smu_table.driver_pptable;
+ 	const OverDriveLimits_t * const overdrive_upperlimits =
+ 				&pptable->SkuTable.OverDriveLimitsBasicMax;
+@@ -364,7 +364,7 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
+ 	 * Disable the OD feature support for SMU13 temporarily.
+ 	 * TODO: get this reverted when new OD mechanism online
+ 	 */
+-#if 0
++#if 1
+ 	if (!overdrive_lowerlimits->FeatureCtrlMask ||
+ 	    !overdrive_upperlimits->FeatureCtrlMask)
+ 		smu->od_enabled = false;
+diff --git a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c
+index 94ef5b4d116d..efc3deb1a9c8 100644
+--- a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c
++++ b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c
+@@ -331,7 +331,7 @@ static int smu_v13_0_7_check_powerplay_table(struct smu_context *smu)
+ 	struct smu_baco_context *smu_baco = &smu->smu_baco;
+ 	PPTable_t *smc_pptable = table_context->driver_pptable;
+ 	BoardTable_t *BoardTable = &smc_pptable->BoardTable;
+-#if 0
++#if 1
+ 	const OverDriveLimits_t * const overdrive_upperlimits =
+ 				&smc_pptable->SkuTable.OverDriveLimitsBasicMax;
+ 	const OverDriveLimits_t * const overdrive_lowerlimits =
+@@ -348,7 +348,7 @@ static int smu_v13_0_7_check_powerplay_table(struct smu_context *smu)
+ 	if (smu_baco->platform_support && (BoardTable->HsrEnabled || BoardTable->VddqOffEnabled))
+ 		smu_baco->maco_support = true;
+ 
+-#if 0
++#if 1
+ 	if (!overdrive_lowerlimits->FeatureCtrlMask ||
+ 	    !overdrive_upperlimits->FeatureCtrlMask)
+ 		smu->od_enabled = false;
+-- 
+2.41.0
+

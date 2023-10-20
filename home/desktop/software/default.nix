@@ -34,10 +34,10 @@ in {
   #};
 
   nixpkgs.config.packageOverrides = super: {
-    syncplay = (pkgs.stable.syncplay.overrideAttrs (old: {
-      src = inputs.syncplay;
-      version = "unstable-master";
-    }));
+    # syncplay = (pkgs.stable.syncplay.overrideAttrs (old: {
+    #   src = inputs.syncplay;
+    #   version = "unstable-master";
+    # }));
     kcc = (pkgs.stable.kcc.overrideAttrs (old: {
       # src = inputs.kcc;
       postPatch = ''
@@ -66,13 +66,14 @@ in {
       #misc
       arandr
       monero-cli
+      nvtop-amd
 
       # https://github.com/NixOS/nixpkgs/pull/195985
       # gtk4 problem, use stable until fixed
       stable.gnome.nautilus
 
       feh
-      syncplay
+      # syncplay
       gnome-feeds
       deploy-rs.deploy-rs
       kcc
