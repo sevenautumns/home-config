@@ -40,7 +40,7 @@
     fileWidgetOptions = [ "--preview='${pkgs.bat}/bin/bat {} --color=always'" ];
     changeDirWidgetCommand = "${pkgs.fd}/bin/fd -E /net --hidden --type d";
     changeDirWidgetOptions =
-      [ "--preview='${pkgs.exa}/bin/exa --tree {} | head -200'" ];
+      [ "--preview='${pkgs.eza}/bin/eza --tree {} | head -200'" ];
     historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
   };
 
@@ -108,7 +108,7 @@
   };
   programs.zsh.enable = true;
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
     enableAliases = true;
   };

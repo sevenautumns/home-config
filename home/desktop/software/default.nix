@@ -35,10 +35,6 @@ in
   #};
 
   nixpkgs.config.packageOverrides = super: {
-    syncplay = (pkgs.stable.syncplay.overrideAttrs (old: {
-      src = inputs.syncplay;
-      version = "unstable-master";
-    }));
     kcc = (pkgs.stable.kcc.overrideAttrs (old: {
       # src = inputs.kcc;
       postPatch = ''
@@ -83,6 +79,8 @@ in
       calibre
 
       gamescope
+      nss
+      nss.tools
 
       libgourou
 
