@@ -90,10 +90,6 @@ in {
         title = "Media viewer";
       }
       { class = "zoom"; }
-      {
-        class = "syncplay";
-        title = "Syncplay configuration";
-      }
     ];
   };
 

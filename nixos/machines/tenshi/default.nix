@@ -7,7 +7,6 @@
     ./modules/nginx.nix
     ./modules/ror2.nix
     ./modules/satisfactory.nix
-    ./modules/syncplay.nix
     ./modules/torrent.nix
     ../../common.nix
     (modulesPath + "/profiles/qemu-guest.nix")

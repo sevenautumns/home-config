@@ -2,7 +2,8 @@
 let
   host = machine.host;
   theme = config.theme;
-in {
+in
+{
   # services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
 
   # Fallback Terminal
@@ -32,7 +33,7 @@ in {
         opacity = 0.95;
         # decorations_theme_variant = "dark";
       };
-      font.size = 14;
+      font.size = 10;
       shell.program = "${pkgs.fish}/bin/fish";
       colors = {
         transparent_background_colors = true;

@@ -6,7 +6,6 @@
     ./modules/rr.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
-    # ./modules/syncplay.nix
     ./modules/niketsu.nix
     # ./modules/jellyfin.nix
     ../../common.nix

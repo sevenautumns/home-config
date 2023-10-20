@@ -615,8 +615,7 @@
         "nixpkgs-stable-05": "nixpkgs-stable-05",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "services-bundle": "services-bundle",
-        "syncplay": "syncplay"
+        "services-bundle": "services-bundle"
       }
     },
     "rust-analyzer-src": {
@@ -674,22 +673,6 @@
       "original": {
         "owner": "pierre1313",
         "repo": "Services.bundle",
-        "type": "github"
-      }
-    },
-    "syncplay": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697058758,
-        "narHash": "sha256-pdauML20bTN5uo8Ka7VzEfA0Rr4lhTCMPwqu2qe0/P8=",
-        "owner": "Syncplay",
-        "repo": "syncplay",
-        "rev": "20846ca78ccdeb07dc7529445fde2868a3ce6c37",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Syncplay",
-        "repo": "syncplay",
         "type": "github"
       }
     },

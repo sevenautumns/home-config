@@ -14,7 +14,8 @@ let
       cp -r share $out/
     '';
   };
-in {
+in
+{
   home.packages = with pkgs; [ papirus-icon-theme pkgs.stable.bibata-cursors ];
 
   # TODO symlink .nix-profile/share/icons:themes folder to .local/share/icons:themes
@@ -30,17 +31,18 @@ in {
   gtk = {
     enable = true;
     theme = {
-      #name = "Adwaita-dark"; 
-      name = "Yaru-blue-dark";
-      package = yaru-papirus;
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
+      # name = "Yaru-blue-dark";
+      # package = yaru-papirus;
       #name = "Pop-dark";
       #package = pkgs.pop-gtk-theme;
     };
     iconTheme = {
-      #name = "Papirus-Dark";
-      #package = pkgs.papirus-icon-theme;
-      name = "Yaru-blue-dark";
-      package = yaru-papirus;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+      # name = "Yaru-blue-dark";
+      # package = yaru-papirus;
     };
     font = {
       name = "Roboto";
@@ -70,8 +72,8 @@ in {
     enable = true;
     # Use same theme as GTK applications
     platformTheme = "gtk";
-    style.package = pkgs.adwaita-qt;
-    style.name = "adwaita-dark";
+    # style.package = pkgs.adwaita-qt;
+    # style.name = "adwaita-dark";
   };
 
   home.pointerCursor = {

@@ -25,55 +25,44 @@ in {
     [ wl-clipboard sway-launcher-desktop ]
     ++ lib.optionals (machine.host == "neesama") [ desktop-mode couch-mode ];
   programs.i3status-rust.enable = true;
-  programs.i3status-rust.bars.default.settings = {
-    theme = {
-      # name = "plain";
-      overrides = with config.theme; {
-        idle_bg = gray0;
-        idle_fg = gray5;
-        info_bg = gray0;
-        info_fg = gray5;
-        good_bg = gray0;
-        good_fg = green;
-        warning_bg = gray0;
-        warning_fg = yellow1;
-        critical_bg = gray0;
-        critical_fg = red;
-        separator_bg = gray0;
-        separator_fg = gray5;
+  programs.i3status-rust.bars.default = {
+    settings = {
+      theme = {
+        # name = "plain";
+        overrides = with config.theme; {
+          idle_bg = gray0;
+          idle_fg = gray5;
+          info_bg = gray0;
+          info_fg = gray5;
+          good_bg = gray0;
+          good_fg = green;
+          warning_bg = gray0;
+          warning_fg = yellow1;
+          critical_bg = gray0;
+          critical_fg = red;
+          separator_bg = gray0;
+          separator_fg = gray5;
+        };
       };
     };
     blocks = [
-      {
-        block = "disk_space";
-        path = "/";
-        alias = "/";
-        info_type = "available";
-        unit = "GB";
-        interval = 60;
-        warning = 20.0;
-        alert = 10.0;
-      }
+      { block = "disk_space"; }
       {
         block = "memory";
-        display_type = "memory";
-        format_mem = "{mem_used_percents}";
-        format_swap = "{swap_used_percents}";
+        format = " MEM $mem_used.eng(prefix:M)/$mem_total.eng(prefix:M) ";
       }
       {
         block = "cpu";
         interval = 1;
       }
-      {
-        block = "load";
-        interval = 1;
-        format = "{1m}";
-      }
       { block = "sound"; }
+      {
+        block = "battery";
+        driver = "upower";
+      }
       {
         block = "time";
         interval = 60;
-        format = "%a %d/%m %r";
       }
     ];
   };
@@ -187,47 +176,48 @@ in {
             ${laptop} = {
               mode = "1920x1080@60Hz";
               pos = "7680 540";
+              # scale = "2";
             };
           };
           workspaceOutputAssign = [
             {
-              output = ''${tuf}" "${wide}'';
+              output = [ tuf wide ];
               workspace = ws1;
             }
             {
-              output = ''${tuf}" "${wide}'';
+              output = [ tuf wide ];
               workspace = ws2;
             }
             {
-              output = ''${tuf}" "${wide}'';
+              output = [ tuf wide ];
               workspace = ws3;
             }
             {
-              output = ''${tuf}" "${wide}'';
+              output = [ tuf wide ];
               workspace = ws4;
             }
             {
-              output = ''${tuf}" "${wide}'';
+              output = [ tuf wide ];
               workspace = ws5;
             }
             {
-              output = ''${fourk}" "${laptop}'';
+              output = [ fourk laptop ];
               workspace = ws6;
             }
             {
-              output = ''${fourk}" "${laptop}'';
+              output = [ fourk laptop ];
               workspace = ws7;
             }
             {
-              output = ''${tv}" "${fourk}" "${laptop}'';
+              output = [ tv fourk laptop ];
               workspace = ws8;
             }
             {
-              output = ''${tv}" "${fourk}" "${laptop}'';
+              output = [ tv fourk laptop ];
               workspace = ws9;
             }
             {
-              output = ''${tuf}" "${wide}'';
+              output = [ tuf wide ];
               workspace = ws10;
             }
           ];
@@ -253,7 +243,8 @@ in {
                 "exec alacritty --class=launcher -e ${window-switcher}/bin/window-switcher";
               # "${modifier}+t" = "exec rofi -show window -modi window";
               # "${modifier}+t" = "exec ${pkgs.swayr}/bin/swayr switch-workspace-or-window";
-              "${modifier}+p" = "exec rofi-pass";
+              # "${modifier}+p" = "exec rofi-pass";
+              "${modifier}+p" = "exec ${pkgs.tessen}/bin/tessen";
 
               "${modifier}+o" = "exec alacritty --class=launcher -e pulsemixer";
 

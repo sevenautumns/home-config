@@ -59,9 +59,6 @@
     fcitx5-adwaita.url = "github:escape0707/fcitx5-adwaita-dark";
     fcitx5-adwaita.flake = false;
 
-    syncplay.url = "github:Syncplay/syncplay";
-    syncplay.flake = false;
-
     #Plex
     services-bundle.url = "github:pierre1313/Services.bundle";
     services-bundle.flake = false;
@@ -202,7 +199,6 @@
       # nixosModules.gobot = let gobot = inputs.gobot;
       # in import modules/gobot.nix;
       # nixosModules.lavalink = import modules/lavalink.nix;
-      # nixosModules.syncplay = import modules/syncplay.nix;
       nixosModules.flood = import modules/flood.nix;
 
       deploy.nodes = lib.mapAttrs (host: machine: {
