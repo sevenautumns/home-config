@@ -1,26 +1,28 @@
-From 807f6773a5eb75079d6cd406a00e11019bf81423 Mon Sep 17 00:00:00 2001
+From 8ca43916275eedb5817dec4ba8a75d1dd5e7a3f1 Mon Sep 17 00:00:00 2001
 From: Sven Friedrich <sven@autumnal.de>
 Date: Fri, 20 Oct 2023 11:32:33 +0200
 Subject: [PATCH] enable smu13 undervolting
 
 ---
- drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c | 4 ++--
+ drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c | 6 +++---
  drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
-index 3903a47669e4..e6400c58f3d4 100644
+index 3903a47669e4..c006422a32f3 100644
 --- a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
 +++ b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
-@@ -341,7 +341,7 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
+@@ -341,8 +341,8 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
  		table_context->power_play_table;
  	struct smu_baco_context *smu_baco = &smu->smu_baco;
  	PPTable_t *pptable = smu->smu_table.driver_pptable;
 -#if 0
+-	PPTable_t *pptable = smu->smu_table.driver_pptable;
 +#if 1
- 	PPTable_t *pptable = smu->smu_table.driver_pptable;
++	// PPTable_t *pptable = smu->smu_table.driver_pptable;
  	const OverDriveLimits_t * const overdrive_upperlimits =
  				&pptable->SkuTable.OverDriveLimitsBasicMax;
+ 	const OverDriveLimits_t * const overdrive_lowerlimits =
 @@ -364,7 +364,7 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
  	 * Disable the OD feature support for SMU13 temporarily.
  	 * TODO: get this reverted when new OD mechanism online
