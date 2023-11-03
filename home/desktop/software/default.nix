@@ -9,7 +9,8 @@ let
   #     inputs.homeManager.packages.${machine.arch}.docs-html
   #   }/share/doc/home-manager/options.html $@
   # '';
-in {
+in
+{
   imports = [
     ./alacritty.nix
     ./beets.nix
@@ -23,6 +24,7 @@ in {
     ./lutris.nix
     #./redshift.nix
     ./rust.nix
+    ./screenaudio.nix
     ./vscode.nix
   ];
 

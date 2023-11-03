@@ -26,7 +26,8 @@
     # "net.ipv4.conf.all.src_valid_mark" = 1;
   };
 
-  boot.kernelParams = [ # Activate CGroup Memory control
+  boot.kernelParams = [
+    # Activate CGroup Memory control
     "cgroup_memory=1"
     "cgroup_enable=memory"
   ];
@@ -59,6 +60,8 @@
     32469 # DLNA
 
     8384 # Syncthing
+
+    28981 # Paperless
   ];
 
   # Syncthing GUI only for my own network
@@ -105,6 +108,8 @@
       options = [ "noatime" ];
     };
   };
+
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   #Disable Spindow: -S 0
   #Disable Power Managment: -B 255

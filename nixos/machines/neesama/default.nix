@@ -12,7 +12,7 @@
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.kernelPatches = [{
     name = "enable-smu13-undervolting";
     patch = ./0001-enable-smu13-undervolting.patch;
@@ -21,6 +21,25 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.udev.packages = [ pkgs.yubikey-personalization ];
+
+
+  systemd.services.undervolt = {
+    description = "Undervolt GPU";
+    serviceConfig.Type = "oneshot";
+    serviceConfig.RemainAfterExit = true;
+    wantedBy = [ "multi-user.target" ];
+    unitConfig.RequiresMountsFor = "/sys";
+    script = ''
+      sleep 5
+      echo 'vc 0 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vc 1 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vc 2 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vc 3 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vc 4 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vc 5 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'c' > /sys/class/drm/card0/device/pp_od_clk_voltage
+    '';
+  };
 
   hardware.xpadneo.enable = true;
 
@@ -41,7 +60,7 @@
   xdg.portal.wlr.settings = {
     screencast = {
       output_name = "DP-1";
-      max_fps = 30;
+      max_fps = 60;
       chooser_type = "simple";
       chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
     };
@@ -165,8 +184,7 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
   powerManagement.cpuFreqGovernor = "ondemand";
-  hardware.cpu.amd.updateMicrocode =
-    config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
   system.stateVersion = "22.11";
 }

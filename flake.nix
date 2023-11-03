@@ -37,8 +37,13 @@
     # pop-launcher.url = "github:pop-os/launcher";
     # pop-launcher.flake = false;
 
+    # niketsu.url = "github:sevenautumns/niketsu";
     niketsu.url = "github:sevenautumns/niketsu/main";
 
+    screenaudio = {
+      url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
+      flake = false;
+    };
     # herbst3 = {
     #   url = "github:sevenautumns/herbst3";
     #   inputs.herbstluftwm.follows = "herbstluftwm";
@@ -70,8 +75,16 @@
     absolut-series-scanner.flake = false;
   };
 
-  outputs = { self, home-manager, nur, deploy-rs, nixpkgs-unstable
-    , nixpkgs-stable, agenix, ... }@inputs:
+  outputs =
+    { self
+    , home-manager
+    , nur
+    , deploy-rs
+    , nixpkgs-unstable
+    , nixpkgs-stable
+    , agenix
+    , ...
+    }@inputs:
     let
       lib = nixpkgs-unstable.lib;
       machines = {
@@ -124,57 +137,62 @@
           managed-nixos = true;
         };
       };
-    in {
-      homeConfigurations = lib.attrsets.mapAttrs' (host: pre_machine:
-        let machine = pre_machine // { inherit host; };
-        in lib.attrsets.nameValuePair (machine.user + "@" + host)
-        (home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable {
-            system = machine.arch;
-            overlays = [
-              deploy-rs.overlay
-              self.overlays.matryoshka-pkgs
-              nur.overlay
-              inputs.nixd.overlays.default
-            ];
-          };
-          modules = [
-            ./home
-            {
-              home = {
-                username = machine.user;
-                homeDirectory = "/home/${machine.user}";
-                stateVersion = "23.05";
-                packages = [ agenix.packages."${machine.arch}".agenix ];
+    in
+    {
+      homeConfigurations = lib.attrsets.mapAttrs'
+        (host: pre_machine:
+          let machine = pre_machine // { inherit host; };
+          in lib.attrsets.nameValuePair (machine.user + "@" + host)
+            (home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs-unstable {
+                system = machine.arch;
+                overlays = [
+                  deploy-rs.overlay
+                  self.overlays.matryoshka-pkgs
+                  nur.overlay
+                  inputs.nixd.overlays.default
+                ];
               };
-            }
-          ];
-          extraSpecialArgs = {
-            inherit inputs;
-            inherit machine;
-          };
-        })) machines;
+              modules = [
+                ./home
+                {
+                  home = {
+                    username = machine.user;
+                    homeDirectory = "/home/${machine.user}";
+                    stateVersion = "23.05";
+                    packages = [ agenix.packages."${machine.arch}".agenix ];
+                  };
+                }
+              ];
+              extraSpecialArgs = {
+                inherit inputs;
+                inherit machine;
+              };
+            }))
+        machines;
 
-      nixosConfigurations = lib.mapAttrs (host: machine:
-        lib.nixosSystem rec {
-          system = machine.arch;
-          modules = [
-            {
-              networking.hostName = host;
-              nixpkgs.overlays =
-                [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
-            }
-            agenix.nixosModules.default
-            self.nixosModules.transmission
-            self.nixosModules.flood
-            (./nixos/machines + "/${host}")
-          ];
-          specialArgs = {
-            inherit inputs;
-            inherit machine;
-          };
+      nixosConfigurations = lib.mapAttrs
+        (host: machine:
+          lib.nixosSystem rec {
+            system = machine.arch;
+            modules = [
+              {
+                networking.hostName = host;
+                nixpkgs.overlays =
+                  [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
+              }
+              agenix.nixosModules.default
+              self.nixosModules.transmission
+              self.nixosModules.flood
+              (./nixos/machines + "/${host}")
+            ];
+            specialArgs = {
+              inherit inputs;
+              inherit machine;
+            };
 
-        }) (lib.filterAttrs (h: m: m.managed-nixos) machines);
+          })
+        (lib.filterAttrs (h: m: m.managed-nixos) machines);
 
       # https://github.com/LEXUGE/flake nixosModule example
       # nixosModules.test = let pkgs = nixpkgs-stable; in (import ./modules/desktop/audio {inherit pkgs lib home-manager; });
@@ -201,25 +219,27 @@
       # nixosModules.lavalink = import modules/lavalink.nix;
       nixosModules.flood = import modules/flood.nix;
 
-      deploy.nodes = lib.mapAttrs (host: machine: {
-        hostname = machine.address;
-        profilesOrder = [ "system" "user" ];
-        fastConnection = false;
-        profiles = {
-          user = {
-            sshUser = machine.user;
-            path = deploy-rs.lib.${machine.arch}.activate.home-manager
-              self.homeConfigurations."${machine.user}@${host}";
+      deploy.nodes = lib.mapAttrs
+        (host: machine: {
+          hostname = machine.address;
+          profilesOrder = [ "system" "user" ];
+          fastConnection = false;
+          profiles = {
+            user = {
+              sshUser = machine.user;
+              path = deploy-rs.lib.${machine.arch}.activate.home-manager
+                self.homeConfigurations."${machine.user}@${host}";
+            };
+          } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
+            system = {
+              sshUser = "admin";
+              path = deploy-rs.lib.${machine.arch}.activate.nixos
+                self.nixosConfigurations."${host}";
+              user = "root";
+            };
           };
-        } // lib.attrsets.optionalAttrs (machine.managed-nixos) {
-          system = {
-            sshUser = "admin";
-            path = deploy-rs.lib.${machine.arch}.activate.nixos
-              self.nixosConfigurations."${host}";
-            user = "root";
-          };
-        };
-      }) (lib.filterAttrs (h: m: m ? address) machines);
+        })
+        (lib.filterAttrs (h: m: m ? address) machines);
 
       # checks = builtins.mapAttrs
       #   (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
