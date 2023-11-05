@@ -13,10 +13,20 @@
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelPatches = [{
-    name = "enable-smu13-undervolting";
-    patch = ./0001-enable-smu13-undervolting.patch;
-  }];
+  boot.kernelPatches =
+    let
+      inherit (lib.kernel) yes;
+    in
+    [
+      {
+        name = "enable-smu13-undervolting";
+        patch = ./0001-enable-smu13-undervolting.patch;
+        extraStructuredConfig = {
+          FRAMEBUFFER_CONSOLE_DETECT_PRIMARY = yes;
+          DRM_FBDEV_EMULATION = yes;
+        };
+      }
+    ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -66,11 +76,11 @@
     };
   };
 
-  services.fwupd.enable = true;
-  programs.corectrl = {
-    enable = true;
-    gpuOverclock.enable = true;
-  };
+  # services.fwupd.enable = true;
+  # programs.corectrl = {
+  #   enable = true;
+  #   gpuOverclock.enable = true;
+  # };
 
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.driSupport = true;
@@ -111,7 +121,8 @@
       enable = true;
       cue = true;
       # Utilize appId key for injecting pin requirement
-      appId = "pam://$HOSTNAME pinverification=1 userpresence=0";
+      # appId = "pam://$HOSTNAME pinverification=1 userpresence=0";
+      appId = "pam://$HOSTNAME";
       authFile = "/etc/u2f_keys";
     };
     services = {

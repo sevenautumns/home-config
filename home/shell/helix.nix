@@ -3,7 +3,6 @@
     enable = true;
     package =
       if (machine.arch == "x86_64-linux") then
-      # inputs.helix.packages."${pkgs.system}".default
         pkgs.unstable.helix
       else
         pkgs.stable.helix;
@@ -29,102 +28,76 @@
         space.o = ":reload";
         space.u = ":format";
         space.n = ":new";
-        "C-left" = "move_prev_long_word_start";
-        "C-right" = "move_next_long_word_end";
-        "C-down" = [
-          "move_line_down"
-          "move_line_down"
-          "move_line_down"
-          "move_line_down"
-          "move_line_down"
-        ];
-        "C-up" = [
-          "move_line_up"
-          "move_line_up"
-          "move_line_up"
-          "move_line_up"
-          "move_line_up"
-        ];
       };
       keys.insert = {
         up = "move_line_up";
         down = "move_line_down";
         left = "move_char_left";
         right = "move_char_right";
-        "C-left" = "move_prev_long_word_start";
-        "C-right" = "move_next_long_word_end";
-        "C-down" = [
-          "move_line_down"
-          "move_line_down"
-          "move_line_down"
-          "move_line_down"
-          "move_line_down"
-        ];
-        "C-up" = [
-          "move_line_up"
-          "move_line_up"
-          "move_line_up"
-          "move_line_up"
-          "move_line_up"
-        ];
       };
       keys.select = {
         "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
         "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
       };
     };
-    languages.language = [
-      {
-        name = "rust";
-        config = {
+    languages = {
+      language = [
+        {
+          name = "toml";
+          language-servers = [ "taplo" ];
+        }
+        {
+          name = "latex";
+          language-servers = [ "ltex" ];
+        }
+        {
+          name = "nix";
+          formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+          language-servers = [ "nixd" ];
+          file-types = [ "nix" ];
+          scope = "source.nix";
+          auto-format = true;
+        }
+        {
+          name = "git-commit";
+          scope = "git.commitmsg";
+          roots = [ ];
+          file-types = [ "COMMIT_EDITMSG" ];
+          comment-token = "#";
+          indent = {
+            tab-width = 2;
+            unit = "  ";
+          };
+          language-servers = [ "ltex" ];
+        }
+        {
+          name = "markdown";
+          language-servers = [ "ltex" ];
+          file-types = [ "md" ];
+          scope = "source.markdown";
+          roots = [ ];
+        }
+      ];
+      language-server = {
+        rust-analyzer.config = {
           checkOnSave.command = "clippy";
           procMacro.enable = true;
           diagnostics.disabled = [ "unresolved-proc-macro" ];
         };
-      }
-      {
-        name = "toml";
-        language-server = {
+        taplo = {
           command = "taplo";
           args = [ "lsp" "stdio" ];
         };
-      }
-      {
-        name = "latex";
-        language-server.command = "ltex-ls";
-        config.ltex = {
-          language = "en-GB";
-          latex.commands = { "\\\\lstinline{}" = "dummy"; };
+        ltex = {
+          command = "ltex-ls";
+          config.ltex = {
+            language = "en-GB";
+            latex.commands = { "\\\\lstinline{}" = "dummy"; };
+          };
         };
-      }
-      {
-        name = "nix";
-        formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
-        language-server.command = "nixd";
-        file-types = [ "nix" ];
-        scope = "source.nix";
-        auto-format = true;
-      }
-      {
-        name = "git-commit";
-        scope = "git.commitmsg";
-        roots = [ ];
-        file-types = [ "COMMIT_EDITMSG" ];
-        comment-token = "#";
-        indent = {
-          tab-width = 2;
-          unit = "  ";
-        };
-        language-server.command = "ltex-ls";
-      }
-      {
-        name = "markdown";
-        language-server.command = "ltex-ls";
-        file-types = [ "md" ];
-        scope = "source.markdown";
-        roots = [ ];
-      }
-    ];
+        nixd.command = "nixd";
+      };
+    };
   };
 
   home.sessionVariables.EDITOR = "${pkgs.helix}/bin/hx";
