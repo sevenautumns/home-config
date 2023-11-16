@@ -96,11 +96,9 @@ in
     ] ++ lib.optionals (machine.nixos) [
       discord
       discord-canary
-      webcord
       tdesktop
       element-desktop
       spotify
-      brave
     ] ++ lib.optionals (host == "neesama") [
       # inputs.knock.packages.x86_64-linux.knock
     ];

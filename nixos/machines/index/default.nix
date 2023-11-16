@@ -176,6 +176,13 @@
         "guest ok" = "yes";
         "read only" = "yes";
       };
+      consume = {
+        browseable = "yes";
+        comment = "Paperless Consume";
+        path = "/media/paperless/consume";
+        "guest ok" = "no";
+        "read only" = "no";
+      };
     };
   };
 

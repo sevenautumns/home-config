@@ -89,9 +89,10 @@ in
           ws9 = "9";
           ws10 = "10";
           wide-tuf = "ASUSTek COMPUTER INC ASUS VG34V R6LMTF119386";
-          tuf = "ASUSTek COMPUTER INC VG279QM L9LMQS257534";
+          # tuf = "ASUSTek COMPUTER INC VG279QM L9LMQS257534";
           # fourk = "Samsung Electric Company U28E590 HTPH204116";
           tv = "Samsung Electric Company SAMSUNG 0x00000F00";
+          fourthree = "AOC 172S 8416BHA012675";
           laptop = "Chimei Innolux Corporation 0x1529 Unknown";
           wide = "Dell Inc. DELL U3421WE 6B17753";
         in
@@ -164,15 +165,9 @@ in
                 mode = "3840x2160@120Hz";
                 pos = "0 0";
               };
-              # ${fourk} = {
-              #   mode = "3840x2160@60Hz";
-              #   scale = "2";
-              #   pos = "3840 540";
-              # };
-              ${tuf} = {
-                mode = "1920x1080@60Hz";
-                pos = "3840 120";
-                transform = "90";
+              ${fourthree} = {
+                mode = "1280x1024@75Hz";
+                pos = "3840 776";
               };
               ${wide} = {
                 mode = "3440x1440@60Hz";
@@ -180,12 +175,11 @@ in
               };
               ${wide-tuf} = {
                 mode = "3440x1440@164.999Hz";
-                pos = "4920 360";
+                pos = "5120 360";
               };
               ${laptop} = {
                 mode = "1920x1080@60Hz";
                 pos = "7680 540";
-                # scale = "2";
               };
             };
             workspaceOutputAssign = [
@@ -210,19 +204,19 @@ in
                 workspace = ws5;
               }
               {
-                output = [ tuf laptop ];
+                output = [ fourthree laptop ];
                 workspace = ws6;
               }
               {
-                output = [ tuf laptop ];
+                output = [ fourthree laptop ];
                 workspace = ws7;
               }
               {
-                output = [ tv tuf laptop ];
+                output = [ tv fourthree laptop ];
                 workspace = ws8;
               }
               {
-                output = [ tv tuf laptop ];
+                output = [ tv fourthree laptop ];
                 workspace = ws9;
               }
               {
