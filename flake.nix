@@ -102,6 +102,13 @@
           nixos = true;
           managed-nixos = false;
         };
+        "ft-ssy-avil-w2" = {
+          user = "frie_sv";
+          arch = "x86_64-linux";
+          headless = false;
+          nixos = true;
+          managed-nixos = false;
+        };
         "ft-ssy-stonks" = {
           user = "frie_sv";
           arch = "x86_64-linux";

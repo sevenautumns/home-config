@@ -22,6 +22,30 @@ in
 {
   imports = [ ./rofi.nix ];
 
+  systemd.user.services.wayvnc = {
+    Unit = {
+      Description = "VNC Server for Sway";
+      # Allow it to restart infinitely
+      StartLimitIntervalSec = 0;
+    };
+
+    Service = {
+      ExecStart = "${pkgs.writeShellScript "wayvnc-start" ''
+          if [[ $XDG_SESSION_TYPE = "wayland" ]]; then
+            ${pkgs.wayvnc}/bin/wayvnc && exit 1
+          else
+            exit 0
+          fi
+        ''}";
+      Restart = "on-failure";
+      RestartSec = "1m";
+    };
+
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
+  home.file.".config/systemd/user/xdg-desktop-portal-gnome.service".source = config.lib.file.mkOutOfStoreSymlink "/dev/null";
+
   home.packages = with pkgs;
     [ wl-clipboard sway-launcher-desktop ]
     ++ lib.optionals (machine.host == "neesama") [ desktop-mode couch-mode ];
@@ -235,6 +259,7 @@ in
                 "${modifier}+v" = "split v";
                 "${modifier}+c" = "kill";
                 "${modifier}+x" = "move workspace to output next";
+                "${modifier}+u" = "mode passthrough";
 
                 "${modifier}+m" = "exec ${pkgs.warpd}/bin/warpd --grid";
                 "${modifier}+l" = "exec swaylock";
@@ -324,6 +349,19 @@ in
               "${modifier}+Shift+Mod2+80" = "move container to workspace ${ws8}";
               "${modifier}+Shift+Mod2+81" = "move container to workspace ${ws9}";
               "${modifier}+Shift+Mod2+90" = "move container to workspace ${ws10}";
+            };
+            modes = {
+              passthrough = {
+                "${modifier}+u" = "mode default";
+              };
+              resize = {
+                Left = "resize shrink width 10px";
+                Down = "resize grow height 10px";
+                Up = "resize shrink height 10px";
+                Right = "resize grow width 10px";
+                Escape = "mode default";
+                Return = "mode default";
+              };
             };
             colors = {
               background = gray0;
