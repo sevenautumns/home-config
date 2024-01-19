@@ -5,19 +5,19 @@
       path = "/var/lib/transmission/auth";
       owner = "autumnal";
     };
-    mullvard_private = {
-      file = ../../../../secrets/mullvard_private.age;
-      path = "/var/lib/mullvard/private";
+    mullvad_coyote = {
+      file = ../../../../secrets/mullvad_coyote.age;
+      path = "/var/lib/mullvad/coyote";
     };
   };
 
-  # smart cricket
+  # coyote
   secure.transmission = {
     enable = true;
-    ips = [ "10.64.141.29/32" ];
+    ips = [ "10.69.2.101/32" ];
     dns = "10.64.0.1";
     namespace = "transmission_wg";
-    privateKeyFile = config.age.secrets.mullvard_private.path;
+    privateKeyFile = config.age.secrets.mullvad_coyote.path;
     openRPClocal = true;
     peer = {
       publicKey = "qcvI02LwBnTb7aFrOyZSWvg4kb7zNW9/+rS6alnWyFE=";
@@ -53,20 +53,22 @@
       alt-speed-time-end = 480;
       alt-speed-up = 1500;
       utp-enabled = false;
+      ratio-limit-enabled = true;
+      ratio-limit = 2;
     };
   };
 
-  # Limit resource usage for transmission
-  systemd.services.transmission = {
-    startLimitIntervalSec = 3;
-    startLimitBurst = 1;
-    serviceConfig = {
-      Restart = "on-failure";
-      memoryAccounting = true;
-      # MemoryHigh = "1000M";
-      MemoryMax = "1300M";
-    };
-  };
+  # # Limit resource usage for transmission
+  # systemd.services.transmission = {
+  #   startLimitIntervalSec = 3;
+  #   startLimitBurst = 1;
+  #   serviceConfig = {
+  #     Restart = "on-failure";
+  #     memoryAccounting = true;
+  #     # MemoryHigh = "1000M";
+  #     MemoryMax = "1300M";
+  #   };
+  # };
 
   services.flood = {
     enable = true;

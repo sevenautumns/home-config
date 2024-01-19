@@ -88,9 +88,27 @@ in {
       ];
 
       # Resolve Config for namespace
-      environment.etc."netns/${cfg.namespace}/resolv.conf" = {
-        text = "nameserver ${cfg.dns}";
-        mode = "0664";
+      environment.etc = {
+        "netns/${cfg.namespace}/resolv.conf" = {
+          text = "nameserver ${cfg.dns}";
+          mode = "0664";
+        };
+        "netns/${cfg.namespace}/nsswitch.conf" = {
+          text = ''
+            passwd:    files systemd
+            group:     files [success=merge] systemd
+            shadow:    files
+
+            hosts:     mymachines files myhostname wins dns
+            networks:  files
+
+            ethers:    files
+            services:  files
+            protocols: files
+            rpc:       files
+          '';
+          mode = "0664";
+        };
       };
 
       # Network Interface Setup
@@ -132,7 +150,10 @@ in {
             # Because Transmission overrides /etc and would use the original
             # /etc/resolv.conf otherwise
             serviceConfig.BindReadOnlyPaths =
-              [ "/etc/netns/${cfg.namespace}/resolv.conf:/etc/resolv.conf" ];
+              [
+                "/etc/netns/${cfg.namespace}/resolv.conf:/etc/resolv.conf"
+                "/etc/netns/${cfg.namespace}/nsswitch.conf:/etc/nsswitch.conf"
+              ];
           };
         }
         (mkIf cfg.openRPClocal {
@@ -141,11 +162,13 @@ in {
             enable = true;
             partOf = [ "transmission.service" ];
             wantedBy = [ "multi-user.target" ];
-            script = let
-              port = toString config.services.transmission.settings.rpc-port;
-            in ''
-              ${pkgs.socat}/bin/socat tcp-listen:${port},fork,reuseaddr,bind=0.0.0.0 exec:'${pkgs.iproute2}/bin/ip netns exec ${cfg.namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:${port}"',nofork
-            '';
+            script =
+              let
+                port = toString config.services.transmission.settings.rpc-port;
+              in
+              ''
+                ${pkgs.socat}/bin/socat tcp-listen:${port},fork,reuseaddr,bind=0.0.0.0 exec:'${pkgs.iproute2}/bin/ip netns exec ${cfg.namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:${port}"',nofork
+              '';
           };
 
         })

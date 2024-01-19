@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-stable-05.url = "github:nixos/nixpkgs/nixos-22.05";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
@@ -37,8 +37,8 @@
     # pop-launcher.url = "github:pop-os/launcher";
     # pop-launcher.flake = false;
 
-    # niketsu.url = "github:sevenautumns/niketsu";
-    niketsu.url = "github:sevenautumns/niketsu/main";
+    niketsu.url = "github:sevenautumns/niketsu";
+    # niketsu.url = "github:sevenautumns/niketsu/server/cache";
 
     screenaudio = {
       url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
@@ -116,11 +116,10 @@
           nixos = true;
           managed-nixos = false;
         };
-        "index" = {
+        "roxy" = {
           user = "autumnal";
-          #address = "10.4.0.0";
           address = "192.168.178.2";
-          arch = "aarch64-linux";
+          arch = "x86_64-linux";
           headless = true;
           nixos = true;
           managed-nixos = true;
