@@ -99,7 +99,7 @@ in
       tdesktop
       element-desktop
       spotify
-    ] ++ lib.optionals (host == "neesama") [
+    ] ++ lib.optionals (host == "vivi") [
       # inputs.knock.packages.x86_64-linux.knock
     ];
 

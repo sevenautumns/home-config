@@ -2,12 +2,12 @@
 let
   host = machine.host;
   theme = config.theme;
-in {
+in
+{
   programs.kitty = {
     enable = true;
     package = with pkgs; stable.kitty;
     theme = "Nord";
-    #font.size = if host == "neesama" then 11 else 8;
 
     settings = {
       window_padding_width = 2;

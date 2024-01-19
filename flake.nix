@@ -88,7 +88,7 @@
     let
       lib = nixpkgs-unstable.lib;
       machines = {
-        "neesama" = {
+        "vivi" = {
           user = "autumnal";
           arch = "x86_64-linux";
           headless = false;
@@ -124,14 +124,6 @@
           nixos = true;
           managed-nixos = true;
         };
-        # "tenshi" = {
-        #   user = "autumnal";
-        #   address = "10.3.0.0";
-        #   arch = "x86_64-linux";
-        #   headless = true;
-        #   nixos = true;
-        #   managed-nixos = true;
-        # };
         "castle" = {
           user = "autumnal";
           #address = "10.2.0.0";

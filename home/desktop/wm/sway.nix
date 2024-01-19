@@ -48,7 +48,7 @@ in
 
   home.packages = with pkgs;
     [ wl-clipboard sway-launcher-desktop ]
-    ++ lib.optionals (machine.host == "neesama") [ desktop-mode couch-mode ];
+    ++ lib.optionals (machine.host == "vivi") [ desktop-mode couch-mode ];
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default = {
     settings = {

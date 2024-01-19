@@ -157,7 +157,7 @@ in
   # Required for wireguard
   networking.firewall.checkReversePath = false;
 
-  networking.hostName = "neesama";
+  networking.hostName = "vivi";
 
   # services.teamviewer.enable = true;
   # environment.systemPackages = with pkgs; [ teamviewer ];
@@ -196,8 +196,8 @@ in
   #   fsType = "btrfs";
   # };
 
-  fileSystems."/net/index" = {
-    device = "index:/media";
+  fileSystems."/net/roxy" = {
+    device = "roxy:/media";
     fsType = "nfs";
     noCheck = true;
     options = [

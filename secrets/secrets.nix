@@ -3,25 +3,23 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp";
   frie_sv =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXeNbEgdMSjXN7C22LuaEgj9ppT+zhvyAzYKqiCpn/6";
-  users = [ autumnal frie_sv neesama ];
+  users = [ autumnal frie_sv ];
 
-  index =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKd6aKgl2xDyW3/yoWYQa+/sFbiRxXfeXZfOY9vEwTLR";
-  index_new =
+  roxy =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC3RDWALJo/vw6XeXBQ3lvPJCiJpsReQWMq/MPAYYG0l";
   castle =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2tYyAHOAZQs2ME6B6aX5iAxxd9I7jqi1UJW/spYXZK";
-  neesama =
+  vivi =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE/y3P7h6fiwG95EHTkVFu9rNjr+2J9IIyWlIhFzMPS/";
-  systems = [ index castle ];
+  systems = [ roxy castle ];
 in
 {
-  "niketsu.age".publicKeys = [ index index_new ] ++ users;
-  "mullvad_coyote.age".publicKeys = [ index index_new ] ++ users;
-  "mullvad_well.age".publicKeys = [ index_new ] ++ users;
-  "transmission_auth.age".publicKeys = [ index index_new ] ++ users;
+  "niketsu.age".publicKeys = [ roxy ] ++ users;
+  "mullvad_coyote.age".publicKeys = [ roxy ] ++ users;
+  "mullvad_well.age".publicKeys = [ ] ++ users;
+  "transmission_auth.age".publicKeys = [ roxy ] ++ users;
   "wireguard-castle.age".publicKeys = [ castle ] ++ users;
-  "rclone-mega.age".publicKeys = [ index_new ] ++ users;
-  "ppp-1und1-secret.age".publicKeys = [ index_new ] ++ users;
-  "paperless-restic-password.age".publicKeys = [ index_new ] ++ users;
+  "rclone-mega.age".publicKeys = [ ] ++ users;
+  "ppp-1und1-secret.age".publicKeys = [ ] ++ users;
+  "paperless-restic-password.age".publicKeys = [ ] ++ users;
 }

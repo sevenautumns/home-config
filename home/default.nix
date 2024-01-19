@@ -65,7 +65,7 @@ in
   #];
 
   home.file =
-    if host == "neesama" then {
+    if host == "vivi" then {
       "GitRepos".source =
         config.lib.file.mkOutOfStoreSymlink "/media/ssddata/GitRepos";
     } else

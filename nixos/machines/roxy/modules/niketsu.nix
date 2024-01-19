@@ -2,7 +2,8 @@
 let
   system = pkgs.system;
   niketsu = inputs.niketsu.packages.${system}.niketsu-server;
-in {
+in
+{
   systemd.services.niketsu = {
     enable = true;
     wantedBy = [ "multi-user.target" ];
@@ -30,7 +31,7 @@ in {
     home = "/var/lib/niketsu";
     description = "Niketsu Service User";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@neesama"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@vivi"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXeNbEgdMSjXN7C22LuaEgj9ppT+zhvyAzYKqiCpn/6 frie_sv@ft-ssy-sfnb"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrXLTP6n3DEhDwMX/69MMenKeuEsA/k0WkmAE3DvOaN hendrikbertram@protonmail.com"
     ];

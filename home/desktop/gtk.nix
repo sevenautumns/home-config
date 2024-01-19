@@ -51,8 +51,8 @@ in
     };
     gtk3 = {
       bookmarks = [ "file:///home/${user}/GitRepos GitRepos" ]
-        ++ lib.optionals (host == "neesama")
-        [ "file:///net/index Index (NFS)" ];
+        ++ lib.optionals (host == "vivi")
+        [ "file:///net/roxy Roxy (NFS)" ];
       extraConfig = {
         gtk-application-prefer-dark-theme = 1;
         gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
