@@ -3,7 +3,8 @@
     enable = true;
     package = with pkgs;
       (pkgs.wrapMpv
-        (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; }) {
+        (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
+        {
           youtubeSupport = true;
         });
     config = {

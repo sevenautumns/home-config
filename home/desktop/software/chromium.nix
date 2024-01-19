@@ -2,7 +2,8 @@
 let
   host = machine.host;
   theme = config.theme;
-in {
+in
+{
   programs.chromium = {
     enable = true;
     package = pkgs.chromium.override {

@@ -1,8 +1,8 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [ 
+  imports = [
     # ./greetd.nix 
-    ./pipewire.nix 
-    ./virtualbox.nix 
+    ./pipewire.nix
+    ./virtualbox.nix
   ];
 
   # Required for various programs

@@ -36,17 +36,22 @@ let
     hint = red;
     primary = brown;
   };
-in {
+in
+{
   options = with lib; {
-    theme = mapAttrs (name: value:
-      mkOption {
-        type = types.str;
-        default = value;
-      }) theme;
-    theme-non_hex = mapAttrs (name: value:
-      mkOption {
-        type = types.str;
-        default = builtins.replaceStrings [ "#" ] [ "" ] value;
-      }) theme;
+    theme = mapAttrs
+      (name: value:
+        mkOption {
+          type = types.str;
+          default = value;
+        })
+      theme;
+    theme-non_hex = mapAttrs
+      (name: value:
+        mkOption {
+          type = types.str;
+          default = builtins.replaceStrings [ "#" ] [ "" ] value;
+        })
+      theme;
   };
 }

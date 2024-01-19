@@ -19,7 +19,8 @@ let
   #     lockFile = "${inputs.pop-launcher}/Cargo.lock";
   #   };
   # }));
-in {
+in
+{
   home.packages = with pkgs; [ pop-shell pop-launcher ];
 
   home.file.".local/share/pop-launcher/plugins/web/config.ron".text = ''

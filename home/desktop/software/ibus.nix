@@ -2,7 +2,8 @@
 let
   ibus = with pkgs;
     (ibus-with-plugins.override { plugins = [ ibus-engines.mozc ]; });
-in {
+in
+{
   i18n.inputMethod.package = ibus;
   home.packages = [ ibus ];
   home.sessionVariables = {
