@@ -2,7 +2,8 @@
 let
   host = machine.host;
   theme = config.theme;
-in {
+in
+{
   programs.browserpass.enable = true;
 
   programs.firefox = {

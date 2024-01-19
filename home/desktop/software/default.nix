@@ -13,7 +13,7 @@ in
 {
   imports = [
     ./alacritty.nix
-    ./beets.nix
+    # ./beets.nix
     ./chromium.nix
     ./firefox.nix
     ./fcitx.nix
@@ -72,7 +72,7 @@ in
 
       feh
       gnome-feeds
-      deploy-rs.deploy-rs
+      # deploy-rs.deploy-rs
       kcc
       gnome-network-displays
       gthumb

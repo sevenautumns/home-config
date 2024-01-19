@@ -1,7 +1,13 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, ... }:
+let
+  amdgpu-kernel-module = pkgs.callPackage ./amdgpu.nix {
+    kernel = config.boot.kernelPackages.kernel;
+  };
+in
+{
   imports = [
     ../../common.nix
-    ../../syncthing.nix
+    # ../../syncthing.nix
     ./desktop
     ./software/steam.nix
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -11,27 +17,26 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "xpad" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelPatches =
-    let
-      inherit (lib.kernel) yes;
-    in
-    [
-      {
-        name = "enable-smu13-undervolting";
-        patch = ./0001-enable-smu13-undervolting.patch;
-        extraStructuredConfig = {
-          FRAMEBUFFER_CONSOLE_DETECT_PRIMARY = yes;
-          DRM_FBDEV_EMULATION = yes;
-        };
-      }
-    ];
+  boot.extraModulePackages = [
+    (amdgpu-kernel-module.overrideAttrs (_: {
+      patches = [ ./0001-enable-smu13-undervolting.patch ];
+    }))
+  ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
+  virtualisation.docker.enable = true;
+  users.users.autumnal.extraGroups = [ "docker" ];
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
 
   systemd.services.undervolt = {
     description = "Undervolt GPU";
@@ -51,6 +56,10 @@
     '';
   };
 
+  services.zerotierone.joinNetworks = [
+    "12ac4a1e711ec1f6" # Weebwork
+  ];
+
   hardware.xpadneo.enable = true;
 
   # 8bitdo ultimate keep alive
@@ -66,6 +75,7 @@
   };
 
   xdg.portal.enable = true;
+  xdg.portal.config.common.default = "*";
   xdg.portal.wlr.enable = true;
   xdg.portal.wlr.settings = {
     screencast = {
@@ -87,7 +97,16 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+      rocm-opencl-icd
+      rocmPackages.rocm-runtime
+    ];
+  };
+
+  environment.variables = {
+    OCL_ICD_VENDORS = "${pkgs.rocm-opencl-icd}/etc/OpenCL/vendors/";
   };
 
   hardware.bluetooth = {
@@ -102,10 +121,10 @@
   };
 
   # Printing
-  services.printing.enable = true;
-  services.printing.drivers = with pkgs; [ brlaser ];
-  services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  # services.printing.enable = true;
+  # services.printing.drivers = with pkgs; [ brlaser ];
+  # services.avahi.enable = true;
+  # services.avahi.nssmdns = true;
 
   virtualisation.podman.enable = true;
 
@@ -144,10 +163,10 @@
   # environment.systemPackages = with pkgs; [ teamviewer ];
 
   ### 500GB nixos
-  fileSystems."/media/nixos_500" = {
-    device = "/dev/disk/by-uuid/dad978f1-bcf2-431a-b482-80fff36b4b74";
-    fsType = "btrfs";
-  };
+  # fileSystems."/media/nixos_500" = {
+  #   device = "/dev/disk/by-uuid/dad978f1-bcf2-431a-b482-80fff36b4b74";
+  #   fsType = "btrfs";
+  # };
 
   # fileSystems."/boot" = {
   #   device = "/dev/disk/by-uuid/F5B3-D735";
@@ -178,7 +197,7 @@
   # };
 
   fileSystems."/net/index" = {
-    device = "index:/export/media";
+    device = "index:/media";
     fsType = "nfs";
     noCheck = true;
     options = [

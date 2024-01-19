@@ -118,6 +118,7 @@ in
           tv = "Samsung Electric Company SAMSUNG 0x00000F00";
           fourthree = "AOC 172S 8416BHA012675";
           laptop = "Chimei Innolux Corporation 0x1529 Unknown";
+          uslar = "RGT 0x1352 0x00000101";
           wide = "Dell Inc. DELL U3421WE 6B17753";
         in
         {
@@ -204,6 +205,10 @@ in
               ${laptop} = {
                 mode = "1920x1080@60Hz";
                 pos = "7680 540";
+              };
+              ${uslar} = {
+                mode = "1920x1080@60Hz";
+                pos = "0 0";
               };
             };
             workspaceOutputAssign = [

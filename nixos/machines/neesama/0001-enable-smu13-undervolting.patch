@@ -1,59 +1,32 @@
-From 8ca43916275eedb5817dec4ba8a75d1dd5e7a3f1 Mon Sep 17 00:00:00 2001
+From 663b543f74efe03df2785b55292d3c19ba535e78 Mon Sep 17 00:00:00 2001
 From: Sven Friedrich <sven@autumnal.de>
-Date: Fri, 20 Oct 2023 11:32:33 +0200
+Date: Fri, 19 Jan 2024 16:23:50 +0100
 Subject: [PATCH] enable smu13 undervolting
 
 ---
- drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c | 6 +++---
- drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c | 4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
-index 3903a47669e4..c006422a32f3 100644
---- a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
-+++ b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_0_ppt.c
-@@ -341,8 +341,8 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
- 		table_context->power_play_table;
- 	struct smu_baco_context *smu_baco = &smu->smu_baco;
- 	PPTable_t *pptable = smu->smu_table.driver_pptable;
--#if 0
--	PPTable_t *pptable = smu->smu_table.driver_pptable;
-+#if 1
-+	// PPTable_t *pptable = smu->smu_table.driver_pptable;
- 	const OverDriveLimits_t * const overdrive_upperlimits =
- 				&pptable->SkuTable.OverDriveLimitsBasicMax;
- 	const OverDriveLimits_t * const overdrive_lowerlimits =
-@@ -364,7 +364,7 @@ static int smu_v13_0_0_check_powerplay_table(struct smu_context *smu)
- 	 * Disable the OD feature support for SMU13 temporarily.
- 	 * TODO: get this reverted when new OD mechanism online
- 	 */
--#if 0
-+#if 1
- 	if (!overdrive_lowerlimits->FeatureCtrlMask ||
- 	    !overdrive_upperlimits->FeatureCtrlMask)
- 		smu->od_enabled = false;
-diff --git a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c
-index 94ef5b4d116d..efc3deb1a9c8 100644
---- a/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c
-+++ b/drivers/gpu/drm/amd/pm/swsmu/smu13/smu_v13_0_7_ppt.c
-@@ -331,7 +331,7 @@ static int smu_v13_0_7_check_powerplay_table(struct smu_context *smu)
- 	struct smu_baco_context *smu_baco = &smu->smu_baco;
- 	PPTable_t *smc_pptable = table_context->driver_pptable;
- 	BoardTable_t *BoardTable = &smc_pptable->BoardTable;
--#if 0
-+#if 1
- 	const OverDriveLimits_t * const overdrive_upperlimits =
- 				&smc_pptable->SkuTable.OverDriveLimitsBasicMax;
- 	const OverDriveLimits_t * const overdrive_lowerlimits =
-@@ -348,7 +348,7 @@ static int smu_v13_0_7_check_powerplay_table(struct smu_context *smu)
- 	if (smu_baco->platform_support && (BoardTable->HsrEnabled || BoardTable->VddqOffEnabled))
- 		smu_baco->maco_support = true;
- 
--#if 0
-+#if 1
- 	if (!overdrive_lowerlimits->FeatureCtrlMask ||
- 	    !overdrive_upperlimits->FeatureCtrlMask)
- 		smu->od_enabled = false;
+diff --git a/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c b/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
+index c16703868e5c..e990c32bccae 100644
+--- a/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
++++ b/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
+@@ -701,6 +701,7 @@ static int smu_set_funcs(struct amdgpu_device *adev)
+ 	case IP_VERSION(13, 0, 0):
+ 	case IP_VERSION(13, 0, 10):
+ 		smu_v13_0_0_set_ppt_funcs(smu);
++		smu->od_enabled = true;
+ 		break;
+ 	case IP_VERSION(13, 0, 6):
+ 		smu_v13_0_6_set_ppt_funcs(smu);
+@@ -709,6 +710,7 @@ static int smu_set_funcs(struct amdgpu_device *adev)
+ 		break;
+ 	case IP_VERSION(13, 0, 7):
+ 		smu_v13_0_7_set_ppt_funcs(smu);
++		smu->od_enabled = true;
+ 		break;
+ 	case IP_VERSION(14, 0, 0):
+ 		smu_v14_0_0_set_ppt_funcs(smu);
 -- 
-2.41.0
+2.42.0
 
