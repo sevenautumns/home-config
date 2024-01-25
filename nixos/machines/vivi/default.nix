@@ -46,12 +46,7 @@ in
     unitConfig.RequiresMountsFor = "/sys";
     script = ''
       sleep 5
-      echo 'vc 0 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
-      echo 'vc 1 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
-      echo 'vc 2 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
-      echo 'vc 3 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
-      echo 'vc 4 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
-      echo 'vc 5 -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vo -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
       echo 'c' > /sys/class/drm/card0/device/pp_od_clk_voltage
     '';
   };
