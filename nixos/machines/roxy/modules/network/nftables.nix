@@ -55,10 +55,12 @@ in
               2049, # NFS
               7766, # Niketsu
               19999, # Netdata
+              8211, # Palworld
             } accept comment "Allow SSH, NFS, Samba and Netdata from ZERO_SSS"
             udp dport { 
               137, # Samba
               138, # Samba
+              8211, # Palworld
             } accept comment "Allow Samba from ZERO_SSS"
             counter drop comment "Drop everything else from ZERO_SSS"
           }

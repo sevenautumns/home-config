@@ -29,6 +29,18 @@
       #   extraOptions = [ "--network=host" ];
       #   ports = [ "1000:1000" ];
       # };
+      palworld = {
+        image = "jammsen/palworld-dedicated-server:latest";
+        volumes = [ "/var/lib/palworld:/config" ];
+        environment = {
+          TZ = "Europe/Berlin";
+          PUID = "1000";
+          PGID = "1000";
+        };
+        ports = [
+          "8211:8211"
+        ];
+      };
       # unifi = {
       #   image = "lscr.io/linuxserver/unifi-network-application:latest";
       #   volumes = [ "/var/lib/unifi:/config" ];
