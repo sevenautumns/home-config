@@ -10,6 +10,7 @@
       theme = "autumn";
       editor = {
         true-color = true;
+        lsp.display-messages = true;
         idle-timeout = 0;
         cursor-shape = {
           insert = "bar";
@@ -96,6 +97,28 @@
           };
         };
         nixd.command = "nixd";
+      };
+      debugger = {
+        command = "${pkgs.lldb}/bin/lldb-vscode";
+        name = "lldb-vscode";
+        port-arg = "--port {}";
+        transport = "tcp";
+        templates = [
+          {
+            name = "binary";
+            request = "launch";
+            completion = [
+              {
+                completion = "filename";
+                name = "binary";
+              }
+            ];
+            args = {
+              program = "{0}";
+              runInTerminal = true;
+            };
+          }
+        ];
       };
     };
   };
