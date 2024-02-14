@@ -18,14 +18,7 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  # xdg.configFile."test".text = "${inputs.homeManager.packages.${machine.arch}.docs-html}";
   xdg.enable = true;
-
-  # scheme = (config.lib.base16.mkSchemeAttrs {
-
-  # });
-
-  #TODO use hinted roboto
 
   home.packages = [
     #pkgs.alacritty

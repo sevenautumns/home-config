@@ -1,6 +1,5 @@
 { config, lib, pkgs, modulesPath, inputs, ... }: {
   imports = [
-    # ./modules/adguard.nix
     # ./modules/docker.nix
     ./modules/network
     ./modules/plex.nix
@@ -11,9 +10,7 @@
     ./modules/torrent.nix
     ./modules/niketsu.nix
     ./modules/restic.nix
-    # ./modules/jellyfin.nix
     ../../common.nix
-    # ../../syncthing.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 

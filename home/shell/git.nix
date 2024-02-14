@@ -1,5 +1,4 @@
 { pkgs, config, ... }: {
-  # TODO Use more professional email/name ?
   programs.git = {
     enable = true;
     userName = "Sven Friedrich";

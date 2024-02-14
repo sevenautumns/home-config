@@ -5,7 +5,6 @@
     ./audio
     ./wm
 
-    ./mime.nix
     ./font.nix
     ./gtk.nix
   ];

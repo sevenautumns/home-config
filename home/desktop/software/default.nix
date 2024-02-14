@@ -2,38 +2,20 @@
 let
   host = machine.host;
   arch = machine.arch;
-  #naersk = pkgs.callPackage inputs.naersk {};
-  #rdf = naersk.buildPackage inputs.rdf;
-  # hm-options = pkgs.writeShellScriptBin "hm-options" ''
-  #   xdg-open ${
-  #     inputs.homeManager.packages.${machine.arch}.docs-html
-  #   }/share/doc/home-manager/options.html $@
-  # '';
 in
 {
   imports = [
     ./alacritty.nix
-    # ./beets.nix
     ./chromium.nix
     ./firefox.nix
     ./fcitx.nix
-    # ./ibus.nix
-    ./warpd.nix
     ./kitty.nix
     ./mpv.nix
     ./lutris.nix
-    #./redshift.nix
     ./rust.nix
     ./screenaudio.nix
     ./vscode.nix
   ];
-
-  #services.sxhkd.keybindings = with pkgs; {
-  #  "super + w" = "firefox";
-  #  "super + shift + w" = "brave";
-  #  "super + shift + Return" =
-  #    "${pkgs.gnome.nautilus}/bin/nautilus --new-window";
-  #};
 
   nixpkgs.config.packageOverrides = super: {
     kcc = (pkgs.stable.kcc.overrideAttrs (old: {
@@ -72,11 +54,9 @@ in
 
       feh
       gnome-feeds
-      # deploy-rs.deploy-rs
       kcc
       gnome-network-displays
       gthumb
-      # hm-options
       calibre
 
       gamescope
@@ -84,34 +64,16 @@ in
       nss.tools
 
       libgourou
-
-      hakuneko
-      (makeDesktopItem {
-        name = "hakuneko-desktop-no-sandbox";
-        desktopName = "HakuNeko Desktop No-Sandbox";
-        exec = "hakuneko --no-sandbox";
-        type = "Application";
-        icon = "hakuneko-desktop";
-      })
     ] ++ lib.optionals (machine.nixos) [
       discord
       discord-canary
       tdesktop
       element-desktop
       spotify
-    ] ++ lib.optionals (host == "vivi") [
-      # inputs.knock.packages.x86_64-linux.knock
     ];
 
-  # xsession.numlock.enable = true;
-  services.network-manager-applet.enable = true;
-  # services.blueman-applet.enable = true;
+  services.network-manager-applet.enable = !builtins.elem host [ "ft-ssy-avil-w2" ];
   dconf.settings."org/blueman/general" = {
     plugin-list = [ "!ConnectionNotifier" ];
   };
-
-  # services.sxhkd.enable = true;
-
-  #services.syncthing.enable = true;
-  #services.syncthing.tray.enable = true;
 }

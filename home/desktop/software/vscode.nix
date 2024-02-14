@@ -38,28 +38,6 @@
       #Neovim integration
       vscode-neovim.neovimExecutablePaths.linux =
         "${config.programs.neovim.finalPackage}/bin/nvim";
-
-      # Language
-      # languageToolLinter.serviceType = "external";
-      # languageToolLinter.external.url ="http://localhost:9510";
-      # languageToolLinter.languageTool.language = "en-GB";
-      # languageToolLinter.lintOnChange = true;
     };
   };
-
-  # systemd.user.services."languagetool-http-server" = {
-  #   Unit = {
-  #     Description = "Languagetool HTTP server";
-  #     PartOf = [ "graphical-session-pre.target" ];
-  #     After = [ "graphical-session.target" ];
-  #   };
-
-  #   Service = {
-  #     Type = "simple";
-  #     ExecStart = "${pkgs.languagetool}/bin/languagetool-http-server org.languagetool.server.HTTPServer --port 9510 --allow-origin '*'";
-  #     Restart = "always";
-  #   };
-
-  #   Install = { WantedBy = [ "graphical-session.target" ]; };
-  # };
 }

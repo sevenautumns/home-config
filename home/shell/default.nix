@@ -3,11 +3,9 @@
     ./colors.nix
     ./git.nix
     ./gpg
-    ./mail
     ./helix.nix
     ./fish.nix
     ./starship.nix
-    ./posh.nix
     ./neovim.nix
     ./nu.nix
     ./keyboard.nix
@@ -43,17 +41,6 @@
       [ "--preview='${pkgs.eza}/bin/eza --tree {} | head -200'" ];
     historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
   };
-
-  # programs.atuin = {
-  #   enable = true;
-  #   package = pkgs.unstable.atuin;
-  #   enableFishIntegration = true;
-  #   settings = {
-  #     auto_sync = false;
-  #     search_mode = "fuzzy";
-  #     dialect = "uk";
-  #   };
-  # };
 
   programs.password-store = {
     enable = true;

@@ -7,7 +7,6 @@ in
 {
   imports = [
     ../../common.nix
-    # ../../syncthing.nix
     ./desktop
     ./software/steam.nix
     (modulesPath + "/installer/scan/not-detected.nix")

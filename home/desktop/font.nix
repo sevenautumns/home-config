@@ -16,19 +16,11 @@ in
     font-awesome
     unstable.symbola
     roboto
-    #siji
-    # dina-font
     twitter-color-emoji
     comic-mono
     uw-ttyp0
     monoid
-    # mplus-outline-fonts.osdnRelease
-    # mplus-bitmap
-    # cozette
-    # jisx0213
-    # efont
     profont
-    # mplus-outline-fonts.githubRelease
   ];
 
   #fonts
