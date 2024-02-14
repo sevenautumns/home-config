@@ -2,7 +2,6 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable-05.url = "github:nixos/nixpkgs/nixos-22.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
@@ -14,28 +13,20 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    home-manager = {
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager-main = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      # inputs.utils.follows = "flake-utils";
     };
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
-    # gobot.url = "github:c0nvulsiv3/gobot";
-    # gobot.flake = false;
-
-    # herbstluftwm.url = "github:herbstluftwm/herbstluftwm";
-    # herbstluftwm.flake = false;
-    # hyprland.url = "github:hyprwm/Hyprland/2df0d034bc4a18fafb3524401eeeceaa6b23e753";
-
-    # pop-shell.url = "github:pop-os/shell";
-    # pop-shell.flake = false;
-    # pop-launcher.url = "github:pop-os/launcher";
-    # pop-launcher.flake = false;
 
     niketsu.url = "github:sevenautumns/niketsu";
     # niketsu.url = "github:sevenautumns/niketsu/server/cache";
@@ -44,12 +35,6 @@
       url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
       flake = false;
     };
-    # herbst3 = {
-    #   url = "github:sevenautumns/herbst3";
-    #   inputs.herbstluftwm.follows = "herbstluftwm";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #   inputs.utils.follows = "flake-utils";
-    # };
 
     helix = {
       url = "github:helix-editor/helix";
@@ -77,9 +62,11 @@
 
   outputs =
     { self
-    , home-manager
+    , home-manager-stable
+    , home-manager-main
     , nur
     , deploy-rs
+    , nixpkgs
     , nixpkgs-unstable
     , nixpkgs-stable
     , agenix
@@ -93,6 +80,8 @@
           arch = "x86_64-linux";
           headless = false;
           nixos = true;
+          nixpkgs = nixpkgs-unstable;
+          home-manager = home-manager-main;
           managed-nixos = true;
         };
         "ft-ssy-sfnb" = {
@@ -100,6 +89,8 @@
           arch = "x86_64-linux";
           headless = false;
           nixos = true;
+          nixpkgs = nixpkgs;
+          home-manager = home-manager-stable;
           managed-nixos = false;
         };
         "ft-ssy-avil-w2" = {
@@ -107,6 +98,8 @@
           arch = "x86_64-linux";
           headless = false;
           nixos = true;
+          nixpkgs = nixpkgs;
+          home-manager = home-manager-stable;
           managed-nixos = false;
         };
         "ft-ssy-stonks" = {
@@ -114,6 +107,8 @@
           arch = "x86_64-linux";
           headless = true;
           nixos = true;
+          nixpkgs = nixpkgs;
+          home-manager = home-manager-stable;
           managed-nixos = false;
         };
         "roxy" = {
@@ -122,16 +117,18 @@
           arch = "x86_64-linux";
           headless = true;
           nixos = true;
+          nixpkgs = nixpkgs-unstable;
+          home-manager = home-manager-main;
           managed-nixos = true;
         };
         "castle" = {
           user = "autumnal";
-          #address = "10.2.0.0";
-          # address = "192.168.2.250";
           address = "192.168.178.64";
           arch = "aarch64-linux";
           headless = true;
           nixos = true;
+          nixpkgs = nixpkgs-unstable;
+          home-manager = home-manager-main;
           managed-nixos = true;
         };
       };
@@ -141,8 +138,8 @@
         (host: pre_machine:
           let machine = pre_machine // { inherit host; };
           in lib.attrsets.nameValuePair (machine.user + "@" + host)
-            (home-manager.lib.homeManagerConfiguration {
-              pkgs = import nixpkgs-unstable {
+            (machine.home-manager.lib.homeManagerConfiguration {
+              pkgs = import machine.nixpkgs {
                 system = machine.arch;
                 overlays = [
                   deploy-rs.overlay
@@ -171,7 +168,7 @@
 
       nixosConfigurations = lib.mapAttrs
         (host: machine:
-          lib.nixosSystem rec {
+          machine.nixpkgs.lib.nixosSystem rec {
             system = machine.arch;
             modules = [
               {
@@ -192,9 +189,6 @@
           })
         (lib.filterAttrs (h: m: m.managed-nixos) machines);
 
-      # https://github.com/LEXUGE/flake nixosModule example
-      # nixosModules.test = let pkgs = nixpkgs-stable; in (import ./modules/desktop/audio {inherit pkgs lib home-manager; });
-
       # Overlay for always having stable and unstable accessible
       overlays.matryoshka-pkgs = final: prev: {
         unstable = import "${inputs.nixpkgs-unstable}" {
@@ -205,16 +199,9 @@
           system = prev.system;
           config.allowUnfree = true;
         };
-        stable-05 = import "${inputs.nixpkgs-stable-05}" {
-          system = prev.system;
-          config.allowUnfree = true;
-        };
       };
 
       nixosModules.transmission = import modules/transmission.nix;
-      # nixosModules.gobot = let gobot = inputs.gobot;
-      # in import modules/gobot.nix;
-      # nixosModules.lavalink = import modules/lavalink.nix;
       nixosModules.flood = import modules/flood.nix;
 
       deploy.nodes = lib.mapAttrs
