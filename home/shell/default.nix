@@ -8,7 +8,6 @@
     ./starship.nix
     ./neovim.nix
     ./nu.nix
-    ./keyboard.nix
     ./zsh.nix
   ];
   home.packages = with pkgs; [

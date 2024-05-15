@@ -73,10 +73,10 @@
         }
         {
           name = "markdown";
-          language-servers = [ "ltex" ];
-          file-types = [ "md" ];
-          scope = "source.markdown";
-          roots = [ ];
+          language-servers = [ "ltex" "zk" ];
+          file-types = [ "md" "markdown" ];
+          scope = "source.md";
+          roots = [ ".zk" ".git" ];
         }
       ];
       language-server = {
@@ -95,6 +95,10 @@
             language = "en-GB";
             latex.commands = { "\\\\lstinline{}" = "dummy"; };
           };
+        };
+        zk = {
+          command = "zk";
+          args = [ "lsp" ];
         };
         nixd.command = "nixd";
       };
@@ -148,6 +152,7 @@
     texlab # LaTeX
     gopls # Go
     rnix-lsp # Nix
+    zk # Zettelkasten
     # rust-analyzer # Rust
     sumneko-lua-language-server # Lua
     nodePackages.vim-language-server # Vim
