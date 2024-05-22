@@ -151,13 +151,13 @@
     cmake-language-server # Cmake
     texlab # LaTeX
     gopls # Go
-    rnix-lsp # Nix
+    # rnix-lsp # Nix
     zk # Zettelkasten
     # rust-analyzer # Rust
     sumneko-lua-language-server # Lua
     nodePackages.vim-language-server # Vim
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
-    (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
+    nixd # (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
   ];
 }

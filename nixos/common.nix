@@ -26,6 +26,7 @@
   # enable zerotier virtual switch
   services.zerotierone = {
     enable = true;
+    package = pkgs.stable.zerotierone;
     # package = pkgs.zerotierone.overrideAttrs (orig: {
     #   buildInputs = orig.buildInputs ++ [ pkgs.miniupnpc pkgs.libnatpmp ];
     # });

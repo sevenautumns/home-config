@@ -1,28 +1,32 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }: {
+{ config, lib, pkgs, modulesPath, inputs, ... }:
+let
+  overlay = final: super: {
+    makeModulesClosure = x:
+      super.makeModulesClosure (x // { allowMissing = true; });
+  };
+in
+{
+  nixpkgs.overlays = [ overlay ];
   imports = [
-    # ./modules/adguard.nix
-    ./modules/docker.nix
-    ./modules/wireguard.nix
     ../../common.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
-
   # NixOS wants to enable GRUB by default
   boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_rpi3;
-  boot.initrd.includeDefaultModules = false;
-  boot.initrd.availableKernelModules = [ "usbhid" ];
-  hardware.enableRedistributableFirmware = true;
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
+  boot.initrd.availableKernelModules = [ "usbhid" "usb_storage" "vc4" ];
+
+  environment.systemPackages = with pkgs; [ libraspberrypi ];
 
   networking = {
-    hostName = "castle";
-    # interfaces.eth0.ipv4.addresses = [{
-    # address = "192.168.2.250";
-    # prefixLength = 24;
-    # }];
-    # defaultGateway = "192.168.2.1";
+    hostName = "ika";
+    interfaces.eth0.ipv4.addresses = [{
+      address = "192.168.178.12";
+      prefixLength = 24;
+    }];
+    # defaultGateway = "192.168.178.2";
     nameservers = [ "1.1.1.1" ];
     enableIPv6 = true;
   };
@@ -38,5 +42,5 @@
 
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "24.05";
 }

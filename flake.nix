@@ -121,7 +121,7 @@
           home-manager = home-manager-main;
           managed-nixos = true;
         };
-        "castle" = {
+        "ika" = {
           user = "autumnal";
           address = "192.168.178.64";
           arch = "aarch64-linux";

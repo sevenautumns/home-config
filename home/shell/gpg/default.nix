@@ -12,7 +12,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = false;
-    pinentryFlavor = "gnome3";
+    pinentryPackage = pkgs.pinentry-gnome3;
     grabKeyboardAndMouse = false;
   };
 }

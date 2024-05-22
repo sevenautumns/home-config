@@ -115,7 +115,8 @@ in
           wide-tuf = "ASUSTek COMPUTER INC ASUS VG34V R6LMTF119386";
           # tuf = "ASUSTek COMPUTER INC VG279QM L9LMQS257534";
           # fourk = "Samsung Electric Company U28E590 HTPH204116";
-          tv = "Samsung Electric Company SAMSUNG 0x00000F00";
+          # tv = "Samsung Electric Company SAMSUNG 0x00000F00";
+          tv = "Samsung Electric Company SAMSUNG 0x01000E00";
           fourthree = "AOC 172S 8416BHA012675";
           laptop = "Chimei Innolux Corporation 0x1529 Unknown";
           uslar = "RGT 0x1352 0x00000101";
@@ -188,6 +189,7 @@ in
               "*".bg = "~/Pictures/Wallpaper/Autumn.png fill";
               ${tv} = {
                 mode = "3840x2160@120Hz";
+                # scale = "2";
                 pos = "0 0";
               };
               ${fourthree} = {

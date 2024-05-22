@@ -124,29 +124,29 @@ in
 
   services.blueman.enable = true;
 
-  environment.etc.u2f_keys = {
-    text = "autumnal:*,o65pPMQU2m31y+DIpa5nPQ/Xc5CXwiSq98n8lIFQzTM=,eddsa,";
-    mode = "0644";
-  };
+  # environment.etc.u2f_keys = {
+  #   text = "autumnal:*,o65pPMQU2m31y+DIpa5nPQ/Xc5CXwiSq98n8lIFQzTM=,eddsa,";
+  #   mode = "0644";
+  # };
   # services.pcscd.enable = true;
-  security.pam = {
-    u2f = {
-      enable = true;
-      cue = true;
-      # Utilize appId key for injecting pin requirement
-      # appId = "pam://$HOSTNAME pinverification=1 userpresence=0";
-      appId = "pam://$HOSTNAME";
-      authFile = "/etc/u2f_keys";
-    };
-    services = {
-      login.u2fAuth = true;
-      sudo.u2fAuth = true;
-      i3lock.u2fAuth = true;
-      i3lock-color.u2fAuth = true;
-      swaylock.u2fAuth = true;
-      greetd.u2fAuth = true;
-    };
-  };
+  # security.pam = {
+  #   u2f = {
+  #     enable = true;
+  #     cue = true;
+  #     # Utilize appId key for injecting pin requirement
+  #     # appId = "pam://$HOSTNAME pinverification=1 userpresence=0";
+  #     appId = "pam://$HOSTNAME";
+  #     # authFile = "/etc/u2f_keys";
+  #   };
+  #   # services = {
+  #   #   login.u2fAuth = true;
+  #   #   sudo.u2fAuth = true;
+  #   #   i3lock.u2fAuth = true;
+  #   #   i3lock-color.u2fAuth = true;
+  #   #   swaylock.u2fAuth = true;
+  #   #   greetd.u2fAuth = true;
+  #   # };
+  # };
 
   # Required for wireguard
   networking.firewall.checkReversePath = false;
