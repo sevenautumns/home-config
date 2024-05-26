@@ -45,7 +45,6 @@ in
 
       #misc
       arandr
-      monero-cli
       nvtop-amd
 
       # https://github.com/NixOS/nixpkgs/pull/195985

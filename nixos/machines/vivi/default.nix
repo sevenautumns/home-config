@@ -13,6 +13,7 @@ in
   ];
 
   boot.loader.systemd-boot.enable = true;
+
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -45,8 +46,8 @@ in
     unitConfig.RequiresMountsFor = "/sys";
     script = ''
       sleep 5
-      echo 'vo -90' > /sys/class/drm/card0/device/pp_od_clk_voltage
-      echo 'c' > /sys/class/drm/card0/device/pp_od_clk_voltage
+      echo 'vo -80' > /sys/class/drm/card1/device/pp_od_clk_voltage
+      echo 'c' > /sys/class/drm/card1/device/pp_od_clk_voltage
     '';
   };
 
@@ -81,10 +82,10 @@ in
   };
 
   # services.fwupd.enable = true;
-  # programs.corectrl = {
-  #   enable = true;
-  #   gpuOverclock.enable = true;
-  # };
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.enable = true;
+  };
 
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.driSupport = true;

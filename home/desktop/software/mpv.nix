@@ -2,8 +2,9 @@
   programs.mpv = {
     enable = true;
     package = with pkgs;
-      (pkgs.wrapMpv
-        (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
+      (pkgs.unstable.wrapMpv
+        # (pkgs.unstable.mpv-unwrapped.override { vapoursynthSupport = true; })
+        pkgs.unstable.mpv-unwrapped
         {
           youtubeSupport = true;
         });

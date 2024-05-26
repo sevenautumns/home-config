@@ -158,6 +158,6 @@
     nodePackages.vim-language-server # Vim
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
-    nixd # (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
+    unstable.nixd # (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
   ];
 }

@@ -186,7 +186,7 @@ in
               };
             };
             output = {
-              "*".bg = "~/Pictures/Wallpaper/Autumn.png fill";
+              "*".bg = "${../Autumn.png} fill";
               ${tv} = {
                 mode = "3840x2160@120Hz";
                 # scale = "2";

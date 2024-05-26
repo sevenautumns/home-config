@@ -8,38 +8,30 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-stable = {
-      url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager-system.url = "github:nix-community/home-manager/release-23.11";
+    home-manager-system.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager-main = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    home-manager-unstable.url = "github:nix-community/home-manager";
+    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
+    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     niketsu.url = "github:sevenautumns/niketsu";
     # niketsu.url = "github:sevenautumns/niketsu/server/cache";
+    niketsu.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    screenaudio = {
-      url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
-      flake = false;
-    };
+    screenaudio.url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
+    screenaudio.flake = false;
 
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    helix.url = "github:helix-editor/helix";
+    helix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     nixd.url = "github:nix-community/nixd";
 
@@ -62,8 +54,9 @@
 
   outputs =
     { self
+    , home-manager-system
     , home-manager-stable
-    , home-manager-main
+    , home-manager-unstable
     , nur
     , deploy-rs
     , nixpkgs
@@ -73,7 +66,7 @@
     , ...
     }@inputs:
     let
-      lib = nixpkgs-unstable.lib;
+      lib = nixpkgs-stable.lib;
       machines = {
         "vivi" = {
           user = "autumnal";
@@ -81,7 +74,7 @@
           headless = false;
           nixos = true;
           nixpkgs = nixpkgs-unstable;
-          home-manager = home-manager-main;
+          home-manager = home-manager-unstable;
           managed-nixos = true;
         };
         "ft-ssy-sfnb" = {
@@ -90,7 +83,7 @@
           headless = false;
           nixos = true;
           nixpkgs = nixpkgs;
-          home-manager = home-manager-stable;
+          home-manager = home-manager-system;
           managed-nixos = false;
         };
         "ft-ssy-avil-w2" = {
@@ -99,7 +92,7 @@
           headless = false;
           nixos = true;
           nixpkgs = nixpkgs;
-          home-manager = home-manager-stable;
+          home-manager = home-manager-system;
           managed-nixos = false;
         };
         "ft-ssy-stonks" = {
@@ -108,7 +101,7 @@
           headless = true;
           nixos = true;
           nixpkgs = nixpkgs;
-          home-manager = home-manager-stable;
+          home-manager = home-manager-system;
           managed-nixos = false;
         };
         "roxy" = {
@@ -117,8 +110,8 @@
           arch = "x86_64-linux";
           headless = true;
           nixos = true;
-          nixpkgs = nixpkgs-unstable;
-          home-manager = home-manager-main;
+          nixpkgs = nixpkgs-stable;
+          home-manager = home-manager-stable;
           managed-nixos = true;
         };
         "ika" = {
@@ -127,8 +120,8 @@
           arch = "aarch64-linux";
           headless = true;
           nixos = true;
-          nixpkgs = nixpkgs-unstable;
-          home-manager = home-manager-main;
+          nixpkgs = nixpkgs-stable;
+          home-manager = home-manager-stable;
           managed-nixos = true;
         };
       };

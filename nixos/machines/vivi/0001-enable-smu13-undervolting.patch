@@ -1,4 +1,4 @@
-From c318262fbac11fcd69bf94427c355144b32aebdf Mon Sep 17 00:00:00 2001
+From c89c6e1145c4e4dd6c9da36d5ce342bb22895a6c Mon Sep 17 00:00:00 2001
 From: Sven Friedrich <sven@autumnal.de>
 Date: Fri, 19 Jan 2024 16:23:50 +0100
 Subject: [PATCH] enable smu13 undervolting
@@ -8,10 +8,10 @@ Subject: [PATCH] enable smu13 undervolting
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c b/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
-index 7ffad3eb0a01..7a0a019f319f 100644
+index 7789b313285c..d67870f69f32 100644
 --- a/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
 +++ b/drivers/gpu/drm/amd/pm/swsmu/amdgpu_smu.c
-@@ -702,6 +702,7 @@ static int smu_set_funcs(struct amdgpu_device *adev)
+@@ -703,6 +703,7 @@ static int smu_set_funcs(struct amdgpu_device *adev)
  	case IP_VERSION(13, 0, 0):
  	case IP_VERSION(13, 0, 10):
  		smu_v13_0_0_set_ppt_funcs(smu);
@@ -19,14 +19,14 @@ index 7ffad3eb0a01..7a0a019f319f 100644
  		break;
  	case IP_VERSION(13, 0, 6):
  		smu_v13_0_6_set_ppt_funcs(smu);
-@@ -710,6 +711,7 @@ static int smu_set_funcs(struct amdgpu_device *adev)
+@@ -711,6 +712,7 @@ static int smu_set_funcs(struct amdgpu_device *adev)
  		break;
  	case IP_VERSION(13, 0, 7):
  		smu_v13_0_7_set_ppt_funcs(smu);
 +		smu->od_enabled = true;
  		break;
  	case IP_VERSION(14, 0, 0):
- 		smu_v14_0_0_set_ppt_funcs(smu);
+ 	case IP_VERSION(14, 0, 1):
 -- 
-2.43.0
+2.43.2
 
