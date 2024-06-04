@@ -31,21 +31,14 @@
     niketsu.url = "github:sevenautumns/niketsu";
     # niketsu.url = "github:sevenautumns/niketsu/server/cache";
 
-    screenaudio = {
-      url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
-      flake = false;
-    };
-
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # screenaudio = {
+    #   url = "git+https://github.com/maltejur/discord-screenaudio?submodules=1";
+    #   flake = false;
+    # };
 
     nixd.url = "github:nix-community/nixd";
 
     # Home manager used repos
-    cmus-notify.url = "github:dcx86r/cmus-notify";
-    cmus-notify.flake = false;
     fcitx5-adwaita.url = "github:escape0707/fcitx5-adwaita-dark";
     fcitx5-adwaita.flake = false;
 
@@ -79,10 +72,10 @@
           user = "autumnal";
           arch = "x86_64-linux";
           headless = false;
-          nixos = true;
+          nixos = false;
           nixpkgs = nixpkgs-unstable;
           home-manager = home-manager-main;
-          managed-nixos = true;
+          managed-nixos = false;
         };
         "ft-ssy-sfnb" = {
           user = "frie_sv";

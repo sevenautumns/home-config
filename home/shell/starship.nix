@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }:
+let inherit (lib.meta) getExe getExe'; in {
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
@@ -48,10 +49,10 @@
       # Print packages of shell if we are in nix-shell
       custom.nix-shell-info = {
         command =
-          "${pkgs.any-nix-shell}/bin/nix-shell-info | sed 's/x1B[[0-9;]{1,}[A-Za-z]//g'";
-        when = "test 0 -ne $(${pkgs.any-nix-shell}/bin/nix-shell-info | wc -w)";
+          "${getExe' pkgs.any-nix-shell "nix-shell-info"} | sed 's/x1B[[0-9;]{1,}[A-Za-z]//g'";
+        when = "test 0 -ne $(${getExe' pkgs.any-nix-shell "nix-shell-info"} | wc -w)";
         format = "with \\[[$output]($style)\\] ";
-        shell = [ "${pkgs.bash}/bin/bash" ];
+        shell = [ "${getExe pkgs.bash}" ];
       };
     };
   };

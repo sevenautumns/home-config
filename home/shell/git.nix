@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }:
+let
+  inherit (lib.meta) getExe;
+in
+{
   programs.git = {
     enable = true;
     userName = "Sven Friedrich";
@@ -11,7 +15,7 @@
     extraConfig = {
       commit.gpgsign = true;
       core.editor = config.home.sessionVariables.EDITOR;
-      core.pager = "${pkgs.delta}/bin/delta";
+      core.pager = "${getExe pkgs.delta}";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };

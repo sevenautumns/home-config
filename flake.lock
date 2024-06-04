@@ -39,43 +39,6 @@
         "type": "github"
       }
     },
-    "cmus-notify": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1612135493,
-        "narHash": "sha256-D0kt7ZJJmFceJC2Gp/MLRzIcwfWfr0FVSBbNOmsofOo=",
-        "owner": "dcx86r",
-        "repo": "cmus-notify",
-        "rev": "e6c34df22d0eba52e60bddcfda9b3f2f8233eb3c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dcx86r",
-        "repo": "cmus-notify",
-        "type": "github"
-      }
-    },
-    "crane": {
-      "inputs": {
-        "nixpkgs": [
-          "helix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1701025348,
-        "narHash": "sha256-42GHmYH+GF7VjwGSt+fVT1CQuNpGanJbNgVHTAZppUM=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "42afaeb1a0325194a7cdb526332d2cb92fddd07b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -122,7 +85,7 @@
     },
     "devshell": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
@@ -231,24 +194,6 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1694529238,
-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
-      "inputs": {
-        "systems": "systems_5"
-      },
-      "locked": {
         "lastModified": 1701680307,
         "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
         "owner": "numtide",
@@ -275,29 +220,6 @@
       "original": {
         "owner": "ZeroQI",
         "repo": "Hama.bundle",
-        "type": "github"
-      }
-    },
-    "helix": {
-      "inputs": {
-        "crane": "crane",
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1707200000,
-        "narHash": "sha256-ojPAbAZCkz/eZVVp0h0BdHCVgiYxiJKGxzG0aJnm/Xg=",
-        "owner": "helix-editor",
-        "repo": "helix",
-        "rev": "1d87c6a999d389011cf8a5849a6096d981c93e33",
-        "type": "github"
-      },
-      "original": {
-        "owner": "helix-editor",
-        "repo": "helix",
         "type": "github"
       }
     },
@@ -599,12 +521,10 @@
       "inputs": {
         "absolut-series-scanner": "absolut-series-scanner",
         "agenix": "agenix",
-        "cmus-notify": "cmus-notify",
         "deploy-rs": "deploy-rs",
         "fcitx5-adwaita": "fcitx5-adwaita",
         "flake-utils": "flake-utils",
         "hama-bundle": "hama-bundle",
-        "helix": "helix",
         "home-manager-main": "home-manager-main",
         "home-manager-stable": "home-manager-stable",
         "myanimelist-bundle": "myanimelist-bundle",
@@ -614,7 +534,6 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "screenaudio": "screenaudio",
         "services-bundle": "services-bundle"
       }
     },
@@ -633,49 +552,6 @@
         "ref": "nightly",
         "repo": "rust-analyzer",
         "type": "github"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "flake-utils": [
-          "helix",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "helix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1701137803,
-        "narHash": "sha256-0LcPAdql5IhQSUXJx3Zna0dYTgdIoYO7zUrsKgiBd04=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "9dd940c967502f844eacea52a61e9596268d4f70",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "screenaudio": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1698432393,
-        "narHash": "sha256-pD3NtDRqpi3too7jKGvno9QkYN6pSbP/hycRqS2SwaE=",
-        "ref": "refs/heads/master",
-        "rev": "3f3f17949d13f479c2f21573d5471b5ecf33c633",
-        "revCount": 178,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/maltejur/discord-screenaudio"
-      },
-      "original": {
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/maltejur/discord-screenaudio"
       }
     },
     "services-bundle": {
@@ -769,21 +645,6 @@
         "type": "github"
       }
     },
-    "systems_6": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "utils": {
       "inputs": {
         "systems": "systems_2"
@@ -804,7 +665,7 @@
     },
     "utils_2": {
       "inputs": {
-        "systems": "systems_6"
+        "systems": "systems_5"
       },
       "locked": {
         "lastModified": 1705309234,

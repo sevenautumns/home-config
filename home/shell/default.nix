@@ -1,4 +1,5 @@
-{ pkgs, lib, config, machine, ... }: {
+{ pkgs, lib, config, machine, ... }:
+let inherit (lib.meta) getExe; in {
   imports = [
     ./colors.nix
     ./git.nix
@@ -33,11 +34,11 @@
   programs.skim = {
     enable = true;
     enableFishIntegration = true;
-    fileWidgetCommand = "${pkgs.fd}/bin/fd -E /net --hidden --type f";
-    fileWidgetOptions = [ "--preview='${pkgs.bat}/bin/bat {} --color=always'" ];
-    changeDirWidgetCommand = "${pkgs.fd}/bin/fd -E /net --hidden --type d";
+    fileWidgetCommand = "${getExe pkgs.fd} -E /net --hidden --type f";
+    fileWidgetOptions = [ "--preview='${getExe pkgs.bat} {} --color=always'" ];
+    changeDirWidgetCommand = "${getExe pkgs.fd} -E /net --hidden --type d";
     changeDirWidgetOptions =
-      [ "--preview='${pkgs.eza}/bin/eza --tree {} | head -200'" ];
+      [ "--preview='${getExe pkgs.eza} --tree {} | head -200'" ];
     historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
   };
 

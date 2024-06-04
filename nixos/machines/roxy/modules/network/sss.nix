@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }: {
-
+{ config, lib, pkgs, ... }:
+let inherit (lib.meta) getExe'; in {
   services.zerotierone.joinNetworks = [
     "12ac4a1e711ec1f6"
   ];
@@ -50,7 +50,7 @@
           #!${pkgs.runtimeShell}
           if [ $IFACE = "ztbtovjx4h" ]; then
             # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
-            ${pkgs.iproute2}/bin/tc filter add dev ztbtovjx4h parent ffff: matchall action mirred egress redirect dev ifbztbtovjx4h
+            ${getExe' pkgs.iproute2 "tc"} filter add dev ztbtovjx4h parent ffff: matchall action mirred egress redirect dev ifbztbtovjx4h
           fi
         '';
       };

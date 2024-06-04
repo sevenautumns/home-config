@@ -9,11 +9,10 @@ in
     ./chromium.nix
     ./firefox.nix
     ./fcitx.nix
-    ./kitty.nix
+    # ./kitty.nix
     ./mpv.nix
-    ./lutris.nix
     ./rust.nix
-    ./screenaudio.nix
+    # ./screenaudio.nix
     ./vscode.nix
   ];
 
@@ -28,47 +27,38 @@ in
   };
 
   home.packages = with pkgs;
-    [
+    lib.optionals (machine.nixos) [
       #office  
       libreoffice
+      okular
+
+      #com
       thunderbird
       mattermost-desktop
-      okular
+      discord
+      discord-canary
+      tdesktop
+      element-desktop
 
       #image
       gnome.eog
       inkscape
       gimp
-
-      #dev
-      nixfmt
+      feh
+      gthumb
 
       #misc
-      arandr
-      monero-cli
       nvtop-amd
 
       # https://github.com/NixOS/nixpkgs/pull/195985
       # gtk4 problem, use stable until fixed
       stable.gnome.nautilus
 
-      feh
-      gnome-feeds
       kcc
-      gnome-network-displays
-      gthumb
       calibre
 
       gamescope
-      nss
-      nss.tools
 
-      libgourou
-    ] ++ lib.optionals (machine.nixos) [
-      discord
-      discord-canary
-      tdesktop
-      element-desktop
       spotify
     ];
 

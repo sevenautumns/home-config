@@ -1,12 +1,16 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, machine, inputs, ... }:
+let
+  mpv-package = with pkgs;
+    (pkgs.wrapMpv
+      (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
+      {
+        youtubeSupport = true;
+      });
+in
+{
   programs.mpv = {
     enable = true;
-    package = with pkgs;
-      (pkgs.wrapMpv
-        (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
-        {
-          youtubeSupport = true;
-        });
+    package = with pkgs; if machine.nixos then mpv-package else hello;
     config = {
       no-keepaspect-window = "";
       #vo = "gpu";

@@ -1,7 +1,8 @@
-{ pkgs, config, lib, inputs, ... }: {
+{ pkgs, config, lib, machine, inputs, ... }:
+let inherit (lib.meta) getExe; in {
   programs.vscode = {
     enable = true;
-    package = with pkgs; vscodium;
+    package = with pkgs; if machine.nixos then vscodium else hello;
     extensions = with pkgs.vscode-extensions;
       with pkgs.vscode-utils; [
         bbenoist.nix
@@ -37,7 +38,7 @@
 
       #Neovim integration
       vscode-neovim.neovimExecutablePaths.linux =
-        "${config.programs.neovim.finalPackage}/bin/nvim";
+        "${getExe config.programs.neovim.finalPackage}";
     };
   };
 }

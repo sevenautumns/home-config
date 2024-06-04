@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, lib, ... }:
+let inherit (lib.meta) getExe'; in {
 
   networking.nat.enable = true;
   networking.nat.externalInterface = "eth0";
@@ -8,10 +9,10 @@
     listenPort = 51666;
     privateKeyFile = "/var/lib/wireguard/private";
     postSetup = ''
-      ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 192.168.15.0/24 -o eth0 -j MASQUERADE
+      ${getExe' pkgs.iptables "iptables"} -t nat -A POSTROUTING -s 192.168.15.0/24 -o eth0 -j MASQUERADE
     '';
     postShutdown = ''
-      ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 192.168.15.0/24 -o eth0 -j MASQUERADE
+      ${getExe' pkgs.iptables "iptables"} -t nat -D POSTROUTING -s 192.168.15.0/24 -o eth0 -j MASQUERADE
     '';
     peers = [
       {

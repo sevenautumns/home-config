@@ -1,4 +1,6 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{ config, lib, pkgs, modulesPath, ... }:
+let inherit (lib.meta) getExe;
+in {
   services.xserver = {
     enable = true;
     dpi = 80;
@@ -27,7 +29,7 @@
     settings = {
       default_session = {
         command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet \
+          ${getExe pkgs.greetd.tuigreet} \
             --time --remember --asterisks \
             --cmd "sway" \
             --user-menu --issue

@@ -8,7 +8,7 @@ in
 
   programs.firefox = {
     enable = true;
-    package = with pkgs; firefox;
+    package = with pkgs; if machine.nixos then firefox else hello;
     profiles.default = {
       id = 0;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [

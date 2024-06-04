@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.services.flood;
-in {
+let
+  inherit (lib.meta) getExe;
+  cfg = config.services.flood;
+in
+{
   options = {
     services.flood = {
       enable = mkEnableOption (lib.mdDoc "Flood");
@@ -63,7 +66,7 @@ in {
       serviceConfig = {
         Type = "simple";
         ExecStart = lib.concatStringsSep " " [
-          "${pkgs.flood}/bin/flood"
+          "${getExe pkgs.flood}"
           "--port ${toString cfg.port}"
           "--host 0.0.0.0"
           "--rundir ${cfg.runDir}"
