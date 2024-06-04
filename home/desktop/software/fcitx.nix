@@ -1,7 +1,5 @@
 { pkgs, inputs, config, lib, ... }:
 let
-  default-keyboard = config.home.keyboard.layout
-    + (if config.home.keyboard.variant == "us" then "-us" else "");
   fcitx5-adwaita = pkgs.stdenv.mkDerivation rec {
     name = "fcitx5-adwaita";
     version = "git";
@@ -112,20 +110,20 @@ in
     "fcitx5/profile" = {
       force = true;
       text = lib.generators.toINI { } {
-        "Group/0" = {
-          Name = "Default";
-          "Default Layout" = default-keyboard;
+        "Groups/0" = {
+          Name = "Group 1";
+          "Default Layout" = "de-us";
           DefaultIM = "mozc";
         };
-        "Group/0/Items/0" = {
-          Name = "keyboard-${default-keyboard}";
+        "Groups/0/Items/0" = {
+          Name = "keyboard-de-us";
           Layout = "";
         };
         "Groups/0/Items/1" = {
           Name = "mozc";
           Layout = "";
         };
-        GroupOrder."0" = "Group 1";
+        GroupOrder."0" = "\"Group 1\"";
       };
     };
   };

@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }: {
-
+{ config, lib, pkgs, ... }:
+let inherit (lib.meta) getExe'; in {
   systemd.network.netdevs = {
     # QoS concentrator
     "ifbppp0" = {
@@ -76,7 +76,7 @@
           #!${pkgs.runtimeShell}
           if [ $IFACE = "ppp0" ]; then
             # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
-            ${pkgs.iproute2}/bin/tc filter add dev ppp0 parent ffff: matchall action mirred egress redirect dev ifbppp0
+            ${getExe' pkgs.iproute2 "tc"} filter add dev ppp0 parent ffff: matchall action mirred egress redirect dev ifbppp0
           fi
         '';
       };

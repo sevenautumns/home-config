@@ -1,5 +1,6 @@
 { pkgs, config, inputs, lib, ... }:
 let
+  inherit (lib.meta) getExe';
   system = pkgs.system;
   niketsu = inputs.niketsu.packages.${system}.niketsu-server;
 in
@@ -9,7 +10,7 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       User = "niketsu";
-      ExecStart = "${niketsu}/bin/niketsu-server";
+      ExecStart = "${getExe' niketsu "niketsu-server"}";
       Restart = "always";
       RestartSec = 2;
       WorkingDirectory = "/var/lib/niketsu";
@@ -40,7 +41,7 @@ in
   security.sudo.extraRules = [{
     users = [ "niketsu" ];
     commands = [{
-      command = "${pkgs.systemd}/bin/systemctl restart niketsu";
+      command = "${getExe' pkgs.systemd "systemctl"} restart niketsu";
       options = [ "NOPASSWD" ];
     }];
   }];

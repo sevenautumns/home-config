@@ -1,13 +1,19 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, machine, inputs, ... }:
+let
+  mpv-package = with pkgs;
+    (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
+      {
+        youtubeSupport = true;
+      };
+
+in
+{
   programs.mpv = {
     enable = true;
     package = with pkgs;
-      (pkgs.unstable.wrapMpv
-        # (pkgs.unstable.mpv-unwrapped.override { vapoursynthSupport = true; })
-        pkgs.unstable.mpv-unwrapped
-        {
-          youtubeSupport = true;
-        });
+      pkgs.unstable.mpv.override {
+        youtubeSupport = true;
+      };
     config = {
       no-keepaspect-window = "";
       #vo = "gpu";

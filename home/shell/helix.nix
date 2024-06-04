@@ -1,4 +1,5 @@
-{ pkgs, config, lib, machine, inputs, ... }: {
+{ pkgs, config, lib, machine, inputs, ... }:
+let inherit (lib.meta) getExe getExe'; in {
   programs.helix = {
     enable = true;
     package =
@@ -53,7 +54,7 @@
         }
         {
           name = "nix";
-          formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+          formatter.command = "${getExe pkgs.nixpkgs-fmt}";
           language-servers = [ "nixd" ];
           file-types = [ "nix" ];
           scope = "source.nix";
@@ -103,7 +104,7 @@
         nixd.command = "nixd";
       };
       debugger = {
-        command = "${pkgs.lldb}/bin/lldb-vscode";
+        command = "${getExe' pkgs.lldb "lldb-vscode"}";
         name = "lldb-vscode";
         port-arg = "--port {}";
         transport = "tcp";
@@ -127,14 +128,14 @@
     };
   };
 
-  home.sessionVariables.EDITOR = "${pkgs.helix}/bin/hx";
+  home.sessionVariables.EDITOR = "${getExe pkgs.helix}";
 
   home.packages = with pkgs; [
     (makeDesktopItem {
       name = "helix";
       desktopName = "Helix";
       exec =
-        "${config.programs.alacritty.package}/bin/alacritty --title Helix --class helix -e ${config.programs.helix.package}/bin/hx %F";
+        "alacritty --title Helix --class helix -e ${getExe config.programs.helix.package} %F";
       terminal = false;
       type = "Application";
     })

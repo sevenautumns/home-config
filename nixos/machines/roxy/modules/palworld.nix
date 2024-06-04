@@ -3,6 +3,7 @@
 */
 { config, pkgs, lib, ... }:
 let
+  inherit (lib.meta) getExe getExe';
   steam-app = "2394010";
   port = 8211;
   group = "palworld";
@@ -24,14 +25,14 @@ in
     serviceConfig = {
       # EnvironmentFile = cfg.secretFile;
       ExecStartPre = join [
-        "${pkgs.steamcmd}/bin/steamcmd"
+        "${getExe' pkgs.steamcmd "steamcmd"}"
         "+force_install_dir ${dataDir}"
         "+login anonymous"
         "+app_update 2394010"
         "+quit"
       ];
       ExecStart = join [
-        "${pkgs.steam-run}/bin/steam-run ${dataDir}/Pal/Binaries/Linux/PalServer-Linux-Shipping Pal"
+        "${getExe pkgs.steam-run} ${dataDir}/Pal/Binaries/Linux/PalServer-Linux-Shipping Pal"
         "--port ${toString port}"
         "--players ${toString 12}"
         "--useperfthreads"

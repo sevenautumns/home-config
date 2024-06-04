@@ -1,5 +1,6 @@
 { config, lib, pkgs, modulesPath, inputs, ... }:
 let
+  inherit (lib.meta) getExe getExe';
   amdgpu-kernel-module = pkgs.callPackage ./amdgpu.nix {
     kernel = config.boot.kernelPackages.kernel;
   };
@@ -66,7 +67,7 @@ in
     StandardOutput = "null";
     Type = "simple";
     User = "1000";
-    ExecStart = "${pkgs.coreutils}/bin/cat /dev/input/%i";
+    ExecStart = "${getExe' pkgs.coreutils "cat"} /dev/input/%i";
   };
 
   xdg.portal.enable = true;
@@ -77,7 +78,7 @@ in
       output_name = "DP-1";
       max_fps = 60;
       chooser_type = "simple";
-      chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+      chooser_cmd = "${getExe pkgs.slurp} -f %o -or";
     };
   };
 

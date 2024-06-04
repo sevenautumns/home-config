@@ -1,22 +1,23 @@
 { pkgs, config, machine, lib, ... }:
 let
+  inherit (lib.meta) getExe getExe';
   window-switcher = pkgs.writeShellScriptBin "window-switcher" ''
     swaymsg -t get_tree --raw | \
-      ${pkgs.jq}/bin/jq -r '.. | select(.nodes?) | 
+      ${getExe pkgs.jq} -r '.. | select(.nodes?) | 
         select((.name | length > 0 ) and ((.type == "con") or (.type == "floating_con"))) | 
         "#" + (.id|tostring) + " " + (if (.app_id | length > 0) then .app_id + ": " else "" end) + .name' | \
-      ${pkgs.skim}/bin/sk --header="Sway Window Switcher" | \
+      ${getExe pkgs.skim} --header="Sway Window Switcher" | \
       awk '/^#[0-9]+/ { system("swaymsg \"[con_id=" substr($1, 2) "] focus\""); exit(0) }' \
   '';
   desktop-mode = pkgs.writeShellScriptBin "desktop-mode" ''
-    ${pkgs.sway}/bin/swaymsg output HDMI-A-1 disable
-    ${pkgs.sway}/bin/swaymsg output DP-1 enable
-    ${pkgs.sway}/bin/swaymsg output DP-3 enable
+    swaymsg output HDMI-A-1 disable
+    swaymsg output DP-1 enable
+    swaymsg output DP-3 enable
   '';
   couch-mode = pkgs.writeShellScriptBin "couch-mode" ''
-    ${pkgs.sway}/bin/swaymsg output HDMI-A-1 enable
-    ${pkgs.sway}/bin/swaymsg output DP-1 disable
-    ${pkgs.sway}/bin/swaymsg output DP-3 disable
+    swaymsg output HDMI-A-1 enable
+    swaymsg output DP-1 disable
+    swaymsg output DP-3 disable
   '';
 in
 {
@@ -32,7 +33,7 @@ in
     Service = {
       ExecStart = "${pkgs.writeShellScript "wayvnc-start" ''
           if [[ $XDG_SESSION_TYPE = "wayland" ]]; then
-            ${pkgs.wayvnc}/bin/wayvnc && exit 1
+            ${getExe' pkgs.wayvnc "wayvnc"} && exit 1
           else
             exit 0
           fi
@@ -48,7 +49,9 @@ in
 
   home.packages = with pkgs;
     [ wl-clipboard sway-launcher-desktop ]
+    ++ lib.optionals machine.nixos [ ]
     ++ lib.optionals (machine.host == "vivi") [ desktop-mode couch-mode ];
+
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default = {
     settings = {
@@ -160,7 +163,7 @@ in
               };
               fonts = fonts;
               statusCommand =
-                "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+                "${getExe pkgs.i3status-rust} ~/.config/i3status-rust/config-default.toml";
             }];
             window.border = 2;
             gaps = {
@@ -268,27 +271,27 @@ in
                 "${modifier}+x" = "move workspace to output next";
                 "${modifier}+u" = "mode passthrough";
 
-                "${modifier}+m" = "exec ${pkgs.warpd}/bin/warpd --grid";
+                # "${modifier}+m" = "exec ${getExe pkgs.warpd} --grid";
                 "${modifier}+l" = "exec swaylock";
 
                 # "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
                 "${modifier}+d" =
                   "exec alacritty --class=launcher -e sway-launcher-desktop";
                 "${modifier}+t" =
-                  "exec alacritty --class=launcher -e ${window-switcher}/bin/window-switcher";
+                  "exec alacritty --class=launcher -e ${getExe window-switcher}";
                 # "${modifier}+t" = "exec rofi -show window -modi window";
-                # "${modifier}+t" = "exec ${pkgs.swayr}/bin/swayr switch-workspace-or-window";
+                # "${modifier}+t" = "exec ${getExe pkgs.swayr} switch-workspace-or-window";
                 # "${modifier}+p" = "exec rofi-pass";
-                "${modifier}+p" = "exec ${pkgs.tessen}/bin/tessen";
+                "${modifier}+p" = "exec ${getExe pkgs.tessen}";
 
                 "${modifier}+o" = "exec alacritty --class=launcher -e pulsemixer";
 
-                "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+                "${modifier}+Return" = "exec alacritty";
                 "${modifier}+Shift+Return" = ''
-                  exec ${pkgs.alacritty}/bin/alacritty --working-directory="$(${pkgs.xcwd}/bin/xcwd)"'';
-                "${modifier}+e" = "exec ${pkgs.xdg-utils}/bin/xdg-open ~";
+                  exec alacritty --working-directory="$(${getExe pkgs.swaycwd}"'';
+                "${modifier}+e" = "exec nautilus ~";
                 "${modifier}+Shift+e" = ''
-                  exec ${pkgs.xdg-utils}/bin/xdg-open "$(${pkgs.xcwd}/bin/xcwd)"'';
+                  exec ${getExe' pkgs.xdg-utils "xdg-utils"} "$(${getExe pkgs.swaycwd}"'';
 
                 "${modifier}+w" = "exec firefox";
 
@@ -301,15 +304,15 @@ in
                 #     -b 'logout' 'i3-msg exit' 
                 # '';
 
-                "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
-                "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
-                "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
+                "XF86AudioMute" = "exec ${getExe pkgs.pamixer} -t";
+                "XF86AudioLowerVolume" = "exec ${getExe pkgs.pamixer} -d 5";
+                "XF86AudioRaiseVolume" = "exec ${getExe pkgs.pamixer} -i 5";
                 "XF86AudioPlay" =
-                  "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-                "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
-                "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
-                "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 10";
-                "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
+                  "exec ${getExe pkgs.playerctl} play-pause";
+                "XF86AudioNext" = "exec ${getExe pkgs.playerctl} next";
+                "XF86AudioPrev" = "exec ${getExe pkgs.playerctl} previous";
+                "XF86MonBrightnessUp" = "exec ${getExe pkgs.light} -A 10";
+                "XF86MonBrightnessDown" = "exec ${getExe pkgs.light} -U 10";
               };
             keycodebindings = {
               # Workspace select numpad
@@ -406,10 +409,10 @@ in
               command =
                 "floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 5";
             }];
-            startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
-              command =
-                "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
-            }];
+            # startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
+            #   command =
+            #     "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
+            # }];
           };
           extraConfig = ''
             for_window [instance="^launcher$"] floating enable sticky enable resize set 30 ppt 60 ppt border normal 10

@@ -1,5 +1,6 @@
 { pkgs, config, lib, machine, ... }:
 let
+  inherit (lib.meta) getExe;
   host = machine.host;
   theme = config.theme;
 in
@@ -13,8 +14,7 @@ in
         name = "Alacritty (Fallback)";
         desktopName = "Alacritty (Fallback)";
         icon = "Alacritty";
-        exec =
-          "${config.programs.alacritty.package}/bin/alacritty --command fish --no-config";
+        exec = "alacritty --command fish --no-config";
         terminal = false;
         type = "Application";
       })
@@ -34,7 +34,7 @@ in
         # decorations_theme_variant = "dark";
       };
       font.size = 10;
-      shell.program = "${pkgs.fish}/bin/fish";
+      shell.program = "${getExe pkgs.fish}";
       colors = {
         transparent_background_colors = true;
         # Autumn

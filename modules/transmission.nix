@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.secure.transmission;
-in {
+let
+  cfg = config.secure.transmission;
+  inherit (lib.meta) getExe getExe';
+in
+{
   options = {
     secure.transmission = {
       enable = mkEnableOption "tunneled transmission";
@@ -167,7 +170,7 @@ in {
                 port = toString config.services.transmission.settings.rpc-port;
               in
               ''
-                ${pkgs.socat}/bin/socat tcp-listen:${port},fork,reuseaddr,bind=0.0.0.0 exec:'${pkgs.iproute2}/bin/ip netns exec ${cfg.namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:127.0.0.1:${port}"',nofork
+                ${getExe pkgs.socat} tcp-listen:${port},fork,reuseaddr,bind=0.0.0.0 exec:'${getExe' pkgs.iproute2 "ip"} netns exec ${cfg.namespace} ${getExe pkgs.socat} STDIO "tcp-connect:127.0.0.1:${port}"',nofork
               '';
           };
 

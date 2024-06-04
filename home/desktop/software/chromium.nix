@@ -6,10 +6,7 @@ in
 {
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium.override {
-      enableWideVine = true;
-      # ungoogled = true;
-    };
+    package = with pkgs; if machine.nixos then ungoogled-chromium else hello;
     extensions = [
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       { id = "pkehgijcmpdhfbdbbnkijodmdjhbjlgp"; } # privacy badger

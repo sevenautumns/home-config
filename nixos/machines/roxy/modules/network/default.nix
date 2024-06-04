@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let inherit (lib.meta) getExe'; in {
   imports = [
     ./nftables.nix
     ./well.nix
@@ -115,7 +116,7 @@
           #!${pkgs.runtimeShell}
           if [ $IFACE = "enp2s0" ]; then
             # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
-            ${pkgs.iproute2}/bin/tc filter add dev enp2s0 parent ffff: matchall action mirred egress redirect dev ifbenp2s0
+            ${getExe' pkgs.iproute2 "tc"} filter add dev enp2s0 parent ffff: matchall action mirred egress redirect dev ifbenp2s0
           fi
         '';
       };

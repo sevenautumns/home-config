@@ -36,8 +36,6 @@
     nixd.url = "github:nix-community/nixd";
 
     # Home manager used repos
-    cmus-notify.url = "github:dcx86r/cmus-notify";
-    cmus-notify.flake = false;
     fcitx5-adwaita.url = "github:escape0707/fcitx5-adwaita-dark";
     fcitx5-adwaita.flake = false;
 

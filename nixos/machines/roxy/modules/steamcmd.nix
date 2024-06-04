@@ -2,6 +2,7 @@
 *  Taken from https://github.com/Zumorica/GradientOS/blob/7fd124e1c966205a761937d13ec053b353f427c5/mixins/steamcmd.nix
 */
 { config, pkgs, lib, ... }:
+let inherit (lib.meta) getExe getExe'; in
 {
   users.users.steamcmd = {
     isSystemUser = true;
@@ -22,13 +23,13 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.resholve.writeScript "steam" {
-        interpreter = "${pkgs.zsh}/bin/zsh";
+        interpreter = "${getExe pkgs.zsh}";
         inputs = with pkgs; [
           patchelf
           steamcmd
         ];
         execer = [
-          "cannot:${pkgs.steamcmd}/bin/steamcmd"
+          "cannot:${getExe pkgs.steamcmd "steamcmd"}"
         ];
       } ''
         set -eux
@@ -85,7 +86,7 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = lib.escapeShellArgs [
-        "${pkgs.coreutils}/bin/echo"
+        "${getExe' pkgs.coreutils "echo"}"
         "Done! Steamworks SDK should be downloaded now."
       ];
       Restart = "no";

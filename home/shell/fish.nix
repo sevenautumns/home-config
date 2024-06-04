@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }:
+let inherit (lib.meta) getExe; in {
   programs.command-not-found.enable = false;
   programs.fish = {
     enable = true;
@@ -29,11 +30,11 @@
       set -g fish_color_valid_path --underline
 
       # Hooks.
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
+      ${getExe pkgs.any-nix-shell} fish | source
     '';
     shellAliases = {
-      cat = "${pkgs.bat}/bin/bat --paging=never -p";
-      fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+      cat = "${getExe pkgs.bat} --paging=never -p";
+      fmtnix = "${getExe pkgs.fd} -e nix -X ${getExe pkgs.nixfmt-rfc-style}";
       fu = "fish_update_completions";
       zf = ''z --pipe="sk --layout=reverse"'';
       # zf = ''z --pipe="sk --height 40% --layout=reverse"'';
