@@ -41,11 +41,11 @@ in
       gimp
 
       #dev
-      nixfmt
+      nixfmt-rfc-style
 
       #misc
       arandr
-      nvtop-amd
+      nvtopPackages.amd
 
       # https://github.com/NixOS/nixpkgs/pull/195985
       # gtk4 problem, use stable until fixed

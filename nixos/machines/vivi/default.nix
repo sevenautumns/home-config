@@ -115,6 +115,16 @@ in
     };
   };
 
+  security = {
+    polkit.enable = true;
+    #fix swaylock
+    pam.services.swaylock = {
+      text = ''
+        auth include login
+      '';
+    };
+  };
+
   # Printing
   # services.printing.enable = true;
   # services.printing.drivers = with pkgs; [ brlaser ];

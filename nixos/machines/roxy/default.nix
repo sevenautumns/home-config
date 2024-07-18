@@ -42,7 +42,7 @@
   services.unifi = {
     enable = true;
     unifiPackage = pkgs.unifi8;
-    mongodbPackage = pkgs.stable.mongodb-4_4;
+    mongodbPackage = pkgs.stable.mongodb-5_0;
   };
 
 

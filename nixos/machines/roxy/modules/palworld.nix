@@ -31,7 +31,7 @@ in
         "+quit"
       ];
       ExecStart = join [
-        "${pkgs.steam-run}/bin/steam-run ${dataDir}/Pal/Binaries/Linux/PalServer-Linux-Test Pal"
+        "${pkgs.steam-run}/bin/steam-run ${dataDir}/Pal/Binaries/Linux/PalServer-Linux-Shipping Pal"
         "--port ${toString port}"
         "--players ${toString 12}"
         "--useperfthreads"

@@ -66,7 +66,7 @@ in
   qt = {
     enable = true;
     # Use same theme as GTK applications
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
     # style.package = pkgs.adwaita-qt;
     # style.name = "adwaita-dark";
   };

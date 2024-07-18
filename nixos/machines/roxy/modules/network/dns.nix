@@ -4,9 +4,9 @@
     enable = true;
     localControlSocketPath = "/run/unbound/unbound.ctl";
     settings = {
-      include = [
-        "\"${config.services.unbound.stateDir}/blacklist.conf\""
-      ];
+      # include = [
+      #   "\"${config.services.unbound.stateDir}/blacklist.conf\""
+      # ];
       server = {
         access-control = [
           "::1/128 allow_snoop"
@@ -54,24 +54,24 @@
     };
   };
 
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "0 4 * * *   root   systemctl restart unbound-blacklist.service"
-    ];
-  };
+  # services.cron = {
+  #   enable = true;
+  #   systemCronJobs = [
+  #     "0 4 * * *   root   systemctl restart unbound-blacklist.service"
+  #   ];
+  # };
 
-  systemd.services."unbound-blacklist" = {
-    script = ''
-      wget -O ${config.services.unbound.stateDir}/blacklist.conf https://small.oisd.nl/unbound
-    '';
-    path = with pkgs; [ wget ];
-    requiredBy = [ "unbound.service" ];
-    before = [ "unbound.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = config.services.unbound.user;
-      Group = config.services.unbound.group;
-    };
-  };
+  # systemd.services."unbound-blacklist" = {
+  #   script = ''
+  #     wget -O ${config.services.unbound.stateDir}/blacklist.conf https://small.oisd.nl/unbound
+  #   '';
+  #   path = with pkgs; [ wget ];
+  #   requiredBy = [ "unbound.service" ];
+  #   before = [ "unbound.service" ];
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     User = config.services.unbound.user;
+  #     Group = config.services.unbound.group;
+  #   };
+  # };
 }

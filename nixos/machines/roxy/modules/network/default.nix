@@ -6,6 +6,7 @@
     ./ntp.nix
     ./sss.nix
     ./dns.nix
+    ./neighbour.nix
   ];
 
   networking.networkmanager.enable = lib.mkForce false;
@@ -48,7 +49,6 @@
   };
 
   systemd.network.networks."20-lan" = {
-    # name = "eth0";
     name = "enp2s0";
     dhcpPrefixDelegationConfig = {
       SubnetId = "auto";
@@ -57,7 +57,7 @@
       RequiredForOnline = "no";
     };
     dhcpServerConfig = {
-      DNS = "192.168.178.2";
+      DNS = "1.1.1.1";
       NTP = "192.168.178.2"; # provide NTP
       EmitDNS = true;
       EmitNTP = true;
@@ -75,8 +75,7 @@
       FlowIsolationMode = "triple";
     };
     networkConfig = {
-      # VLAN = [ "mullvad.150" ];
-      # Domains = domain;
+      VLAN = [ "neighbour.250" ];
       Address = "192.168.178.2/24";
       EmitLLDP = "yes";
       IPv6SendRA = true;

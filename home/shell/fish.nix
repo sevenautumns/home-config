@@ -33,7 +33,7 @@
     '';
     shellAliases = {
       cat = "${pkgs.bat}/bin/bat --paging=never -p";
-      fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt}/bin/nixfmt";
+      fmtnix = "${pkgs.fd}/bin/fd -e nix -X ${pkgs.nixfmt-rfc-style}/bin/nixfmt";
       fu = "fish_update_completions";
       zf = ''z --pipe="sk --layout=reverse"'';
       # zf = ''z --pipe="sk --height 40% --layout=reverse"'';

@@ -26,11 +26,11 @@
   # enable zerotier virtual switch
   services.zerotierone = {
     enable = true;
-    # package = pkgs.unstable.zerotierone;
+    package = pkgs.unstable.zerotierone;
     # package = pkgs.zerotierone.overrideAttrs (orig: {
     #   buildInputs = orig.buildInputs ++ [ pkgs.miniupnpc pkgs.libnatpmp ];
     # });
-    package = pkgs.stable.zerotierone;
+    # package = pkgs.stable.zerotierone;
     joinNetworks = [
       "565799d8f6299e0c" # Network for my devices
     ];
@@ -115,7 +115,7 @@
     uid = 1000;
     isNormalUser = true;
     extraGroups =
-      [ "wheel" "disk" "input" "audio" "video" "networkmanager" "docker" ];
+      [ "wheel" "disk" "input" "audio" "video" "networkmanager" "docker" "gamemode" ];
     shell = pkgs.fish;
     home = "/home/autumnal";
     description = "Sven Friedrich";

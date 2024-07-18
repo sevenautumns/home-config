@@ -2,7 +2,7 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
@@ -11,14 +11,14 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-system.url = "github:nix-community/home-manager/release-23.11";
+    home-manager-system.url = "github:nix-community/home-manager/release-24.05";
     home-manager-system.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
-    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
+    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -56,11 +56,11 @@
     { self
     , home-manager-system
     , home-manager-stable
-    , home-manager-unstable
+      # , home-manager-unstable
     , nur
     , deploy-rs
     , nixpkgs
-    , nixpkgs-unstable
+      # , nixpkgs-unstable
     , nixpkgs-stable
     , agenix
     , ...
@@ -73,8 +73,8 @@
           arch = "x86_64-linux";
           headless = false;
           nixos = true;
-          nixpkgs = nixpkgs-unstable;
-          home-manager = home-manager-unstable;
+          nixpkgs = nixpkgs-stable;
+          home-manager = home-manager-stable;
           managed-nixos = true;
         };
         "ft-ssy-sfnb" = {
@@ -161,7 +161,7 @@
 
       nixosConfigurations = lib.mapAttrs
         (host: machine:
-          machine.nixpkgs.lib.nixosSystem rec {
+          machine.nixpkgs.lib.nixosSystem {
             system = machine.arch;
             modules = [
               {
