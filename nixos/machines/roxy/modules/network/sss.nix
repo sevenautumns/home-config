@@ -29,7 +29,8 @@ let inherit (lib.meta) getExe'; in {
     };
     cakeConfig = {
       Bandwidth = "30M"; # Upload Bandwidth Limit
-      FlowIsolationMode = "triple";
+      FlowIsolationMode = "dual-src-host";
+      PriorityQueueingPreset = "besteffort";
     };
   };
 
@@ -37,7 +38,8 @@ let inherit (lib.meta) getExe'; in {
     name = "ifbztbtovjx4h";
     cakeConfig = {
       Bandwidth = "50M"; # Download Bandwidth Limit
-      FlowIsolationMode = "triple";
+      FlowIsolationMode = "dual-dst-host";
+      PriorityQueueingPreset = "besteffort";
     };
   };
 

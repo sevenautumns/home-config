@@ -34,9 +34,13 @@ let inherit (lib.meta) getExe'; in {
     };
     # Traffic Shaper
     cakeConfig = {
-      Bandwidth = "40M"; # Upload Bandwidth (Same as provider sold bandwidth)
+      Handle = "5000";
+      Bandwidth = "38M"; # Upload Bandwidth (Same as provider sold bandwidth) minus 5%
       CompensationMode = "ptm"; # VDSL compensation
-      FlowIsolationMode = "triple";
+      PriorityQueueingPreset = "diffserv4";
+      FlowIsolationMode = "dual-src-host";
+      AckFilter = true; # use ack filtering for upload direction
+      NAT = true;
     };
     extraConfig = ''
       [DHCPv6]
@@ -61,9 +65,12 @@ let inherit (lib.meta) getExe'; in {
     name = "ifbppp0";
     # Traffic Shaper
     cakeConfig = {
-      Bandwidth = "250M"; # Download Bandwidth (Same as provider sold bandwidth)
+      Handle = "5001";
+      Bandwidth = "240M"; # Download Bandwidth (Same as provider sold bandwidth) minus 5%
       CompensationMode = "ptm"; # VDSL compensation
-      FlowIsolationMode = "triple";
+      PriorityQueueingPreset = "diffserv4";
+      FlowIsolationMode = "dual-dst-host";
+      NAT = true;
     };
   };
 
@@ -72,13 +79,25 @@ let inherit (lib.meta) getExe'; in {
     rules = {
       setup-ppp0-ifb = {
         onState = [ "configured" ];
-        script = ''
-          #!${pkgs.runtimeShell}
-          if [ $IFACE = "ppp0" ]; then
-            # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
-            ${getExe' pkgs.iproute2 "tc"} filter add dev ppp0 parent ffff: matchall action mirred egress redirect dev ifbppp0
-          fi
-        '';
+        script =
+          let
+            ppp0Handle = config.systemd.network.networks."30-ppp0".cakeConfig.Handle;
+            ifbppp0Handle = config.systemd.network.networks."30-ifbppp0".cakeConfig.Handle;
+            torrentIP = builtins.head (lib.splitString ":" config.secure.transmission.peer.endpoint);
+          in
+          ''
+            #!${pkgs.runtimeShell}
+            if [ $IFACE = "ppp0" ]; then
+              # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
+              ${getExe' pkgs.iproute2 "tc"} filter add dev ppp0 parent ffff: matchall action mirred egress redirect dev ifbppp0
+
+              # Place torrent traffic in the lowest tin
+              ${getExe' pkgs.iproute2 "tc"} filter del dev ppp0 # clear previous filter
+              ${getExe' pkgs.iproute2 "tc"} filter add dev ppp0 parent ${ppp0Handle}: protocol ip prio 1 u32 match ip dst ${torrentIP}/32 action skbedit priority ${ppp0Handle}:1
+              ${getExe' pkgs.iproute2 "tc"} filter del dev ifbppp0 # clear previous filter
+              ${getExe' pkgs.iproute2 "tc"} filter add dev ifbppp0 parent ${ifbppp0Handle}: protocol ip prio 1 u32 match ip src ${torrentIP}/32 action skbedit priority ${ifbppp0Handle}:1
+            fi
+          '';
       };
     };
   };

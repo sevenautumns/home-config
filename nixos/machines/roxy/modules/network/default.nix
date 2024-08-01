@@ -42,7 +42,6 @@ let inherit (lib.meta) getExe'; in {
     linkConfig = {
       RequiredForOnline = "no";
     };
-    cakeConfig.Bandwidth = "1000M"; # Traffic Shaper local
     networkConfig = {
       Address = "192.168.1.2/24";
       DHCP = "no";
@@ -73,7 +72,8 @@ let inherit (lib.meta) getExe'; in {
     };
     cakeConfig = {
       Bandwidth = "1G"; # Local Bandwidth
-      FlowIsolationMode = "triple";
+      FlowIsolationMode = "dual-dst-host";
+      PriorityQueueingPreset = "besteffort";
     };
     networkConfig = {
       VLAN = [ "neighbour.250" ];
@@ -103,7 +103,8 @@ let inherit (lib.meta) getExe'; in {
     name = "ifbenp2s0";
     cakeConfig = {
       Bandwidth = "1G"; # Local Bandwidth
-      FlowIsolationMode = "triple";
+      FlowIsolationMode = "dual-src-host";
+      PriorityQueueingPreset = "besteffort";
     };
   };
 

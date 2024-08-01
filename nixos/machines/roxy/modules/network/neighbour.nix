@@ -1,14 +1,4 @@
 { config, lib, pkgs, ... }: {
-  systemd.network.netdevs = {
-    # QoS concentrator
-    "ifbneighbour" = {
-      netdevConfig = {
-        Kind = "ifb";
-        Name = "ifbneighbour";
-      };
-    };
-  };
-
   systemd.network.netdevs."60-neighbour" = {
     netdevConfig = {
       Kind = "vlan";
@@ -37,15 +27,7 @@
       PoolOffset = 50;
       PoolSize = 200;
     };
-    # for ifbneighbour routing
-    qdiscConfig = {
-      Parent = "ingress";
-      Handle = "0xffff";
-    };
-    cakeConfig = {
-      Bandwidth = "1G"; # Local Bandwidth
-      FlowIsolationMode = "triple";
-    };
+    # Cake is not required here, because this traffic is already shaped by the underlying interface enp2s0
     networkConfig = {
       Address = "192.168.250.2/24";
       EmitLLDP = "yes";
@@ -56,29 +38,6 @@
     };
     networkConfig = {
       DHCP = "no";
-    };
-  };
-  systemd.network.networks."68-ifbneighbour" = {
-    name = "ifbneighbour";
-    cakeConfig = {
-      Bandwidth = "1G"; # Local Bandwidth
-      FlowIsolationMode = "triple";
-    };
-  };
-
-  services.networkd-dispatcher = {
-    enable = true;
-    rules = {
-      setup-neighbour-ifb = {
-        onState = [ "configured" ];
-        script = ''
-          #!${pkgs.runtimeShell}
-          if [ $IFACE = "neighbour.250" ]; then
-            # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
-            ${pkgs.iproute2}/bin/tc filter add dev neighbour.250 parent ffff: matchall action mirred egress redirect dev ifbneighbour
-          fi
-        '';
-      };
     };
   };
 }

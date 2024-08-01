@@ -21,7 +21,7 @@ in
   users.groups.${group} = { };
 
   systemd.services.palworld = {
-    wantedBy = [ "multi-user.target" ];
+    # wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       # EnvironmentFile = cfg.secretFile;
       ExecStartPre = join [
@@ -39,7 +39,6 @@ in
         "-NoAsyncLoadingThread"
         "-UseMultithreadForDS"
       ];
-      Nice = "-5";
       Restart = "always";
       StateDirectory = "palworld";
       User = user;

@@ -144,8 +144,8 @@ in
           chain postrouting {
             type nat hook postrouting priority srcnat; policy accept;
 
-            ct state new meta nftrace set 1
-            ct state new log
+            # nftrace set 1
+            # ct state new log
 
             ip saddr { ${LAN_IPS} } oifname { ${IF_MODEM} } masquerade
             ip saddr { 172.16.0.2/12 } oifname { ${IF_WELL} } masquerade
@@ -157,22 +157,22 @@ in
     };
   };
 
-  services.ulogd = {
-    enable = true;
-    logLevel = 3;
-    settings = {
-      global.stack = [ "ct1:NFCT,sqlite3_ct:SQLITE3" ];
-      sqlite3_ct = {
-        db = "/var/log/ulogd.sqlite3db";
-        table = "ulog_ct";
-        buffer = 200;
-      };
-      ct1 = {
-        netlink_socket_buffer_size = 217088;
-        netlink_socket_buffer_maxsize = 1085440;
-        netlink_resync_timeout = 60;
-        pollinterval = 10;
-      };
-    };
-  };
+  # services.ulogd = {
+  #   enable = true;
+  #   logLevel = 3;
+  #   settings = {
+  #     global.stack = [ "ct1:NFCT,sqlite3_ct:SQLITE3" ];
+  #     sqlite3_ct = {
+  #       db = "/var/log/ulogd.sqlite3db";
+  #       table = "ulog_ct";
+  #       buffer = 200;
+  #     };
+  #     ct1 = {
+  #       netlink_socket_buffer_size = 217088;
+  #       netlink_socket_buffer_maxsize = 1085440;
+  #       netlink_resync_timeout = 60;
+  #       pollinterval = 10;
+  #     };
+  #   };
+  # };
 }

@@ -42,9 +42,12 @@
   services.unifi = {
     enable = true;
     unifiPackage = pkgs.unifi8;
-    mongodbPackage = pkgs.stable.mongodb-5_0;
+    mongodbPackage = pkgs.hello; # use ferretdb instead
   };
-
+  services.ferretdb = {
+    enable = true;
+    package = pkgs.unstable.ferretdb;
+  };
 
   fileSystems = {
     "/" = {
