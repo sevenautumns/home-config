@@ -11,7 +11,7 @@ in
   programs.mpv = {
     enable = true;
     package = with pkgs;
-      pkgs.unstable.mpv.override {
+      pkgs.mpv.override {
         youtubeSupport = true;
       };
     config = {

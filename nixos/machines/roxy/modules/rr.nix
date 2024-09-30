@@ -1,8 +1,4 @@
 { pkgs, ... }: {
-  services.jackett = {
-    enable = true;
-    openFirewall = true;
-  };
   services.sonarr = {
     enable = true;
     user = "autumnal";
@@ -16,6 +12,10 @@
   services.bazarr = {
     enable = true;
     user = "autumnal";
+    openFirewall = true;
+  };
+  services.prowlarr = {
+    enable = true;
     openFirewall = true;
   };
 }

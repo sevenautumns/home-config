@@ -37,16 +37,47 @@ let inherit (lib.meta) getExe'; in {
 
   systemd.network.wait-online.enable = false;
 
+  # TODO improve naming
+  # TODO improve organization
   systemd.network.networks."10-wan" = {
     name = "enp1s0";
     linkConfig = {
       RequiredForOnline = "no";
     };
     networkConfig = {
-      Address = "192.168.1.2/24";
+      VLAN = [ "enp1s0.7" ];
+      Address = "10.10.1.2/24";
       DHCP = "no";
     };
   };
+
+  # TODO improve naming
+  # TODO improve organization
+  systemd.network.netdevs."10-wan-vlan" = {
+    netdevConfig = {
+      Kind = "vlan";
+      Name = "enp1s0.7";
+    };
+    vlanConfig = {
+      Id = 7;
+    };
+  };
+
+  # TODO improve naming
+  # TODO improve organization
+  systemd.network.networks."15-wan-vlan" = {
+    matchConfig = {
+      Name = "enp1s0.7";
+      Kind = "vlan";
+    };
+    linkConfig = {
+      RequiredForOnline = "no";
+    };
+    networkConfig = {
+      DHCP = "no";
+    };
+  };
+
 
   systemd.network.networks."20-lan" = {
     name = "enp2s0";
@@ -57,7 +88,7 @@ let inherit (lib.meta) getExe'; in {
       RequiredForOnline = "no";
     };
     dhcpServerConfig = {
-      DNS = "1.1.1.1";
+      DNS = "192.168.178.2"; # provide DNS
       NTP = "192.168.178.2"; # provide NTP
       EmitDNS = true;
       EmitNTP = true;
@@ -101,6 +132,9 @@ let inherit (lib.meta) getExe'; in {
 
   systemd.network.networks."40-ifbenp2s0" = {
     name = "ifbenp2s0";
+    linkConfig = {
+      RequiredForOnline = "no";
+    };
     cakeConfig = {
       Bandwidth = "1G"; # Local Bandwidth
       FlowIsolationMode = "dual-src-host";

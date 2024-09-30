@@ -26,6 +26,16 @@ in
     }));
   };
 
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-pipewire-audio-capture
+      obs-backgroundremoval
+      obs-vaapi
+    ];
+  };
+
   home.packages = with pkgs;
     lib.optionals (machine.nixos) [
       #office  
@@ -37,8 +47,13 @@ in
       mattermost-desktop
       discord
       discord-canary
+      vesktop
       tdesktop
       element-desktop
+
+      lutris
+      # wine64
+      breitbandmessung
 
       #image
       gnome.eog

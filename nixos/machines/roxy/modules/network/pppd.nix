@@ -35,11 +35,10 @@ let inherit (lib.meta) getExe'; in {
     # Traffic Shaper
     cakeConfig = {
       Handle = "5000";
-      Bandwidth = "38M"; # Upload Bandwidth (Same as provider sold bandwidth) minus 5%
-      CompensationMode = "ptm"; # VDSL compensation
+      Bandwidth = "240M"; # Upload Bandwidth
+      CompensationMode = "ptm";
       PriorityQueueingPreset = "diffserv4";
       FlowIsolationMode = "dual-src-host";
-      AckFilter = true; # use ack filtering for upload direction
       NAT = true;
     };
     extraConfig = ''
@@ -66,8 +65,8 @@ let inherit (lib.meta) getExe'; in {
     # Traffic Shaper
     cakeConfig = {
       Handle = "5001";
-      Bandwidth = "240M"; # Download Bandwidth (Same as provider sold bandwidth) minus 5%
-      CompensationMode = "ptm"; # VDSL compensation
+      Bandwidth = "900M";
+      CompensationMode = "ptm";
       PriorityQueueingPreset = "diffserv4";
       FlowIsolationMode = "dual-dst-host";
       NAT = true;
@@ -134,7 +133,7 @@ let inherit (lib.meta) getExe'; in {
         config = ''
           debug
 
-          plugin pppoe.so enp1s0
+          plugin pppoe.so enp1s0.7
 
           noauth
           hide-password
@@ -145,6 +144,10 @@ let inherit (lib.meta) getExe'; in {
           persist
           maxfail 0
           holdoff 5
+
+          # mru 1492
+          # mtu 1500
+          # default-mru
 
           noipdefault
           defaultroute

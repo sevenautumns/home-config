@@ -10,6 +10,7 @@ in
     ../../common.nix
     ./desktop
     ./software/steam.nix
+    ./rtmp.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -74,11 +75,15 @@ in
   xdg.portal.config.common.default = "*";
   xdg.portal.wlr.enable = true;
   xdg.portal.wlr.settings = {
+    # screencast = {
+    #   output_name = "DP-1";
+    #   max_fps = 60;
+    #   chooser_type = "simple";
+    #   chooser_cmd = "${getExe pkgs.slurp} -f %o -or";
+    # };
     screencast = {
-      output_name = "DP-1";
-      max_fps = 60;
-      chooser_type = "simple";
-      chooser_cmd = "${getExe pkgs.slurp} -f %o -or";
+      chooser_type = "dmenu";
+      chooser_cmd = getExe pkgs.bemenu;
     };
   };
 
@@ -100,6 +105,10 @@ in
       rocmPackages.rocm-runtime
     ];
   };
+
+  # TODO Wait for 24.11
+  # https://github.com/NixOS/nixpkgs/pull/300764
+  # hardware.graphics.extraPackages = [ pkgs.amf ];
 
   environment.variables = {
     OCL_ICD_VENDORS = "${pkgs.rocm-opencl-icd}/etc/OpenCL/vendors/";

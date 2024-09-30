@@ -20,7 +20,7 @@
       RequiredForOnline = "no";
     };
     dhcpServerConfig = {
-      DNS = "1.1.1.1";
+      DNS = "192.168.250.2";
       EmitDNS = true;
       EmitNTP = true;
       EmitRouter = true;

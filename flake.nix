@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+    lix-module.inputs.nixpkgs.follows = "nixpkgs-stable";
+
     nur.url = "github:nix-community/NUR";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -58,6 +62,7 @@
     , nur
     , deploy-rs
     , nixpkgs
+    , lix-module
       # , nixpkgs-unstable
     , nixpkgs-stable
     , agenix
@@ -149,6 +154,7 @@
                     packages = [ agenix.packages."${machine.arch}".agenix ];
                   };
                 }
+                lix-module.nixosModules.default
               ];
               extraSpecialArgs = {
                 inherit inputs;
@@ -170,6 +176,7 @@
               agenix.nixosModules.default
               self.nixosModules.transmission
               self.nixosModules.flood
+              lix-module.nixosModules.default
               (./nixos/machines + "/${host}")
             ];
             specialArgs = {

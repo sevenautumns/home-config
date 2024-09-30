@@ -7,7 +7,7 @@ let
     home-manager switch --flake $HOME/.config/nixpkgs#"${user}@${host}" $@
   '';
   sw-sys = pkgs.writeShellScriptBin "sw-sys" ''
-    sudo nixos-rebuild switch --flake $HOME/.config/nixpkgs#"${host}" $@
+    sudo nixos-rebuild switch --flake $HOME/.config/nixpkgs#"${host}" --log-format multiline $@
   '';
   hinted = { };
 in

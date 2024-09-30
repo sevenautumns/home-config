@@ -2,7 +2,6 @@
 let
   # IF_WAN = "dslite";
   IF_WAN = "ppp0";
-  IF_WAN6 = "ppp0";
   IF_WELL = "wg-well";
   IF_MULLVAD = "mullvad.150";
   IF_NEIGHBOUR = "neighbour.250";
@@ -48,9 +47,11 @@ in
 
           chain input_neighbour {
             tcp dport { 
+              53, # DNS
               123, # NTP
             } accept comment "Allow NTP from Neighbour"
             udp dport {
+              53, # DNS
               67, # DHCP
               123, # NTP
             } accept comment "Allow DHCP and NTP from Neighbour"
@@ -72,6 +73,7 @@ in
               137, # Samba
               138, # Samba
               8211, # Palworld
+              27015, 27016, # Core Keepers
             } accept comment "Allow Samba from ZERO_SSS"
             counter drop comment "Drop everything else from ZERO_SSS"
           }
@@ -90,7 +92,6 @@ in
             iifname vmap { 
               lo : accept, 
               ${IF_WAN} : jump input_wan, 
-              ${IF_WAN6} : jump input_wan, 
               ${IF_LAN} : jump input_lan, 
               ${IF_MULLVAD} : jump input_mullvad,
               ${IF_NEIGHBOUR} : jump input_neighbour,
@@ -102,6 +103,17 @@ in
           chain forward {
             type filter hook forward priority filter; policy drop;
 
+            meta l4proto icmp nftrace set 1
+
+            oifname { ${IF_WAN} } tcp flags syn tcp option maxseg size set rt mtu comment "clamp MSS to Path MTU"
+            # oifname { ${IF_WAN} } tcp flags syn tcp option maxseg size set 1452 comment "clamp MSS to Path MTU"
+            # ip protocol icmp icmp type { echo-request, destination-unreachable, time-exceeded } limit rate 1000/second burst 5 packets accept comment "Accept echo request"
+            # ip protocol icmp icmp type { destination-unreachable, time-exceeded } accept comment "Accept echo request"
+            # ip protocol icmp accept
+            # icmp code frag-needed counter nftrace set 1
+            # icmp code frag-needed counter accept
+            # ip6 nexthdr icmpv6 accept
+
             # Accept connections tracked by destination NAT
             ct status dnat counter accept comment "Accept connections tracked by DNAT"
 
@@ -109,16 +121,16 @@ in
             # meta l4proto ipv6-icmp accept comment "Forward ICMP in IPv6"
 
             # LAN -> WAN
-            iifname { ${IF_LAN} } oifname { ${IF_WAN}, ${IF_LAN}, ${IF_WAN6}, ${IF_MODEM} } counter accept comment "Allow all traffic forwarding from LAN to LAN and WAN"
+            iifname { ${IF_LAN} } oifname { ${IF_WAN}, ${IF_LAN}, ${IF_MODEM} } counter accept comment "Allow all traffic forwarding from LAN to LAN and WAN"
 
             # WAN -> LAN
-            iifname { ${IF_WAN}, ${IF_WAN6}, ${IF_MODEM} } oifname { ${IF_LAN} } ct state { established, related } counter accept comment "Allow established back from WAN"
+            iifname { ${IF_WAN}, ${IF_MODEM} } oifname { ${IF_LAN} } ct state { established, related } counter accept comment "Allow established back from WAN"
 
             # NEIGHBOUR -> WAN
-            iifname { ${IF_NEIGHBOUR} } oifname { ${IF_WAN}, ${IF_NEIGHBOUR}, ${IF_WAN6} } counter accept comment "Allow all traffic forwarding from NEIGHBOUR to NEIGHBOUR and WAN"
+            iifname { ${IF_NEIGHBOUR} } oifname { ${IF_WAN}, ${IF_NEIGHBOUR} } counter accept comment "Allow all traffic forwarding from NEIGHBOUR to NEIGHBOUR and WAN"
 
             # WAN -> NEIGHBOUR
-            iifname { ${IF_WAN}, ${IF_WAN6} } oifname { ${IF_NEIGHBOUR} } ct state { established, related } counter accept comment "Allow established back from WAN"
+            iifname { ${IF_WAN} } oifname { ${IF_NEIGHBOUR} } ct state { established, related } counter accept comment "Allow established back from WAN"
 
             # MULLVAD -> WELL
             iifname { ${IF_MULLVAD} } oifname { ${IF_WELL} } counter accept comment "Allow all traffic forwarding from LAN to LAN and WAN"
@@ -138,7 +150,7 @@ in
           chain prerouting {
             type nat hook prerouting priority dstnat; policy accept;
 
-            ip daddr 15.1.1.1 dnat to 192.168.1.1
+            ip daddr 15.1.1.1 dnat to 10.10.1.1
           }
 
           chain postrouting {
@@ -156,23 +168,4 @@ in
       };
     };
   };
-
-  # services.ulogd = {
-  #   enable = true;
-  #   logLevel = 3;
-  #   settings = {
-  #     global.stack = [ "ct1:NFCT,sqlite3_ct:SQLITE3" ];
-  #     sqlite3_ct = {
-  #       db = "/var/log/ulogd.sqlite3db";
-  #       table = "ulog_ct";
-  #       buffer = 200;
-  #     };
-  #     ct1 = {
-  #       netlink_socket_buffer_size = 217088;
-  #       netlink_socket_buffer_maxsize = 1085440;
-  #       netlink_resync_timeout = 60;
-  #       pollinterval = 10;
-  #     };
-  #   };
-  # };
 }

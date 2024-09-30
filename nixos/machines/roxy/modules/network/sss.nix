@@ -28,7 +28,7 @@ let inherit (lib.meta) getExe'; in {
       Handle = "0xffff";
     };
     cakeConfig = {
-      Bandwidth = "30M"; # Upload Bandwidth Limit
+      Bandwidth = "150M"; # Upload Bandwidth Limit
       FlowIsolationMode = "dual-src-host";
       PriorityQueueingPreset = "besteffort";
     };
@@ -37,7 +37,7 @@ let inherit (lib.meta) getExe'; in {
   systemd.network.networks."40-ifbztbtovjx4h" = {
     name = "ifbztbtovjx4h";
     cakeConfig = {
-      Bandwidth = "50M"; # Download Bandwidth Limit
+      Bandwidth = "100M"; # Download Bandwidth Limit
       FlowIsolationMode = "dual-dst-host";
       PriorityQueueingPreset = "besteffort";
     };

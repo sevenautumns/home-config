@@ -5,6 +5,7 @@
     ./modules/plex.nix
     ./modules/rr.nix
     ./modules/palworld.nix
+    ./modules/corekeeper.nix
     # ./modules/steamcmd.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
@@ -29,6 +30,12 @@
     # "net.ipv6.conf.all.disable_ipv6" = 1;
     # "net.ipv4.ip_forward" = 1;
     # "net.ipv4.conf.all.src_valid_mark" = 1;
+    "net.core.rmem_max" = 16777216;
+    "net.core.wmem_max" = 16777216;
+    "net.ipv4.tcp_rmem" = "4096 87380 16777216";
+    "net.ipv4.tcp_wmem" = "4096 65536 16777216";
+    "net.ipv4.udp_rmem_min" = 16384;
+    "net.ipv4.udp_wmem_min" = 16384;
   };
 
   boot.kernelParams = [
@@ -42,11 +49,7 @@
   services.unifi = {
     enable = true;
     unifiPackage = pkgs.unifi8;
-    mongodbPackage = pkgs.hello; # use ferretdb instead
-  };
-  services.ferretdb = {
-    enable = true;
-    package = pkgs.unstable.ferretdb;
+    mongodbPackage = pkgs.unstable.mongodb-ce;
   };
 
   fileSystems = {
