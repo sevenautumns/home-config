@@ -128,6 +128,7 @@ in
         {
           enable = true;
           systemd.enable = true;
+          checkConfig = false;
           config = {
             terminal = "alacritty";
             bars = [{
@@ -189,7 +190,7 @@ in
               };
             };
             output = {
-              "*".bg = "${../Autumn.png} fill";
+              "*".bg = "$HOME/Pictures/Wallpaper/Autumn.png fill ";
               ${tv} = {
                 mode = "3840x2160@120Hz";
                 # scale = "2";

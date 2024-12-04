@@ -19,6 +19,7 @@ in
       commit.gpgsign = true;
       core.editor = config.home.sessionVariables.EDITOR;
       core.pager = "${getExe pkgs.delta}";
+      pager.blame = "${getExe pkgs.delta}";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };

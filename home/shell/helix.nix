@@ -160,5 +160,6 @@ let inherit (lib.meta) getExe getExe'; in {
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
     unstable.nixd # (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
+    typst-lsp
   ];
 }
