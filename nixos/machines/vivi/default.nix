@@ -94,24 +94,15 @@ in
   };
 
   services.xserver.videoDrivers = [ "modesetting" ];
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
       vaapiVdpau
       libvdpau-va-gl
-      rocm-opencl-icd
+      pkgs.amf
       rocmPackages.rocm-runtime
     ];
-  };
-
-  # TODO Wait for 24.11
-  # https://github.com/NixOS/nixpkgs/pull/300764
-  # hardware.graphics.extraPackages = [ pkgs.amf ];
-
-  environment.variables = {
-    OCL_ICD_VENDORS = "${pkgs.rocm-opencl-icd}/etc/OpenCL/vendors/";
   };
 
   hardware.bluetooth = {

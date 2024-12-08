@@ -14,6 +14,8 @@
   security.polkit.enable = true;
 
   hardware.xone.enable = true;
-  hardware.opentabletdriver.enable = true;
-  hardware.opentabletdriver.daemon.enable = true;
+
+  # Insecure because of old dotnet version
+  # hardware.opentabletdriver.enable = true;
+  # hardware.opentabletdriver.daemon.enable = true;
 }

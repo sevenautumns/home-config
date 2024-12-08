@@ -22,4 +22,5 @@ in
   "rclone-mega.age".publicKeys = [ ] ++ users;
   "ppp-1und1-secret.age".publicKeys = [ ] ++ users;
   "paperless-restic-password.age".publicKeys = [ ] ++ users;
+  "homepage_dashboard.age".publicKeys = [ roxy ] ++ users;
 }

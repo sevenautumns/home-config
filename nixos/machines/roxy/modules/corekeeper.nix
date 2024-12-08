@@ -42,5 +42,5 @@ in
       # LD_LIBRARY_PATH = "${pkgs.glibc}/lib";
     };
   };
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 }

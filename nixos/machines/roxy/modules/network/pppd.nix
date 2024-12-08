@@ -17,8 +17,8 @@ let inherit (lib.meta) getExe'; in {
       RequiredForOnline = "routable";
     };
     routes = [
-      { routeConfig.Destination = "0.0.0.0/0"; }
-      { routeConfig.Destination = "::/0"; }
+      { Destination = "0.0.0.0/0"; }
+      { Destination = "::/0"; }
     ];
     networkConfig = {
       KeepConfiguration = "static";

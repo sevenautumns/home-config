@@ -17,7 +17,7 @@ let inherit (lib.meta) getExe'; in {
   systemd.network.networks."40-ztbtovjx4h" = {
     matchConfig.Name = "ztbtovjx4h";
     # linkConfig.RequiredForOnline = "no";
-    routes = [{ routeConfig.Destination = "192.168.194.0/24"; }];
+    routes = [{ Destination = "192.168.194.0/24"; }];
     networkConfig = {
       Address = "192.168.194.51/24";
       DHCP = "ipv4";
@@ -70,11 +70,14 @@ let inherit (lib.meta) getExe'; in {
     enable = true;
     nsswins = true;
     openFirewall = true;
-    extraConfig = ''
-      guest account = nobody
-      map to guest = bad user
-    '';
-    shares = {
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "sss";
+        "netbios name" = "sss";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
       anime = {
         browseable = "yes";
         comment = "Anime Share";

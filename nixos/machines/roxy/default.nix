@@ -10,7 +10,7 @@
     # ./modules/steamcmd.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
-    ./modules/niketsu.nix
+    # ./modules/niketsu.nix
     ./modules/restic.nix
     ../../common.nix
     (modulesPath + "/installer/scan/not-detected.nix")

@@ -2,10 +2,10 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nur.url = "github:nix-community/NUR";
@@ -15,13 +15,13 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-system.url = "github:nix-community/home-manager/release-24.05";
+    home-manager-system.url = "github:nix-community/home-manager/release-24.11";
     home-manager-system.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-stable.url = "github:nix-community/home-manager/release-24.05";
+    home-manager-stable.url = "github:nix-community/home-manager/release-24.11";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -140,7 +140,7 @@
                 overlays = [
                   deploy-rs.overlay
                   self.overlays.matryoshka-pkgs
-                  nur.overlay
+                  nur.overlays.default
                   inputs.nixd.overlays.default
                 ];
               };
@@ -171,11 +171,11 @@
               {
                 networking.hostName = host;
                 nixpkgs.overlays =
-                  [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlay ];
+                  [ deploy-rs.overlay self.overlays.matryoshka-pkgs nur.overlays.default ];
               }
               agenix.nixosModules.default
               self.nixosModules.transmission
-              self.nixosModules.flood
+              # self.nixosModules.flood
               lix-module.nixosModules.default
               (./nixos/machines + "/${host}")
             ];
@@ -200,7 +200,7 @@
       };
 
       nixosModules.transmission = import modules/transmission.nix;
-      nixosModules.flood = import modules/flood.nix;
+      # nixosModules.flood = import modules/flood.nix;
 
       deploy.nodes = lib.mapAttrs
         (host: machine: {

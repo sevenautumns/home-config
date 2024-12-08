@@ -33,7 +33,7 @@
     group = "media";
     credentialsFile = "/var/lib/transmission/auth";
     settings = {
-      # umask = "002";
+      umask = 2;
       download-dir = "/media/torrent_storage/completed";
       incomplete-dir = "/media/torrent_storage/incomplete";
       incomplete-dir-enabled = true;
@@ -73,8 +73,9 @@
 
   services.flood = {
     enable = true;
-    user = "autumnal";
-    group = "media";
+    host = "0.0.0.0";
+    # user = "autumnal";
+    # group = "media";
     port = 3030;
     openFirewall = true;
   };

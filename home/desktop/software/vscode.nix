@@ -7,7 +7,7 @@ let inherit (lib.meta) getExe; in {
       with pkgs.vscode-utils; [
         bbenoist.nix
         streetsidesoftware.code-spell-checker
-        matklad.rust-analyzer
+        rust-lang.rust-analyzer
         vadimcn.vscode-lldb
         bungcip.better-toml
         james-yu.latex-workshop

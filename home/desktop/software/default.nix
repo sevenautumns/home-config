@@ -53,10 +53,10 @@ in
 
       lutris
       # wine64
-      breitbandmessung
 
       #image
-      gnome.eog
+      eog
+      feh
       inkscape
       gimp
 
@@ -67,10 +67,8 @@ in
       arandr
       nvtopPackages.amd
 
-      # https://github.com/NixOS/nixpkgs/pull/195985
-      # gtk4 problem, use stable until fixed
-      stable.gnome.nautilus
-      cinnamon.nemo
+      nautilus
+      nemo
 
       kcc
       calibre
