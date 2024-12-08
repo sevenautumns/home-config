@@ -34,7 +34,7 @@ in
         # decorations_theme_variant = "dark";
       };
       font.size = 10;
-      shell.program = "${getExe pkgs.fish}";
+      terminal.shell.program = "${getExe pkgs.fish}";
       colors = {
         transparent_background_colors = true;
         # Autumn

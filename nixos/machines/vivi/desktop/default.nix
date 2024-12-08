@@ -13,7 +13,7 @@
   programs.seahorse.enable = true;
   security.polkit.enable = true;
 
-  # hardware.xone.enable = true;
+  hardware.xone.enable = true;
   hardware.opentabletdriver.enable = true;
   hardware.opentabletdriver.daemon.enable = true;
 }

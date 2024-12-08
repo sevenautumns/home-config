@@ -74,6 +74,7 @@ in
               138, # Samba
               8211, # Palworld
               27015, 27016, # Core Keepers
+              34197, # Factorio
             } accept comment "Allow Samba from ZERO_SSS"
             counter drop comment "Drop everything else from ZERO_SSS"
           }

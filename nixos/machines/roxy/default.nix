@@ -6,6 +6,7 @@
     ./modules/rr.nix
     ./modules/palworld.nix
     ./modules/corekeeper.nix
+    ./modules/factorio.nix
     # ./modules/steamcmd.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
