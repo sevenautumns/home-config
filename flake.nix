@@ -175,7 +175,6 @@
               }
               agenix.nixosModules.default
               self.nixosModules.transmission
-              # self.nixosModules.flood
               lix-module.nixosModules.default
               (./nixos/machines + "/${host}")
             ];
@@ -200,7 +199,6 @@
       };
 
       nixosModules.transmission = import modules/transmission.nix;
-      # nixosModules.flood = import modules/flood.nix;
 
       deploy.nodes = lib.mapAttrs
         (host: machine: {
