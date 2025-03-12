@@ -1,6 +1,14 @@
-{ pkgs, config, lib, inputs, ... }:
-let theme = config.theme;
-in {
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}:
+let
+  theme = config.theme;
+in
+{
   programs.rofi = with config.theme; {
     enable = true;
     # font = "FiraCode Nerd Font Medium 12";
@@ -23,8 +31,10 @@ in {
       modi = "drun,window,run,ssh";
     };
     theme =
-      let inherit (config.lib.formats.rasi) mkLiteral;
-      in {
+      let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in
+      {
         "*" = {
           # font = "FiraCode Nerd Font Medium 10";
           font = "Ttyp0 Medium 14";
@@ -69,7 +79,9 @@ in {
           vertical-align = mkLiteral "0.5";
         };
 
-        "prompt" = { text-color = mkLiteral "@accent-color"; };
+        "prompt" = {
+          text-color = mkLiteral "@accent-color";
+        };
 
         "textbox" = {
           padding = mkLiteral "@pad";
@@ -90,13 +102,21 @@ in {
           spacing = mkLiteral "@spac";
         };
 
-        "element normal normal" = { text-color = mkLiteral "@fg0"; };
+        "element normal normal" = {
+          text-color = mkLiteral "@fg0";
+        };
 
-        "element normal urgent" = { text-color = mkLiteral "@urgent-color"; };
+        "element normal urgent" = {
+          text-color = mkLiteral "@urgent-color";
+        };
 
-        "element normal active" = { text-color = mkLiteral "@accent-color"; };
+        "element normal active" = {
+          text-color = mkLiteral "@accent-color";
+        };
 
-        "element selected" = { text-color = mkLiteral "@bg0"; };
+        "element selected" = {
+          text-color = mkLiteral "@bg0";
+        };
 
         "element selected normal, element selected active" = {
           background-color = mkLiteral "@accent-color";
@@ -106,9 +126,13 @@ in {
           background-color = mkLiteral "@urgent-color";
         };
 
-        "element-icon" = { size = mkLiteral "0.8em"; };
+        "element-icon" = {
+          size = mkLiteral "0.8em";
+        };
 
-        "element-text" = { text-color = mkLiteral "inherit"; };
+        "element-text" = {
+          text-color = mkLiteral "inherit";
+        };
       };
     pass = {
       enable = true;

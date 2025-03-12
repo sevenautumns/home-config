@@ -1,4 +1,10 @@
-{ pkgs, config, lib, machine, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  machine,
+  ...
+}:
 let
   host = machine.host;
   theme = config.theme;

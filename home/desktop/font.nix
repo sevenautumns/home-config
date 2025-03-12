@@ -10,7 +10,12 @@ in
 {
   home.packages = with pkgs; [
     (nerdfonts.override {
-      fonts = [ "FiraMono" "FiraCode" "RobotoMono" "SourceCodePro" ];
+      fonts = [
+        "FiraMono"
+        "FiraCode"
+        "RobotoMono"
+        "SourceCodePro"
+      ];
     })
     sarasa-gothic
     font-awesome

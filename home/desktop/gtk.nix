@@ -1,4 +1,10 @@
-{ pkgs, lib, config, machine, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  machine,
+  ...
+}:
 let
   host = machine.host;
   user = machine.user;
@@ -16,12 +22,12 @@ let
   };
 in
 {
-  home.file.".local/share/themes".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.profileDirectory}/share/themes";
-  home.file.".icons/icons".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.profileDirectory}/share/icons";
-  home.file.".themes".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.profileDirectory}/share/themes";
+  home.file.".local/share/themes".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/themes";
+  home.file.".icons/icons".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/icons";
+  home.file.".themes".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/themes";
 
   gtk = {
     enable = true;
@@ -45,9 +51,9 @@ in
       package = pkgs.roboto;
     };
     gtk3 = {
-      bookmarks = [ "file:///home/${user}/GitRepos GitRepos" ]
-        ++ lib.optionals (host == "vivi")
-        [ "file:///net/roxy Roxy (NFS)" ];
+      bookmarks = [
+        "file:///home/${user}/GitRepos GitRepos"
+      ] ++ lib.optionals (host == "vivi") [ "file:///net/roxy Roxy (NFS)" ];
       extraConfig = {
         gtk-application-prefer-dark-theme = 1;
         gtk-toolbar-style = "GTK_TOOLBAR_BOTH";

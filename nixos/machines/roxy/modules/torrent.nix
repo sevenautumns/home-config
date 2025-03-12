@@ -1,12 +1,20 @@
-{ pkgs, config, inputs, lib, ... }: {
+{
+  pkgs,
+  config,
+  inputs,
+  lib,
+  flakeRoot,
+  ...
+}:
+{
   age.secrets = {
     transmission_auth = {
-      file = ../../../../secrets/transmission_auth.age;
+      file = flakeRoot + "/secrets/transmission_auth.age";
       path = "/var/lib/transmission/auth";
       owner = "autumnal";
     };
     mullvad_coyote = {
-      file = ../../../../secrets/mullvad_coyote.age;
+      file = flakeRoot + "/secrets/mullvad_coyote.age";
       path = "/var/lib/mullvad/coyote";
     };
   };

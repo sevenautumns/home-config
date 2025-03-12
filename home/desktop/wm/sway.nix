@@ -1,4 +1,10 @@
-{ pkgs, config, machine, lib, ... }:
+{
+  pkgs,
+  config,
+  machine,
+  lib,
+  ...
+}:
 let
   inherit (lib.meta) getExe getExe';
   window-switcher = pkgs.writeShellScriptBin "window-switcher" ''
@@ -32,12 +38,12 @@ in
 
     Service = {
       ExecStart = "${pkgs.writeShellScript "wayvnc-start" ''
-          if [[ $XDG_SESSION_TYPE = "wayland" ]]; then
-            ${getExe' pkgs.wayvnc "wayvnc"} && exit 1
-          else
-            exit 0
-          fi
-        ''}";
+        if [[ $XDG_SESSION_TYPE = "wayland" ]]; then
+          ${getExe' pkgs.wayvnc "wayvnc"} && exit 1
+        else
+          exit 0
+        fi
+      ''}";
       Restart = "on-failure";
       RestartSec = "1m";
     };
@@ -45,12 +51,20 @@ in
     Install.WantedBy = [ "graphical-session.target" ];
   };
 
-  home.file.".config/systemd/user/xdg-desktop-portal-gnome.service".source = config.lib.file.mkOutOfStoreSymlink "/dev/null";
+  home.file.".config/systemd/user/xdg-desktop-portal-gnome.service".source =
+    config.lib.file.mkOutOfStoreSymlink "/dev/null";
 
-  home.packages = with pkgs;
-    [ wl-clipboard sway-launcher-desktop ]
+  home.packages =
+    with pkgs;
+    [
+      wl-clipboard
+      sway-launcher-desktop
+    ]
     ++ lib.optionals machine.nixos [ ]
-    ++ lib.optionals (machine.host == "vivi") [ desktop-mode couch-mode ];
+    ++ lib.optionals (machine.host == "vivi") [
+      desktop-mode
+      couch-mode
+    ];
 
   programs.i3status-rust.enable = true;
   programs.i3status-rust.bars.default = {
@@ -87,6 +101,7 @@ in
       {
         block = "battery";
         driver = "upower";
+        missing_format = "";
       }
       {
         block = "time";
@@ -100,7 +115,10 @@ in
       sway =
         let
           fonts = {
-            names = [ "Ttyp0" "Sarasa UI J" ];
+            names = [
+              "Ttyp0"
+              "Sarasa UI J"
+            ];
             # names = [ "Ttyp0" "Fixed" ];
             size = 9.0;
           };
@@ -131,41 +149,42 @@ in
           checkConfig = false;
           config = {
             terminal = "alacritty";
-            bars = [{
-              colors = {
-                activeWorkspace = {
-                  background = gray3;
-                  border = gray3;
-                  text = white;
-                };
-                background = gray0;
-                bindingMode = {
-                  background = red;
-                  border = red;
-                  text = gray0;
-                };
-                focusedWorkspace = {
-                  background = brown;
-                  border = brown;
-                  text = gray0;
-                };
-                inactiveWorkspace = {
+            bars = [
+              {
+                colors = {
+                  activeWorkspace = {
+                    background = gray3;
+                    border = gray3;
+                    text = white;
+                  };
                   background = gray0;
-                  border = gray3;
-                  text = gray5;
+                  bindingMode = {
+                    background = red;
+                    border = red;
+                    text = gray0;
+                  };
+                  focusedWorkspace = {
+                    background = brown;
+                    border = brown;
+                    text = gray0;
+                  };
+                  inactiveWorkspace = {
+                    background = gray0;
+                    border = gray3;
+                    text = gray5;
+                  };
+                  separator = gray5;
+                  statusline = gray5;
+                  urgentWorkspace = {
+                    background = red;
+                    border = red;
+                    text = gray0;
+                  };
                 };
-                separator = gray5;
-                statusline = gray5;
-                urgentWorkspace = {
-                  background = red;
-                  border = red;
-                  text = gray0;
-                };
-              };
-              fonts = fonts;
-              statusCommand =
-                "${getExe pkgs.i3status-rust} ~/.config/i3status-rust/config-default.toml";
-            }];
+                fonts = fonts;
+                statusCommand = "${getExe pkgs.i3status-rust} ~/.config/i3status-rust/config-default.toml";
+              }
+            ];
             window.border = 2;
             gaps = {
               inner = 5;
@@ -190,7 +209,7 @@ in
               };
             };
             output = {
-              "*".bg = "$HOME/Pictures/Wallpaper/Autumn.png fill ";
+              "*".bg = "$HOME/Pictures/Wallpaper/Autumn.jpg fill ";
               ${tv} = {
                 mode = "3840x2160@120Hz";
                 # scale = "2";
@@ -219,47 +238,80 @@ in
             };
             workspaceOutputAssign = [
               {
-                output = [ wide-tuf wide ];
+                output = [
+                  wide-tuf
+                  wide
+                ];
                 workspace = ws1;
               }
               {
-                output = [ wide-tuf wide ];
+                output = [
+                  wide-tuf
+                  wide
+                ];
                 workspace = ws2;
               }
               {
-                output = [ wide-tuf wide ];
+                output = [
+                  wide-tuf
+                  wide
+                ];
                 workspace = ws3;
               }
               {
-                output = [ wide-tuf wide ];
+                output = [
+                  wide-tuf
+                  wide
+                ];
                 workspace = ws4;
               }
               {
-                output = [ wide-tuf wide ];
+                output = [
+                  wide-tuf
+                  wide
+                ];
                 workspace = ws5;
               }
               {
-                output = [ fourthree laptop ];
+                output = [
+                  fourthree
+                  laptop
+                ];
                 workspace = ws6;
               }
               {
-                output = [ fourthree laptop ];
+                output = [
+                  fourthree
+                  laptop
+                ];
                 workspace = ws7;
               }
               {
-                output = [ tv fourthree laptop ];
+                output = [
+                  tv
+                  fourthree
+                  laptop
+                ];
                 workspace = ws8;
               }
               {
-                output = [ tv fourthree laptop ];
+                output = [
+                  tv
+                  fourthree
+                  laptop
+                ];
                 workspace = ws9;
               }
               {
-                output = [ wide-tuf wide ];
+                output = [
+                  wide-tuf
+                  wide
+                ];
                 workspace = ws10;
               }
             ];
-            keybindings = with config.theme-non_hex;
+            keybindings =
+              with config.theme-non_hex;
               pkgs.lib.mkOptionDefault {
                 "${modifier}+s" = "layout stacking";
                 "${modifier}+y" = "layout tabbed";
@@ -276,10 +328,9 @@ in
                 "${modifier}+l" = "exec swaylock";
 
                 # "${modifier}+d" = "exec rofi -no-lazy-grab -show drun -modi drun";
-                "${modifier}+d" =
-                  "exec alacritty --class=launcher -e sway-launcher-desktop";
-                "${modifier}+t" =
-                  "exec alacritty --class=launcher -e ${getExe window-switcher}";
+                "${modifier}+d" = "exec alacritty --class=launcher -e sway-launcher-desktop";
+                "${modifier}+t" = "exec alacritty --class=launcher -e ${getExe window-switcher}";
+                "${modifier}+g" = "exec alacritty --class=ghost --title=ghost";
                 # "${modifier}+t" = "exec rofi -show window -modi window";
                 # "${modifier}+t" = "exec ${getExe pkgs.swayr} switch-workspace-or-window";
                 # "${modifier}+p" = "exec rofi-pass";
@@ -288,11 +339,9 @@ in
                 "${modifier}+o" = "exec alacritty --class=launcher -e pulsemixer";
 
                 "${modifier}+Return" = "exec alacritty";
-                "${modifier}+Shift+Return" = ''
-                  exec alacritty --working-directory="$(${getExe pkgs.swaycwd}"'';
+                "${modifier}+Shift+Return" = ''exec alacritty --working-directory="$(${getExe pkgs.swaycwd}"'';
                 "${modifier}+e" = "exec nautilus ~";
-                "${modifier}+Shift+e" = ''
-                  exec ${getExe' pkgs.xdg-utils "xdg-utils"} "$(${getExe pkgs.swaycwd}"'';
+                "${modifier}+Shift+e" = ''exec ${getExe' pkgs.xdg-utils "xdg-utils"} "$(${getExe pkgs.swaycwd}"'';
 
                 "${modifier}+w" = "exec firefox";
 
@@ -302,14 +351,13 @@ in
                 #     -m 'power menu' \
                 #     -b 'reboot' 'reboot' \
                 #     -b 'shutdown' 'poweroff' \
-                #     -b 'logout' 'i3-msg exit' 
+                #     -b 'logout' 'i3-msg exit'
                 # '';
 
                 "XF86AudioMute" = "exec ${getExe pkgs.pamixer} -t";
                 "XF86AudioLowerVolume" = "exec ${getExe pkgs.pamixer} -d 5";
                 "XF86AudioRaiseVolume" = "exec ${getExe pkgs.pamixer} -i 5";
-                "XF86AudioPlay" =
-                  "exec ${getExe pkgs.playerctl} play-pause";
+                "XF86AudioPlay" = "exec ${getExe pkgs.playerctl} play-pause";
                 "XF86AudioNext" = "exec ${getExe pkgs.playerctl} next";
                 "XF86AudioPrev" = "exec ${getExe pkgs.playerctl} previous";
                 "XF86MonBrightnessUp" = "exec ${getExe pkgs.light} -A 10";
@@ -405,15 +453,20 @@ in
                 indicator = white2;
               };
             };
-            window.commands = [{
-              criteria = { app_id = "^launcher$"; };
-              command =
-                "floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 5";
-            }];
-            # startup = [ ] ++ lib.optionals (machine.user == "autumnal") [{
-            #   command =
-            #     "pass show linux/local/autumnal | gnome-keyring-daemon --unlock --replace";
-            # }];
+            window.commands = [
+              {
+                criteria = {
+                  app_id = "^launcher$";
+                };
+                command = "floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 5";
+              }
+              {
+                criteria = {
+                  app_id = "^ghost$";
+                };
+                command = "opacity 0";
+              }
+            ];
           };
           extraConfig = ''
             for_window [instance="^launcher$"] floating enable sticky enable resize set 30 ppt 60 ppt border normal 10

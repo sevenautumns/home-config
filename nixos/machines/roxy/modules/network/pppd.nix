@@ -1,5 +1,14 @@
-{ config, lib, pkgs, ... }:
-let inherit (lib.meta) getExe'; in {
+{
+  config,
+  lib,
+  pkgs,
+  flakeRoot,
+  ...
+}:
+let
+  inherit (lib.meta) getExe';
+in
+{
   systemd.network.netdevs = {
     # QoS concentrator
     "ifbppp0" = {
@@ -58,7 +67,6 @@ let inherit (lib.meta) getExe'; in {
       Managed = true;
     };
   };
-
 
   systemd.network.networks."30-ifbppp0" = {
     name = "ifbppp0";
@@ -119,7 +127,7 @@ let inherit (lib.meta) getExe'; in {
   #     Mode = "ipip6";
   #     Local = "slaac";
   #     # Local = "2001:9e8:69b8:a00:da5e:d3ff:fed4:add8";
-  #     Remote = "2001:1438:fff:30::1"; # aftr.online.versatel.de 
+  #     Remote = "2001:1438:fff:30::1"; # aftr.online.versatel.de
   #     EncapsulationLimit = "none";
   #   };
   # };
@@ -164,7 +172,7 @@ let inherit (lib.meta) getExe'; in {
   };
 
   age.secrets."ppp-1und1-secret" = {
-    file = ../../../../../secrets/ppp-1und1-secret.age;
+    file = flakeRoot + "/secrets/ppp-1und1-secret.age";
     owner = "root";
     mode = "700";
     path = "/etc/ppp/peers/1und1-secret";

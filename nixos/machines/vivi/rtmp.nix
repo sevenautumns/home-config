@@ -1,4 +1,11 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   services.nginx = {
     enable = true;
     additionalModules = with pkgs.nginxModules; [ rtmp ];
@@ -20,5 +27,3 @@
   };
 
 }
-
-

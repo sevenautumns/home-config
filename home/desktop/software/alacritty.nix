@@ -1,4 +1,10 @@
-{ pkgs, config, lib, machine, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  machine,
+  ...
+}:
 let
   inherit (lib.meta) getExe;
   host = machine.host;
@@ -8,23 +14,24 @@ in
   # services.sxhkd.keybindings = { "super + Return" = "alacritty"; };
 
   # Fallback Terminal
-  home.packages = with pkgs;
-    [
-      (makeDesktopItem {
-        name = "Alacritty (Fallback)";
-        desktopName = "Alacritty (Fallback)";
-        icon = "Alacritty";
-        exec = "alacritty --command fish --no-config";
-        terminal = false;
-        type = "Application";
-      })
-    ];
+  home.packages = with pkgs; [
+    (makeDesktopItem {
+      name = "Alacritty (Fallback)";
+      desktopName = "Alacritty (Fallback)";
+      icon = "Alacritty";
+      exec = "alacritty --command fish --no-config";
+      terminal = false;
+      type = "Application";
+    })
+  ];
 
   programs.alacritty = {
     enable = true;
     package = with pkgs; if machine.nixos then unstable.alacritty else hello;
     settings = {
-      env = { WINIT_X11_SCALE_FACTOR = "1"; };
+      env = {
+        WINIT_X11_SCALE_FACTOR = "1";
+      };
       window = {
         padding = {
           x = 5;
@@ -96,7 +103,7 @@ in
         # primary = {
         #   background = "0x282828";
         #   foreground = "0xebdbb2";
-        # }; 
+        # };
         # # Normal colors;
         # normal = {
         #   black = "0x282828";

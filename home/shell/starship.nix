@@ -1,5 +1,13 @@
-{ pkgs, config, lib, ... }:
-let inherit (lib.meta) getExe getExe'; in {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  inherit (lib.meta) getExe getExe';
+in
+{
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
@@ -48,8 +56,7 @@ let inherit (lib.meta) getExe getExe'; in {
       swift.symbol = "ﯣ ";
       # Print packages of shell if we are in nix-shell
       custom.nix-shell-info = {
-        command =
-          "${getExe' pkgs.any-nix-shell "nix-shell-info"} | sed 's/x1B[[0-9;]{1,}[A-Za-z]//g'";
+        command = "${getExe' pkgs.any-nix-shell "nix-shell-info"} | sed 's/x1B[[0-9;]{1,}[A-Za-z]//g'";
         when = "test 0 -ne $(${getExe' pkgs.any-nix-shell "nix-shell-info"} | wc -w)";
         format = "with \\[[$output]($style)\\] ";
         shell = [ "${getExe pkgs.bash}" ];

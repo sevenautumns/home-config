@@ -1,5 +1,13 @@
-{ pkgs, config, lib, ... }:
-let inherit (lib.meta) getExe; in {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  inherit (lib.meta) getExe;
+in
+{
   programs.command-not-found.enable = false;
   programs.zsh = {
     enable = true;

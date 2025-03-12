@@ -1,5 +1,13 @@
-{ config, lib, pkgs, ... }:
-let inherit (lib.meta) getExe'; in {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (lib.meta) getExe';
+in
+{
   services.zerotierone.joinNetworks = [
     "12ac4a1e711ec1f6"
   ];
@@ -17,7 +25,7 @@ let inherit (lib.meta) getExe'; in {
   systemd.network.networks."40-ztbtovjx4h" = {
     matchConfig.Name = "ztbtovjx4h";
     # linkConfig.RequiredForOnline = "no";
-    routes = [{ Destination = "192.168.194.0/24"; }];
+    routes = [ { Destination = "192.168.194.0/24"; } ];
     networkConfig = {
       Address = "192.168.194.51/24";
       DHCP = "ipv4";

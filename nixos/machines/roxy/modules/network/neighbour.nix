@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   systemd.network.netdevs."60-neighbour" = {
     netdevConfig = {
       Kind = "vlan";

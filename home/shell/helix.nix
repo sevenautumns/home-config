@@ -1,12 +1,18 @@
-{ pkgs, config, lib, machine, inputs, ... }:
-let inherit (lib.meta) getExe getExe'; in {
+{
+  pkgs,
+  config,
+  lib,
+  machine,
+  inputs,
+  ...
+}:
+let
+  inherit (lib.meta) getExe getExe';
+in
+{
   programs.helix = {
     enable = true;
-    package =
-      if (machine.arch == "x86_64-linux") then
-        pkgs.unstable.helix
-      else
-        pkgs.stable.helix;
+    package = if (machine.arch == "x86_64-linux") then pkgs.unstable.helix else pkgs.stable.helix;
     settings = {
       theme = "autumn";
       editor = {
@@ -21,8 +27,16 @@ let inherit (lib.meta) getExe getExe'; in {
         soft-wrap.enable = true;
       };
       keys.normal = {
-        "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
-        "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
+        "^" = [
+          "select_mode"
+          "goto_first_nonwhitespace"
+          "normal_mode"
+        ];
+        "$" = [
+          "select_mode"
+          "goto_line_end"
+          "normal_mode"
+        ];
         X = "extend_line_above";
         space.space = "file_picker";
         space.w = ":write";
@@ -38,8 +52,16 @@ let inherit (lib.meta) getExe getExe'; in {
         right = "move_char_right";
       };
       keys.select = {
-        "^" = [ "select_mode" "goto_first_nonwhitespace" "normal_mode" ];
-        "$" = [ "select_mode" "goto_line_end" "normal_mode" ];
+        "^" = [
+          "select_mode"
+          "goto_first_nonwhitespace"
+          "normal_mode"
+        ];
+        "$" = [
+          "select_mode"
+          "goto_line_end"
+          "normal_mode"
+        ];
       };
     };
     languages = {
@@ -54,7 +76,7 @@ let inherit (lib.meta) getExe getExe'; in {
         }
         {
           name = "nix";
-          formatter.command = "${getExe pkgs.nixpkgs-fmt}";
+          formatter.command = "${getExe pkgs.nixfmt-rfc-style}";
           language-servers = [ "nixd" ];
           file-types = [ "nix" ];
           scope = "source.nix";
@@ -74,10 +96,19 @@ let inherit (lib.meta) getExe getExe'; in {
         }
         {
           name = "markdown";
-          language-servers = [ "ltex" "zk" ];
-          file-types = [ "md" "markdown" ];
+          language-servers = [
+            "ltex"
+            "zk"
+          ];
+          file-types = [
+            "md"
+            "markdown"
+          ];
           scope = "source.md";
-          roots = [ ".zk" ".git" ];
+          roots = [
+            ".zk"
+            ".git"
+          ];
         }
       ];
       language-server = {
@@ -88,13 +119,18 @@ let inherit (lib.meta) getExe getExe'; in {
         };
         taplo = {
           command = "taplo";
-          args = [ "lsp" "stdio" ];
+          args = [
+            "lsp"
+            "stdio"
+          ];
         };
         ltex = {
           command = "ltex-ls";
           config.ltex = {
             language = "en-GB";
-            latex.commands = { "\\\\lstinline{}" = "dummy"; };
+            latex.commands = {
+              "\\\\lstinline{}" = "dummy";
+            };
           };
         };
         zk = {
@@ -134,8 +170,7 @@ let inherit (lib.meta) getExe getExe'; in {
     (makeDesktopItem {
       name = "helix";
       desktopName = "Helix";
-      exec =
-        "alacritty --title Helix --class helix -e ${getExe config.programs.helix.package} %F";
+      exec = "alacritty --title Helix --class helix -e ${getExe config.programs.helix.package} %F";
       terminal = false;
       type = "Application";
     })

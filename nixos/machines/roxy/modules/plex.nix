@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   services.plex = {
     enable = true;
     user = "autumnal";

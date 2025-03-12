@@ -1,4 +1,11 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
   # sound.enable = false;

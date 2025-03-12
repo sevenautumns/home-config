@@ -1,7 +1,10 @@
-/*
-*  Taken from https://github.com/Zumorica/GradientOS/blob/main/hosts/asiyah/palworld-server.nix
-*/
-{ config, pkgs, lib, ... }:
+# *  Taken from https://github.com/Zumorica/GradientOS/blob/main/hosts/asiyah/palworld-server.nix
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   inherit (lib.meta) getExe getExe';
   steam-app = "2394010";

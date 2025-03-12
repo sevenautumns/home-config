@@ -1,8 +1,14 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}:
 let
   overlay = final: super: {
-    makeModulesClosure = x:
-      super.makeModulesClosure (x // { allowMissing = true; });
+    makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
   };
 in
 {
@@ -16,16 +22,22 @@ in
   # Enables the generation of /boot/extlinux/extlinux.conf
   boot.loader.generic-extlinux-compatible.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_rpi4;
-  boot.initrd.availableKernelModules = [ "usbhid" "usb_storage" "vc4" ];
+  boot.initrd.availableKernelModules = [
+    "usbhid"
+    "usb_storage"
+    "vc4"
+  ];
 
   environment.systemPackages = with pkgs; [ libraspberrypi ];
 
   networking = {
     hostName = "ika";
-    interfaces.eth0.ipv4.addresses = [{
-      address = "192.168.178.12";
-      prefixLength = 24;
-    }];
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = "192.168.178.12";
+        prefixLength = 24;
+      }
+    ];
     # defaultGateway = "192.168.178.2";
     nameservers = [ "1.1.1.1" ];
     enableIPv6 = true;

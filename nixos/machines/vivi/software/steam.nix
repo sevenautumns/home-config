@@ -1,5 +1,13 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   programs.steam.enable = true;
+  programs.steam.package = pkgs.unstable.steam;
   hardware.steam-hardware.enable = true;
   programs.steam.gamescopeSession.enable = true;
 
@@ -12,9 +20,12 @@
   };
 
   services.flatpak.enable = true;
+  programs.steam.protontricks.enable = true;
 
   programs.gamemode.enable = true;
 
-  environment.systemPackages = with pkgs; [ gamescope mangohud ];
+  environment.systemPackages = with pkgs; [
+    gamescope
+    mangohud
+  ];
 }
-

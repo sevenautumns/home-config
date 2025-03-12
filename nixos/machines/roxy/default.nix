@@ -1,16 +1,22 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}:
+{
   imports = [
-    # ./modules/docker.nix
     ./modules/network
     ./modules/plex.nix
     ./modules/rr.nix
     ./modules/palworld.nix
     ./modules/corekeeper.nix
     ./modules/factorio.nix
-    # ./modules/steamcmd.nix
+    ./modules/sim_refresh
     ./modules/paperless.nix
     ./modules/torrent.nix
-    # ./modules/niketsu.nix
     ./modules/restic.nix
     ../../common.nix
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -18,7 +24,11 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -65,7 +75,10 @@
     "/media" = {
       device = "/dev/disk/by-uuid/5ea476f2-d9fd-4de8-9d53-b901caa88303";
       fsType = "btrfs";
-      options = [ "noatime" "compress=zstd" ];
+      options = [
+        "noatime"
+        "compress=zstd"
+      ];
     };
   };
 

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   inherit (lib.meta) getExe getExe';
   port = 8211;
@@ -17,7 +22,10 @@ in
   users.groups.${group} = { };
 
   systemd.services.corekeeper = {
-    path = with pkgs.xorg; [ libXi xorgserver ];
+    path = with pkgs.xorg; [
+      libXi
+      xorgserver
+    ];
     # wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       # EnvironmentFile = cfg.secretFile;

@@ -1,5 +1,14 @@
-{ pkgs, lib, config, machine, ... }:
-let inherit (lib.meta) getExe; in {
+{
+  pkgs,
+  lib,
+  config,
+  machine,
+  ...
+}:
+let
+  inherit (lib.meta) getExe;
+in
+{
   imports = [
     ./colors.nix
     ./git.nix
@@ -37,9 +46,11 @@ let inherit (lib.meta) getExe; in {
     fileWidgetCommand = "${getExe pkgs.fd} -E /net --hidden --type f";
     fileWidgetOptions = [ "--preview='${getExe pkgs.bat} {} --color=always'" ];
     changeDirWidgetCommand = "${getExe pkgs.fd} -E /net --hidden --type d";
-    changeDirWidgetOptions =
-      [ "--preview='${getExe pkgs.eza} --tree {} | head -200'" ];
-    historyWidgetOptions = [ "--height 40%" "--layout=reverse" ];
+    changeDirWidgetOptions = [ "--preview='${getExe pkgs.eza} --tree {} | head -200'" ];
+    historyWidgetOptions = [
+      "--height 40%"
+      "--layout=reverse"
+    ];
   };
 
   programs.password-store = {
@@ -49,7 +60,9 @@ let inherit (lib.meta) getExe; in {
       # exts.pass-import
       exts.pass-audit
     ]);
-    settings = { PASSWORD_STORE_DIR = "$HOME/.password-store"; };
+    settings = {
+      PASSWORD_STORE_DIR = "$HOME/.password-store";
+    };
   };
 
   programs.tealdeer.enable = true;

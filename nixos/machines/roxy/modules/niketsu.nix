@@ -1,4 +1,11 @@
-{ pkgs, config, inputs, lib, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  lib,
+  flakeRoot,
+  ...
+}:
 let
   inherit (lib.meta) getExe';
   system = pkgs.system;
@@ -20,7 +27,7 @@ in
   networking.firewall.allowedTCPPorts = [ 7766 ];
 
   age.secrets.niketsu = {
-    file = ../../../../secrets/niketsu.age;
+    file = flakeRoot + "/secrets/niketsu.age";
     path = "/var/lib/niketsu/server/config.toml";
     owner = "niketsu";
   };
@@ -38,11 +45,15 @@ in
     ];
   };
 
-  security.sudo.extraRules = [{
-    users = [ "niketsu" ];
-    commands = [{
-      command = "${getExe' pkgs.systemd "systemctl"} restart niketsu";
-      options = [ "NOPASSWD" ];
-    }];
-  }];
+  security.sudo.extraRules = [
+    {
+      users = [ "niketsu" ];
+      commands = [
+        {
+          command = "${getExe' pkgs.systemd "systemctl"} restart niketsu";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 }

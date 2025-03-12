@@ -1,13 +1,19 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  flakeRoot,
+  ...
+}:
+{
 
   # FIXME remove when #360592 resolves
   # https://github.com/NixOS/nixpkgs/issues/360592
-  nixpkgs.config.permittedInsecurePackages = [
-    "aspnetcore-runtime-6.0.36"
-    "aspnetcore-runtime-wrapped-6.0.36"
-    "dotnet-sdk-6.0.428"
-    "dotnet-sdk-wrapped-6.0.428"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "aspnetcore-runtime-6.0.36"
+  #   "aspnetcore-runtime-wrapped-6.0.36"
+  #   "dotnet-sdk-6.0.428"
+  #   "dotnet-sdk-wrapped-6.0.428"
+  # ];
 
   services.sonarr = {
     enable = true;
@@ -34,7 +40,7 @@
 
   age.secrets = {
     homepage_dashboard = {
-      file = ../../../../secrets/homepage_dashboard.age;
+      file = flakeRoot + "/secrets/homepage_dashboard.age";
     };
   };
 

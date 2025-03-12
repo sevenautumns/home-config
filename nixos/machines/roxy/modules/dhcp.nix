@@ -1,7 +1,8 @@
 { pkgs, ... }:
 let
 
-in {
+in
+{
   services.kea.dhcp4.enable = true;
   services.kea.dhcp4.settings = {
     interfaces-config = {

@@ -1,4 +1,10 @@
-{ lib, pkgs, info, ... }: {
+{
+  lib,
+  pkgs,
+  info,
+  ...
+}:
+{
   boot.tmp.cleanOnBoot = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
@@ -14,7 +20,10 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   nix = {
-    settings.trusted-users = [ "admin" "autumnal" ];
+    settings.trusted-users = [
+      "admin"
+      "autumnal"
+    ];
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -48,7 +57,10 @@
   };
 
   # enable openssh
-  environment.systemPackages = with pkgs; [ openssh git ];
+  environment.systemPackages = with pkgs; [
+    openssh
+    git
+  ];
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
@@ -89,18 +101,25 @@
     packages = [ pkgs.uw-ttyp0 ];
   };
 
-  security.sudo.extraRules = [{
-    users = [ "admin" ];
-    commands = [{
-      command = "ALL";
-      options = [ "NOPASSWD" ];
-    }];
-  }];
+  security.sudo.extraRules = [
+    {
+      users = [ "admin" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 
   users.users.admin = {
     uid = 1001;
     isNormalUser = true;
-    extraGroups = [ "wheel" "sudo" ];
+    extraGroups = [
+      "wheel"
+      "sudo"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@roxy"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBS1P0v8LyDWFjm4ruh97R+ypG3iHBTGCnqq89lcK+KCAAAAD3NzaDplZDI1NTE5WVNDMQ== ssh:ed25519YSC1"
@@ -114,13 +133,20 @@
   users.users.autumnal = {
     uid = 1000;
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "disk" "input" "audio" "video" "networkmanager" "docker" "gamemode" ];
+    extraGroups = [
+      "wheel"
+      "disk"
+      "input"
+      "audio"
+      "video"
+      "networkmanager"
+      "docker"
+      "gamemode"
+    ];
     shell = pkgs.fish;
     home = "/home/autumnal";
     description = "Sven Friedrich";
-    hashedPassword =
-      "$6$C2lvYMnUwU$fHgjzsQRizvJclKHgscbXiPjrFp0Zm5jvC7Qi1wBdn6poFZ.qDpqmqmuW2UcrT9G.sccZ1W6Htx4Qszf0id68/";
+    hashedPassword = "$6$C2lvYMnUwU$fHgjzsQRizvJclKHgscbXiPjrFp0Zm5jvC7Qi1wBdn6poFZ.qDpqmqmuW2UcrT9G.sccZ1W6Htx4Qszf0id68/";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2untVWtTCezJeQxl40TJGsnDvDNXBiUxWnpN4oOdrp autumnal@roxy"
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBS1P0v8LyDWFjm4ruh97R+ypG3iHBTGCnqq89lcK+KCAAAAD3NzaDplZDI1NTE5WVNDMQ== ssh:ed25519YSC1"
@@ -129,4 +155,3 @@
     ];
   };
 }
-

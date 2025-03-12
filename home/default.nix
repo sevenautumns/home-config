@@ -1,4 +1,11 @@
-{ config, pkgs, lib, machine, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  machine,
+  inputs,
+  ...
+}:
 let
   host = machine.host;
   user = machine.user;
@@ -37,9 +44,9 @@ in
   targets.genericLinux.enable = !machine.nixos;
   home.sessionVariables.PATH =
     if !machine.nixos then
-    ## Reorder PATH for non-Nix system
-    ## - Nix packages work flawlessly with unfavorable PATH-Order
-    ## - Arch packages don't
+      ## Reorder PATH for non-Nix system
+      ## - Nix packages work flawlessly with unfavorable PATH-Order
+      ## - Arch packages don't
       (builtins.replaceStrings [ "\n" ] [ "" ] ''
         /usr/local/bin:
         /usr/bin:/bin:
@@ -58,9 +65,10 @@ in
   #];
 
   home.file =
-    if host == "vivi" then {
-      "GitRepos".source =
-        config.lib.file.mkOutOfStoreSymlink "/media/ssddata/GitRepos";
-    } else
+    if host == "vivi" then
+      {
+        "GitRepos".source = config.lib.file.mkOutOfStoreSymlink "/media/ssddata/GitRepos";
+      }
+    else
       { };
 }

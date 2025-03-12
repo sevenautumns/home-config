@@ -1,6 +1,13 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   imports = [
-    # ./greetd.nix 
+    # ./greetd.nix
     ./pipewire.nix
     ./virtualbox.nix
   ];
@@ -16,6 +23,7 @@
   hardware.xone.enable = true;
 
   # Insecure because of old dotnet version
-  # hardware.opentabletdriver.enable = true;
-  # hardware.opentabletdriver.daemon.enable = true;
+  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.package = pkgs.unstable.opentabletdriver;
+  hardware.opentabletdriver.daemon.enable = true;
 }

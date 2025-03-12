@@ -1,4 +1,10 @@
-{ pkgs, inputs, config, lib, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  lib,
+  ...
+}:
 let
   fcitx5-adwaita = pkgs.stdenv.mkDerivation rec {
     name = "fcitx5-adwaita";
@@ -6,7 +12,7 @@ let
     src = inputs.fcitx5-adwaita;
     unpackPhase = "mkdir -p $out/Adwaita-dark";
     installPhase = "cd ${src} && cp -r * $out/Adwaita-dark";
-    # 
+    #
   };
 
 in

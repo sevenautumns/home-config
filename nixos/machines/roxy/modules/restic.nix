@@ -1,10 +1,16 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  flakeRoot,
+  ...
+}:
+{
   age.secrets = {
     rclone-mega = {
-      file = ../../../../secrets/rclone-mega.age;
+      file = flakeRoot + "/secrets/rclone-mega.age";
     };
     paperless-restic-password = {
-      file = ../../../../secrets/paperless-restic-password.age;
+      file = flakeRoot + "/secrets/paperless-restic-password.age";
     };
   };
   services.restic = {

@@ -1,4 +1,11 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   virtualisation.virtualbox.host = {
     # enable = true;
     # package = pkgs.stable.virtualbox;

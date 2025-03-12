@@ -1,4 +1,11 @@
-{ pkgs, config, inputs, lib, ... }: {
+{
+  pkgs,
+  config,
+  inputs,
+  lib,
+  ...
+}:
+{
   services.paperless = {
     enable = true;
     user = "autumnal";

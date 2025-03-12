@@ -1,5 +1,13 @@
-{ pkgs, config, lib, ... }:
-let inherit (lib.meta) getExe; in {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  inherit (lib.meta) getExe;
+in
+{
   programs.command-not-found.enable = false;
   programs.fish = {
     enable = true;
@@ -40,7 +48,9 @@ let inherit (lib.meta) getExe; in {
       # zf = ''z --pipe="sk --height 40% --layout=reverse"'';
     };
     functions = {
-      fish_greeting = { body = ""; };
+      fish_greeting = {
+        body = "";
+      };
       fish_user_key_bindings = {
         description = "Set custom key bindings";
         body = ''

@@ -1,5 +1,13 @@
-{ config, lib, pkgs, ... }:
-let inherit (lib.meta) getExe'; in {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (lib.meta) getExe';
+in
+{
   imports = [
     ./nftables.nix
     ./well.nix
@@ -77,7 +85,6 @@ let inherit (lib.meta) getExe'; in {
       DHCP = "no";
     };
   };
-
 
   systemd.network.networks."20-lan" = {
     name = "enp2s0";

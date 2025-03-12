@@ -1,16 +1,23 @@
-{ pkgs, lib, machine, inputs, ... }:
+{
+  pkgs,
+  lib,
+  machine,
+  inputs,
+  ...
+}:
 let
-  mpv-package = with pkgs;
-    (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; })
-      {
-        youtubeSupport = true;
-      };
+  mpv-package =
+    with pkgs;
+    (pkgs.mpv-unwrapped.override { vapoursynthSupport = true; }) {
+      youtubeSupport = true;
+    };
 
 in
 {
   programs.mpv = {
     enable = true;
-    package = with pkgs;
+    package =
+      with pkgs;
       pkgs.mpv.override {
         youtubeSupport = true;
       };

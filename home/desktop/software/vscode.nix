@@ -1,10 +1,22 @@
-{ pkgs, config, lib, machine, inputs, ... }:
-let inherit (lib.meta) getExe; in {
+{
+  pkgs,
+  config,
+  lib,
+  machine,
+  inputs,
+  ...
+}:
+let
+  inherit (lib.meta) getExe;
+in
+{
   programs.vscode = {
     enable = true;
     package = with pkgs; if machine.nixos then vscodium else hello;
-    extensions = with pkgs.vscode-extensions;
-      with pkgs.vscode-utils; [
+    extensions =
+      with pkgs.vscode-extensions;
+      with pkgs.vscode-utils;
+      [
         bbenoist.nix
         streetsidesoftware.code-spell-checker
         rust-lang.rust-analyzer
@@ -37,8 +49,7 @@ let inherit (lib.meta) getExe; in {
       debug.allowBreakpointsEverywhere = true;
 
       #Neovim integration
-      vscode-neovim.neovimExecutablePaths.linux =
-        "${getExe config.programs.neovim.finalPackage}";
+      vscode-neovim.neovimExecutablePaths.linux = "${getExe config.programs.neovim.finalPackage}";
     };
   };
 }

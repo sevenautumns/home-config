@@ -1,4 +1,11 @@
-{ pkgs, config, lib, inputs, machine, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  machine,
+  ...
+}:
 let
   host = machine.host;
   arch = machine.arch;
@@ -16,15 +23,15 @@ in
     ./vscode.nix
   ];
 
-  nixpkgs.config.packageOverrides = super: {
-    kcc = (pkgs.stable.kcc.overrideAttrs (old: {
-      # src = inputs.kcc;
-      postPatch = ''
-        substituteInPlace kindlecomicconverter/startup.py \
-          --replace 'dependencyCheck(' '#dependencyCheck('
-      '';
-    }));
-  };
+  # nixpkgs.config.packageOverrides = super: {
+  #   kcc = (pkgs.unstable.kcc.overrideAttrs (old: {
+  #     # src = inputs.kcc;
+  #     postPatch = ''
+  #       substituteInPlace kindlecomicconverter/startup.py \
+  #         --replace 'dependencyCheck(' '#dependencyCheck('
+  #     '';
+  #   }));
+  # };
 
   programs.obs-studio = {
     enable = true;
@@ -36,9 +43,10 @@ in
     ];
   };
 
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     lib.optionals (machine.nixos) [
-      #office  
+      #office
       libreoffice
       okular
 
@@ -48,11 +56,11 @@ in
       discord
       discord-canary
       vesktop
-      tdesktop
+      telegram-desktop
       element-desktop
 
-      lutris
-      # wine64
+      unstable.lutris
+      wine64
 
       #image
       eog
@@ -70,7 +78,7 @@ in
       nautilus
       nemo
 
-      kcc
+      update-kcc.kcc
       calibre
 
       gamescope

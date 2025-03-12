@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
 
   # systemd.network.netdevs."50-mullvad" = {
   #   netdevConfig = {
@@ -42,7 +48,7 @@
   #     # DHCPPrefixDelegation = true;
   #     DHCPServer = true;
   #   };
-  #   cakeConfig.Bandwidth = "5M"; # Download Bandwidth Limit 
+  #   cakeConfig.Bandwidth = "5M"; # Download Bandwidth Limit
   #   networkConfig = {
   #     DHCP = "no";
   #   };

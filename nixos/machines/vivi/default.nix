@@ -1,4 +1,11 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}:
 let
   inherit (lib.meta) getExe getExe';
   amdgpu-kernel-module = pkgs.callPackage ./amdgpu.nix {
@@ -17,8 +24,14 @@ in
   boot.loader.systemd-boot.enable = true;
 
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.availableKernelModules =
-    [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [ "xpad" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [

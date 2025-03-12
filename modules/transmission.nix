@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.secure.transmission;
@@ -32,31 +37,26 @@ in
       interfaceName = mkOption {
         type = types.str;
         default = "wgt";
-        description =
-          "The wireguard network interface name inside the namespace";
+        description = "The wireguard network interface name inside the namespace";
       };
       # We only need a single peer
       peer = {
         publicKey = mkOption {
           type = types.str;
-          description =
-            "networking.wireguard.interfaces.<name>.peers.*.publicKey";
+          description = "networking.wireguard.interfaces.<name>.peers.*.publicKey";
         };
         allowedIPs = mkOption {
           type = with types; listOf str;
-          description =
-            "networking.wireguard.interfaces.<name>.peers.*.allowedIPs";
+          description = "networking.wireguard.interfaces.<name>.peers.*.allowedIPs";
         };
         endpoint = mkOption {
           type = types.str;
-          description =
-            "networking.wireguard.interfaces.<name>.peers.*.endpoint";
+          description = "networking.wireguard.interfaces.<name>.peers.*.endpoint";
         };
         keepalive = mkOption {
           type = types.int;
           default = 25;
-          description =
-            "networking.wireguard.interfaces.<name>.peers.*.persistentKeepalive";
+          description = "networking.wireguard.interfaces.<name>.peers.*.persistentKeepalive";
         };
       };
     };
@@ -64,11 +64,13 @@ in
 
   config = mkMerge [
     (mkIf config.services.transmission.enable {
-      assertions = [{
-        # Guarantee usage of this module if it is imported and transmission is enabled
-        assertion = cfg.enable;
-        message = "Transmission is enabled but not `secure.transmission`!";
-      }];
+      assertions = [
+        {
+          # Guarantee usage of this module if it is imported and transmission is enabled
+          assertion = cfg.enable;
+          message = "Transmission is enabled but not `secure.transmission`!";
+        }
+      ];
     })
     (mkIf cfg.enable {
       # Some assertions for assuring tunneling
@@ -132,12 +134,14 @@ in
         # Use provided information for Wireguard configuration
         ips = cfg.ips;
         privateKeyFile = cfg.privateKeyFile;
-        peers = [{
-          publicKey = cfg.peer.publicKey;
-          allowedIPs = cfg.peer.allowedIPs;
-          endpoint = cfg.peer.endpoint;
-          persistentKeepalive = cfg.peer.keepalive;
-        }];
+        peers = [
+          {
+            publicKey = cfg.peer.publicKey;
+            allowedIPs = cfg.peer.allowedIPs;
+            endpoint = cfg.peer.endpoint;
+            persistentKeepalive = cfg.peer.keepalive;
+          }
+        ];
       };
 
       systemd.services = mkMerge [
@@ -147,16 +151,14 @@ in
             requires = [ "network-online.target" ];
             after = [ "wireguard-${cfg.interfaceName}.service" ];
             # Make transmission run in network namespace
-            serviceConfig.NetworkNamespacePath =
-              "/var/run/netns/${cfg.namespace}";
+            serviceConfig.NetworkNamespacePath = "/var/run/netns/${cfg.namespace}";
             # Re-add network namespace resolv.conf for transmission
             # Because Transmission overrides /etc and would use the original
             # /etc/resolv.conf otherwise
-            serviceConfig.BindReadOnlyPaths =
-              [
-                "/etc/netns/${cfg.namespace}/resolv.conf:/etc/resolv.conf"
-                "/etc/netns/${cfg.namespace}/nsswitch.conf:/etc/nsswitch.conf"
-              ];
+            serviceConfig.BindReadOnlyPaths = [
+              "/etc/netns/${cfg.namespace}/resolv.conf:/etc/resolv.conf"
+              "/etc/netns/${cfg.namespace}/nsswitch.conf:/etc/nsswitch.conf"
+            ];
           };
         }
         (mkIf cfg.openRPClocal {

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.chrony = {
     enable = true;
     extraConfig = ''

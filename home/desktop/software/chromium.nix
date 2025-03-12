@@ -1,4 +1,11 @@
-{ pkgs, config, lib, machine, hm-firefox, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  machine,
+  hm-firefox,
+  ...
+}:
 let
   host = machine.host;
   theme = config.theme;

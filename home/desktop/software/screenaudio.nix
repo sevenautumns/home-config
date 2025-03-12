@@ -1,4 +1,10 @@
-{ pkgs, config, lib, inputs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   screenaudio = pkgs.stdenv.mkDerivation rec {
     pname = "discord-screenaudio";
@@ -26,7 +32,6 @@ let
   };
 in
 {
-  home.packages =
-    [ screenaudio ];
+  home.packages = [ screenaudio ];
 
 }

@@ -1,7 +1,12 @@
-{ pkgs, inputs, config, lib, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  lib,
+  ...
+}:
 let
-  ibus = with pkgs;
-    (ibus-with-plugins.override { plugins = [ ibus-engines.mozc ]; });
+  ibus = with pkgs; (ibus-with-plugins.override { plugins = [ ibus-engines.mozc ]; });
 in
 {
   i18n.inputMethod.package = ibus;
