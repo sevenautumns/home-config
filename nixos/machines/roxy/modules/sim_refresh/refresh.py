@@ -68,6 +68,7 @@ def check_1und1(username, password, CHECK_INTERVAL):
                                 confirm_button.click()
                                 logging.info("Closed confirmation successfully")
                     else:
+                        # Currently has no effect because of wait_for_selector
                         logging.warning("Button '+1 GB' not found")
 
                     logging.info(f"Waiting {CHECK_INTERVAL} seconds until checking again...")

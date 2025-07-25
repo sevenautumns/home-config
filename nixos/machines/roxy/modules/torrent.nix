@@ -29,7 +29,6 @@
     openRPClocal = true;
     peer = {
       publicKey = "qcvI02LwBnTb7aFrOyZSWvg4kb7zNW9/+rS6alnWyFE=";
-      allowedIPs = [ "0.0.0.0/0" ];
       endpoint = "193.32.127.67:443";
     };
   };
@@ -62,8 +61,8 @@
       # alt-speed-time-end = 480;
       # alt-speed-up = 1500;
       utp-enabled = false;
-      ratio-limit-enabled = true;
-      ratio-limit = 2;
+      ratio-limit-enabled = false;
+      # ratio-limit = 2;
     };
   };
 

@@ -39,6 +39,7 @@ in
       Bandwidth = "150M"; # Upload Bandwidth Limit
       FlowIsolationMode = "dual-src-host";
       PriorityQueueingPreset = "besteffort";
+      RTTSec = "30ms";
     };
   };
 
@@ -48,6 +49,7 @@ in
       Bandwidth = "100M"; # Download Bandwidth Limit
       FlowIsolationMode = "dual-dst-host";
       PriorityQueueingPreset = "besteffort";
+      RTTSec = "30ms";
     };
   };
 
@@ -58,7 +60,7 @@ in
         onState = [ "configured" ];
         script = ''
           #!${pkgs.runtimeShell}
-          if [ $IFACE = "ztbtovjx4h" ]; then
+          if [ "$IFACE" = "ztbtovjx4h" ]; then
             # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
             ${getExe' pkgs.iproute2 "tc"} filter add dev ztbtovjx4h parent ffff: matchall action mirred egress redirect dev ifbztbtovjx4h
           fi

@@ -55,11 +55,16 @@
     "cgroup_enable=memory"
   ];
 
-  services.netdata.enable = true;
+  services.netdata = {
+    enable = true;
+    package = pkgs.netdata.override {
+      withCloudUi = true;
+    };
+  };
 
   services.unifi = {
     enable = true;
-    unifiPackage = pkgs.unifi8;
+    unifiPackage = pkgs.unifi;
     mongodbPackage = pkgs.unstable.mongodb-ce;
   };
 

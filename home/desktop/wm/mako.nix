@@ -9,9 +9,11 @@
   services.mako = with config.theme; {
     enable = true;
     package = with pkgs; if machine.nixos then mako else hello;
-    font = "Ttyp0 10";
-    backgroundColor = gray0;
-    borderColor = brown;
-    textColor = brown;
+    settings = {
+      border-color = brown;
+      text-color = brown;
+      background-color = gray0;
+      font = "Ttyp0 10";
+    };
   };
 }

@@ -48,7 +48,7 @@ in
     lib.optionals (machine.nixos) [
       #office
       libreoffice
-      okular
+      kdePackages.okular
 
       #com
       thunderbird
@@ -68,6 +68,8 @@ in
       inkscape
       gimp
 
+      freecad
+
       #dev
       nixfmt-rfc-style
 
@@ -84,6 +86,8 @@ in
       gamescope
 
       spotify
+
+      citrix_workspace
     ];
 
   services.network-manager-applet.enable = !builtins.elem host [ "ft-ssy-avil-w2" ];

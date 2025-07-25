@@ -112,6 +112,7 @@ in
       Bandwidth = "1G"; # Local Bandwidth
       FlowIsolationMode = "dual-dst-host";
       PriorityQueueingPreset = "besteffort";
+      RTTSec = "1ms";
     };
     networkConfig = {
       VLAN = [ "neighbour.250" ];
@@ -146,6 +147,7 @@ in
       Bandwidth = "1G"; # Local Bandwidth
       FlowIsolationMode = "dual-src-host";
       PriorityQueueingPreset = "besteffort";
+      RTTSec = "1ms";
     };
   };
 
@@ -156,7 +158,7 @@ in
         onState = [ "configured" ];
         script = ''
           #!${pkgs.runtimeShell}
-          if [ $IFACE = "enp2s0" ]; then
+          if [ "$IFACE" = "enp2s0" ]; then
             # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
             ${getExe' pkgs.iproute2 "tc"} filter add dev enp2s0 parent ffff: matchall action mirred egress redirect dev ifbenp2s0
           fi

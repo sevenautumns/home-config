@@ -18,7 +18,7 @@ in
     package = with pkgs; if machine.nixos then firefox else hello;
     profiles.default = {
       id = 0;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         vimium
         ublock-origin
         videospeed
@@ -38,16 +38,16 @@ in
       ];
       search = {
         force = true;
-        default = "DuckDuckGo";
+        default = "ddg";
         order = [
-          "DuckDuckGo"
-          "Google"
+          "ddg"
+          "google"
         ];
         engines = {
-          "Bing".metaData.hidden = true;
-          "eBay".metaData.hidden = true;
+          bing.metaData.hidden = true;
+          ebay.metaData.hidden = true;
           # "Google".metaData.alias = ":g";
-          "DuckDuckGo".metaData.alias = ":d";
+          ddg.metaData.alias = ":d";
           "GitHub Nix" = {
             urls = [
               {
@@ -72,7 +72,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://github.githubassets.com/favicons/favicon.svg";
+            icon = "https://github.githubassets.com/favicons/favicon.svg";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":gn" ];
           };
@@ -96,7 +96,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://github.githubassets.com/favicons/favicon.svg";
+            icon = "https://github.githubassets.com/favicons/favicon.svg";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":gc" ];
           };
@@ -124,7 +124,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://github.githubassets.com/favicons/favicon.svg";
+            icon = "https://github.githubassets.com/favicons/favicon.svg";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":gr" ];
           };
@@ -144,7 +144,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://leta.mullvad.net/mullvad-vpn-logo.svg";
+            icon = "https://leta.mullvad.net/mullvad-vpn-logo.svg";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":g" ];
           };
@@ -164,7 +164,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://nixos.org/favicon.png";
+            icon = "https://nixos.org/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":np" ];
           };
@@ -184,7 +184,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://nixos.org/favicon.png";
+            icon = "https://nixos.org/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":no" ];
           };
@@ -200,7 +200,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://crates.io/favicon.ico";
+            icon = "https://crates.io/favicon.ico";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":c" ];
           };
@@ -216,7 +216,7 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://www4.dict.cc/img/favicons/favicon4.png";
+            icon = "https://www4.dict.cc/img/favicons/favicon4.png";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":e" ];
           };
@@ -232,53 +232,12 @@ in
                 ];
               }
             ];
-            iconUpdateURL = "https://nyaa.si/static/favicon.png";
+            icon = "https://nyaa.si/static/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ ":nyaa" ];
           };
         };
       };
-
-      bookmarks = [
-        {
-          toolbar = true;
-          bookmarks = [
-            {
-              name = "YouTube";
-              url = "https://www.youtube.com/?gl=DE&hl=de";
-            }
-            {
-              name = "WaniKani";
-              url = "https://www.wanikani.com/";
-            }
-            {
-              name = "Bunpro";
-              url = "https://bunpro.jp/";
-            }
-            {
-              name = "DLR";
-              bookmarks = [
-                {
-                  name = "Mail";
-                  url = "https://mail.dlr.de/owa/#path=/mail";
-                }
-                {
-                  name = "Gleitzeit";
-                  url = "https://gleitzeit.bs.dlr.de/primeweb/index.jsp";
-                }
-                {
-                  name = "WebPostkorb";
-                  url = "https://webpostkorb.dlr.de/";
-                }
-                {
-                  name = "Intra";
-                  url = "https://intranet.dlr.de/Seiten/start.aspx";
-                }
-              ];
-            }
-          ];
-        }
-      ];
 
       settings = {
         "extensions.pocket.enabled" = false;
@@ -287,8 +246,8 @@ in
 
         "general.smoothScroll" = false;
 
-        "browser.search.defaultenginename" = "DuckDuckGo";
-        "browser.search.selectedEngine" = "DuckDuckGo";
+        "browser.search.defaultenginename" = "ddg";
+        "browser.search.selectedEngine" = "ddg";
         #"browser.search.region" = "US";fi
         #"browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = true;

@@ -49,6 +49,7 @@ in
       PriorityQueueingPreset = "diffserv4";
       FlowIsolationMode = "dual-src-host";
       NAT = true;
+      RTTSec = "30ms";
     };
     extraConfig = ''
       [DHCPv6]
@@ -78,6 +79,7 @@ in
       PriorityQueueingPreset = "diffserv4";
       FlowIsolationMode = "dual-dst-host";
       NAT = true;
+      RTTSec = "30ms";
     };
   };
 
@@ -94,7 +96,7 @@ in
           in
           ''
             #!${pkgs.runtimeShell}
-            if [ $IFACE = "ppp0" ]; then
+            if [ "$IFACE" = "ppp0" ]; then
               # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
               ${getExe' pkgs.iproute2 "tc"} filter add dev ppp0 parent ffff: matchall action mirred egress redirect dev ifbppp0
 

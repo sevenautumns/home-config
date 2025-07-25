@@ -2,11 +2,11 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-kcc.url = "github:adfaure/nixpkgs/update-kcc";
 
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
+    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
     lix-module.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nur.url = "github:nix-community/NUR";
@@ -16,13 +16,13 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-system.url = "github:nix-community/home-manager/release-24.11";
+    home-manager-system.url = "github:nix-community/home-manager/release-25.05";
     home-manager-system.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-stable.url = "github:nix-community/home-manager/release-24.11";
+    home-manager-stable.url = "github:nix-community/home-manager/release-25.05";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -144,7 +144,7 @@
             pkgs = import machine.nixpkgs {
               system = machine.arch;
               overlays = [
-                deploy-rs.overlay
+                deploy-rs.overlays.default
                 self.overlays.matryoshka-pkgs
                 nur.overlays.default
                 inputs.nixd.overlays.default
@@ -179,7 +179,7 @@
             {
               networking.hostName = host;
               nixpkgs.overlays = [
-                deploy-rs.overlay
+                deploy-rs.overlays.default
                 self.overlays.matryoshka-pkgs
                 nur.overlays.default
               ];

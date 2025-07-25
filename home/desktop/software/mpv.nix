@@ -26,6 +26,7 @@ in
       #vo = "gpu";
       volume = 70;
       hwdec = "auto";
+      osd-msg2 = "Playback speed: \${speed}";
     };
     bindings = {
       "Ctrl+j" = "cycle secondary-sid";

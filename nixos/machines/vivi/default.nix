@@ -208,6 +208,19 @@ in
   fileSystems."/media/ssddata" = {
     device = "/dev/disk/by-uuid/81c6fec5-b8e1-4d7a-b68e-39b16dcc2f86";
     fsType = "btrfs";
+    options = [
+      "auto"
+      "nofail"
+    ];
+  };
+
+  fileSystems."/media/nvmedata" = {
+    device = "/dev/disk/by-uuid/3a21229f-02a1-453c-b276-9c7c3c4e36d3";
+    fsType = "btrfs";
+    options = [
+      "auto"
+      "nofail"
+    ];
   };
 
   # fileSystems."/media/arch" = {

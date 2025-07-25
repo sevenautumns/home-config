@@ -9,14 +9,11 @@ let
 in
 {
   home.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "FiraMono"
-        "FiraCode"
-        "RobotoMono"
-        "SourceCodePro"
-      ];
-    })
+    nerd-fonts.fira-mono
+    nerd-fonts.fira-code
+    nerd-fonts.roboto-mono
+    # nerd-fonts.SourceCodePro
+    nerd-fonts.sauce-code-pro
     sarasa-gothic
     font-awesome
     unstable.symbola

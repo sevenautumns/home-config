@@ -142,6 +142,7 @@
       "networkmanager"
       "docker"
       "gamemode"
+      "dialout"
     ];
     shell = pkgs.fish;
     home = "/home/autumnal";

@@ -23,7 +23,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = false;
-    pinentryPackage = pkgs.pinentry-gnome3;
+    pinentry.package = pkgs.pinentry-gnome3;
     grabKeyboardAndMouse = false;
   };
 }

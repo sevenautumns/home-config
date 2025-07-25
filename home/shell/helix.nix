@@ -113,7 +113,9 @@ in
       ];
       language-server = {
         rust-analyzer.config = {
-          checkOnSave.command = "clippy";
+          checkOnSave = true;
+          check.command = "clippy";
+          # checkOnSave.command = "clippy";
           procMacro.enable = true;
           diagnostics.disabled = [ "unresolved-proc-macro" ];
         };
@@ -195,6 +197,6 @@ in
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
     unstable.nixd # (if machine.arch == "x86_64-linux" then nixd else unstable.nixd)
-    typst-lsp
+    tinymist
   ];
 }

@@ -47,6 +47,7 @@ in
         };
         allowedIPs = mkOption {
           type = with types; listOf str;
+          default = [ "0.0.0.0/0" ];
           description = "networking.wireguard.interfaces.<name>.peers.*.allowedIPs";
         };
         endpoint = mkOption {
