@@ -10,6 +10,8 @@
     ./mako.nix
   ];
 
+  services.kanshi.enable = true;
+
   home.packages = with pkgs; [
     niri
     fuzzel
@@ -17,6 +19,7 @@
     xdg-terminal-exec-mkhl
     dmenu-wayland
     ironbar
+    xwayland
     xdg-utils
   ];
 
