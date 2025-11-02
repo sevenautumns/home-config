@@ -121,6 +121,8 @@ in
             # jump input_icmp_untrusted
             # meta l4proto ipv6-icmp accept comment "Forward ICMP in IPv6"
 
+            ip saddr 192.168.178.206 meta nftrace set 1
+
             # LAN -> WAN
             iifname { ${IF_LAN} } oifname { ${IF_WAN}, ${IF_LAN}, ${IF_MODEM} } counter accept comment "Allow all traffic forwarding from LAN to LAN and WAN"
 

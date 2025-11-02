@@ -51,8 +51,8 @@ in
     Install.WantedBy = [ "graphical-session.target" ];
   };
 
-  home.file.".config/systemd/user/xdg-desktop-portal-gnome.service".source =
-    config.lib.file.mkOutOfStoreSymlink "/dev/null";
+  # home.file.".config/systemd/user/xdg-desktop-portal-gnome.service".source =
+  #   config.lib.file.mkOutOfStoreSymlink "/dev/null";
 
   home.packages =
     with pkgs;

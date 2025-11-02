@@ -83,6 +83,19 @@ in
           auto-format = true;
         }
         {
+          name = "python";
+          formatter = {
+            command = "black";
+            args = [
+              "--quiet"
+              "-"
+            ];
+          };
+          language-servers = [ "pyright" ];
+          auto-format = true;
+          roots = [ "pyproject.toml" ];
+        }
+        {
           name = "git-commit";
           scope = "git.commitmsg";
           roots = [ ];
@@ -139,6 +152,10 @@ in
           command = "zk";
           args = [ "lsp" ];
         };
+        pyright = {
+          command = "pyright-langserver";
+          args = [ "--stdio" ];
+        };
         nixd.command = "nixd";
       };
       debugger = {
@@ -182,6 +199,8 @@ in
 
     # Spelling checker
     ltex-ls
+
+    pyright
 
     # Language servers
     clang-tools # C-Style

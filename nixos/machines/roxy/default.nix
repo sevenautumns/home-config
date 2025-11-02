@@ -9,12 +9,13 @@
 {
   imports = [
     ./modules/network
+    # ./modules/firefly.nix
     ./modules/plex.nix
     ./modules/rr.nix
     ./modules/palworld.nix
     ./modules/corekeeper.nix
     ./modules/factorio.nix
-    ./modules/sim_refresh
+    # ./modules/sim_refresh
     ./modules/paperless.nix
     ./modules/torrent.nix
     ./modules/restic.nix
@@ -61,6 +62,21 @@
       withCloudUi = true;
     };
   };
+
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+  environment.systemPackages = with pkgs; [
+    dive # look into docker image layers
+    podman-tui # status of containers in the terminal
+    docker-compose # start group of containers for dev
+    podman-compose # start group of containers for dev
+  ];
 
   services.unifi = {
     enable = true;

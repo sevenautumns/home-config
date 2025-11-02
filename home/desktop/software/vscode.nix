@@ -26,6 +26,7 @@ in
           james-yu.latex-workshop
           mkhl.direnv
           oderwat.indent-rainbow
+          ms-vscode-remote.remote-containers
           jnoortheen.nix-ide
         ];
       keybindings = [

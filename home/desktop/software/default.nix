@@ -63,9 +63,11 @@ in
       wine64
 
       #image
-      eog
+      loupe
       feh
-      inkscape
+      (inkscape-with-extensions.override {
+        inkscapeExtensions = with inkscape-extensions; [ inkstitch ];
+      })
       gimp
 
       freecad

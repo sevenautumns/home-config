@@ -16,6 +16,7 @@ in
     nerd-fonts.sauce-code-pro
     sarasa-gothic
     font-awesome
+    font-awesome_5
     unstable.symbola
     roboto
     twitter-color-emoji

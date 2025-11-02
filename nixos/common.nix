@@ -130,6 +130,10 @@
 
   programs.fish.enable = true;
 
+  users.groups = {
+    plugdev = { };
+  };
+
   users.users.autumnal = {
     uid = 1000;
     isNormalUser = true;
@@ -143,6 +147,7 @@
       "docker"
       "gamemode"
       "dialout"
+      "plugdev"
     ];
     shell = pkgs.fish;
     home = "/home/autumnal";
