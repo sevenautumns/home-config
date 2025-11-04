@@ -71,6 +71,7 @@ in
       gimp
 
       freecad
+      jabref
 
       #dev
       nixfmt-rfc-style

@@ -209,7 +209,7 @@ in
               };
             };
             output = {
-              "*".bg = "$HOME/Pictures/Wallpaper/Autumn.jpg fill ";
+              "*".bg = "$HOME/Pictures/Wallpaper/Autumn.png fill ";
               ${tv} = {
                 mode = "3840x2160@120Hz";
                 # scale = "2";

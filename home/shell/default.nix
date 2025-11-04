@@ -83,6 +83,8 @@ in
       KexAlgorithms -sntrup761x25519-sha512@openssh.com
     '';
     matchBlocks."ft-ssy-stonks.intra.dlr.de".forwardAgent = true;
+    matchBlocks."ft-ssy-grof.intra.dlr.de".forwardAgent = true;
+    matchBlocks."lebenshilfe-uslar.de".forwardAgent = true;
     matchBlocks."192.168.178.2".forwardAgent = true;
   };
 

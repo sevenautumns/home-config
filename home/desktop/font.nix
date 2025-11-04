@@ -18,6 +18,7 @@ in
     font-awesome
     font-awesome_5
     unstable.symbola
+    noto-fonts
     roboto
     twitter-color-emoji
     comic-mono

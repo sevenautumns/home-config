@@ -12,9 +12,72 @@
 
   services.kanshi.enable = true;
 
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+
+        modules-left = [
+          "niri/workspaces"
+          "niri/mode"
+          "wlr/taskbar"
+        ];
+
+        modules-center = [
+          "niri/window"
+        ];
+
+        modules-right = [
+          "cpu"
+          "memory"
+          "pulseaudio"
+          "temperature"
+          "clock"
+        ];
+
+        "niri/workspaces" = {
+          all-outputs = true;
+        };
+
+        "cpu" = {
+          format = "CPU {usage}%";
+          tooltip = true;
+          interval = 5;
+        };
+
+        "memory" = {
+          format = "RAM {used:0.1f}G";
+          tooltip = true;
+          interval = 5;
+        };
+
+        "pulseaudio" = {
+          format = "{volume}% {icon}";
+          format-muted = "Muted";
+          on-click = "pavucontrol";
+        };
+
+        "clock" = {
+          format = "{:%H:%M}";
+          format-alt = "{:%Y-%m-%d}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+
+        "temperature" = {
+          format = "{temperatureC}°C";
+          critical-threshold = 80;
+          format-critical = "{temperatureC}°C";
+        };
+      };
+    };
+  };
+
   home.packages = with pkgs; [
     niri
-    waybar
+    fuzzel
     xwayland-satellite
     wdisplays
     xdg-terminal-exec-mkhl
