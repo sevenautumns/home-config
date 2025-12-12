@@ -2,12 +2,9 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-kcc.url = "github:adfaure/nixpkgs/update-kcc";
-
-    lix-module.url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
-    lix-module.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nur.url = "github:nix-community/NUR";
 
@@ -16,13 +13,13 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-system.url = "github:nix-community/home-manager/release-25.05";
+    home-manager-system.url = "github:nix-community/home-manager/release-25.11";
     home-manager-system.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager-stable.url = "github:nix-community/home-manager/release-25.05";
+    home-manager-stable.url = "github:nix-community/home-manager/release-25.11";
     home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -64,7 +61,6 @@
       nur,
       deploy-rs,
       nixpkgs,
-      lix-module,
       # , nixpkgs-unstable
       nixpkgs-stable,
       agenix,
@@ -160,7 +156,6 @@
                   packages = [ agenix.packages."${machine.arch}".agenix ];
                 };
               }
-              lix-module.nixosModules.default
             ];
             extraSpecialArgs = {
               inherit inputs;
@@ -186,7 +181,6 @@
             }
             agenix.nixosModules.default
             self.nixosModules.transmission
-            lix-module.nixosModules.default
             (./nixos/machines + "/${host}")
           ];
           specialArgs = {
@@ -223,22 +217,21 @@
           "user"
         ];
         fastConnection = false;
-        profiles =
-          {
-            user = {
-              sshUser = machine.user;
-              path =
-                deploy-rs.lib.${machine.arch}.activate.home-manager
-                  self.homeConfigurations."${machine.user}@${host}";
-            };
-          }
-          // lib.attrsets.optionalAttrs (machine.managed-nixos) {
-            system = {
-              sshUser = "admin";
-              path = deploy-rs.lib.${machine.arch}.activate.nixos self.nixosConfigurations."${host}";
-              user = "root";
-            };
+        profiles = {
+          user = {
+            sshUser = machine.user;
+            path =
+              deploy-rs.lib.${machine.arch}.activate.home-manager
+                self.homeConfigurations."${machine.user}@${host}";
           };
+        }
+        // lib.attrsets.optionalAttrs (machine.managed-nixos) {
+          system = {
+            sshUser = "admin";
+            path = deploy-rs.lib.${machine.arch}.activate.nixos self.nixosConfigurations."${host}";
+            user = "root";
+          };
+        };
       }) (lib.filterAttrs (h: m: m ? address) machines);
 
       # checks = builtins.mapAttrs

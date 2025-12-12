@@ -54,7 +54,7 @@ in
       <alias binding="strong">
         <family>monospace</family>
         <prefer>
-          <family>Ttyp0</family>
+          <family>Ttyp0 OTB</family>
           <family>FiraCode Nerd Font Mono</family>
           <family>Twitter Color Emoji</family>
           <family>EfontBiwidth</family>

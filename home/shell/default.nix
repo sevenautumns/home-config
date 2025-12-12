@@ -23,9 +23,9 @@ in
   home.packages = with pkgs; [
     fd
     ripgrep
-    du-dust
+    dust
     any-nix-shell
-    lfs
+    dysk
     hyperfine
     bluetuith
     calc
@@ -71,9 +71,12 @@ in
   # home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/ssh-agent";
   programs.ssh = {
     enable = true;
-    compression = true;
-    controlMaster = "auto";
-    controlPersist = "1m";
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      compression = true;
+      controlMaster = "auto";
+      controlPersist = "1m";
+    };
     extraConfig = ''
       AddKeysToAgent yes
       IdentityFile ~/.ssh/id_ed25519_sk

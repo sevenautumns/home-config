@@ -8,6 +8,7 @@ let
   inherit (lib.meta) getExe;
 in
 {
+  home.shell.enableFishIntegration = true;
   programs.command-not-found.enable = false;
   programs.fish = {
     enable = true;

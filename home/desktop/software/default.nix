@@ -90,7 +90,7 @@ in
 
       spotify
 
-      citrix_workspace
+      # citrix_workspace
     ];
 
   services.network-manager-applet.enable = !builtins.elem host [ "ft-ssy-avil-w2" ];

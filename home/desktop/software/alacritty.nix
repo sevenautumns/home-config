@@ -27,7 +27,7 @@ in
 
   programs.alacritty = {
     enable = true;
-    package = with pkgs; if machine.nixos then unstable.alacritty else hello;
+    package = with pkgs; if machine.nixos then alacritty else hello;
     settings = {
       env = {
         WINIT_X11_SCALE_FACTOR = "1";

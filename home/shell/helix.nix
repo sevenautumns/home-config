@@ -211,7 +211,7 @@ in
     # rnix-lsp # Nix
     zk # Zettelkasten
     # rust-analyzer # Rust
-    sumneko-lua-language-server # Lua
+    lua-language-server # Lua
     nodePackages.vim-language-server # Vim
     nodePackages.typescript-language-server # Typescript
     nodePackages.vscode-json-languageserver # JSON
