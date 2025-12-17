@@ -10,10 +10,6 @@ in
 {
   programs.git = {
     enable = true;
-    signing = {
-      key = "2FCAB71B";
-      signByDefault = true;
-    };
     settings = {
       user = {
         name = "Sven Friedrich";
@@ -41,7 +37,6 @@ in
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
-    enableJujutsuIntegration = true;
     options = {
       syntax-theme = "base16";
       navigate = true;

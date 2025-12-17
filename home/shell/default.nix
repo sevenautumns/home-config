@@ -12,7 +12,7 @@ in
   imports = [
     ./colors.nix
     ./git.nix
-    ./gpg
+    ./jj.nix
     ./helix.nix
     ./fish.nix
     ./starship.nix
@@ -67,8 +67,13 @@ in
 
   programs.tealdeer.enable = true;
 
-  services.gnome-keyring.enable = true;
-  # home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/ssh-agent";
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "secrets" ];
+  };
+  home.sessionVariables.SSH_AUTH_SOCK = "/run/user/$UID/ssh-agent";
+  services.ssh-agent.enable = true;
+
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;

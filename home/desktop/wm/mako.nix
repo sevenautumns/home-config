@@ -13,7 +13,7 @@
       border-color = brown;
       text-color = brown;
       background-color = gray0;
-      font = "Ttyp0 10";
+      font = "Ttyp0 OTB 10";
     };
   };
 }
