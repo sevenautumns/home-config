@@ -17,13 +17,13 @@ in
 {
   "niketsu.age".publicKeys = [ roxy ] ++ users;
   "mullvad_coyote.age".publicKeys = [ roxy ] ++ users;
-  "mullvad_well.age".publicKeys = [ ] ++ users;
+  "mullvad_well.age".publicKeys = [ roxy ] ++ users;
   "transmission_auth.age".publicKeys = [ roxy ] ++ users;
   "one-and-one.age".publicKeys = [ roxy ] ++ users;
   "firefly.age".publicKeys = [ roxy ] ++ users;
   "wireguard-castle.age".publicKeys = [ castle ] ++ users;
-  "rclone-mega.age".publicKeys = [ ] ++ users;
-  "ppp-1und1-secret.age".publicKeys = [ ] ++ users;
-  "paperless-restic-password.age".publicKeys = [ ] ++ users;
+  "rclone-mega.age".publicKeys = [ roxy ] ++ users;
+  "ppp-1und1-secret.age".publicKeys = [ roxy ] ++ users;
+  "paperless-restic-password.age".publicKeys = [ roxy ] ++ users;
   "homepage_dashboard.age".publicKeys = [ roxy ] ++ users;
 }
