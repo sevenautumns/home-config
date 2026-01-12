@@ -28,8 +28,8 @@
     privateKeyFile = config.age.secrets.mullvad_coyote.path;
     openRPClocal = true;
     peer = {
-      publicKey = "I5XiRYHPmxnmGtPJ90Yio6QXL441C/+kYV6UH6wU+jk=";
-      endpoint = "146.70.126.226:4567";
+      publicKey = "wDjbvO94t0UI1RlimpEFFv7kJ6DngthvuRX6uBN0wAA=";
+      endpoint = "193.32.127.84:51820";
     };
   };
 

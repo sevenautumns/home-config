@@ -69,6 +69,7 @@ in
       vesktop
       telegram-desktop
       element-desktop
+      bitwarden-desktop
 
       unstable.lutris
       wine64

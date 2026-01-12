@@ -360,14 +360,14 @@ in
     ];
   };
 
-  fileSystems."/media/nvmedata" = {
-    device = "/dev/disk/by-uuid/3a21229f-02a1-453c-b276-9c7c3c4e36d3";
-    fsType = "btrfs";
-    options = [
-      "auto"
-      "nofail"
-    ];
-  };
+  # fileSystems."/media/nvmedata" = {
+  #   device = "/dev/disk/by-uuid/3a21229f-02a1-453c-b276-9c7c3c4e36d3";
+  #   fsType = "btrfs";
+  #   options = [
+  #     "auto"
+  #     "nofail"
+  #   ];
+  # };
 
   # fileSystems."/media/arch" = {
   #   device = "/dev/disk/by-uuid/9e37651d-1ad9-4d3c-bdfc-90e4857f38ae";

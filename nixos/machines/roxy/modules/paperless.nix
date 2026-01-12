@@ -9,7 +9,7 @@
   services.paperless = {
     enable = true;
     user = "autumnal";
-    package = pkgs.unstable.paperless-ngx;
+    package = pkgs.paperless-ngx;
     address = "10.4.0.0";
     port = 28981;
     dataDir = "/media/paperless";

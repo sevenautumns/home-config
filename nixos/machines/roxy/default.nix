@@ -15,6 +15,7 @@
     # ./modules/palworld.nix
     # ./modules/corekeeper.nix
     # ./modules/factorio.nix
+    # ./modules/docker.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
     ./modules/restic.nix

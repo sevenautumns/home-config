@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  version = "2.0.66";
+  version = "2.0.72";
 in
 {
   services.factorio = {
@@ -10,12 +10,13 @@ in
       src = pkgs.fetchurl {
         url = "https://factorio.com/get-download/${version}/headless/linux64";
         name = "factorio-headless-${version}.tar.xz";
-        sha256 = "sha256-8bOXbqzE4jOADTmdkABsNW+jZvXWQ0HFBMlcDLoyHAY=";
+        sha256 = "sha256-zzBXNA28nYK9UWGUmuPnuPrZEux8oHuKMVHgQkpVaM0=";
       };
     });
     public = false;
     requireUserVerification = false;
     port = 34197;
     game-name = "DinossindShit";
+    saveName = "newyear";
   };
 }
