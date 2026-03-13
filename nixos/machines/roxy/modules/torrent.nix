@@ -49,10 +49,10 @@
       rpc-host-whitelist-enabled = false;
       rpc-whitelist-enabled = false;
       # peer-port = 57342;
-      # speed-limit-down = 5000;
-      speed-limit-down-enabled = false; # cake helps us here
-      # speed-limit-up = 500;
-      speed-limit-up-enabled = false; # cake helps us here
+      speed-limit-down = 2000;
+      speed-limit-down-enabled = true;
+      speed-limit-up = 100;
+      speed-limit-up-enabled = true;
       # alt-speed-down = 5000;
       # alt-speed-enabled = false;
       # alt-speed-time-begin = 240;

@@ -8,14 +8,13 @@
 }:
 {
   imports = [
-    ./modules/network
-    # ./modules/firefly.nix
+    # ./modules/network # For when we are the router
+    ./modules/network_guest.nix # For the classic network experience
     ./modules/plex.nix
     ./modules/rr.nix
-    ./modules/palworld.nix
-    ./modules/corekeeper.nix
-    ./modules/factorio.nix
-    # ./modules/sim_refresh
+    # ./modules/palworld.nix
+    # ./modules/corekeeper.nix
+    # ./modules/factorio.nix
     ./modules/paperless.nix
     ./modules/torrent.nix
     ./modules/restic.nix
@@ -34,33 +33,14 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  boot.kernel.sysctl = {
-    "net.ipv4.conf.all.forwarding" = "1";
-    "net.ipv6.conf.all.forwarding" = "1";
-    "net.ipv6.conf.all.accept_ra" = "0";
-    "net.ipv6.conf.all.autoconf" = "0";
-    # "net.ipv6.conf.all.disable_ipv6" = 1;
-    # "net.ipv4.ip_forward" = 1;
-    # "net.ipv4.conf.all.src_valid_mark" = 1;
-    "net.core.rmem_max" = 16777216;
-    "net.core.wmem_max" = 16777216;
-    "net.ipv4.tcp_rmem" = "4096 87380 16777216";
-    "net.ipv4.tcp_wmem" = "4096 65536 16777216";
-    "net.ipv4.udp_rmem_min" = 16384;
-    "net.ipv4.udp_wmem_min" = 16384;
-  };
-
   boot.kernelParams = [
     # Activate CGroup Memory control
     "cgroup_memory=1"
     "cgroup_enable=memory"
   ];
 
-  services.netdata = {
-    enable = true;
-    package = pkgs.netdata.override {
-      withCloudUi = true;
-    };
+  networking = {
+    hostName = "roxy";
   };
 
   virtualisation.containers.enable = true;

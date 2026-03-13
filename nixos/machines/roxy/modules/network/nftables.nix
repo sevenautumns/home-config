@@ -4,7 +4,6 @@ let
   IF_WAN = "ppp0";
   IF_WELL = "wg-well";
   IF_MULLVAD = "mullvad.150";
-  IF_NEIGHBOUR = "neighbour.250";
   # IF_WAN = "enp1s0";
   IF_MODEM = "enp1s0";
   # IF_LAN = "eth0";
@@ -45,18 +44,6 @@ in
             udp dport { 67 } accept comment "Allow DHCP from Mullvad"
           }
 
-          chain input_neighbour {
-            tcp dport { 
-              53, # DNS
-              123, # NTP
-            } accept comment "Allow NTP from Neighbour"
-            udp dport {
-              53, # DNS
-              67, # DHCP
-              123, # NTP
-            } accept comment "Allow DHCP and NTP from Neighbour"
-          }
-
           chain input_zero_sss {
             jump input_icmp_untrusted
 
@@ -95,7 +82,6 @@ in
               ${IF_WAN} : jump input_wan, 
               ${IF_LAN} : jump input_lan, 
               ${IF_MULLVAD} : jump input_mullvad,
-              ${IF_NEIGHBOUR} : jump input_neighbour,
               ${IF_ZERO_SSS} : jump input_zero_sss, 
               ${IF_ZERO_PRIV} : jump input_zero_priv 
             }
@@ -128,12 +114,6 @@ in
 
             # WAN -> LAN
             iifname { ${IF_WAN}, ${IF_MODEM} } oifname { ${IF_LAN} } ct state { established, related } counter accept comment "Allow established back from WAN"
-
-            # NEIGHBOUR -> WAN
-            iifname { ${IF_NEIGHBOUR} } oifname { ${IF_WAN}, ${IF_NEIGHBOUR} } counter accept comment "Allow all traffic forwarding from NEIGHBOUR to NEIGHBOUR and WAN"
-
-            # WAN -> NEIGHBOUR
-            iifname { ${IF_WAN} } oifname { ${IF_NEIGHBOUR} } ct state { established, related } counter accept comment "Allow established back from WAN"
 
             # MULLVAD -> WELL
             iifname { ${IF_MULLVAD} } oifname { ${IF_WELL} } counter accept comment "Allow all traffic forwarding from LAN to LAN and WAN"

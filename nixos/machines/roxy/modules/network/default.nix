@@ -15,29 +15,25 @@ in
     ./ntp.nix
     ./sss.nix
     ./dns.nix
-    ./neighbour.nix
   ];
 
   networking.networkmanager.enable = lib.mkForce false;
   systemd.network.enable = true;
 
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = "1";
+    "net.ipv6.conf.all.forwarding" = "1";
+    "net.ipv6.conf.all.accept_ra" = "0";
+    "net.ipv6.conf.all.autoconf" = "0";
+    "net.core.rmem_max" = 16777216;
+    "net.core.wmem_max" = 16777216;
+    "net.ipv4.tcp_rmem" = "4096 87380 16777216";
+    "net.ipv4.tcp_wmem" = "4096 65536 16777216";
+    "net.ipv4.udp_rmem_min" = 16384;
+    "net.ipv4.udp_wmem_min" = 16384;
+  };
+
   networking = {
-    hostName = "roxy";
-    # interfaces = {
-    #   enp1s0.ipv4.addresses = [{
-    #     address = "192.168.178.2";
-    #     prefixLength = 24;
-    #   }];
-    #   eth0.ipv4.addresses = [{
-    #     address = "192.168.1.2";
-    #     prefixLength = 24;
-    #   }];
-    # };
-    # defaultGateway = {
-    #   interface = "eth0";
-    #   address = "192.168.178.1";
-    # };
-    # nameservers = [ "1.1.1.1" ];
     useDHCP = false;
     nat.enable = false;
     firewall.enable = false;
@@ -115,7 +111,6 @@ in
       RTTSec = "1ms";
     };
     networkConfig = {
-      VLAN = [ "neighbour.250" ];
       Address = "192.168.178.2/24";
       EmitLLDP = "yes";
       IPv6SendRA = true;

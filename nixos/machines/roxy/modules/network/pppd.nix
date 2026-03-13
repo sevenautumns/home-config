@@ -111,29 +111,6 @@ in
     };
   };
 
-  # systemd.network.networks."40-dslite" = {
-  #   matchConfig.Name = "dslite";
-  #   linkConfig = {
-  #     RequiredForOnline = "no";
-  #   };
-  #   routes = [
-  #     { routeConfig.Destination = "0.0.0.0/0"; }
-  #   ];
-  # };
-  # systemd.network.netdevs."40-dslite" = {
-  #   netdevConfig = {
-  #     Kind = "ip6tnl";
-  #     Name = "dslite";
-  #   };
-  #   tunnelConfig = {
-  #     Mode = "ipip6";
-  #     Local = "slaac";
-  #     # Local = "2001:9e8:69b8:a00:da5e:d3ff:fed4:add8";
-  #     Remote = "2001:1438:fff:30::1"; # aftr.online.versatel.de
-  #     EncapsulationLimit = "none";
-  #   };
-  # };
-
   services.pppd = {
     enable = true;
     peers = {
