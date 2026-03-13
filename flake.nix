@@ -2,6 +2,7 @@
   description = "Home Manager configurations";
 
   inputs = {
+    nixpkgs-warbler.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-kcc.url = "github:adfaure/nixpkgs/update-kcc";
@@ -63,6 +64,7 @@
       nixpkgs,
       # , nixpkgs-unstable
       nixpkgs-stable,
+      nixpkgs-warbler,
       agenix,
       ...
     }@inputs:
@@ -197,8 +199,15 @@
         unstable = import "${inputs.nixpkgs-unstable}" {
           system = prev.system;
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "libsoup-2.74.3"
+          ];
         };
         stable = import "${inputs.nixpkgs-stable}" {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+        warbler = import "${inputs.nixpkgs-warbler}" {
           system = prev.system;
           config.allowUnfree = true;
         };

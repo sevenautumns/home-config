@@ -31,7 +31,8 @@ in
     #pkgs.alacritty
     pkgs.unstable.xterm
     sw
-  ] ++ lib.optionals (machine.managed-nixos) [ sw-sys ];
+  ]
+  ++ lib.optionals (machine.managed-nixos) [ sw-sys ];
 
   home.sessionVariables = {
     LANGUAGE = "en_GB.UTF-8";

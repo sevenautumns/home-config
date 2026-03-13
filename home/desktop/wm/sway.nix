@@ -481,7 +481,7 @@ in
       indicator-idle-visible = true;
       indicator-radius = 100;
       show-keyboard-layout = false;
-      image = "~/Pictures/Wallpaper/Autumn.png";
+      image = "~/Pictures/Wallpaper/greenland-winter.jpg";
       color = gray0;
       ring-color = brown;
       ring-ver-color = brown;

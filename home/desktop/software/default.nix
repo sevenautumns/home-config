@@ -43,6 +43,17 @@ in
     ];
   };
 
+  programs.obsidian = {
+    enable = true;
+
+    defaultSettings = {
+      communityPlugins = [
+        "Git"
+      ];
+      themes = [ "Catppuccin" ];
+    };
+  };
+
   home.packages =
     with pkgs;
     lib.optionals (machine.nixos) [
@@ -90,7 +101,7 @@ in
 
       spotify
 
-      # citrix_workspace
+      unstable.citrix_workspace
     ];
 
   services.network-manager-applet.enable = !builtins.elem host [ "ft-ssy-avil-w2" ];
