@@ -17,6 +17,7 @@
     # ./modules/factorio.nix
     # ./modules/docker.nix
     ./modules/paperless.nix
+    ./modules/sss.nix
     ./modules/torrent.nix
     ./modules/restic.nix
     ../../common.nix
@@ -44,10 +45,10 @@
     hostName = "roxy";
   };
 
-  virtualisation.containers.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.onShutdown = "shutdown";
-  virtualisation.spiceUSBRedirection.enable = true;
+  # virtualisation.containers.enable = true;
+  # virtualisation.libvirtd.enable = true;
+  # virtualisation.libvirtd.onShutdown = "shutdown";
+  # virtualisation.spiceUSBRedirection.enable = true;
 
   virtualisation = {
     podman = {
