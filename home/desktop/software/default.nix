@@ -67,9 +67,13 @@ in
       discord
       discord-canary
       vesktop
+      teamspeak6-client
+      mumble
+      signal-desktop
       telegram-desktop
       element-desktop
       bitwarden-desktop
+      unstable.gpu-screen-recorder
 
       unstable.lutris
       wine64

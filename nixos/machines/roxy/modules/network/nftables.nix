@@ -7,7 +7,7 @@ let
   # IF_WAN = "enp1s0";
   IF_MODEM = "enp1s0";
   # IF_LAN = "eth0";
-  IF_LAN = "enp2s0";
+  IF_LAN = "br-lan";
   IF_ZERO_SSS = "ztbtovjx4h";
   IF_ZERO_PRIV = "ztr2q3arx2";
   LAN_IPS = "192.168.178.0/24";

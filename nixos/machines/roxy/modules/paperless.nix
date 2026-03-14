@@ -15,6 +15,8 @@
     dataDir = "/media/paperless";
     settings = {
       PAPERLESS_OCR_LANGUAGE = "deu+eng";
+      # Skip OCRing
+      PAPERLESS_OCR_SKIP_ARCHIVE_FILE = "always";
       PAPERLESS_OCR_USER_ARGS = builtins.toJSON {
         continue_on_soft_render_error = true;
         invalidate_digital_signatures = true;

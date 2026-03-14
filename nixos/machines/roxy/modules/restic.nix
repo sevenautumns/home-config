@@ -25,7 +25,7 @@
         "--keep-monthly 12"
         "--keep-yearly 12"
       ];
-      paths = [ "/media/paperless/media/documents/originals" ];
+      paths = [ "/media/paperless/originals" ];
       repository = "rclone:mega-paperless-crypt:/";
       passwordFile = config.age.secrets.paperless-restic-password.path;
       rcloneConfigFile = config.age.secrets.rclone-mega.path;

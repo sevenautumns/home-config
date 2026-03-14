@@ -47,6 +47,8 @@ in
   virtualisation.docker.enable = true;
   users.users.autumnal.extraGroups = [ "docker" ];
 
+  programs.gpu-screen-recorder.enable = true;
+
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
       inherit pkgs;
@@ -257,7 +259,7 @@ in
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
       pkgs.amf
       rocmPackages.rocm-runtime

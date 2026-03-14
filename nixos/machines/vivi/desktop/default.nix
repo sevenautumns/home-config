@@ -17,6 +17,7 @@
 
   services.gvfs.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  services.gnome.gcr-ssh-agent.enable = false;
   programs.seahorse.enable = true;
   security.polkit.enable = true;
   virtualisation.waydroid.enable = true;

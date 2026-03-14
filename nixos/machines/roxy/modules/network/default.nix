@@ -83,7 +83,13 @@ in
   };
 
   systemd.network.networks."20-lan" = {
-    name = "enp2s0";
+    matchConfig.Name = "enp2s0";
+    networkConfig.Bridge = "br-lan";
+    linkConfig.RequiredForOnline = "no";
+  };
+
+  systemd.network.networks."25-br-lan" = {
+    name = "br-lan";
     dhcpPrefixDelegationConfig = {
       SubnetId = "auto";
     };
@@ -131,6 +137,12 @@ in
         Name = "ifbenp2s0";
       };
     };
+    "20-br-lan" = {
+      netdevConfig = {
+        Kind = "bridge";
+        Name = "br-lan";
+      };
+    };
   };
 
   systemd.network.networks."40-ifbenp2s0" = {
@@ -153,9 +165,9 @@ in
         onState = [ "configured" ];
         script = ''
           #!${pkgs.runtimeShell}
-          if [ "$IFACE" = "enp2s0" ]; then
+          if [ "$IFACE" = "br-lan" ]; then
             # https://www.bufferbloat.net/projects/codel/wiki/Cake/#inbound-configuration-under-linux
-            ${getExe' pkgs.iproute2 "tc"} filter add dev enp2s0 parent ffff: matchall action mirred egress redirect dev ifbenp2s0
+            ${getExe' pkgs.iproute2 "tc"} filter add dev br-lan parent ffff: matchall action mirred egress redirect dev ifbenp2s0
           fi
         '';
       };

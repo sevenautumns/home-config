@@ -45,6 +45,10 @@
   };
 
   virtualisation.containers.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.onShutdown = "shutdown";
+  virtualisation.spiceUSBRedirection.enable = true;
+
   virtualisation = {
     podman = {
       enable = true;

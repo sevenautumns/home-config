@@ -112,7 +112,7 @@ in
       consume = {
         browseable = "yes";
         comment = "Paperless Consume";
-        path = "/media/paperless/consume";
+        path = "/media/paperless/pre_consume";
         "guest ok" = "no";
         "read only" = "no";
       };
